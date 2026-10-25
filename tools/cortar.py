@@ -44,7 +44,7 @@ def run(cmd, **kw):
 def probe(path):
     """Probe con ffmpeg-skill (HARD-RULES 1). Si la skill no está, ffprobe directo."""
     try:
-        r = run([sys.executable, os.path.join(SKILL, 'probe.py'), path, '--json'])
+        r = run([sys.executable, '-B', os.path.join(SKILL, 'probe.py'), path, '--json'])
         d = json.loads(r.stdout); v = d.get('video') or {}
         w, h = v.get('display_width') or v.get('width'), v.get('display_height') or v.get('height')
         if not v.get('display_width') and abs(int(v.get('rotation') or 0)) in (90, 270): w, h = h, w   # HARD-RULES 1: display, no stream
@@ -64,7 +64,7 @@ def probe(path):
 def planos_origen(path):
     """Cambios de plano del crudo con ffmpeg-skill scenes.py (lista de tiempos de corte)."""
     try:
-        r = run([sys.executable, os.path.join(SKILL, 'scenes.py'), path, '--json'], timeout=600)
+        r = run([sys.executable, '-B', os.path.join(SKILL, 'scenes.py'), path, '--json'], timeout=600)
         sc = json.loads(r.stdout).get('scenes') or []
         return [round(s['start'], 3) for s in sc[1:]]
     except Exception as e:

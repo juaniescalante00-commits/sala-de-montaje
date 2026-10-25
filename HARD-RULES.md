@@ -44,7 +44,7 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 23. **Corregir y re-renderizar, máximo 3 vueltas.** Si después de 3 sigue mal, se entrega con el problema dicho claro.
 
 ## F. Herramientas y seguridad
-24. **Nunca escribir dentro de la carpeta de una skill**: todo lo que se genera va a la carpeta del proyecto.
+24. **Nunca escribir dentro de la carpeta de una skill**: todo lo que se genera va a la carpeta del proyecto. Los scripts de Python de una skill se corren con `python3 -B` (si no, dejan `__pycache__` adentro, y llegaron a entrar en un commit).
 25. **Nada pago ni cuentas nuevas sin OK de Juani.** `motionmaxxing` trae `voice.py` (ElevenLabs) e `imagegen.py` (Codex): no se configuran claves para usarlos.
 26. **Skills de terceros: solo copias auditadas** (sin red escondida, sin claves, sin comandos peligrosos). Se actualizan volviendo a auditar, nunca con el instalador de la skill.
 27. **Al repo nunca suben audios ni videos** (pesan y no son nuestros): solo tablas, fichas y tiras JPG livianas. El `.gitignore` los frena; si uno aparece en un commit, se saca antes de pushear.
