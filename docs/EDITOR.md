@@ -106,7 +106,7 @@ los cortes de toma. Siempre mirá la hoja con Read.
 pieza con sus parámetros, estilos de subtítulos, looks de color, fuentes, sonidos del kit, dónde está la cara cada 2 s y
 el transcript con tiempos. Leelo una vez al empezar.
 
-### 2.6 Comparar y corregir (mínimo 2 rondas, máximo 4)
+### 2.6 Comparar y corregir (mínimo 2 rondas, máximo 3: HARD-RULES 23)
 - Armá una imagen lado a lado: cuadros de la referencia arriba, tus cuadros abajo, en momentos equivalentes
   (`ffmpeg` con `hstack`/`vstack`). Mirala con Read.
 - Preguntas de director exigente, una por una, mirando la imagen:
