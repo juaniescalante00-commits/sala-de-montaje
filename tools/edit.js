@@ -304,9 +304,9 @@ const MOCK = ([proj, settings]) => {
           if (mejor && mejor.nota > ahora.nota + 0.1) { mover(m, mejor.dyp / K); r.movido_px = Math.round(mejor.dyp / K); }
           fr = await captar(m, 0.1); let fin = medir(fr, 0);
           // velo suave si sigue sin llegar (solo pieza libre: capas negras de 9 % que se suman hacia el centro, 8 px de borde por capa)
-          if (fin && fin.nota < 1 && m.type === 'libre' && Array.isArray(m.params?.elements)) {
+          if (fin && fin.nota < 1.1 && m.type === 'libre' && Array.isArray(m.params?.elements)) {
             const base = m.params.elements.filter(e => !e._velo);
-            for (let capas = 6; capas <= 12 && fin && fin.nota < 1; capas += 2) {
+            for (let capas = 6; capas <= 12 && fin && fin.nota < 1.1; capas += 2) {   // con margen: después corren las reglas
               // el velo entero tiene que entrar en la zona segura (si no, la regla de la página corre toda la pieza):
               // si no entra, primero se corre la pieza lo justo
               m.params.elements = base; fr = await captar(m, 0.2);
@@ -329,11 +329,16 @@ const MOCK = ([proj, settings]) => {
       return rep;
     }, soloMedir);
     const tx = await textoContraste(false);
-    if (tx.some(r => r.movido_px || r.velo)) {
+    // las reglas pueden reubicar lo que se movió o se veló: se vuelve a medir tal como queda y, si algo dejó de pasar,
+    // una segunda vuelta de arreglo (más velo o otro lugar) y de reglas
+    for (let vuelta = 0; vuelta < 2 && tx.some(r => r.movido_px || r.velo); vuelta++) {
       const rr3 = await page.evaluate(async () => { const rr = runRules(true); await prepareMotions(S.p); return rr; });
       res.fixes.push(...rr3.fixes);
-      // las reglas pueden haber reubicado algo: se vuelve a medir tal como queda
-      for (const v of await textoContraste(true)) { const r = tx.find(x => x.id === v.id); if (r && (r.movido_px || r.velo)) r.despues = { nota: v.nota, letra: v.letra }; }
+      const medido = await textoContraste(true);
+      for (const v of medido) { const r = tx.find(x => x.id === v.id); if (r && (r.movido_px || r.velo)) r.despues = { nota: v.nota, letra: v.letra }; }
+      if (vuelta === 1 || !medido.some(v => v.nota < 1)) break;
+      const tx2 = await textoContraste(false);
+      for (const v of tx2) { const r = tx.find(x => x.id === v.id); if (r && (v.movido_px || v.velo)) { r.movido_px += v.movido_px; r.velo = v.velo || r.velo; r.despues = v.despues; } }
     }
     for (const r of tx) {
       const mm = String(Math.floor(r.start / 60)).padStart(2, '0') + ':' + String(Math.floor(r.start % 60)).padStart(2, '0');
