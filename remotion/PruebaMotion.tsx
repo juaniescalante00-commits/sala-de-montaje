@@ -17,7 +17,7 @@ const Titulo: React.FC = () => {
   });
   return (
     <div ref={ref} style={{ position: 'absolute', left: 108, top: 330, color: '#f2f0ea' }}>
-      <div style={{ fontFamily: 'Georgia, serif', fontSize: 92, lineHeight: 1.05, letterSpacing: -1 }}>
+      <div style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 92, lineHeight: 1.05, letterSpacing: -1 }}>
         {['Sala', 'de', 'Montaje'].map((p) => (
           <span key={p} style={{ display: 'inline-block', overflow: 'hidden', marginRight: 22 }}>
             <span className="p" style={{ display: 'inline-block' }}>{p}</span>
@@ -37,7 +37,7 @@ const Subtitulos: React.FC = () => {
   const page = pages.find((p) => ms >= p.startMs && ms < p.startMs + p.durationMs);
   if (!page) return null;
   return (
-    <div style={{ position: 'absolute', left: 108, right: 108, top: 1080, textAlign: 'center', fontFamily: 'Helvetica, Arial, sans-serif',
+    <div style={{ position: 'absolute', left: 108, right: 108, top: 1080, textAlign: 'center', fontFamily: 'Inter, Helvetica, Arial, sans-serif',
       fontSize: 64, fontWeight: 600, whiteSpace: 'pre', textShadow: '0 2px 12px rgba(0,0,0,.5)' }}>
       {page.tokens.map((t) => (
         <span key={t.fromMs} style={{ color: ms >= t.fromMs ? '#ffffff' : 'rgba(255,255,255,.45)' }}>{t.text}</span>

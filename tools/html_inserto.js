@@ -14,12 +14,15 @@
      /lib/lottie.min.js          lottie-web 5.12.2 (lottie.loadAnimation con renderer 'svg' o 'canvas', y goToAndStop)
      /mm/motion.js               runtime de motionmaxxing (curvas medidas, contrato de seek; ver su SKILL.md y runtime/README.md).
                                  Toda la carpeta runtime/ se sirve bajo /mm/ (hero3d, fonts.css, native-ui).
+     /fonts/sala.css             las 17 tipografías de la Sala (Instrument Serif, Inter, Geist, Montserrat…); un <link> a
+                                 Google Fonts también funciona: se responde con las mismas fuentes locales.
      /fonts/InterVariable.woff2  Inter (OFL)
    Los archivos que estén junto al .html se sirven con su nombre (imágenes, JSON de Lottie, etc.).
    --q pasa parámetros a la página (new URLSearchParams(location.search)): así una plantilla sirve para muchos textos.
    Plantillas listas en tools/insertos/ (gsap-titulo, gsap-dato, three-objeto, lottie). */
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { spawn } = require('child_process');
+const FUENTES = require('./fuentes_locales.js'); // /fonts/sala.css: las 17 tipografías de la Sala (o un <link> a Google Fonts: se responde local)
 
 const args = process.argv.slice(2), pos = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[i - 1].startsWith('--')));
 const opt = k => { const i = args.indexOf('--' + k); return i < 0 ? null : args[i + 1]; };
@@ -39,6 +42,8 @@ const srv = http.createServer((req, res) => {
   let f = null;
   if (u === '/') f = path.resolve(HTML);
   else if (LIB[u]) f = LIB[u].find(p => fs.existsSync(p));
+  else if (u === '/fonts/sala.css') { res.setHeader('content-type', 'text/css'); return res.end(FUENTES.css('/_fonts')); }
+  else if (u.startsWith('/_fonts/')) f = FUENTES.archivo(u.slice(7));
   else if (u.startsWith('/mm/')) { const p = path.join(MM, u.slice(4)); if (p.startsWith(MM) && fs.existsSync(p) && fs.statSync(p).isFile()) f = p; }
   else { const p = path.join(ROOT, u); if (p.startsWith(ROOT) && fs.existsSync(p) && fs.statSync(p).isFile()) f = p; }
   if (!f) { res.statusCode = 404; return res.end(); }
@@ -50,6 +55,7 @@ const srv = http.createServer((req, res) => {
   const page = await browser.newPage({ viewport: { width: Wd, height: Hd }, deviceScaleFactor: SCALE });
   page.on('pageerror', e => console.log('ERROR de página: ' + e.message));
   page.on('console', m => { if (m.type() === 'error') console.log('consola: ' + m.text()); });
+  await FUENTES.interceptar(page, `http://localhost:${srv.address().port}/_fonts`);
   await page.goto(`http://localhost:${srv.address().port}/` + (opt('q') ? '?' + opt('q') : ''), { waitUntil: 'networkidle' });
   await page.evaluate(async () => { if (window.ready) await window.ready; if (document.fonts) await document.fonts.ready; });
   if (!(await page.evaluate(() => typeof window.seek === 'function'))) throw new Error('la página no define window.seek(t)');

@@ -11,6 +11,7 @@
    lo pasa a H.264 con ffmpeg. */
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
+const FUENTES = require('./fuentes_locales.js'); // las tipografías de la Sala sin Google Fonts (bloqueado en la nube)
 
 const A = {}; for (let i = 2; i < process.argv.length; i++) { const k = process.argv[i]; if (k.startsWith('--')) { const v = process.argv[i + 1]; if (!v || v.startsWith('--')) A[k.slice(2)] = true; else { A[k.slice(2)] = v; i++; } } }
 for (const k of ['dist', 'blobs', 'project', 'out']) if (!A[k]) { console.error('falta --' + k); process.exit(2); }
@@ -31,6 +32,7 @@ const srv = http.createServer((req, res) => {
     if (rg) { const a = rg[1] ? +rg[1] : 0, b = rg[2] ? +rg[2] : buf.length - 1; res.statusCode = 206; res.setHeader('content-range', `bytes ${a}-${b}/${buf.length}`); return res.end(buf.subarray(a, b + 1)); }
     return res.end(buf);
   }
+  if (u.startsWith('/_fonts/')) { const ff = FUENTES.archivo(u.slice(7)); if (!ff) { res.statusCode = 404; return res.end(); } res.setHeader('content-type', ff.endsWith('.woff2') ? 'font/woff2' : 'font/woff'); return res.end(fs.readFileSync(ff)); }
   const f = path.join(DIST, u); if (f.startsWith(DIST) && fs.existsSync(f)) { res.setHeader('content-type', MIME[path.extname(f)] || 'application/octet-stream'); return res.end(fs.readFileSync(f)); }
   res.statusCode = 404; res.end();
 });
@@ -52,8 +54,12 @@ const MOCK = ([proj, settings]) => {
   const page = await browser.newPage({ viewport: { width: 1280, height: 860 } });
   page.on('pageerror', e => console.log('ERROR de página: ' + e.message));
   await page.addInitScript(MOCK, [PROJ, SETTINGS]);
+  await FUENTES.interceptar(page, `http://localhost:${port}/_fonts`);
   await page.goto(`http://localhost:${port}/`); await page.waitForTimeout(1200);
   await page.evaluate(id => { const p = S.projects.find(x => x.id === id); openProject(p); }, PROJ.id);
+  // carga ya todas las tipografías (en el canvas no se piden solas): así los cuadros salen con la fuente real
+  const fx = await page.evaluate(async () => { const fams = new Set(FONTS.concat(S.p.brand?.display || [], S.p.brand?.body || [])); await Promise.all([...fams].flatMap(f => ['400', '500', '600', '700', '800', 'italic 400', 'italic 600'].map(w => document.fonts.load(`${w} 40px "${f}"`).catch(() => { })))); const ok = new Set([...document.fonts].filter(x => x.status === 'loaded').map(x => x.family.replace(/["']/g, ''))); return [...fams].filter(f => !ok.has(f)); }).catch(e => ['error: ' + e.message]);
+  if (fx.length) console.log('OJO: fuentes sin cargar: ' + fx.join(', '));
   if (PROJ.video) await page.waitForFunction(() => S.videoReady, null, { timeout: 60000 });
   await page.waitForFunction(() => S.voiceBuf || !S.p.video, null, { timeout: 60000 }).catch(() => { });
   await page.waitForTimeout(400);

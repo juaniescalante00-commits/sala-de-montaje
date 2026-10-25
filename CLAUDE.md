@@ -83,6 +83,9 @@ push a main + publicar (ver abajo) para que la copia de respaldo quede igual.
 - `html_inserto.js`: HTML con `window.seek(t)` → MP4 lado a lado para la pieza `inserto`. Plantillas en `tools/insertos/`
   (`gsap-titulo`, `gsap-dato`, `three-objeto`, `lottie`). `a_inserto.sh`: cualquier video con alfa (Remotion ProRes 4444,
   WebM, PNG) → mismo formato. Composición de ejemplo con alfa: `remotion/InsertoTexto.tsx`.
+- `fuentes_locales.js`: las 17 tipografías de la Sala desde npm (`@fontsource/*`, OFL) para `edit.js` y `html_inserto.js`:
+  en la nube Google Fonts está bloqueado y sin esto los cuadros de control salen con letra de reemplazo. En Remotion,
+  lo mismo con `remotion/fuentes.ts`. Si se suma una familia a `FONTS` (01-core.js), sumá su `@fontsource/<familia>`.
 - `elegir_audio.py`: cruza `datos/audio/indice.json` con la biblioteca y el kit de la base; devuelve solo lo usable.
   Ojo: de los 1105 sonidos del índice, la mayoría no está subida a la Sala (solo los de la biblioteca sirven).
 - `empaquetar.sh`: copia de respaldo del repo para la tarea en la nube (`dist/repo.tgz.b64.txt`).

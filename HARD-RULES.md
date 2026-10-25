@@ -42,6 +42,7 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 25. **Nada pago ni cuentas nuevas sin OK de Juani.** `motionmaxxing` trae `voice.py` (ElevenLabs) e `imagegen.py` (Codex): no se configuran claves para usarlos.
 26. **Skills de terceros: solo copias auditadas** (sin red escondida, sin claves, sin comandos peligrosos). Se actualizan volviendo a auditar, nunca con el instalador de la skill.
 27. **Al repo nunca suben audios ni videos** (pesan y no son nuestros): solo tablas, fichas y tiras JPG livianas. El `.gitignore` los frena; si uno aparece en un commit, se saca antes de pushear.
+28. **Los cuadros de control se miran con las tipografías reales.** En la nube Google Fonts está bloqueado: `edit.js`, `html_inserto.js` y Remotion las toman de npm (`npm ci` hecho). Si `edit.js` avisa "fuentes sin cargar" o una serif sale como sans, el control no vale: arreglalo antes de juzgar el texto.
 
 ## Qué NO va en este archivo
 Movimientos de cámara (zooms, seguimiento de cara, reencuadres), estilo de subtítulos (tamaño, palabras por bloque,

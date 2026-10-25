@@ -255,7 +255,13 @@ Qué motor usar:
 
 Reglas del HTML (`tools/html_inserto.js`): la página define `window.seek(t)` y dibuja ese instante exacto (timelines GSAP
 pausadas con `tl.seek(t)`, nada de relojes ni transiciones CSS); fondo transparente; 1080×1920. Librerías en `/lib/`
-(gsap, three, lottie) y fuente Inter en `/fonts/`. Parámetros por `--q`.
+(gsap, three, lottie). Parámetros por `--q`.
+- **`window.seek` nunca devuelve la timeline**: escribí `window.seek = t => { tl.seek(t); }`, con llaves. Una timeline de
+  GSAP es "thenable": si la devolvés, el renderizador espera a que termine una timeline pausada y se cuelga para siempre.
+- **Tipografías**: las 17 de la Sala (las mismas de la página: Instrument Serif, Inter, Geist, Montserrat, Fraunces,
+  Playfair Display, Anton, Bebas Neue…) con `<link rel="stylesheet" href="/fonts/sala.css">`. Un `<link>` a Google Fonts
+  también anda (se responde con las mismas fuentes locales: Google Fonts está bloqueado en la nube). Usá la tipografía
+  de la marca del proyecto (`brand.display` / `brand.body`) para que el inserto parezca parte del mismo video.
 ```
 node tools/html_inserto.js tools/insertos/gsap-titulo.html ins1.mp4 --dur 2.5 --q "texto=…&y=0.3&dur=2.5"
 ```
@@ -266,7 +272,9 @@ npx remotion render remotion/index.ts InsertoTexto ins.mov --codec=prores --pror
   --pixel-format=yuva444p10le --image-format=png --props='{"texto":"…","y":0.3,"color":"#ffffff","acento":"#ffd400"}'
 sh tools/a_inserto.sh ins.mov ins1.mp4
 ```
-(3D en Remotion: agregá `--gl=swangle`; en la nube no hay GPU.)
+(3D en Remotion: agregá `--gl=swangle`; en la nube no hay GPU.) En Remotion las 17 tipografías de la Sala ya están
+cargadas (`remotion/fuentes.ts`, desde npm): usalas por nombre, `fontFamily: "'Instrument Serif'"`. No uses
+`@remotion/google-fonts` (en la nube no llega a Google).
 
 El resultado es un MP4 "lado a lado" (izquierda color, derecha alfa). Después:
 1. Miralo: `ffmpeg -i ins1.mp4 -vf "select='eq(n\,10)+eq(n\,40)',scale=540:-1,tile=2x1" -frames:v 1 ins1.jpg` y Read.
