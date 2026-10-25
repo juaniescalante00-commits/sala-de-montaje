@@ -17,7 +17,7 @@ Castellano rioplatense con voseo, directo, sin tecnicismos ni nombres de archivo
 Estética minimalista y editorial en todo.
 
 Reglas técnicas que nunca se rompen: `HARD-RULES.md` (leelo antes de cortar o renderizar).
-Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` (cortes, silencios, subtítulos, loudness, verificación), `motionmaxxing` (motion graphics con oficio) y las oficiales de Remotion (`remotion-markup`, `-captions`, `-render`, `-studio`, `-multimedia`, `-interactivity`, `-docs`). Para skills nuevas: auditar con `tools/scan_skill.py` antes de copiar.
+Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` (cortes, silencios, subtítulos, loudness, verificación), `motionmaxxing` (motion graphics con oficio) las oficiales de Remotion (`remotion-markup`, `-captions`, `-render`, `-studio`, `-multimedia`, `-interactivity`, `-docs`) y las oficiales de GSAP (`gsap-core`, `-timeline`, `-plugins`, `-utils`, `-performance`). Para skills nuevas: auditar con `tools/scan_skill.py` antes de copiar.
 
 ## Reglas de edición que nunca se rompen
 - Nunca sonidos que no tienen que ver con lo que pasa en pantalla. Nada de pips, pops, ticks.
@@ -84,7 +84,27 @@ Si cambiás una herramienta o el manual, publicalos en el artifact (ver abajo): 
 ## Remotion (`remotion/`)
 - Remotion 4.0.538 se usa bajo la **licencia gratis para individuos** (https://remotion.dev/license): Juani lo usa como persona individual. Si pasara a usarlo una empresa de más de 3 personas, hace falta la licencia de empresa.
 - Composiciones en `remotion/Root.tsx` (1080×1920, 30 fps). Prueba: `npm run remotion:prueba` → `test/out/remotion-prueba.mp4`; vista previa: `npm run remotion:studio`. En la nube: `REMOTION_CHROME=/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell`.
+- Paquetes de motion (4.0.538, con `npx remotion add`): `@remotion/captions`, `@remotion/gsap` (+ `gsap` 3.15.0, licencia "Standard No Charge": gratis también comercial, no es open source), `@remotion/three` (+ `@react-three/fiber` 9.8.2 y `@types/three` 0.160.0) y `@remotion/lottie`. `three` queda en **0.160.0** a propósito: el editor copia three.js r160 a `dist/`; no subirlo sin probar la página.
+- Prueba de motion (GSAP + captions, 4 s vertical): `npm run prueba-motion` → `test/out/prueba-motion.mp4`. El 3D usa el renderer `angle` (en `remotion.config.ts`); en la nube no hay GPU y `angle` no consigue WebGL: ahí se renderiza con `--gl=swangle`.
 - Nunca pasar `licenseKey` (manda un aviso de uso a remotion.pro). Nunca `npx remotion upgrade` ni `npx skills`: pisan las skills auditadas. Para actualizar: todas las `remotion`/`@remotion/*` a la misma versión exacta con npm, y volver a auditar las skills.
+
+## Librerías de motion
+
+Librerías de motion de la sala de montaje. Antes de animar, elegí según esta tabla y leé la skill correspondiente.
+
+- Subtítulos animados palabra por palabra: @remotion/captions con los tiempos de WhisperX. Skill oficial de Remotion (remotion-captions). Pocas palabras por vez, legibles y sin tapar caras.
+- Títulos, texto que entra por letras o palabras, formas que se transforman: GSAP con @remotion/gsap. La timeline siempre pausada y atada a useCurrentFrame(), nunca al reloj. Leé las gsap-skills.
+- 3D (logo, producto, objeto con luz y profundidad): @remotion/three con React Three Fiber dentro de <ThreeCanvas>. Animá con useCurrentFrame(), useFrame() está prohibido. Cada <Sequence> dentro del canvas con layout="none". Renderer angle.
+- Animaciones hechas en After Effects o de LottieFiles: @remotion/lottie, cargando el JSON con delayRender y continueRender.
+- Gráficos de datos: componentes de Remotion con escalas de D3 (si está instalado). Para explicativos con fórmulas, Manim aparte y después se compone con ffmpeg.
+- Placas fijas y contact sheets: Pillow o ffmpeg.
+- Corte, mezcla, encode y composición final: ffmpeg.
+- No uses MoviePy, Motion Canvas, Revideo, Theatre.js ni Framer Motion.
+
+Estética obligatoria: minimalista y editorial. Nada de pips ni mini zooms. Movimientos cortos y suaves, tipografía limpia, mucho aire. Ante la duda, menos animación.
+Después de cada render, sacá frames en los momentos animados y miralos antes de mostrármelo. Revisá que el texto no se corte, que nada tape caras y que el posicionamiento sea el pedido.
+
+Nota: la línea de "Estética obligatoria" es el default cuando el plan no dice otra cosa, porque cámara y estilo de subtítulos se eligen en cada edición, en el plan que aprueba Juani (regla de Juani del 25/10/2026).
 
 ## Construir, probar y publicar
 1. `npm run build` (o `sh build.sh`).

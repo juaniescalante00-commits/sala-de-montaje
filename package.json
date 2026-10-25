@@ -6,7 +6,8 @@
     "build": "sh build.sh",
     "test": "node test/run-all.js",
     "remotion:studio": "remotion studio remotion/index.ts",
-    "remotion:prueba": "remotion render remotion/index.ts Prueba test/out/remotion-prueba.mp4"
+    "remotion:prueba": "remotion render remotion/index.ts Prueba test/out/remotion-prueba.mp4",
+    "prueba-motion": "remotion render remotion/index.ts PruebaMotion test/out/prueba-motion.mp4"
   },
   "devDependencies": {
     "@mediabunny/aac-encoder": "1.61.2",
@@ -19,5 +20,14 @@
     "react-dom": "19.2.0",
     "remotion": "4.0.538",
     "three": "0.160.0"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/captions": "4.0.538",
+    "@remotion/gsap": "4.0.538",
+    "@remotion/lottie": "4.0.538",
+    "@remotion/three": "4.0.538",
+    "@types/three": "0.160.0",
+    "gsap": "3.15.0"
   }
 }

@@ -7,4 +7,5 @@ Claude Code en la nube para editar a fondo. Todo el contexto para trabajar está
 npm run build   # arma dist/sala.html
 npm test        # pruebas en Chromium sin pantalla (necesitan el video de prueba en .media/)
 npm run remotion:prueba   # render mínimo de Remotion (licencia gratis para individuos)
+npm run prueba-motion     # prueba de motion: título con GSAP y subtítulos palabra por palabra
 ```
