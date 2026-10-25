@@ -201,6 +201,12 @@ Las piezas `behind` solo valen mientras hay alguien en cuadro (el editor las con
 - Formato horizontal.
 - Generar imágenes, voces o música.
 
+## 6b. Nitidez de la exportación (HARD-RULES 43)
+Si el video del proyecto es la copia liviana (720p), `edit.js --export` lo escala a 1080×1920 con lanczos y un enfoque
+leve antes de exportar (`--sin-nitidez` para no). Medido en Larreta: el detalle de una toma aérea pasa de 4,5 a 10,4
+(varianza del laplaciano) sin halos en cara ni texto. No inventa detalle: para la máxima calidad, exportar desde la
+página de Juani con el original.
+
 ## 7. Render final a la carpeta Editados
 `tools/render.js` (otro archivo) renderiza el proyecto con el video original en máxima calidad para guardarlo en la
 compu de Juani. Lo usa la skill de la Sala de Montaje; en la edición a fondo no hace falta: la página exporta sola.
@@ -299,6 +305,10 @@ Pieza:
   se ocultan mientras está; si no tiene texto, dejalo vacío).
 - El editor lo mide por sus píxeles reales: si tapa la cara, lo baja o achica (lo vas a ver en `rules.json`). Mejor
   diseñalo desde el principio fuera de la cara (mirá `faces` en el manual generado).
+- **Contraste** (HARD-RULES 42): `edit.js` mide el texto del inserto contra el fondo real y, si no se lee, lo mueve o
+  avisa que necesita velo (`rules.json` → `contraste`). Diseñalo sobre la zona oscura o pareja de la toma, mirando
+  cómo se mueve la cámara mientras está; si el fondo es claro o cargado, velo suave detrás (`velo=1` en las plantillas,
+  o un `radial-gradient` oscuro sin bordes en tu HTML) y sombra. Nada de texto blanco sobre superficies blancas.
 
 **Legibilidad sobre exteriores claros** (aprendido en la prueba de Larreta con la referencia 1): los subtítulos bitono
 (palabra que viene en gris) funcionan sobre fondos oscuros; sobre cielo, pasto o paredes claras no se leen. Ahí van
@@ -324,6 +334,10 @@ Qué hace solo (cada cosa se apaga con `--sin-silencios`, `--sin-muletillas`, `-
   (`--punch 1.1`, centrado en la cara). En cada plano nuevo del crudo y en las tomas sin persona vuelve a 1,0.
 - Si una palabra pedida no tiene un silencio de verdad alrededor, **no la saca** y lo avisa (transcript y audio
   siempre iguales).
+- **Audio de cada unión** (HARD-RULES 41): fundido cruzado de 40 ms, el borde de entrada al menos 80 ms antes del ataque
+  real (medido en el audio, no en el transcript) y el de salida 60 ms después de la caída; donde no se saca audio (ritmo,
+  plano) el sonido no se toca. Chasquidos y respiraciones en las pausas se bajan solos (`--sin-suavizar` para no).
+  `informe.txt` dice en cada unión si hubo ataque o cola comidos, hueco o pop: con cualquiera de esos, no se entrega.
 
 Pasos:
 ```

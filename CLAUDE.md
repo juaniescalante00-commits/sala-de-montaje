@@ -79,13 +79,16 @@ Las tareas usan el editor **publicado** (dist del artifact) y las herramientas d
 push a main + publicar (ver abajo) para que la copia de respaldo quede igual.
 
 ## Herramientas (`tools/`)
-- `edit.js`: renderiza el proyecto con el editor real (hojas de cuadros, exportación, manual generado).
+- `edit.js`: renderiza el proyecto con el editor real (hojas de cuadros, exportación, manual generado). Además: mide el
+  contraste del texto de cada inserto contra el fondo real y lo mueve o pide velo (HARD-RULES 42), y al exportar escala
+  la copia de 720p a 1080 con lanczos + enfoque leve (HARD-RULES 43). `--sin-contraste`, `--sin-nitidez`.
 - `html_inserto.js`: HTML con `window.seek(t)` → MP4 lado a lado para la pieza `inserto`. Plantillas en `tools/insertos/`
   (`gsap-titulo`, `gsap-dato`, `three-objeto`, `lottie`). `a_inserto.sh`: cualquier video con alfa (Remotion ProRes 4444,
   WebM, PNG) → mismo formato. Composición de ejemplo con alfa: `remotion/InsertoTexto.tsx`.
 - `cortar.py`: cortes del crudo por palabras (silencios, muletillas, tomas repetidas, jump cuts con punch-in al ritmo de la
   ficha de una referencia), con ffmpeg y la skill `ffmpeg-skill` (probe y planos). Deja el corte en un proyecto nuevo
-  "… · cortado" (`--armar`). Manual: sección 11 de `docs/EDITOR.md`. Prueba: `python3 test/cortar.py`.
+  "… · cortado" (`--armar`). Uniones con fundido cruzado y 80 ms antes de cada ataque, chasquidos suavizados y controles
+  de ataque, cola, hueco y pop (HARD-RULES 41). Manual: sección 11 de `docs/EDITOR.md`. Prueba: `python3 test/cortar.py`.
 - `fuentes_locales.js`: las 17 tipografías de la Sala desde npm (`@fontsource/*`, OFL) para `edit.js` y `html_inserto.js`:
   en la nube Google Fonts está bloqueado y sin esto los cuadros de control salen con letra de reemplazo. En Remotion,
   lo mismo con `remotion/fuentes.ts`. Si se suma una familia a `FONTS` (01-core.js), sumá su `@fontsource/<familia>`.

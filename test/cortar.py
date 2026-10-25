@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Prueba de tools/cortar.py con un crudo sintético: cada palabra es un tono con un cierre mudo en el medio (como la
 "p" de "startups"). Verifica muletillas, falso arranque, toma repetida (queda la última), tartamudeo, "esto"/"este"
-como palabras reales, que ningún corte caiga dentro de una palabra, la duración y que no haya saltos de audio."""
+como palabras reales, que ningún corte caiga dentro de una palabra, 80 ms antes del ataque real aunque el
+reconocedor marque tarde, chasquidos suavizados en las pausas, la duración y uniones sin huecos ni pops."""
 import json, os, subprocess, sys
 AQUI = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(AQUI, 'out', 'cortar'); os.makedirs(OUT, exist_ok=True)
 frase = [
@@ -14,14 +15,17 @@ frase = [
     ('este', 12.3), ('gratuito.', 13.1),                                                 # "este" aislado entre pausas: muletilla
 ]
 words = [{'w': w, 's': s, 'e': round(s + (0.5 if len(w) > 6 else 0.18 if len(w) <= 2 else 0.25), 2)} for w, s in frase]
+reales = [dict(w) for w in words]          # el audio de verdad
+words[19]['s'] = round(words[19]['s'] + 0.1, 2)   # el reconocedor marca tarde el arranque de "Este" (pasa con vocales suaves)
+CHASQUIDO = (7.37, 7.41)                   # chasquido de boca en una pausa que no se corta (entre "parque" y "de")
 dur = 14.1
 P = {'id': 'pprueba', 'name': 'prueba cortes', 'duration': dur, 'words': words, 'faces': [{'t': t / 4, 'caras': [[0.4, 0.2, 0.2, 0.12]]} for t in range(int(dur * 4))],
      'video': {'assetId': 'vid', 'w': 720, 'h': 1280}}
 json.dump(P, open(os.path.join(OUT, 'p.json'), 'w'))
 # audio: tono en cada palabra con un cierre de 80 ms en el medio; video: barra que avanza (se ven los saltos)
-expr = '+'.join(f"between(t,{w['s']},{(w['s'] + w['e']) / 2 - 0.04:.3f})+between(t,{(w['s'] + w['e']) / 2 + 0.04:.3f},{w['e']})" for w in words)
+expr = '+'.join(f"between(t,{w['s']},{(w['s'] + w['e']) / 2 - 0.04:.3f})+between(t,{(w['s'] + w['e']) / 2 + 0.04:.3f},{w['e']})" for w in reales)
 subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', f'color=c=0x223344:s=720x1280:r=30:d={dur}', '-f', 'lavfi', '-i',
-                f"aevalsrc='0.5*sin(2*PI*220*t)*gt({expr},0)+0.01*sin(2*PI*50*t)':s=48000:d={dur}",
+                f"aevalsrc='0.5*sin(2*PI*220*t)*gt({expr},0)+0.15*sin(2*PI*900*t)*between(t,{CHASQUIDO[0]},{CHASQUIDO[1]})+0.01*sin(2*PI*50*t)':s=48000:d={dur}",
                 '-vf', "drawbox=x=0:y=600:w='iw*t/14.1':h=80:color=white:t=fill", '-shortest', '-c:v', 'libx264', '-preset', 'ultrafast',
                 '-pix_fmt', 'yuv420p', '-c:a', 'aac', os.path.join(OUT, 'vid.mp4')], check=True)
 r = subprocess.run([sys.executable, os.path.join(AQUI, '..', 'tools', 'cortar.py'), '--proyecto', os.path.join(OUT, 'p.json'),
@@ -51,9 +55,15 @@ for g in plan['segmentos']:
 for i, w in enumerate(words):
     adentro = any(q['s'] - 0.01 <= w['s'] and w['e'] <= q['e'] + 0.01 for q in plan['quitado'])
     chk(adentro == (i in fuera), f"#{i} {w['w']}: {'salió del transcript pero sigue en el audio' if i in fuera else 'quedó en el transcript pero se cortó del audio'}")
+# ataque real: el tramo que trae "Este" arranca al menos 80 ms antes de que suene (aunque el transcript lo marque tarde)
+seg_este = next((g for g in plan['segmentos'] if g['s'] <= reales[19]['s'] <= g['e']), None)
+chk(seg_este and reales[19]['s'] - seg_este['s'] >= 0.075, f"\"Este\" entra con menos de 80 ms antes de su ataque: {seg_este and round(reales[19]['s'] - seg_este['s'], 3)}")
 c = plan['controles']
+chk(any(abs(x['s'] - (CHASQUIDO[0] - (plan['segmentos'][0]['e'] - plan['segmentos'][0]['s']) * 0)) < 9 for x in c.get('suavizados', [])) and len(c.get('suavizados', [])) >= 1,
+    'el chasquido en la pausa entre "parque" y "de" tenía que suavizarse')
+chk(all(u.get('saca_audio') is not None for u in c['uniones']), 'cada unión tiene que decir si saca audio')
 chk(c['duracion']['ok'], 'la duración no cierra: %s' % c['duracion'])
-chk(all(u['ok'] for u in c['uniones']), 'saltos de audio en las uniones: %s' % [u for u in c['uniones'] if not u['ok']])
+chk(all(u['ok'] for u in c['uniones']), 'uniones con ataque o cola comidos, hueco o pop: %s' % [u for u in c['uniones'] if not u['ok']])
 print('palabras que quedan:', ' '.join(pal))
 print('MAL:\n- ' + '\n- '.join(mal) if mal else 'ok: cortes por palabra, muletillas, tomas y uniones')
 sys.exit(1 if mal else 0)

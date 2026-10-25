@@ -23,7 +23,10 @@ import argparse, array, json, math, os, re, subprocess, sys, time, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SKILL = os.path.join(AQUI, '..', '.claude', 'skills', 'ffmpeg-skill', 'scripts')
-FADE = 0.03            # HARD-RULES 10: 30 ms en cada unión
+FADE = 0.03            # fundido al principio y al final del video
+XF = 0.04              # HARD-RULES 10 y 41: fundido CRUZADO de 40 ms en cada unión (sin hueco en la música de fondo)
+PRE_ATAQUE = 0.08      # HARD-RULES 41: al menos 80 ms antes del ataque real de la palabra que entra
+POST_CAIDA = 0.06      # y 60 ms después de que se apaga la que sale
 MARGEN_MIN, MARGEN_MAX = 0.03, 0.20   # HARD-RULES 9: 30 a 200 ms de aire en cada borde
 
 # Muletillas: solo sonidos de duda. "este", "o sea", "bueno", "esto" son palabras reales casi siempre: "este" sale
@@ -109,6 +112,31 @@ def silencio_sostenido(rms, hz, desde, hasta, hacia_atras=False, minimo=0.12):
             corrida = 0
         i += paso
     return None
+
+
+def _niveles(rms, hz, a, b):
+    zona = rms[max(0, int(a * hz) - 40):int(b * hz) + 40] or [0]
+    voz = sorted(zona)[int(len(zona) * 0.9)]
+    hueco = rms[max(0, int(a * hz)):max(int(a * hz) + 1, int(b * hz))] or [0]
+    piso = sorted(hueco)[len(hueco) // 4]
+    return voz, piso
+
+
+def ataque_real(rms, hz, t, hasta, voz, piso):
+    """Desde t (donde la voz ya es clara) hacia atrás, mientras la energía siga por encima del piso: ahí arranca de
+    verdad la palabra (vocal suave, aire de la consonante). Umbral bajo: el ataque suave no es silencio."""
+    bajo = max(piso * 1.6, voz * 0.03)
+    i = int(t * hz)
+    while i > int(hasta * hz) and i > 0 and rms[i - 1] > bajo: i -= 1
+    return i / hz
+
+
+def caida_real(rms, hz, t, hasta, voz, piso):
+    """Desde t hacia adelante, mientras la palabra que sale se sigue apagando por encima del piso."""
+    bajo = max(piso * 1.6, voz * 0.03)
+    i = int(t * hz)
+    while i < int(hasta * hz) and i < len(rms) - 1 and rms[i + 1] > bajo: i += 1
+    return (i + 1) / hz
 
 
 def frases(words, pausa=0.3):
@@ -198,7 +226,7 @@ def planear(P, info, rms, hz, cortes_origen, a):
     if not kept: raise SystemExit('no queda ninguna palabra: revisá lo que pediste quitar')
 
     # tramos de palabras contiguas que se quedan; entre dos tramos (o en una pausa larga) va un corte
-    segs, quitado, no_cortado = [], [], []
+    segs, quitado, no_cortado, lim_corte = [], [], [], []
     inicio_w = kept[0]
     s0 = max(0.0, W[inicio_w]['s'] - (0.12 if W[inicio_w]['s'] > a.silencio else W[inicio_w]['s']))
     if s0 > 0.05: quitado.append({'s': 0.0, 'e': round(s0, 3), 'motivo': 'silencio inicial', 'texto': ''})
@@ -224,10 +252,34 @@ def planear(P, info, rms, hz, cortes_origen, a):
                 for j in medio:   # sin silencio de verdad no se corta: la palabra se queda (transcript y audio siempre iguales)
                     no_cortado.append({'id': j, 'w': W[j]['w'], 'motivo': fuera.pop(j)})
                 prev = i; continue
-            out_e = lo_mas_callado(rms, hz, fin_a + MARGEN_MIN, min(fin_a + max(aire, MARGEN_MIN + 0.02), ini_b - MARGEN_MIN), fin_a + aire)
-            in_s = lo_mas_callado(rms, hz, max(ini_b - max(aire, MARGEN_MIN + 0.02), out_e), ini_b - MARGEN_MIN, ini_b - aire)
+            # ataque y caída reales (umbral bajo): la vocal suave o el aire de una consonante ya son palabra
+            voz, piso = _niveles(rms, hz, A['s'], B['e'])
+            bajo = max(piso * 1.6, voz * 0.03)
+            fin_r = caida_real(rms, hz, fin_a, ini_b, voz, piso)
+            ini_r = min(ataque_real(rms, hz, ini_b, fin_r, voz, piso), B['s'])   # si el reconocedor marca antes, gana el más temprano
+            # próxima voz después de A y última voz antes de B: los fundidos no pueden tocarlas. Sin palabras en el medio
+            # son B y A mismas; si salen palabras, es el ataque de la primera que sale y la caída de la última. "Voz" es
+            # energía SOSTENIDA (50 ms o más): un golpe de la música de fondo o un chasquido no cuentan.
+            if medio:
+                fuerte = max(bajo, voz * 0.08); n5 = max(1, int(0.05 * hz))
+                j = int(fin_r * hz)
+                while j < int(ini_r * hz) and not all(x > fuerte for x in rms[j:j + n5]): j += 1
+                prox_voz = min(ataque_real(rms, hz, j / hz, fin_r, voz, piso), W[medio[0]]['s'])
+                j = int(ini_r * hz) - 1
+                while j > int(fin_r * hz) and not all(x > fuerte for x in rms[max(0, j - n5 + 1):j + 1]): j -= 1
+                ult_voz = max(caida_real(rms, hz, (j + 1) / hz, ini_r, voz, piso), W[medio[-1]]['e'])
+            else:
+                prox_voz, ult_voz = ini_r, fin_r
+            lim = {'out_lo': fin_r + MARGEN_MIN, 'out_pref': fin_r + POST_CAIDA, 'out_hi': prox_voz - XF - 0.01,
+                   'in_lo': ult_voz + MARGEN_MIN, 'in_hi': ini_r - PRE_ATAQUE}
+            if lim['out_hi'] < lim['out_lo'] or lim['in_hi'] < lim['in_lo']:
+                for j in medio:
+                    no_cortado.append({'id': j, 'w': W[j]['w'], 'motivo': fuera.pop(j)})
+                prev = i; continue
+            out_e = lo_mas_callado(rms, hz, max(lim['out_lo'], min(lim['out_pref'], lim['out_hi'])), min(lim['out_hi'], lim['out_pref'] + max(0, aire - POST_CAIDA)), lim['out_pref'])
+            in_s = lo_mas_callado(rms, hz, max(lim['in_lo'], lim['in_hi'] - max(aire - PRE_ATAQUE, 0.02), out_e), lim['in_hi'], lim['in_hi'])
             if in_s - out_e >= (0.02 if medio else a.min_corte):   # un corte que saca casi nada es un salto sin ganancia
-                segs.append([cur_s, out_e])
+                segs.append([cur_s, out_e]); lim_corte.append(lim)
                 txt = ' '.join(W[j]['w'] for j in medio)
                 mot = sorted({fuera[j] for j in medio}) if medio else ['silencio']
                 quitado.append({'s': round(out_e, 3), 'e': round(in_s, 3), 'motivo': ', '.join(mot), 'texto': txt})
@@ -237,9 +289,19 @@ def planear(P, info, rms, hz, cortes_origen, a):
     segs.append([cur_s, fin])
     if dur - fin > 0.05: quitado.append({'s': round(fin, 3), 'e': round(dur, 3), 'motivo': 'cola', 'texto': ''})
 
-    # cuantizar a cuadros: audio y video cortan exactamente en los mismos instantes (sin deriva entre segmentos)
+    # cuantizar a cuadros: audio y video cortan exactamente en los mismos instantes (sin deriva entre segmentos).
+    # El cuadro se elige DENTRO de los límites de cada borde (nunca un redondeo que meta el borde en una palabra).
     fps = info['fps']; q = lambda t: round(round(t * fps) / fps, 6)
-    segs = [[q(s), q(e)] for s, e in segs if q(e) - q(s) >= 2 / fps]
+    def en_cuadro(t, lo, hi):
+        c = [round(k / fps, 6) for k in range(int(math.floor(lo * fps)), int(math.ceil(hi * fps)) + 1) if lo - 1e-6 <= k / fps <= hi + 1e-6]
+        return min(c, key=lambda x: abs(x - t)) if c else round(math.floor(t * fps) / fps, 6)
+    assert len(lim_corte) == len(segs) - 1, 'límites y tramos desalineados'
+    for k in range(len(segs) - 1):
+        L = lim_corte[k]
+        segs[k][1] = en_cuadro(segs[k][1], L['out_lo'], L['out_hi'])
+        segs[k + 1][0] = en_cuadro(segs[k + 1][0], max(L['in_lo'], segs[k][1]), L['in_hi'])
+    segs[0][0] = q(segs[0][0]); segs[-1][1] = q(segs[-1][1])
+    segs = [[s_, e_] for s_, e_ in segs if e_ - s_ >= 2 / fps]
 
     # ritmo: partir planos largos del talking head en jump cuts con punch-in, al ritmo de la ficha
     objetivo = None
@@ -335,14 +397,30 @@ def renderizar(fuente, segs, info, salida, con_audio=True, crf=19, ancho=None, a
         else:
             v += f",scale={W_}:{H_}"
         fc.append(v + f",setsar=1,fps={info['fps']}[v{k}]")
-        if con_audio:
-            d = g['e'] - g['s']; f = min(FADE, d / 3)
-            fc.append(f"[0:a]atrim=start={g['s']:.6f}:end={g['e']:.6f},asetpts=PTS-STARTPTS,aresample=48000,"
-                      f"afade=t=in:st=0:d={f:.3f},afade=t=out:st={max(0, d - f):.6f}:d={f:.3f}[a{k}]")
-            partes.append(f'[v{k}][a{k}]')
-        else:
-            partes.append(f'[v{k}]')
-    fc.append(''.join(partes) + f"concat=n={len(segs)}:v=1:a={1 if con_audio else 0}" + ('[v][a]' if con_audio else '[v]'))
+        partes.append(f'[v{k}]')
+    fc.append(''.join(partes) + f"concat=n={len(segs)}:v=1:a=0[v]")
+    if con_audio:
+        # el audio va por BLOQUES contiguos del crudo: un corte de ritmo o un cambio de plano no saca nada y el sonido
+        # sigue entero (fundir el audio consigo mismo da +3 dB). Solo hay fundido cruzado donde se sacó algo.
+        bloques = []
+        for g in segs:
+            if bloques and abs(g['s'] - bloques[-1][1]) < 1e-4: bloques[-1][1] = g['e']
+            else: bloques.append([g['s'], g['e']])
+        for k, (s0, e0) in enumerate(bloques):
+            ultimo = k == len(bloques) - 1
+            # cada bloque (menos el último) lleva XF de audio de más que se funde en cruz con el que entra: la duración
+            # total no cambia y no queda un hueco en la música de fondo entre un fundido de salida y uno de entrada
+            d = e0 - s0; n = int(round((d + (0 if ultimo else XF)) * 48000))
+            cad = (f"[0:a]atrim=start={s0:.6f}:end={e0 + (0 if ultimo else XF):.6f},asetpts=PTS-STARTPTS,aresample=48000,"
+                   f"apad=whole_len={n},atrim=end_sample={n}")
+            if k == 0: cad += f",afade=t=in:st=0:d={min(0.01, d / 3):.3f}"
+            if ultimo: cad += f",afade=t=out:st={max(0, d - FADE):.6f}:d={min(FADE, d / 3):.3f}"
+            fc.append(cad + f"[b{k}]")
+        prev_lbl = 'b0'
+        for k in range(1, len(bloques)):
+            lbl = 'a' if k == len(bloques) - 1 else f'x{k}'
+            fc.append(f"[{prev_lbl}][b{k}]acrossfade=d={XF}:c1=qsin:c2=qsin[{lbl}]"); prev_lbl = lbl
+        if len(bloques) == 1: fc.append('[b0]anull[a]')
     fcfile = salida + '.filtro.txt'; open(fcfile, 'w').write(';\n'.join(fc))
     cmd = ['ffmpeg', '-v', 'error', '-y', '-i', fuente, '-filter_complex_script', fcfile, '-map', '[v]']
     if con_audio: cmd += ['-map', '[a]', '-c:a', 'aac', '-b:a', '192k']
@@ -350,8 +428,55 @@ def renderizar(fuente, segs, info, salida, con_audio=True, crf=19, ancho=None, a
     run(cmd); os.remove(fcfile)
 
 
-def controles(salida, segs, out_dir, info):
-    """Uniones: cuadro antes | después de cada corte (miralo con Read), saltos de audio en las uniones y duración."""
+def suavizar_chasquidos(salida, palabras, gan=0.4):
+    """Chasquidos de boca, respiraciones y golpes cortos DENTRO de las pausas entre palabras (no en la voz): les baja
+    unos 8 dB con rampas de 15 ms. Pasa en el crudo aunque no haya corte (Larreta, 0:29, entre "Además," y "te").
+    Devuelve la lista de lo que suavizó (tiempos del archivo cortado)."""
+    raw = run(['ffmpeg', '-v', 'error', '-i', salida, '-vn', '-ac', '2', '-ar', '48000', '-f', 's16le', '-'], text=False).stdout
+    a = array.array('h'); a.frombytes(raw[:len(raw) // 4 * 4]); sr, n = 48000, 480
+    mono = [(abs(a[2 * i]) + abs(a[2 * i + 1])) for i in range(len(a) // 2)]
+    rms = [math.sqrt(sum(x * x for x in mono[i:i + n]) / n) / 2 for i in range(0, len(mono) - n, n)]
+    hz = sr / n; voz = sorted(rms)[int(len(rms) * 0.9)] if rms else 0
+    hechos = []
+    ws = sorted(palabras, key=lambda w: w['s'])
+    for w0, w1 in zip(ws, ws[1:]):
+        a0, b0 = w0['e'] + 0.05, w1['s'] - 0.06
+        if b0 - a0 < 0.06: continue
+        i0, i1 = int(a0 * hz), int(b0 * hz)
+        zona = rms[i0:i1]
+        if not zona: continue
+        piso = sorted(zona)[len(zona) // 2]
+        umbral = max(piso * 2.5, voz * 0.04)
+        j = i0
+        while j < i1:
+            if rms[j] > umbral and rms[j] < voz * 0.35:
+                k = j
+                while k < i1 and rms[k] > umbral: k += 1
+                if (k - j) / hz <= 0.15:
+                    hechos.append((j / hz, k / hz))
+                j = k
+            j += 1
+    if not hechos: return []
+    rampa = int(0.015 * sr)
+    for t0, t1 in hechos:
+        s0, s1 = int((t0 - 0.01) * sr), int((t1 + 0.01) * sr)
+        for i in range(max(0, s0 - rampa), min(len(a) // 2, s1 + rampa)):
+            if i < s0: g = 1 - (1 - gan) * (0.5 - 0.5 * math.cos(math.pi * (i - (s0 - rampa)) / rampa))
+            elif i > s1: g = 1 - (1 - gan) * (0.5 + 0.5 * math.cos(math.pi * (i - s1) / rampa))
+            else: g = gan
+            a[2 * i] = int(a[2 * i] * g); a[2 * i + 1] = int(a[2 * i + 1] * g)
+    tmp = salida + '.tmp.mp4'
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', salida, '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', '-', '-map', '0:v',
+                    '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', tmp],
+                   input=a.tobytes(), check=True, capture_output=True)
+    os.replace(tmp, salida)
+    return [{'s': round(t0, 3), 'e': round(t1, 3)} for t0, t1 in hechos]
+
+
+def controles(salida, segs, out_dir, info, rms_src=None, hz_src=100):
+    """Uniones: cuadro antes | después de cada corte (miralo con Read) y, en cada unión: ataque o cola comidos (en el
+    crudo: ¿el tramo que entra arranca con voz? ¿el que sale corta con voz?), hueco (la música de fondo cae a casi
+    nada) y pop (salto de muestra mucho mayor que lo normal alrededor). Más la duración."""
     rep = {'uniones': []}
     d = json.loads(run(['ffprobe', '-v', 'error', '-show_streams', '-of', 'json', salida]).stdout)['streams']
     dv = next(float(s['duration']) for s in d if s['codec_type'] == 'video')
@@ -361,11 +486,36 @@ def controles(salida, segs, out_dir, info):
                        'ok': abs(dv - esperado) < 2 / info['fps'] and abs(da - dv) < 0.05}
     raw = run(['ffmpeg', '-v', 'error', '-i', salida, '-vn', '-ac', '1', '-ar', '48000', '-f', 's16le', '-'], text=False).stdout
     a = array.array('h'); a.frombytes(raw[:len(raw) // 2 * 2])
-    for g in segs[1:]:
-        i = int(g['out_s'] * 48000)
-        ventana = a[max(0, i - 48):i + 48]
-        salto = max((abs(ventana[j + 1] - ventana[j]) for j in range(len(ventana) - 1)), default=0) / 32768
-        rep['uniones'].append({'t': round(g['out_s'], 3), 'salto_audio': round(salto, 4), 'ok': salto < 0.08, 'entra_por': g['entra_por'], 'zoom': g['zoom']})
+    sr = 48000
+    def rmsv(x0, x1):
+        v = a[max(0, int(x0 * sr)):max(0, int(x1 * sr))]
+        return math.sqrt(sum(x * x for x in v) / len(v)) if len(v) else 0
+    def pasos(x0, x1):
+        v = a[max(0, int(x0 * sr)):max(0, int(x1 * sr))]
+        d = sorted(abs(v[j + 1] - v[j]) for j in range(len(v) - 1)) or [0]
+        return d[-1], d[len(d) // 2] or 1
+    voz_src = sorted(rms_src)[int(len(rms_src) * 0.9)] if rms_src else 0
+    def piso_v(x0, x1):   # la parte más callada (10 ms) de una zona: el fondo de la pausa
+        vals = [rmsv(x, x + 0.01) for x in [x0 + i * 0.01 for i in range(max(1, int((x1 - x0) / 0.01)))]]
+        return min(vals) if vals else 0
+    for k, g in enumerate(segs[1:], 1):
+        t = g['out_s']; prev = segs[k - 1]
+        u = {'t': round(t, 3), 'entra_por': g['entra_por'], 'zoom': g['zoom'], 'saca_audio': abs(g['s'] - prev['e']) > 1e-4}
+        if not u['saca_audio']:   # corte de imagen solo (ritmo o plano): el sonido sigue entero, no hay unión de audio
+            u['ok'] = True; rep['uniones'].append(u); continue
+        # en el crudo: energía de voz justo donde entra el tramo nuevo y justo donde termina el anterior
+        if rms_src:
+            ent = max(rms_src[int(g['s'] * hz_src):int((g['s'] + 0.05) * hz_src) + 1] or [0])
+            sal = max(rms_src[int((prev['e'] - 0.05) * hz_src):int(prev['e'] * hz_src) + 1] or [0])
+            u['ataque_comido'] = ent > voz_src * 0.25; u['cola_comida'] = sal > voz_src * 0.25
+        # en el archivo cortado: hueco y pop
+        antes, despues, centro = piso_v(t - 0.13, t - 0.045), piso_v(t + 0.045, t + 0.13), min(rmsv(x, x + 0.005) for x in [t - 0.035 + i * 0.005 for i in range(14)])   # lados fuera de los fundidos; centro: lo más bajo en 5 ms
+        u['hueco'] = min(antes, despues) > 120 and centro < 0.35 * min(antes, despues)
+        pico, normal = pasos(t - 0.006, t + 0.006); _, normal_zona = pasos(t - 0.1, t + 0.1)
+        u['pop'] = pico > 2500 and pico > 6 * max(normal, normal_zona)
+        u['salto_audio'] = round(pico / 32768, 4)
+        u['ok'] = not (u.get('ataque_comido') or u.get('cola_comida') or u['hueco'] or u['pop'])
+        rep['uniones'].append(u)
     # hoja de uniones: hasta 12, cada una cuadro antes | después
     sel = segs[1:13]
     if sel:
@@ -463,6 +613,7 @@ def main():
     ap.add_argument('--aire', type=float, default=0.2, help='aire total que queda entre las dos palabras de un corte (s)')
     ap.add_argument('--punch', type=float, default=1.1, help='zoom del punch-in en los jump cuts del talking head (1 = sin punch-in)')
     ap.add_argument('--modelo', help='carpeta del modelo Whisper local: retranscribe ±1,2 s en cada unión y compara (HARD-RULES 21)')
+    ap.add_argument('--sin-suavizar', action='store_true', help='no bajar chasquidos ni respiraciones de las pausas')
     ap.add_argument('--solo-plan', action='store_true', help='no renderiza: solo plan.json e informe')
     ap.add_argument('--armar', help='carpeta de un corte ya hecho: arma el proyecto nuevo con los assetId subidos')
     ap.add_argument('--asset-video'); ap.add_argument('--asset-recorte'); ap.add_argument('--id')
@@ -518,10 +669,15 @@ def main():
     if matte:
         mi = probe(matte); mi['audio'] = False
         renderizar(matte, segs, mi, os.path.join(a.out, 'recorte.mp4'), con_audio=False, crf=20)
-    rep = controles(salida, segs, a.out, info)
+    suaves = [] if a.sin_suavizar else suavizar_chasquidos(salida, palabras)
+    rep = controles(salida, segs, a.out, info, rms, hz)
+    rep['suavizados'] = suaves
     malas = [u for u in rep['uniones'] if not u['ok']]
+    motivos = lambda u: '+'.join(k for k in ('ataque_comido', 'cola_comida', 'hueco', 'pop') if u.get(k))
     lineas += ['', f"Controles: duración {'ok' if rep['duracion']['ok'] else 'MAL'} ({rep['duracion']}), " +
-               f"{len(rep['uniones'])} uniones, {len(malas)} con salto de audio" + (f": {[u['t'] for u in malas]}" if malas else '') +
+               f"{sum(1 for u in rep['uniones'] if u.get('saca_audio'))} uniones de audio con fundido cruzado de {int(XF * 1000)} ms, {len(malas)} con problemas" +
+               (': ' + ', '.join(f"{u['t']:.2f}s {motivos(u)}" for u in malas) if malas else ' (ataques, colas, huecos y pops)') +
+               (f". Chasquidos o respiraciones suavizados en las pausas: {len(suaves)} ({', '.join(str(x['s']) for x in suaves)})" if suaves else '') +
                f". Mirá uniones.jpg. Render en {time.time() - t0:.0f} s."]
     if a.modelo:
         rt = retranscribir(salida, palabras, segs, a.modelo, a.out); rep['retranscripcion'] = rt
