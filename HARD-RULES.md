@@ -56,6 +56,10 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 37. **`three` queda fijo en 0.160.0** (y `@types/three` 0.160.0). El editor copia three.js r160 a `dist/` y sus piezas 3D están escritas para esa versión; `@remotion/three` y `@react-three/fiber` funcionan con ella. Subirla rompe la página sin aviso: solo con prueba completa de la página (`npm test`) y de un render 3D en Remotion.
 38. **faster-whisper con audio ya decodificado.** El PyAV que puede venir instalado no es compatible con la versión de faster-whisper que se instala (`open() got an unexpected keyword argument 'metadata_errors'`): decodificar con ffmpeg a PCM 16 kHz mono y pasarle el arreglo (como hace `cortar.py --modelo`), o instalar el PyAV que pide faster-whisper.
 
+39. **La nube trabaja con el último commit o lo dice.** Si no puede clonar, usa la copia de `sistema/repo` (recurso subido después de cada push); la copia publicada en la página puede tener días. Una herramienta que falta en la copia no se reemplaza a mano: se dice. En la prueba del 25/10 la copia publicada no traía `cortar.py` y el corte salió a mano, sin los controles.
+
+40. **Una op `editar` o `borrar` por `id` tiene que llevar también `n`, o cae sobre la primera pieza.** En la página publicada hasta el 25/10 la búsqueda era `x.id === o.id || x.n === o.n`: sin `n`, `undefined === undefined` da verdadero y cualquier corrección editaba la primera pieza (en la prueba, el titular del arranque terminó diciendo "mayor amplitud" y con el clip del inserto). Arreglado en `src/js/09b-agent.js` (entra en la página cuando se publique) y, mientras tanto, `tools/edit.js` completa `n` antes de aplicar las ops. Prueba: `node test/editar.js`. Después de editar, mirá en `project.json` que cada pieza tenga su texto.
+
 ## Qué NO va en este archivo
 Movimientos de cámara (zooms, seguimiento de cara, reencuadres), estilo de subtítulos (tamaño, palabras por bloque,
 posición, mayúsculas, cuándo se ocultan), pantallas completas, densidad de gráficos y música se eligen en cada edición
@@ -65,4 +69,4 @@ posición, mayúsculas, cuándo se ocultan), pantallas completas, densidad de gr
 Origen: reglas 2, 6, 8–16, 19–21 y 24 adaptadas de [browser-use/video-use](https://github.com/browser-use/video-use) y
 [ranahaani/i-hate-editing](https://github.com/ranahaani/i-hate-editing) (MIT, usadas como referencia, no instaladas) y del
 informe "Cómo hacer que Claude edite bien". Reglas 1, 11 y 20 se ejecutan con `.claude/skills/ffmpeg-skill`
-([kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill), MIT). Reglas 17, 18 y 28 a 38 salen de fallas de la Sala.
+([kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill), MIT). Reglas 17, 18 y 28 a 40 salen de fallas de la Sala.

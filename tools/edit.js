@@ -65,6 +65,10 @@ const MOCK = ([proj, settings]) => {
   await page.waitForTimeout(400);
   const res = await page.evaluate(async ({ ops, clear }) => {
     if (clear) mutate(p => { p.motions = []; });
+    // la página publicada (hasta que se publique el arreglo) edita la PRIMERA pieza cuando una op trae id sin n:
+    // se completa n con el orden por inicio para que el id encuentre su pieza (HARD-RULES 40)
+    const orden = (S.p.motions || []).slice().sort((a, b) => a.start - b.start);
+    for (const o of ops) if ((o.op === 'editar' || o.op === 'borrar') && o.id && o.n == null) { const i = orden.findIndex(m => m.id === o.id); o.n = i >= 0 ? i + 1 : -1; }
     const log = ops.length ? applyAgentOps(ops) : [];
     await prepareMotions(S.p);
     const rr = runRules(true);

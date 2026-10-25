@@ -22,14 +22,17 @@ function applyAgentOps(ops) {
           if (!m.quote) m.quote = quoteFor(p, m);
           p.motions.push(m); log.push(`+ ${PRESETS[m.type].name} en ${mmss(m.start)}`);
         } else if (o.op === 'editar') {
-          const m = p.motions.find(x => x.id === o.id || x.n === o.n); if (!m) continue;
+          /* por id; si no, por número (n = orden por inicio, como en projectForAgent). Antes: x.n === o.n con los dos
+             undefined daba verdadero y cualquier edición por id caía sobre la primera pieza. */
+          const porN = Number.isFinite(+o.n) && +o.n >= 1 ? p.motions.slice().sort((a, b) => a.start - b.start)[+o.n - 1] : null;
+          const m = (o.id ? p.motions.find(x => x.id === o.id) : null) || (o.id ? null : porN); if (!m) continue;
           const ch = o.cambios || {}; const prev = clone(m); delete prev.hist;
           const merged = Object.assign({}, m, ch, { id: m.id, params: ch.type && ch.type !== m.type ? (ch.params || {}) : Object.assign({}, m.params, ch.params || {}) });
           if (!ch.fit) delete merged.fit; if (!ch.noCaps) delete merged.noCaps; const nm = sanitizeMotion(merged); nm.hist = (m.hist || []).concat([{ at: Date.now(), comment: 'Pedido a Claude', resumen: 'Cambio desde el pedido libre', prev }]).slice(-4);
           if (ch.start != null && !m._quoteEdited) nm.quote = quoteFor(p, nm);
           for (const k of Object.keys(m)) delete m[k]; Object.assign(m, nm); log.push(`~ ${headline(m)}`);
         } else if (o.op === 'borrar') {
-          const m = p.motions.find(x => x.id === o.id); if (!m) continue; p.motions = p.motions.filter(x => x !== m); log.push(`− ${headline(m)}`);
+          const m = o.id ? p.motions.find(x => x.id === o.id) : (Number.isFinite(+o.n) ? p.motions.slice().sort((a, b) => a.start - b.start)[+o.n - 1] : null); if (!m) continue; p.motions = p.motions.filter(x => x !== m); log.push(`− ${headline(m)}`);
         } else if (o.op === 'proyecto') {
           const pick = (src, dst, keys) => { if (!src || typeof src !== 'object') return 0; let n = 0; for (const k of Object.keys(src)) if (!keys || keys.includes(k)) { dst[k] = src[k]; n++; } return n; };
           if (pick(o.subtitulos, p.captions, ['on', 'style', 'pos', 'y', 'maxWords', 'size', 'upper', 'hideOnFull'])) log.push('~ subtítulos');

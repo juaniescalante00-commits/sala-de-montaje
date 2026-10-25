@@ -300,6 +300,13 @@ Pieza:
 - El editor lo mide por sus píxeles reales: si tapa la cara, lo baja o achica (lo vas a ver en `rules.json`). Mejor
   diseñalo desde el principio fuera de la cara (mirá `faces` en el manual generado).
 
+**Legibilidad sobre exteriores claros** (aprendido en la prueba de Larreta con la referencia 1): los subtítulos bitono
+(palabra que viene en gris) funcionan sobre fondos oscuros; sobre cielo, pasto o paredes claras no se leen. Ahí van
+blancos con sombra (estilo `minimo`, tamaño 1,45 ≈ 64 px) y, si la persona viste oscuro, a la altura del pecho (`y`
+0,58). Titulares sobre cielo: `shadow: true` en cada elemento. Texto blanco nunca sobre superficies blancas (cúpulas,
+paredes): diseñá el inserto con el texto donde el fondo es oscuro. Una pieza termina antes del corte de su toma si la
+siguiente tiene cara (la regla de caras mira unas décimas alrededor).
+
 ## 11. Cortes del crudo (silencios, muletillas, tomas repetidas, ritmo de la referencia)
 `tools/cortar.py` corta el crudo por palabras: vos decidís QUÉ sale (por IDs de palabra o de frase, nunca por tiempo:
 HARD-RULES 6) y el script decide DÓNDE cae cada corte (en un silencio sostenido entre palabras, medido en el audio) y

@@ -71,7 +71,7 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 - `trig_013ERanf5oCJYw1uMqif5veU` · "Sala de Montaje · transcribir, caras y recorte": Whisper (modelo por npm), BlazeFace
   (`tools/faces.py`), Robust Video Matting (`tools/matte.py`).
 - `trig_01FSh19WcrPjb3sAq7BRPFZp` · "Sala de Montaje · editar a fondo": recibe `{proyecto, pedido}`, **clona este repo**
-  (add_repo + git clone; si no puede, baja `tools/repo.tgz.b64.txt` del artifact), lee la lista obligatoria de
+  (add_repo + git clone; si no puede, baja la copia de `sistema/repo` de la base, y como último recurso `tools/repo.tgz.b64.txt` publicado), lee la lista obligatoria de
   `docs/EDITOR.md` (sección 0: CLAUDE.md, HARD-RULES, manual, skills, fichas, índice de audio), corta el crudo con `tools/cortar.py` si el pedido lo pide (proyecto nuevo "… · cortado"), edita con `tools/edit.js`,
   hace insertos con `tools/html_inserto.js` / Remotion, elige audio con `tools/elegir_audio.py`, escribe el resultado y
   `deep.estado`, y cierra su mensaje con "Leí: …". Es el modo por defecto de la página (la edición rápida es opcional).
@@ -91,7 +91,11 @@ push a main + publicar (ver abajo) para que la copia de respaldo quede igual.
   lo mismo con `remotion/fuentes.ts`. Si se suma una familia a `FONTS` (01-core.js), sumá su `@fontsource/<familia>`.
 - `elegir_audio.py`: cruza `datos/audio/indice.json` con la biblioteca y el kit de la base; devuelve solo lo usable.
   Ojo: de los 1105 sonidos del índice, la mayoría no está subida a la Sala (solo los de la biblioteca sirven).
-- `empaquetar.sh`: copia de respaldo del repo para la tarea en la nube (`dist/repo.tgz.b64.txt`).
+- `empaquetar.sh`: copia de respaldo del repo para la tarea en la nube (`dist/repo.tgz.b64.txt`). Después de cada push a
+  main: subila como recurso (Artifact `publish` con `url` del editor, `file_path` = la copia, `asset: true`) y apuntá
+  `sistema/repo` de la base a ella (`ArtifactData set` con `{assetId, commit, at}`). Así la nube tiene el último commit
+  aunque no pueda clonar y sin publicar una versión nueva de la página (en la prueba del 25/10 no pudo clonar y la copia
+  publicada era vieja: no tenía `cortar.py`).
 - `transcribe.py`, `faces.py`, `matte.py`: los usa la tarea de transcripción. `render.js`: render final a Editados.
 
 ## Datos de la compu de Juani (`datos/`, generados por `local/`)
@@ -137,6 +141,7 @@ Nota: la línea de "Estética obligatoria" es el default cuando el plan no dice 
 4. Publicar: commit y push a main, `sh tools/empaquetar.sh`, y herramienta Artifact `publish` con `url` del editor,
    `file_path` = `dist/sala.html` y `files` para lo que cambió (`tools/edit.js`, `tools/EDITOR.md` desde `docs/EDITOR.md`,
    `tools/HARD-RULES.md`, `tools/repo.tgz.b64.txt` y `tools/repo.commit.txt` desde `dist/`; los `.py` con `contentType: "text/plain"`).
+   La copia de respaldo además va siempre a `sistema/repo` (ver `empaquetar.sh`), haya o no versión nueva de la página.
    Si el artifact cambió desde otra sesión, leé primero lo publicado y fusioná.
 5. Nunca publiques sin haber construido, probado y mirado cuadros renderizados.
 
