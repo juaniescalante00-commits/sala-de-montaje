@@ -1,0 +1,1 @@
+Origen: https://github.com/Tejashmakwana/motionmaxxing @ 8c8ec0f (2026-10-06), Apache-2.0 (ver NOTICE para GSAP, three.js y fuentes). Copia auditada; sin docs/ ni studies/ (demos). voice.py (ElevenLabs) e imagegen.py (Codex) son opcionales y pagos: no se configuran sin OK de Juani.

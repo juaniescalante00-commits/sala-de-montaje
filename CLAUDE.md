@@ -16,6 +16,9 @@ gráficos en HTML con HyperFrames y 16:9 → lecciones y A/B → B-roll y sonido
 Castellano rioplatense con voseo, directo, sin tecnicismos ni nombres de archivos o funciones salvo que los pida.
 Estética minimalista y editorial en todo.
 
+Reglas técnicas que nunca se rompen: `HARD-RULES.md` (leelo antes de cortar o renderizar).
+Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` (cortes, silencios, subtítulos, loudness, verificación) y `motionmaxxing` (motion graphics con oficio). Para skills nuevas: auditar con `tools/scan_skill.py` antes de copiar.
+
 ## Reglas de edición que nunca se rompen
 - Nunca sonidos que no tienen que ver con lo que pasa en pantalla. Nada de pips, pops, ticks.
 - Nunca tapar la cara de quien habla.
