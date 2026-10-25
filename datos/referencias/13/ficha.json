@@ -1,0 +1,333 @@
+{
+ "nombre": "13",
+ "archivo": "referencias/13.mp4",
+ "firma": "1720109-1792900035",
+ "generado": "2026-10-25T01:09:18",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 14.0,
+  "ancho": 464,
+  "alto": 832,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "29:52",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 4,
+  "media": 3.5,
+  "mediana": 3.65,
+  "min": 1.4,
+  "max": 5.3
+ },
+ "cortes_por_min": 12.9,
+ "ritmo_habla": {
+  "palabras": 27,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 9.56,
+  "pal_s_hablando": 2.9,
+  "pal_s_total": 1.93,
+  "tiempo_hablando": 9.3,
+  "parte_hablada": 0.66,
+  "bloques": 2,
+  "palabras_por_bloque": {
+   "n": 2,
+   "media": 13.5,
+   "mediana": 13.5,
+   "min": 13.0,
+   "max": 14.0
+  },
+  "dur_bloque": {
+   "n": 2,
+   "media": 4.65,
+   "mediana": 4.65,
+   "min": 3.88,
+   "max": 5.42
+  },
+  "pausas": {
+   "n": 1,
+   "media": 0.26,
+   "mediana": 0.26,
+   "min": 0.26,
+   "max": 0.26
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 1.4,
+   "dur": 1.4,
+   "dicho": "We actually have over"
+  },
+  {
+   "id": 2,
+   "s": 1.4,
+   "e": 4.67,
+   "dur": 3.27,
+   "dicho": "87 different emotions and emotional experiences available"
+  },
+  {
+   "id": 3,
+   "s": 4.67,
+   "e": 9.97,
+   "dur": 5.3,
+   "dicho": "to us. And the average human can only name three within themselves, happy, angry and sad."
+  },
+  {
+   "id": 4,
+   "s": 9.97,
+   "e": 14.0,
+   "dur": 4.03,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 5.42,
+   "dur": 5.42,
+   "palabras": 13,
+   "pal_s": 2.4,
+   "texto": "We actually have over 87 different emotions and emotional experiences available to us."
+  },
+  {
+   "id": 2,
+   "s": 5.68,
+   "e": 9.56,
+   "dur": 3.88,
+   "palabras": 14,
+   "pal_s": 3.6,
+   "texto": "And the average human can only name three within themselves, happy, angry and sad."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "We actually have over"
+   },
+   {
+    "t": 2.0,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": "87 different"
+   },
+   {
+    "t": 5.27,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": "available to us. And the"
+   },
+   {
+    "t": 10.57,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": ""
+   },
+   {
+    "t": 13.7,
+    "que": "final",
+    "plano": 4,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "We",
+   "s": 0.0,
+   "e": 0.14,
+   "p": 0.75
+  },
+  {
+   "w": "actually",
+   "s": 0.14,
+   "e": 0.36,
+   "p": 0.94
+  },
+  {
+   "w": "have",
+   "s": 0.36,
+   "e": 0.58,
+   "p": 0.99
+  },
+  {
+   "w": "over",
+   "s": 0.58,
+   "e": 1.04,
+   "p": 0.99
+  },
+  {
+   "w": "87",
+   "s": 1.04,
+   "e": 2.06,
+   "p": 0.59
+  },
+  {
+   "w": "different",
+   "s": 2.06,
+   "e": 2.7,
+   "p": 0.99
+  },
+  {
+   "w": "emotions",
+   "s": 2.7,
+   "e": 3.22,
+   "p": 0.82
+  },
+  {
+   "w": "and",
+   "s": 3.22,
+   "e": 3.36,
+   "p": 0.99
+  },
+  {
+   "w": "emotional",
+   "s": 3.36,
+   "e": 3.64,
+   "p": 0.99
+  },
+  {
+   "w": "experiences",
+   "s": 3.64,
+   "e": 4.38,
+   "p": 1.0
+  },
+  {
+   "w": "available",
+   "s": 4.38,
+   "e": 4.8,
+   "p": 0.99
+  },
+  {
+   "w": "to",
+   "s": 4.8,
+   "e": 5.16,
+   "p": 0.99
+  },
+  {
+   "w": "us.",
+   "s": 5.16,
+   "e": 5.42,
+   "p": 1.0
+  },
+  {
+   "w": "And",
+   "s": 5.68,
+   "e": 5.78,
+   "p": 0.93
+  },
+  {
+   "w": "the",
+   "s": 5.78,
+   "e": 5.88,
+   "p": 0.94
+  },
+  {
+   "w": "average",
+   "s": 5.88,
+   "e": 6.12,
+   "p": 1.0
+  },
+  {
+   "w": "human",
+   "s": 6.12,
+   "e": 6.42,
+   "p": 0.99
+  },
+  {
+   "w": "can",
+   "s": 6.42,
+   "e": 6.62,
+   "p": 0.99
+  },
+  {
+   "w": "only",
+   "s": 6.62,
+   "e": 6.82,
+   "p": 1.0
+  },
+  {
+   "w": "name",
+   "s": 6.82,
+   "e": 7.04,
+   "p": 0.99
+  },
+  {
+   "w": "three",
+   "s": 7.04,
+   "e": 7.36,
+   "p": 0.9
+  },
+  {
+   "w": "within",
+   "s": 7.36,
+   "e": 7.64,
+   "p": 0.94
+  },
+  {
+   "w": "themselves,",
+   "s": 7.64,
+   "e": 8.08,
+   "p": 1.0
+  },
+  {
+   "w": "happy,",
+   "s": 8.08,
+   "e": 8.6,
+   "p": 0.96
+  },
+  {
+   "w": "angry",
+   "s": 8.74,
+   "e": 9.1,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 9.1,
+   "e": 9.28,
+   "p": 0.6
+  },
+  {
+   "w": "sad.",
+   "s": 9.28,
+   "e": 9.56,
+   "p": 1.0
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 5.42,
+   "texto": "We actually have over 87 different emotions and emotional experiences available to us."
+  },
+  {
+   "s": 5.68,
+   "e": 9.56,
+   "texto": "And the average human can only name three within themselves, happy, angry and sad."
+  }
+ ]
+}

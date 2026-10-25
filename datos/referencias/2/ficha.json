@@ -1,0 +1,1587 @@
+{
+ "nombre": "2",
+ "archivo": "referencias/2.mp4",
+ "firma": "4972196-1792899773",
+ "generado": "2026-10-25T01:09:38",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 50.45,
+  "ancho": 720,
+  "alto": 1280,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 48000,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 9,
+  "media": 5.59,
+  "mediana": 6.07,
+  "min": 2.07,
+  "max": 11.03
+ },
+ "cortes_por_min": 9.5,
+ "ritmo_habla": {
+  "palabras": 187,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 50.12,
+  "pal_s_hablando": 4.12,
+  "pal_s_total": 3.71,
+  "tiempo_hablando": 45.42,
+  "parte_hablada": 0.9,
+  "bloques": 18,
+  "palabras_por_bloque": {
+   "n": 18,
+   "media": 10.39,
+   "mediana": 9.0,
+   "min": 4.0,
+   "max": 25.0
+  },
+  "dur_bloque": {
+   "n": 18,
+   "media": 2.52,
+   "mediana": 1.96,
+   "min": 0.9,
+   "max": 5.64
+  },
+  "pausas": {
+   "n": 12,
+   "media": 0.33,
+   "mediana": 0.33,
+   "min": 0.26,
+   "max": 0.44
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 11.03,
+   "dur": 11.03,
+   "dicho": "This editing style is taking over in 2026 and every single editor wants to learn it. So here's a quick breakdown of how it's made. There's really three steps to making this editing style. First is the background."
+  },
+  {
+   "id": 2,
+   "s": 11.03,
+   "e": 18.07,
+   "dur": 7.03,
+   "dicho": "The background is typically white, layered on with a grid effect. It also has a half -told texture and even a casted shadow."
+  },
+  {
+   "id": 3,
+   "s": 18.07,
+   "e": 24.13,
+   "dur": 6.07,
+   "dicho": "The second step is your main object. There are two types of scenes in this editing style. Object centric and text centric."
+  },
+  {
+   "id": 4,
+   "s": 24.13,
+   "e": 30.3,
+   "dur": 6.17,
+   "dicho": "Just take your main object and place it in the middle. Then stylize it with desaturation, a texture and a casted shadow. The"
+  },
+  {
+   "id": 5,
+   "s": 30.3,
+   "e": 32.57,
+   "dur": 2.27,
+   "dicho": "third step is your complementary object."
+  },
+  {
+   "id": 6,
+   "s": 32.57,
+   "e": 36.47,
+   "dur": 3.9,
+   "dicho": "This is the text that comes behind or around your object to help visualize it."
+  },
+  {
+   "id": 7,
+   "s": 36.47,
+   "e": 38.53,
+   "dur": 2.07,
+   "dicho": "And finally, it's your depth elements."
+  },
+  {
+   "id": 8,
+   "s": 38.53,
+   "e": 43.27,
+   "dur": 4.73,
+   "dicho": "These are the elements on the edges of the screen with a blur and a darken effect to give you some depth."
+  },
+  {
+   "id": 9,
+   "s": 43.27,
+   "e": 50.33,
+   "dur": 7.07,
+   "dicho": "If you would like to watch me create this scene over here step by step, I've made a full tutorial breaking it down on YouTube. Just go ahead and check it out."
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 4.76,
+   "dur": 4.76,
+   "palabras": 16,
+   "pal_s": 3.4,
+   "texto": "This editing style is taking over in 2026 and every single editor wants to learn it."
+  },
+  {
+   "id": 2,
+   "s": 4.94,
+   "e": 6.84,
+   "dur": 1.9,
+   "palabras": 9,
+   "pal_s": 4.7,
+   "texto": "So here's a quick breakdown of how it's made."
+  },
+  {
+   "id": 3,
+   "s": 7.1,
+   "e": 9.44,
+   "dur": 2.34,
+   "palabras": 9,
+   "pal_s": 3.8,
+   "texto": "There's really three steps to making this editing style."
+  },
+  {
+   "id": 4,
+   "s": 9.82,
+   "e": 10.78,
+   "dur": 0.96,
+   "palabras": 4,
+   "pal_s": 4.2,
+   "texto": "First is the background."
+  },
+  {
+   "id": 5,
+   "s": 11.04,
+   "e": 12.36,
+   "dur": 1.32,
+   "palabras": 5,
+   "pal_s": 3.8,
+   "texto": "The background is typically white,"
+  },
+  {
+   "id": 6,
+   "s": 12.72,
+   "e": 13.94,
+   "dur": 1.22,
+   "palabras": 6,
+   "pal_s": 4.9,
+   "texto": "layered on with a grid effect."
+  },
+  {
+   "id": 7,
+   "s": 14.3,
+   "e": 17.78,
+   "dur": 3.48,
+   "palabras": 12,
+   "pal_s": 3.4,
+   "texto": "It also has a half -told texture and even a casted shadow."
+  },
+  {
+   "id": 8,
+   "s": 18.08,
+   "e": 19.76,
+   "dur": 1.68,
+   "palabras": 7,
+   "pal_s": 4.2,
+   "texto": "The second step is your main object."
+  },
+  {
+   "id": 9,
+   "s": 20.14,
+   "e": 22.08,
+   "dur": 1.94,
+   "palabras": 10,
+   "pal_s": 5.2,
+   "texto": "There are two types of scenes in this editing style."
+  },
+  {
+   "id": 10,
+   "s": 22.36,
+   "e": 23.98,
+   "dur": 1.62,
+   "palabras": 5,
+   "pal_s": 3.1,
+   "texto": "Object centric and text centric."
+  },
+  {
+   "id": 11,
+   "s": 24.14,
+   "e": 26.12,
+   "dur": 1.98,
+   "palabras": 11,
+   "pal_s": 5.6,
+   "texto": "Just take your main object and place it in the middle."
+  },
+  {
+   "id": 12,
+   "s": 26.12,
+   "e": 29.9,
+   "dur": 3.78,
+   "palabras": 11,
+   "pal_s": 2.9,
+   "texto": "Then stylize it with desaturation, a texture and a casted shadow."
+  },
+  {
+   "id": 13,
+   "s": 30.14,
+   "e": 32.16,
+   "dur": 2.02,
+   "palabras": 7,
+   "pal_s": 3.5,
+   "texto": "The third step is your complementary object."
+  },
+  {
+   "id": 14,
+   "s": 32.52,
+   "e": 36.3,
+   "dur": 3.78,
+   "palabras": 15,
+   "pal_s": 4.0,
+   "texto": "This is the text that comes behind or around your object to help visualize it."
+  },
+  {
+   "id": 15,
+   "s": 36.5,
+   "e": 38.12,
+   "dur": 1.62,
+   "palabras": 6,
+   "pal_s": 3.7,
+   "texto": "And finally, it's your depth elements."
+  },
+  {
+   "id": 16,
+   "s": 38.56,
+   "e": 43.04,
+   "dur": 4.48,
+   "palabras": 22,
+   "pal_s": 4.9,
+   "texto": "These are the elements on the edges of the screen with a blur and a darken effect to give you some depth."
+  },
+  {
+   "id": 17,
+   "s": 43.3,
+   "e": 48.94,
+   "dur": 5.64,
+   "palabras": 25,
+   "pal_s": 4.4,
+   "texto": "If you would like to watch me create this scene over here step by step, I've made a full tutorial breaking it down on YouTube."
+  },
+  {
+   "id": 18,
+   "s": 49.22,
+   "e": 50.12,
+   "dur": 0.9,
+   "palabras": 7,
+   "pal_s": 7.8,
+   "texto": "Just go ahead and check it out."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "This editing style is"
+   },
+   {
+    "t": 11.63,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": "The background is typically white,"
+   },
+   {
+    "t": 18.67,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": "The second step is your main"
+   },
+   {
+    "t": 24.73,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "Just take your main object and"
+   },
+   {
+    "t": 30.9,
+    "que": "entra el plano",
+    "plano": 5,
+    "dicho": "third step is your complementary"
+   },
+   {
+    "t": 33.17,
+    "que": "entra el plano",
+    "plano": 6,
+    "dicho": "This is the text that comes behind"
+   },
+   {
+    "t": 37.07,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": "And finally, it's your depth elements."
+   },
+   {
+    "t": 39.13,
+    "que": "entra el plano",
+    "plano": 8,
+    "dicho": "These are the elements on the edges"
+   },
+   {
+    "t": 43.87,
+    "que": "entra el plano",
+    "plano": 9,
+    "dicho": "If you would like to watch me create"
+   },
+   {
+    "t": 50.15,
+    "que": "final",
+    "plano": 9,
+    "dicho": "ahead and check it out."
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "This",
+   "s": 0.0,
+   "e": 0.24,
+   "p": 0.95
+  },
+  {
+   "w": "editing",
+   "s": 0.24,
+   "e": 0.46,
+   "p": 0.96
+  },
+  {
+   "w": "style",
+   "s": 0.46,
+   "e": 0.76,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 0.76,
+   "e": 1.08,
+   "p": 1.0
+  },
+  {
+   "w": "taking",
+   "s": 1.08,
+   "e": 1.4,
+   "p": 0.93
+  },
+  {
+   "w": "over",
+   "s": 1.4,
+   "e": 1.9,
+   "p": 1.0
+  },
+  {
+   "w": "in",
+   "s": 1.9,
+   "e": 2.18,
+   "p": 1.0
+  },
+  {
+   "w": "2026",
+   "s": 2.18,
+   "e": 2.74,
+   "p": 0.98
+  },
+  {
+   "w": "and",
+   "s": 2.74,
+   "e": 3.14,
+   "p": 0.68
+  },
+  {
+   "w": "every",
+   "s": 3.14,
+   "e": 3.5,
+   "p": 0.99
+  },
+  {
+   "w": "single",
+   "s": 3.5,
+   "e": 3.74,
+   "p": 1.0
+  },
+  {
+   "w": "editor",
+   "s": 3.74,
+   "e": 3.98,
+   "p": 0.98
+  },
+  {
+   "w": "wants",
+   "s": 3.98,
+   "e": 4.32,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 4.32,
+   "e": 4.5,
+   "p": 1.0
+  },
+  {
+   "w": "learn",
+   "s": 4.5,
+   "e": 4.6,
+   "p": 1.0
+  },
+  {
+   "w": "it.",
+   "s": 4.6,
+   "e": 4.76,
+   "p": 1.0
+  },
+  {
+   "w": "So",
+   "s": 4.94,
+   "e": 5.1,
+   "p": 0.96
+  },
+  {
+   "w": "here's",
+   "s": 5.1,
+   "e": 5.6,
+   "p": 0.88
+  },
+  {
+   "w": "a",
+   "s": 5.6,
+   "e": 5.7,
+   "p": 1.0
+  },
+  {
+   "w": "quick",
+   "s": 5.7,
+   "e": 5.82,
+   "p": 0.99
+  },
+  {
+   "w": "breakdown",
+   "s": 5.82,
+   "e": 6.12,
+   "p": 0.94
+  },
+  {
+   "w": "of",
+   "s": 6.12,
+   "e": 6.42,
+   "p": 1.0
+  },
+  {
+   "w": "how",
+   "s": 6.42,
+   "e": 6.54,
+   "p": 1.0
+  },
+  {
+   "w": "it's",
+   "s": 6.54,
+   "e": 6.68,
+   "p": 0.99
+  },
+  {
+   "w": "made.",
+   "s": 6.68,
+   "e": 6.84,
+   "p": 1.0
+  },
+  {
+   "w": "There's",
+   "s": 7.1,
+   "e": 7.26,
+   "p": 0.98
+  },
+  {
+   "w": "really",
+   "s": 7.26,
+   "e": 7.5,
+   "p": 0.99
+  },
+  {
+   "w": "three",
+   "s": 7.5,
+   "e": 7.76,
+   "p": 0.92
+  },
+  {
+   "w": "steps",
+   "s": 7.76,
+   "e": 8.08,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 8.08,
+   "e": 8.34,
+   "p": 1.0
+  },
+  {
+   "w": "making",
+   "s": 8.34,
+   "e": 8.66,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 8.66,
+   "e": 8.92,
+   "p": 1.0
+  },
+  {
+   "w": "editing",
+   "s": 8.92,
+   "e": 9.18,
+   "p": 0.99
+  },
+  {
+   "w": "style.",
+   "s": 9.18,
+   "e": 9.44,
+   "p": 0.99
+  },
+  {
+   "w": "First",
+   "s": 9.82,
+   "e": 9.98,
+   "p": 0.96
+  },
+  {
+   "w": "is",
+   "s": 9.98,
+   "e": 10.38,
+   "p": 0.93
+  },
+  {
+   "w": "the",
+   "s": 10.38,
+   "e": 10.48,
+   "p": 1.0
+  },
+  {
+   "w": "background.",
+   "s": 10.48,
+   "e": 10.78,
+   "p": 0.99
+  },
+  {
+   "w": "The",
+   "s": 11.04,
+   "e": 11.08,
+   "p": 0.99
+  },
+  {
+   "w": "background",
+   "s": 11.08,
+   "e": 11.4,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 11.4,
+   "e": 11.68,
+   "p": 1.0
+  },
+  {
+   "w": "typically",
+   "s": 11.68,
+   "e": 11.96,
+   "p": 1.0
+  },
+  {
+   "w": "white,",
+   "s": 11.96,
+   "e": 12.36,
+   "p": 0.99
+  },
+  {
+   "w": "layered",
+   "s": 12.72,
+   "e": 12.88,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 12.88,
+   "e": 13.12,
+   "p": 0.99
+  },
+  {
+   "w": "with",
+   "s": 13.12,
+   "e": 13.34,
+   "p": 1.0
+  },
+  {
+   "w": "a",
+   "s": 13.34,
+   "e": 13.46,
+   "p": 1.0
+  },
+  {
+   "w": "grid",
+   "s": 13.46,
+   "e": 13.66,
+   "p": 0.98
+  },
+  {
+   "w": "effect.",
+   "s": 13.66,
+   "e": 13.94,
+   "p": 0.99
+  },
+  {
+   "w": "It",
+   "s": 14.3,
+   "e": 14.38,
+   "p": 0.99
+  },
+  {
+   "w": "also",
+   "s": 14.38,
+   "e": 14.6,
+   "p": 1.0
+  },
+  {
+   "w": "has",
+   "s": 14.6,
+   "e": 14.84,
+   "p": 1.0
+  },
+  {
+   "w": "a",
+   "s": 14.84,
+   "e": 15.02,
+   "p": 1.0
+  },
+  {
+   "w": "half",
+   "s": 15.02,
+   "e": 15.3,
+   "p": 0.85
+  },
+  {
+   "w": "-told",
+   "s": 15.3,
+   "e": 15.5,
+   "p": 0.46
+  },
+  {
+   "w": "texture",
+   "s": 15.5,
+   "e": 15.84,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 15.84,
+   "e": 16.48,
+   "p": 0.93
+  },
+  {
+   "w": "even",
+   "s": 16.48,
+   "e": 16.82,
+   "p": 1.0
+  },
+  {
+   "w": "a",
+   "s": 16.82,
+   "e": 17.02,
+   "p": 1.0
+  },
+  {
+   "w": "casted",
+   "s": 17.02,
+   "e": 17.46,
+   "p": 0.98
+  },
+  {
+   "w": "shadow.",
+   "s": 17.46,
+   "e": 17.78,
+   "p": 0.97
+  },
+  {
+   "w": "The",
+   "s": 18.08,
+   "e": 18.16,
+   "p": 0.99
+  },
+  {
+   "w": "second",
+   "s": 18.16,
+   "e": 18.38,
+   "p": 1.0
+  },
+  {
+   "w": "step",
+   "s": 18.38,
+   "e": 18.64,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 18.64,
+   "e": 18.9,
+   "p": 1.0
+  },
+  {
+   "w": "your",
+   "s": 18.9,
+   "e": 19.04,
+   "p": 1.0
+  },
+  {
+   "w": "main",
+   "s": 19.04,
+   "e": 19.3,
+   "p": 0.99
+  },
+  {
+   "w": "object.",
+   "s": 19.3,
+   "e": 19.76,
+   "p": 0.99
+  },
+  {
+   "w": "There",
+   "s": 20.14,
+   "e": 20.2,
+   "p": 1.0
+  },
+  {
+   "w": "are",
+   "s": 20.2,
+   "e": 20.34,
+   "p": 1.0
+  },
+  {
+   "w": "two",
+   "s": 20.34,
+   "e": 20.54,
+   "p": 0.99
+  },
+  {
+   "w": "types",
+   "s": 20.54,
+   "e": 20.78,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 20.78,
+   "e": 20.92,
+   "p": 1.0
+  },
+  {
+   "w": "scenes",
+   "s": 20.92,
+   "e": 21.12,
+   "p": 1.0
+  },
+  {
+   "w": "in",
+   "s": 21.12,
+   "e": 21.38,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 21.38,
+   "e": 21.5,
+   "p": 1.0
+  },
+  {
+   "w": "editing",
+   "s": 21.5,
+   "e": 21.76,
+   "p": 1.0
+  },
+  {
+   "w": "style.",
+   "s": 21.76,
+   "e": 22.08,
+   "p": 0.99
+  },
+  {
+   "w": "Object",
+   "s": 22.36,
+   "e": 22.58,
+   "p": 0.98
+  },
+  {
+   "w": "centric",
+   "s": 22.58,
+   "e": 22.96,
+   "p": 0.76
+  },
+  {
+   "w": "and",
+   "s": 22.96,
+   "e": 23.28,
+   "p": 0.97
+  },
+  {
+   "w": "text",
+   "s": 23.28,
+   "e": 23.52,
+   "p": 0.83
+  },
+  {
+   "w": "centric.",
+   "s": 23.52,
+   "e": 23.98,
+   "p": 0.99
+  },
+  {
+   "w": "Just",
+   "s": 24.14,
+   "e": 24.28,
+   "p": 0.99
+  },
+  {
+   "w": "take",
+   "s": 24.28,
+   "e": 24.44,
+   "p": 1.0
+  },
+  {
+   "w": "your",
+   "s": 24.44,
+   "e": 24.58,
+   "p": 1.0
+  },
+  {
+   "w": "main",
+   "s": 24.58,
+   "e": 24.74,
+   "p": 1.0
+  },
+  {
+   "w": "object",
+   "s": 24.74,
+   "e": 25.06,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 25.06,
+   "e": 25.38,
+   "p": 0.98
+  },
+  {
+   "w": "place",
+   "s": 25.38,
+   "e": 25.64,
+   "p": 1.0
+  },
+  {
+   "w": "it",
+   "s": 25.64,
+   "e": 25.76,
+   "p": 0.98
+  },
+  {
+   "w": "in",
+   "s": 25.76,
+   "e": 25.84,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 25.84,
+   "e": 25.92,
+   "p": 1.0
+  },
+  {
+   "w": "middle.",
+   "s": 25.92,
+   "e": 26.12,
+   "p": 1.0
+  },
+  {
+   "w": "Then",
+   "s": 26.12,
+   "e": 26.5,
+   "p": 0.66
+  },
+  {
+   "w": "stylize",
+   "s": 26.5,
+   "e": 27.12,
+   "p": 0.62
+  },
+  {
+   "w": "it",
+   "s": 27.12,
+   "e": 27.22,
+   "p": 0.99
+  },
+  {
+   "w": "with",
+   "s": 27.22,
+   "e": 27.4,
+   "p": 0.99
+  },
+  {
+   "w": "desaturation,",
+   "s": 27.4,
+   "e": 28.24,
+   "p": 0.86
+  },
+  {
+   "w": "a",
+   "s": 28.46,
+   "e": 28.56,
+   "p": 0.97
+  },
+  {
+   "w": "texture",
+   "s": 28.56,
+   "e": 28.84,
+   "p": 0.93
+  },
+  {
+   "w": "and",
+   "s": 28.84,
+   "e": 29.28,
+   "p": 0.56
+  },
+  {
+   "w": "a",
+   "s": 29.28,
+   "e": 29.38,
+   "p": 0.96
+  },
+  {
+   "w": "casted",
+   "s": 29.38,
+   "e": 29.68,
+   "p": 0.66
+  },
+  {
+   "w": "shadow.",
+   "s": 29.68,
+   "e": 29.9,
+   "p": 0.99
+  },
+  {
+   "w": "The",
+   "s": 30.14,
+   "e": 30.24,
+   "p": 0.97
+  },
+  {
+   "w": "third",
+   "s": 30.24,
+   "e": 30.48,
+   "p": 0.96
+  },
+  {
+   "w": "step",
+   "s": 30.48,
+   "e": 30.7,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 30.7,
+   "e": 30.98,
+   "p": 0.99
+  },
+  {
+   "w": "your",
+   "s": 30.98,
+   "e": 31.1,
+   "p": 0.99
+  },
+  {
+   "w": "complementary",
+   "s": 31.1,
+   "e": 31.52,
+   "p": 0.66
+  },
+  {
+   "w": "object.",
+   "s": 31.52,
+   "e": 32.16,
+   "p": 0.99
+  },
+  {
+   "w": "This",
+   "s": 32.52,
+   "e": 32.72,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 32.72,
+   "e": 32.82,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 32.82,
+   "e": 32.94,
+   "p": 0.99
+  },
+  {
+   "w": "text",
+   "s": 32.94,
+   "e": 33.16,
+   "p": 1.0
+  },
+  {
+   "w": "that",
+   "s": 33.16,
+   "e": 33.34,
+   "p": 1.0
+  },
+  {
+   "w": "comes",
+   "s": 33.34,
+   "e": 33.54,
+   "p": 1.0
+  },
+  {
+   "w": "behind",
+   "s": 33.54,
+   "e": 33.94,
+   "p": 1.0
+  },
+  {
+   "w": "or",
+   "s": 33.94,
+   "e": 34.2,
+   "p": 0.98
+  },
+  {
+   "w": "around",
+   "s": 34.2,
+   "e": 34.64,
+   "p": 1.0
+  },
+  {
+   "w": "your",
+   "s": 34.64,
+   "e": 34.78,
+   "p": 0.99
+  },
+  {
+   "w": "object",
+   "s": 34.78,
+   "e": 35.06,
+   "p": 0.99
+  },
+  {
+   "w": "to",
+   "s": 35.06,
+   "e": 35.34,
+   "p": 0.98
+  },
+  {
+   "w": "help",
+   "s": 35.34,
+   "e": 35.52,
+   "p": 1.0
+  },
+  {
+   "w": "visualize",
+   "s": 35.52,
+   "e": 35.9,
+   "p": 0.96
+  },
+  {
+   "w": "it.",
+   "s": 35.9,
+   "e": 36.3,
+   "p": 0.99
+  },
+  {
+   "w": "And",
+   "s": 36.5,
+   "e": 36.62,
+   "p": 0.97
+  },
+  {
+   "w": "finally,",
+   "s": 36.62,
+   "e": 36.92,
+   "p": 0.98
+  },
+  {
+   "w": "it's",
+   "s": 37.16,
+   "e": 37.24,
+   "p": 0.99
+  },
+  {
+   "w": "your",
+   "s": 37.24,
+   "e": 37.34,
+   "p": 1.0
+  },
+  {
+   "w": "depth",
+   "s": 37.34,
+   "e": 37.66,
+   "p": 0.98
+  },
+  {
+   "w": "elements.",
+   "s": 37.66,
+   "e": 38.12,
+   "p": 0.98
+  },
+  {
+   "w": "These",
+   "s": 38.56,
+   "e": 38.74,
+   "p": 0.99
+  },
+  {
+   "w": "are",
+   "s": 38.74,
+   "e": 38.88,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 38.88,
+   "e": 38.96,
+   "p": 0.99
+  },
+  {
+   "w": "elements",
+   "s": 38.96,
+   "e": 39.24,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 39.24,
+   "e": 39.52,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 39.52,
+   "e": 39.64,
+   "p": 1.0
+  },
+  {
+   "w": "edges",
+   "s": 39.64,
+   "e": 39.9,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 39.9,
+   "e": 40.1,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 40.1,
+   "e": 40.2,
+   "p": 0.99
+  },
+  {
+   "w": "screen",
+   "s": 40.2,
+   "e": 40.44,
+   "p": 1.0
+  },
+  {
+   "w": "with",
+   "s": 40.44,
+   "e": 40.68,
+   "p": 0.75
+  },
+  {
+   "w": "a",
+   "s": 40.68,
+   "e": 40.8,
+   "p": 0.99
+  },
+  {
+   "w": "blur",
+   "s": 40.8,
+   "e": 40.98,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 40.98,
+   "e": 41.24,
+   "p": 0.99
+  },
+  {
+   "w": "a",
+   "s": 41.24,
+   "e": 41.32,
+   "p": 0.97
+  },
+  {
+   "w": "darken",
+   "s": 41.32,
+   "e": 41.72,
+   "p": 0.57
+  },
+  {
+   "w": "effect",
+   "s": 41.72,
+   "e": 41.94,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 41.94,
+   "e": 42.34,
+   "p": 0.98
+  },
+  {
+   "w": "give",
+   "s": 42.34,
+   "e": 42.5,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 42.5,
+   "e": 42.62,
+   "p": 1.0
+  },
+  {
+   "w": "some",
+   "s": 42.62,
+   "e": 42.76,
+   "p": 1.0
+  },
+  {
+   "w": "depth.",
+   "s": 42.76,
+   "e": 43.04,
+   "p": 1.0
+  },
+  {
+   "w": "If",
+   "s": 43.3,
+   "e": 43.42,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 43.42,
+   "e": 43.56,
+   "p": 1.0
+  },
+  {
+   "w": "would",
+   "s": 43.56,
+   "e": 43.68,
+   "p": 0.99
+  },
+  {
+   "w": "like",
+   "s": 43.68,
+   "e": 43.8,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 43.8,
+   "e": 43.96,
+   "p": 1.0
+  },
+  {
+   "w": "watch",
+   "s": 43.96,
+   "e": 44.14,
+   "p": 1.0
+  },
+  {
+   "w": "me",
+   "s": 44.14,
+   "e": 44.38,
+   "p": 1.0
+  },
+  {
+   "w": "create",
+   "s": 44.38,
+   "e": 44.78,
+   "p": 0.99
+  },
+  {
+   "w": "this",
+   "s": 44.78,
+   "e": 45.06,
+   "p": 0.99
+  },
+  {
+   "w": "scene",
+   "s": 45.06,
+   "e": 45.34,
+   "p": 1.0
+  },
+  {
+   "w": "over",
+   "s": 45.34,
+   "e": 45.58,
+   "p": 0.98
+  },
+  {
+   "w": "here",
+   "s": 45.58,
+   "e": 45.82,
+   "p": 1.0
+  },
+  {
+   "w": "step",
+   "s": 45.82,
+   "e": 46.16,
+   "p": 0.73
+  },
+  {
+   "w": "by",
+   "s": 46.16,
+   "e": 46.44,
+   "p": 0.72
+  },
+  {
+   "w": "step,",
+   "s": 46.44,
+   "e": 46.7,
+   "p": 1.0
+  },
+  {
+   "w": "I've",
+   "s": 46.88,
+   "e": 46.94,
+   "p": 0.99
+  },
+  {
+   "w": "made",
+   "s": 46.94,
+   "e": 47.06,
+   "p": 1.0
+  },
+  {
+   "w": "a",
+   "s": 47.06,
+   "e": 47.16,
+   "p": 0.99
+  },
+  {
+   "w": "full",
+   "s": 47.16,
+   "e": 47.38,
+   "p": 1.0
+  },
+  {
+   "w": "tutorial",
+   "s": 47.38,
+   "e": 47.66,
+   "p": 1.0
+  },
+  {
+   "w": "breaking",
+   "s": 47.66,
+   "e": 48.08,
+   "p": 0.73
+  },
+  {
+   "w": "it",
+   "s": 48.08,
+   "e": 48.3,
+   "p": 1.0
+  },
+  {
+   "w": "down",
+   "s": 48.3,
+   "e": 48.48,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 48.48,
+   "e": 48.7,
+   "p": 1.0
+  },
+  {
+   "w": "YouTube.",
+   "s": 48.7,
+   "e": 48.94,
+   "p": 0.92
+  },
+  {
+   "w": "Just",
+   "s": 49.22,
+   "e": 49.3,
+   "p": 0.98
+  },
+  {
+   "w": "go",
+   "s": 49.3,
+   "e": 49.48,
+   "p": 1.0
+  },
+  {
+   "w": "ahead",
+   "s": 49.48,
+   "e": 49.66,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 49.66,
+   "e": 49.76,
+   "p": 0.99
+  },
+  {
+   "w": "check",
+   "s": 49.76,
+   "e": 49.88,
+   "p": 1.0
+  },
+  {
+   "w": "it",
+   "s": 49.88,
+   "e": 50.04,
+   "p": 0.99
+  },
+  {
+   "w": "out.",
+   "s": 50.04,
+   "e": 50.12,
+   "p": 1.0
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 4.76,
+   "texto": "This editing style is taking over in 2026 and every single editor wants to learn it."
+  },
+  {
+   "s": 4.94,
+   "e": 6.84,
+   "texto": "So here's a quick breakdown of how it's made."
+  },
+  {
+   "s": 7.1,
+   "e": 9.44,
+   "texto": "There's really three steps to making this editing style."
+  },
+  {
+   "s": 9.82,
+   "e": 10.78,
+   "texto": "First is the background."
+  },
+  {
+   "s": 11.04,
+   "e": 13.94,
+   "texto": "The background is typically white, layered on with a grid effect."
+  },
+  {
+   "s": 14.3,
+   "e": 17.78,
+   "texto": "It also has a half-told texture and even a casted shadow."
+  },
+  {
+   "s": 18.08,
+   "e": 19.76,
+   "texto": "The second step is your main object."
+  },
+  {
+   "s": 20.14,
+   "e": 22.08,
+   "texto": "There are two types of scenes in this editing style."
+  },
+  {
+   "s": 22.36,
+   "e": 23.98,
+   "texto": "Object centric and text centric."
+  },
+  {
+   "s": 24.14,
+   "e": 26.12,
+   "texto": "Just take your main object and place it in the middle."
+  },
+  {
+   "s": 26.12,
+   "e": 29.9,
+   "texto": "Then stylize it with desaturation, a texture and a casted shadow."
+  },
+  {
+   "s": 30.14,
+   "e": 32.16,
+   "texto": "The third step is your complementary object."
+  },
+  {
+   "s": 32.52,
+   "e": 36.3,
+   "texto": "This is the text that comes behind or around your object to help visualize it."
+  },
+  {
+   "s": 36.5,
+   "e": 38.12,
+   "texto": "And finally, it's your depth elements."
+  },
+  {
+   "s": 38.56,
+   "e": 41.94,
+   "texto": "These are the elements on the edges of the screen with a blur and a darken effect"
+  },
+  {
+   "s": 41.94,
+   "e": 43.04,
+   "texto": "to give you some depth."
+  },
+  {
+   "s": 43.3,
+   "e": 46.7,
+   "texto": "If you would like to watch me create this scene over here step by step,"
+  },
+  {
+   "s": 46.88,
+   "e": 48.94,
+   "texto": "I've made a full tutorial breaking it down on YouTube."
+  },
+  {
+   "s": 49.22,
+   "e": 50.12,
+   "texto": "Just go ahead and check it out."
+  }
+ ]
+}

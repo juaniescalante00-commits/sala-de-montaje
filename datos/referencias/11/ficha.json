@@ -1,0 +1,640 @@
+{
+ "nombre": "11",
+ "archivo": "referencias/11.mp4",
+ "firma": "5167578-1792900035",
+ "generado": "2026-10-25T01:08:57",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 32.2,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 2,
+  "media": 16.1,
+  "mediana": 16.1,
+  "min": 4.03,
+  "max": 28.17
+ },
+ "cortes_por_min": 1.9,
+ "ritmo_habla": {
+  "palabras": 47,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 25.24,
+  "pal_s_hablando": 3.34,
+  "pal_s_total": 1.46,
+  "tiempo_hablando": 14.08,
+  "parte_hablada": 0.44,
+  "bloques": 15,
+  "palabras_por_bloque": {
+   "n": 15,
+   "media": 3.13,
+   "mediana": 3.0,
+   "min": 1.0,
+   "max": 6.0
+  },
+  "dur_bloque": {
+   "n": 15,
+   "media": 0.94,
+   "mediana": 0.88,
+   "min": 0.22,
+   "max": 1.64
+  },
+  "pausas": {
+   "n": 13,
+   "media": 0.85,
+   "mediana": 0.5,
+   "min": 0.34,
+   "max": 2.18
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 28.17,
+   "dur": 28.17,
+   "dicho": "Hey guys, not so fast. Stay for 20 seconds. Sound off. iPhone 18 Pro. Look, everything waits. A 20 Pro doesn't. All day and all night. We're at 20 seconds? Yes. You thought this was your phone? You wish. Fine. You can scroll now. Worth stopping for."
+  },
+  {
+   "id": 2,
+   "s": 28.17,
+   "e": 32.2,
+   "dur": 4.03,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 1.62,
+   "dur": 1.62,
+   "palabras": 5,
+   "pal_s": 3.1,
+   "texto": "Hey guys, not so fast."
+  },
+  {
+   "id": 2,
+   "s": 2.0,
+   "e": 2.88,
+   "dur": 0.88,
+   "palabras": 4,
+   "pal_s": 4.5,
+   "texto": "Stay for 20 seconds."
+  },
+  {
+   "id": 3,
+   "s": 3.38,
+   "e": 3.6,
+   "dur": 0.22,
+   "palabras": 2,
+   "pal_s": 9.1,
+   "texto": "Sound off."
+  },
+  {
+   "id": 4,
+   "s": 4.38,
+   "e": 5.68,
+   "dur": 1.3,
+   "palabras": 3,
+   "pal_s": 2.3,
+   "texto": "iPhone 18 Pro."
+  },
+  {
+   "id": 5,
+   "s": 7.16,
+   "e": 7.76,
+   "dur": 0.6,
+   "palabras": 1,
+   "pal_s": 1.7,
+   "texto": "Look,"
+  },
+  {
+   "id": 6,
+   "s": 9.94,
+   "e": 10.92,
+   "dur": 0.98,
+   "palabras": 2,
+   "pal_s": 2.0,
+   "texto": "everything waits."
+  },
+  {
+   "id": 7,
+   "s": 11.36,
+   "e": 12.82,
+   "dur": 1.46,
+   "palabras": 4,
+   "pal_s": 2.7,
+   "texto": "A 20 Pro doesn't."
+  },
+  {
+   "id": 8,
+   "s": 13.24,
+   "e": 14.7,
+   "dur": 1.46,
+   "palabras": 5,
+   "pal_s": 3.4,
+   "texto": "All day and all night."
+  },
+  {
+   "id": 9,
+   "s": 14.82,
+   "e": 15.68,
+   "dur": 0.86,
+   "palabras": 4,
+   "pal_s": 4.7,
+   "texto": "We're at 20 seconds?"
+  },
+  {
+   "id": 10,
+   "s": 16.02,
+   "e": 16.3,
+   "dur": 0.28,
+   "palabras": 1,
+   "pal_s": 3.6,
+   "texto": "Yes."
+  },
+  {
+   "id": 11,
+   "s": 17.78,
+   "e": 19.42,
+   "dur": 1.64,
+   "palabras": 6,
+   "pal_s": 3.7,
+   "texto": "You thought this was your phone?"
+  },
+  {
+   "id": 12,
+   "s": 19.78,
+   "e": 20.14,
+   "dur": 0.36,
+   "palabras": 2,
+   "pal_s": 5.6,
+   "texto": "You wish."
+  },
+  {
+   "id": 13,
+   "s": 21.86,
+   "e": 22.46,
+   "dur": 0.6,
+   "palabras": 1,
+   "pal_s": 1.7,
+   "texto": "Fine."
+  },
+  {
+   "id": 14,
+   "s": 22.88,
+   "e": 23.7,
+   "dur": 0.82,
+   "palabras": 4,
+   "pal_s": 4.9,
+   "texto": "You can scroll now."
+  },
+  {
+   "id": 15,
+   "s": 24.24,
+   "e": 25.24,
+   "dur": 1.0,
+   "palabras": 3,
+   "pal_s": 3.0,
+   "texto": "Worth stopping for."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "Hey guys, not"
+   },
+   {
+    "t": 4.6,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "iPhone 18"
+   },
+   {
+    "t": 9.2,
+    "que": "medio",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 13.8,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "All day and all"
+   },
+   {
+    "t": 18.4,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "You thought this was your"
+   },
+   {
+    "t": 23.0,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "Fine. You can scroll now."
+   },
+   {
+    "t": 27.6,
+    "que": "medio",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 28.77,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": ""
+   },
+   {
+    "t": 31.9,
+    "que": "final",
+    "plano": 2,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Hey",
+   "s": 0.0,
+   "e": 0.14,
+   "p": 0.37
+  },
+  {
+   "w": "guys,",
+   "s": 0.14,
+   "e": 0.36,
+   "p": 0.84
+  },
+  {
+   "w": "not",
+   "s": 0.52,
+   "e": 1.04,
+   "p": 0.86
+  },
+  {
+   "w": "so",
+   "s": 1.04,
+   "e": 1.28,
+   "p": 1.0
+  },
+  {
+   "w": "fast.",
+   "s": 1.28,
+   "e": 1.62,
+   "p": 1.0
+  },
+  {
+   "w": "Stay",
+   "s": 2.0,
+   "e": 2.14,
+   "p": 0.3
+  },
+  {
+   "w": "for",
+   "s": 2.14,
+   "e": 2.3,
+   "p": 0.99
+  },
+  {
+   "w": "20",
+   "s": 2.3,
+   "e": 2.56,
+   "p": 0.88
+  },
+  {
+   "w": "seconds.",
+   "s": 2.56,
+   "e": 2.88,
+   "p": 0.99
+  },
+  {
+   "w": "Sound",
+   "s": 3.38,
+   "e": 3.4,
+   "p": 0.79
+  },
+  {
+   "w": "off.",
+   "s": 3.4,
+   "e": 3.6,
+   "p": 0.99
+  },
+  {
+   "w": "iPhone",
+   "s": 4.38,
+   "e": 4.78,
+   "p": 0.85
+  },
+  {
+   "w": "18",
+   "s": 4.78,
+   "e": 5.22,
+   "p": 0.98
+  },
+  {
+   "w": "Pro.",
+   "s": 5.22,
+   "e": 5.68,
+   "p": 0.76
+  },
+  {
+   "w": "Look,",
+   "s": 7.16,
+   "e": 7.76,
+   "p": 0.96
+  },
+  {
+   "w": "everything",
+   "s": 9.94,
+   "e": 10.36,
+   "p": 0.99
+  },
+  {
+   "w": "waits.",
+   "s": 10.36,
+   "e": 10.92,
+   "p": 0.92
+  },
+  {
+   "w": "A",
+   "s": 11.36,
+   "e": 11.46,
+   "p": 0.96
+  },
+  {
+   "w": "20",
+   "s": 11.46,
+   "e": 11.8,
+   "p": 0.97
+  },
+  {
+   "w": "Pro",
+   "s": 11.8,
+   "e": 12.16,
+   "p": 0.54
+  },
+  {
+   "w": "doesn't.",
+   "s": 12.16,
+   "e": 12.82,
+   "p": 0.96
+  },
+  {
+   "w": "All",
+   "s": 13.24,
+   "e": 13.52,
+   "p": 0.97
+  },
+  {
+   "w": "day",
+   "s": 13.52,
+   "e": 13.82,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 13.82,
+   "e": 14.1,
+   "p": 0.86
+  },
+  {
+   "w": "all",
+   "s": 14.1,
+   "e": 14.44,
+   "p": 1.0
+  },
+  {
+   "w": "night.",
+   "s": 14.44,
+   "e": 14.7,
+   "p": 0.99
+  },
+  {
+   "w": "We're",
+   "s": 14.82,
+   "e": 14.96,
+   "p": 0.58
+  },
+  {
+   "w": "at",
+   "s": 14.96,
+   "e": 15.08,
+   "p": 0.52
+  },
+  {
+   "w": "20",
+   "s": 15.08,
+   "e": 15.38,
+   "p": 0.96
+  },
+  {
+   "w": "seconds?",
+   "s": 15.38,
+   "e": 15.68,
+   "p": 0.95
+  },
+  {
+   "w": "Yes.",
+   "s": 16.02,
+   "e": 16.3,
+   "p": 0.94
+  },
+  {
+   "w": "You",
+   "s": 17.78,
+   "e": 18.38,
+   "p": 0.97
+  },
+  {
+   "w": "thought",
+   "s": 18.38,
+   "e": 18.6,
+   "p": 0.95
+  },
+  {
+   "w": "this",
+   "s": 18.6,
+   "e": 18.84,
+   "p": 1.0
+  },
+  {
+   "w": "was",
+   "s": 18.84,
+   "e": 18.96,
+   "p": 1.0
+  },
+  {
+   "w": "your",
+   "s": 18.96,
+   "e": 19.1,
+   "p": 1.0
+  },
+  {
+   "w": "phone?",
+   "s": 19.1,
+   "e": 19.42,
+   "p": 1.0
+  },
+  {
+   "w": "You",
+   "s": 19.78,
+   "e": 19.88,
+   "p": 0.99
+  },
+  {
+   "w": "wish.",
+   "s": 19.88,
+   "e": 20.14,
+   "p": 0.33
+  },
+  {
+   "w": "Fine.",
+   "s": 21.86,
+   "e": 22.46,
+   "p": 0.88
+  },
+  {
+   "w": "You",
+   "s": 22.88,
+   "e": 22.98,
+   "p": 1.0
+  },
+  {
+   "w": "can",
+   "s": 22.98,
+   "e": 23.12,
+   "p": 0.99
+  },
+  {
+   "w": "scroll",
+   "s": 23.12,
+   "e": 23.4,
+   "p": 1.0
+  },
+  {
+   "w": "now.",
+   "s": 23.4,
+   "e": 23.7,
+   "p": 0.96
+  },
+  {
+   "w": "Worth",
+   "s": 24.24,
+   "e": 24.48,
+   "p": 0.52
+  },
+  {
+   "w": "stopping",
+   "s": 24.48,
+   "e": 24.88,
+   "p": 0.97
+  },
+  {
+   "w": "for.",
+   "s": 24.88,
+   "e": 25.24,
+   "p": 1.0
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 1.62,
+   "texto": "Hey guys, not so fast."
+  },
+  {
+   "s": 2.0,
+   "e": 2.88,
+   "texto": "Stay for 20 seconds."
+  },
+  {
+   "s": 3.38,
+   "e": 3.6,
+   "texto": "Sound off."
+  },
+  {
+   "s": 4.38,
+   "e": 5.68,
+   "texto": "iPhone 18 Pro."
+  },
+  {
+   "s": 7.16,
+   "e": 10.92,
+   "texto": "Look, everything waits."
+  },
+  {
+   "s": 11.36,
+   "e": 12.82,
+   "texto": "A 20 Pro doesn't."
+  },
+  {
+   "s": 13.24,
+   "e": 14.7,
+   "texto": "All day and all night."
+  },
+  {
+   "s": 14.82,
+   "e": 15.68,
+   "texto": "We're at 20 seconds?"
+  },
+  {
+   "s": 16.02,
+   "e": 16.3,
+   "texto": "Yes."
+  },
+  {
+   "s": 17.78,
+   "e": 19.42,
+   "texto": "You thought this was your phone?"
+  },
+  {
+   "s": 19.78,
+   "e": 20.14,
+   "texto": "You wish."
+  },
+  {
+   "s": 21.86,
+   "e": 22.46,
+   "texto": "Fine."
+  },
+  {
+   "s": 22.88,
+   "e": 23.7,
+   "texto": "You can scroll now."
+  },
+  {
+   "s": 24.24,
+   "e": 25.24,
+   "texto": "Worth stopping for."
+  }
+ ]
+}

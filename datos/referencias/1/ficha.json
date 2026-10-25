@@ -1,0 +1,1406 @@
+{
+ "nombre": "1",
+ "archivo": "referencias/1.mp4",
+ "firma": "5469641-1792899759",
+ "generado": "2026-10-25T01:08:43",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 58.92,
+  "ancho": 720,
+  "alto": 1280,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 48000,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 25,
+  "media": 2.35,
+  "mediana": 2.3,
+  "min": 0.5,
+  "max": 5.47
+ },
+ "cortes_por_min": 24.4,
+ "ritmo_habla": {
+  "palabras": 114,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 58.76,
+  "pal_s_hablando": 2.66,
+  "pal_s_total": 1.93,
+  "tiempo_hablando": 42.8,
+  "parte_hablada": 0.73,
+  "bloques": 29,
+  "palabras_por_bloque": {
+   "n": 29,
+   "media": 3.93,
+   "mediana": 3.0,
+   "min": 1.0,
+   "max": 14.0
+  },
+  "dur_bloque": {
+   "n": 29,
+   "media": 1.48,
+   "mediana": 1.22,
+   "min": 0.26,
+   "max": 4.84
+  },
+  "pausas": {
+   "n": 25,
+   "media": 0.62,
+   "mediana": 0.58,
+   "min": 0.34,
+   "max": 0.98
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 1.53,
+   "dur": 1.53,
+   "dicho": "Everyone's making videos with"
+  },
+  {
+   "id": 2,
+   "s": 1.53,
+   "e": 2.27,
+   "dur": 0.73,
+   "dicho": "Claude now,"
+  },
+  {
+   "id": 3,
+   "s": 2.27,
+   "e": 3.13,
+   "dur": 0.87,
+   "dicho": "so"
+  },
+  {
+   "id": 4,
+   "s": 3.13,
+   "e": 3.97,
+   "dur": 0.83,
+   "dicho": "how do you make"
+  },
+  {
+   "id": 5,
+   "s": 3.97,
+   "e": 9.43,
+   "dur": 5.47,
+   "dicho": "yours look different? Five Claude skills. Five completely different styles."
+  },
+  {
+   "id": 6,
+   "s": 9.43,
+   "e": 13.03,
+   "dur": 3.6,
+   "dicho": "One Hyperframes by Hagen."
+  },
+  {
+   "id": 7,
+   "s": 13.03,
+   "e": 14.83,
+   "dur": 1.8,
+   "dicho": "HTML in, motion"
+  },
+  {
+   "id": 8,
+   "s": 14.83,
+   "e": 16.07,
+   "dur": 1.23,
+   "dicho": "graphics out,"
+  },
+  {
+   "id": 9,
+   "s": 16.07,
+   "e": 19.0,
+   "dur": 2.93,
+   "dicho": "and every video on this channel is built with it."
+  },
+  {
+   "id": 10,
+   "s": 19.0,
+   "e": 21.3,
+   "dur": 2.3,
+   "dicho": "Two. One take. One"
+  },
+  {
+   "id": 11,
+   "s": 21.3,
+   "e": 24.7,
+   "dur": 3.4,
+   "dicho": "continuous camera that never cuts. Free"
+  },
+  {
+   "id": 12,
+   "s": 24.7,
+   "e": 29.33,
+   "dur": 4.63,
+   "dicho": "for non -commercial use. Three. Collage b -roll."
+  },
+  {
+   "id": 13,
+   "s": 29.33,
+   "e": 32.23,
+   "dur": 2.9,
+   "dicho": "Half -tone paper cutouts that assemble themselves."
+  },
+  {
+   "id": 14,
+   "s": 32.23,
+   "e": 37.67,
+   "dur": 5.43,
+   "dicho": "Animated by Google's Gemini. Four. Claude animation base."
+  },
+  {
+   "id": 15,
+   "s": 37.67,
+   "e": 40.43,
+   "dur": 2.77,
+   "dicho": "Hand -painted cartoons starring Claude."
+  },
+  {
+   "id": 16,
+   "s": 40.43,
+   "e": 41.9,
+   "dur": 1.47,
+   "dicho": "The Claude Code mascot."
+  },
+  {
+   "id": 17,
+   "s": 41.9,
+   "e": 44.27,
+   "dur": 2.37,
+   "dicho": "Five. The wildest."
+  },
+  {
+   "id": 18,
+   "s": 44.27,
+   "e": 46.57,
+   "dur": 2.3,
+   "dicho": "Lemmo Opuskar. Forty"
+  },
+  {
+   "id": 19,
+   "s": 46.57,
+   "e": 48.37,
+   "dur": 1.8,
+   "dicho": "-three film styles."
+  },
+  {
+   "id": 20,
+   "s": 48.37,
+   "e": 48.87,
+   "dur": 0.5,
+   "dicho": "Every film"
+  },
+  {
+   "id": 21,
+   "s": 48.87,
+   "e": 49.83,
+   "dur": 0.97,
+   "dicho": "made in code."
+  },
+  {
+   "id": 22,
+   "s": 49.83,
+   "e": 50.33,
+   "dur": 0.5,
+   "dicho": ""
+  },
+  {
+   "id": 23,
+   "s": 50.33,
+   "e": 51.67,
+   "dur": 1.33,
+   "dicho": "No video model."
+  },
+  {
+   "id": 24,
+   "s": 51.67,
+   "e": 56.1,
+   "dur": 4.43,
+   "dicho": "All five are on GitHub. Pick one and make it yours. Follow"
+  },
+  {
+   "id": 25,
+   "s": 56.1,
+   "e": 58.83,
+   "dur": 2.73,
+   "dicho": "WebLab. And remember..."
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 4.84,
+   "dur": 4.84,
+   "palabras": 14,
+   "pal_s": 2.9,
+   "texto": "Everyone's making videos with Claude now, so how do you make yours look different?"
+  },
+  {
+   "id": 2,
+   "s": 5.32,
+   "e": 6.42,
+   "dur": 1.1,
+   "palabras": 3,
+   "pal_s": 2.7,
+   "texto": "Five Claude skills."
+  },
+  {
+   "id": 3,
+   "s": 7.06,
+   "e": 9.02,
+   "dur": 1.96,
+   "palabras": 4,
+   "pal_s": 2.0,
+   "texto": "Five completely different styles."
+  },
+  {
+   "id": 4,
+   "s": 9.5,
+   "e": 12.0,
+   "dur": 2.5,
+   "palabras": 4,
+   "pal_s": 1.6,
+   "texto": "One Hyperframes by Hagen."
+  },
+  {
+   "id": 5,
+   "s": 12.76,
+   "e": 13.98,
+   "dur": 1.22,
+   "palabras": 2,
+   "pal_s": 1.6,
+   "texto": "HTML in,"
+  },
+  {
+   "id": 6,
+   "s": 14.54,
+   "e": 15.6,
+   "dur": 1.06,
+   "palabras": 3,
+   "pal_s": 2.8,
+   "texto": "motion graphics out,"
+  },
+  {
+   "id": 7,
+   "s": 16.22,
+   "e": 18.8,
+   "dur": 2.58,
+   "palabras": 10,
+   "pal_s": 3.9,
+   "texto": "and every video on this channel is built with it."
+  },
+  {
+   "id": 8,
+   "s": 19.02,
+   "e": 19.28,
+   "dur": 0.26,
+   "palabras": 1,
+   "pal_s": 3.8,
+   "texto": "Two."
+  },
+  {
+   "id": 9,
+   "s": 20.1,
+   "e": 20.5,
+   "dur": 0.4,
+   "palabras": 2,
+   "pal_s": 5.0,
+   "texto": "One take."
+  },
+  {
+   "id": 10,
+   "s": 21.1,
+   "e": 23.7,
+   "dur": 2.6,
+   "palabras": 6,
+   "pal_s": 2.3,
+   "texto": "One continuous camera that never cuts."
+  },
+  {
+   "id": 11,
+   "s": 24.24,
+   "e": 26.18,
+   "dur": 1.94,
+   "palabras": 5,
+   "pal_s": 2.6,
+   "texto": "Free for non -commercial use."
+  },
+  {
+   "id": 12,
+   "s": 26.18,
+   "e": 26.84,
+   "dur": 0.66,
+   "palabras": 1,
+   "pal_s": 1.5,
+   "texto": "Three."
+  },
+  {
+   "id": 13,
+   "s": 27.72,
+   "e": 28.74,
+   "dur": 1.02,
+   "palabras": 3,
+   "pal_s": 2.9,
+   "texto": "Collage b -roll."
+  },
+  {
+   "id": 14,
+   "s": 29.28,
+   "e": 31.62,
+   "dur": 2.34,
+   "palabras": 7,
+   "pal_s": 3.0,
+   "texto": "Half -tone paper cutouts that assemble themselves."
+  },
+  {
+   "id": 15,
+   "s": 32.18,
+   "e": 33.82,
+   "dur": 1.64,
+   "palabras": 4,
+   "pal_s": 2.4,
+   "texto": "Animated by Google's Gemini."
+  },
+  {
+   "id": 16,
+   "s": 34.32,
+   "e": 34.6,
+   "dur": 0.28,
+   "palabras": 1,
+   "pal_s": 3.6,
+   "texto": "Four."
+  },
+  {
+   "id": 17,
+   "s": 35.58,
+   "e": 36.7,
+   "dur": 1.12,
+   "palabras": 3,
+   "pal_s": 2.7,
+   "texto": "Claude animation base."
+  },
+  {
+   "id": 18,
+   "s": 37.62,
+   "e": 40.0,
+   "dur": 2.38,
+   "palabras": 5,
+   "pal_s": 2.1,
+   "texto": "Hand -painted cartoons starring Claude."
+  },
+  {
+   "id": 19,
+   "s": 40.34,
+   "e": 41.52,
+   "dur": 1.18,
+   "palabras": 4,
+   "pal_s": 3.4,
+   "texto": "The Claude Code mascot."
+  },
+  {
+   "id": 20,
+   "s": 42.02,
+   "e": 42.32,
+   "dur": 0.3,
+   "palabras": 1,
+   "pal_s": 3.3,
+   "texto": "Five."
+  },
+  {
+   "id": 21,
+   "s": 42.86,
+   "e": 43.6,
+   "dur": 0.74,
+   "palabras": 2,
+   "pal_s": 2.7,
+   "texto": "The wildest."
+  },
+  {
+   "id": 22,
+   "s": 44.2,
+   "e": 45.32,
+   "dur": 1.12,
+   "palabras": 2,
+   "pal_s": 1.8,
+   "texto": "Lemmo Opuskar."
+  },
+  {
+   "id": 23,
+   "s": 46.1,
+   "e": 47.7,
+   "dur": 1.6,
+   "palabras": 4,
+   "pal_s": 2.5,
+   "texto": "Forty -three film styles."
+  },
+  {
+   "id": 24,
+   "s": 48.28,
+   "e": 49.8,
+   "dur": 1.52,
+   "palabras": 5,
+   "pal_s": 3.3,
+   "texto": "Every film made in code."
+  },
+  {
+   "id": 25,
+   "s": 50.44,
+   "e": 51.36,
+   "dur": 0.92,
+   "palabras": 3,
+   "pal_s": 3.3,
+   "texto": "No video model."
+  },
+  {
+   "id": 26,
+   "s": 51.7,
+   "e": 52.86,
+   "dur": 1.16,
+   "palabras": 5,
+   "pal_s": 4.3,
+   "texto": "All five are on GitHub."
+  },
+  {
+   "id": 27,
+   "s": 53.76,
+   "e": 55.46,
+   "dur": 1.7,
+   "palabras": 6,
+   "pal_s": 3.5,
+   "texto": "Pick one and make it yours."
+  },
+  {
+   "id": 28,
+   "s": 55.7,
+   "e": 57.06,
+   "dur": 1.36,
+   "palabras": 2,
+   "pal_s": 1.5,
+   "texto": "Follow WebLab."
+  },
+  {
+   "id": 29,
+   "s": 57.46,
+   "e": 58.76,
+   "dur": 1.3,
+   "palabras": 2,
+   "pal_s": 1.5,
+   "texto": "And remember..."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "Everyone's making"
+   },
+   {
+    "t": 2.71,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": "now, so how"
+   },
+   {
+    "t": 3.54,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "so how do you make yours"
+   },
+   {
+    "t": 10.03,
+    "que": "entra el plano",
+    "plano": 6,
+    "dicho": "One Hyperframes"
+   },
+   {
+    "t": 15.43,
+    "que": "entra el plano",
+    "plano": 8,
+    "dicho": "graphics out,"
+   },
+   {
+    "t": 16.67,
+    "que": "entra el plano",
+    "plano": 9,
+    "dicho": "and every video on this"
+   },
+   {
+    "t": 21.9,
+    "que": "entra el plano",
+    "plano": 11,
+    "dicho": "One continuous camera"
+   },
+   {
+    "t": 29.93,
+    "que": "entra el plano",
+    "plano": 13,
+    "dicho": "Half -tone paper cutouts"
+   },
+   {
+    "t": 32.83,
+    "que": "entra el plano",
+    "plano": 14,
+    "dicho": "Animated by Google's"
+   },
+   {
+    "t": 41.03,
+    "que": "entra el plano",
+    "plano": 16,
+    "dicho": "The Claude Code mascot."
+   },
+   {
+    "t": 44.87,
+    "que": "entra el plano",
+    "plano": 18,
+    "dicho": "Lemmo Opuskar."
+   },
+   {
+    "t": 47.17,
+    "que": "entra el plano",
+    "plano": 19,
+    "dicho": "Forty -three film styles."
+   },
+   {
+    "t": 49.35,
+    "que": "entra el plano",
+    "plano": 21,
+    "dicho": "film made in code."
+   },
+   {
+    "t": 50.93,
+    "que": "entra el plano",
+    "plano": 23,
+    "dicho": "No video model."
+   },
+   {
+    "t": 52.27,
+    "que": "entra el plano",
+    "plano": 24,
+    "dicho": "All five are on GitHub."
+   },
+   {
+    "t": 58.62,
+    "que": "final",
+    "plano": 25,
+    "dicho": "And remember..."
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Everyone's",
+   "s": 0.0,
+   "e": 0.7,
+   "p": 0.83
+  },
+  {
+   "w": "making",
+   "s": 0.7,
+   "e": 0.9,
+   "p": 1.0
+  },
+  {
+   "w": "videos",
+   "s": 0.9,
+   "e": 1.38,
+   "p": 1.0
+  },
+  {
+   "w": "with",
+   "s": 1.38,
+   "e": 1.64,
+   "p": 1.0
+  },
+  {
+   "w": "Claude",
+   "s": 1.64,
+   "e": 2.04,
+   "p": 0.82
+  },
+  {
+   "w": "now,",
+   "s": 2.04,
+   "e": 2.3,
+   "p": 0.9
+  },
+  {
+   "w": "so",
+   "s": 2.54,
+   "e": 3.28,
+   "p": 0.92
+  },
+  {
+   "w": "how",
+   "s": 3.28,
+   "e": 3.44,
+   "p": 0.99
+  },
+  {
+   "w": "do",
+   "s": 3.44,
+   "e": 3.54,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 3.54,
+   "e": 3.64,
+   "p": 0.99
+  },
+  {
+   "w": "make",
+   "s": 3.64,
+   "e": 3.86,
+   "p": 1.0
+  },
+  {
+   "w": "yours",
+   "s": 3.86,
+   "e": 4.16,
+   "p": 0.98
+  },
+  {
+   "w": "look",
+   "s": 4.16,
+   "e": 4.44,
+   "p": 0.99
+  },
+  {
+   "w": "different?",
+   "s": 4.44,
+   "e": 4.84,
+   "p": 1.0
+  },
+  {
+   "w": "Five",
+   "s": 5.32,
+   "e": 5.52,
+   "p": 0.47
+  },
+  {
+   "w": "Claude",
+   "s": 5.52,
+   "e": 6.04,
+   "p": 0.98
+  },
+  {
+   "w": "skills.",
+   "s": 6.04,
+   "e": 6.42,
+   "p": 0.88
+  },
+  {
+   "w": "Five",
+   "s": 7.06,
+   "e": 7.42,
+   "p": 0.91
+  },
+  {
+   "w": "completely",
+   "s": 7.42,
+   "e": 8.1,
+   "p": 0.98
+  },
+  {
+   "w": "different",
+   "s": 8.1,
+   "e": 8.54,
+   "p": 1.0
+  },
+  {
+   "w": "styles.",
+   "s": 8.54,
+   "e": 9.02,
+   "p": 0.99
+  },
+  {
+   "w": "One",
+   "s": 9.5,
+   "e": 9.76,
+   "p": 0.8
+  },
+  {
+   "w": "Hyperframes",
+   "s": 9.76,
+   "e": 11.1,
+   "p": 0.47
+  },
+  {
+   "w": "by",
+   "s": 11.1,
+   "e": 11.42,
+   "p": 0.98
+  },
+  {
+   "w": "Hagen.",
+   "s": 11.42,
+   "e": 12.0,
+   "p": 0.49
+  },
+  {
+   "w": "HTML",
+   "s": 12.76,
+   "e": 13.4,
+   "p": 0.96
+  },
+  {
+   "w": "in,",
+   "s": 13.4,
+   "e": 13.98,
+   "p": 0.91
+  },
+  {
+   "w": "motion",
+   "s": 14.54,
+   "e": 14.78,
+   "p": 0.85
+  },
+  {
+   "w": "graphics",
+   "s": 14.78,
+   "e": 15.18,
+   "p": 1.0
+  },
+  {
+   "w": "out,",
+   "s": 15.18,
+   "e": 15.6,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 16.22,
+   "e": 16.26,
+   "p": 0.99
+  },
+  {
+   "w": "every",
+   "s": 16.26,
+   "e": 16.62,
+   "p": 1.0
+  },
+  {
+   "w": "video",
+   "s": 16.62,
+   "e": 16.98,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 16.98,
+   "e": 17.2,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 17.2,
+   "e": 17.36,
+   "p": 1.0
+  },
+  {
+   "w": "channel",
+   "s": 17.36,
+   "e": 17.74,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 17.74,
+   "e": 18.04,
+   "p": 0.99
+  },
+  {
+   "w": "built",
+   "s": 18.04,
+   "e": 18.28,
+   "p": 0.99
+  },
+  {
+   "w": "with",
+   "s": 18.28,
+   "e": 18.6,
+   "p": 1.0
+  },
+  {
+   "w": "it.",
+   "s": 18.6,
+   "e": 18.8,
+   "p": 1.0
+  },
+  {
+   "w": "Two.",
+   "s": 19.02,
+   "e": 19.28,
+   "p": 0.89
+  },
+  {
+   "w": "One",
+   "s": 20.1,
+   "e": 20.22,
+   "p": 0.99
+  },
+  {
+   "w": "take.",
+   "s": 20.22,
+   "e": 20.5,
+   "p": 0.91
+  },
+  {
+   "w": "One",
+   "s": 21.1,
+   "e": 21.46,
+   "p": 1.0
+  },
+  {
+   "w": "continuous",
+   "s": 21.46,
+   "e": 21.9,
+   "p": 0.96
+  },
+  {
+   "w": "camera",
+   "s": 21.9,
+   "e": 22.54,
+   "p": 1.0
+  },
+  {
+   "w": "that",
+   "s": 22.54,
+   "e": 23.0,
+   "p": 0.98
+  },
+  {
+   "w": "never",
+   "s": 23.0,
+   "e": 23.28,
+   "p": 1.0
+  },
+  {
+   "w": "cuts.",
+   "s": 23.28,
+   "e": 23.7,
+   "p": 1.0
+  },
+  {
+   "w": "Free",
+   "s": 24.24,
+   "e": 24.96,
+   "p": 0.93
+  },
+  {
+   "w": "for",
+   "s": 24.96,
+   "e": 25.2,
+   "p": 0.99
+  },
+  {
+   "w": "non",
+   "s": 25.2,
+   "e": 25.42,
+   "p": 0.98
+  },
+  {
+   "w": "-commercial",
+   "s": 25.42,
+   "e": 25.82,
+   "p": 0.89
+  },
+  {
+   "w": "use.",
+   "s": 25.82,
+   "e": 26.18,
+   "p": 1.0
+  },
+  {
+   "w": "Three.",
+   "s": 26.18,
+   "e": 26.84,
+   "p": 0.02
+  },
+  {
+   "w": "Collage",
+   "s": 27.72,
+   "e": 28.3,
+   "p": 0.62
+  },
+  {
+   "w": "b",
+   "s": 28.3,
+   "e": 28.5,
+   "p": 0.35
+  },
+  {
+   "w": "-roll.",
+   "s": 28.5,
+   "e": 28.74,
+   "p": 0.93
+  },
+  {
+   "w": "Half",
+   "s": 29.28,
+   "e": 29.54,
+   "p": 0.85
+  },
+  {
+   "w": "-tone",
+   "s": 29.54,
+   "e": 29.76,
+   "p": 0.77
+  },
+  {
+   "w": "paper",
+   "s": 29.76,
+   "e": 30.08,
+   "p": 0.99
+  },
+  {
+   "w": "cutouts",
+   "s": 30.08,
+   "e": 30.62,
+   "p": 0.93
+  },
+  {
+   "w": "that",
+   "s": 30.62,
+   "e": 30.82,
+   "p": 0.99
+  },
+  {
+   "w": "assemble",
+   "s": 30.82,
+   "e": 31.16,
+   "p": 0.99
+  },
+  {
+   "w": "themselves.",
+   "s": 31.16,
+   "e": 31.62,
+   "p": 0.99
+  },
+  {
+   "w": "Animated",
+   "s": 32.18,
+   "e": 32.72,
+   "p": 0.99
+  },
+  {
+   "w": "by",
+   "s": 32.72,
+   "e": 33.0,
+   "p": 1.0
+  },
+  {
+   "w": "Google's",
+   "s": 33.0,
+   "e": 33.48,
+   "p": 0.97
+  },
+  {
+   "w": "Gemini.",
+   "s": 33.48,
+   "e": 33.82,
+   "p": 0.99
+  },
+  {
+   "w": "Four.",
+   "s": 34.32,
+   "e": 34.6,
+   "p": 0.97
+  },
+  {
+   "w": "Claude",
+   "s": 35.58,
+   "e": 35.84,
+   "p": 0.74
+  },
+  {
+   "w": "animation",
+   "s": 35.84,
+   "e": 36.18,
+   "p": 0.41
+  },
+  {
+   "w": "base.",
+   "s": 36.18,
+   "e": 36.7,
+   "p": 0.89
+  },
+  {
+   "w": "Hand",
+   "s": 37.62,
+   "e": 37.92,
+   "p": 0.99
+  },
+  {
+   "w": "-painted",
+   "s": 37.92,
+   "e": 38.2,
+   "p": 0.91
+  },
+  {
+   "w": "cartoons",
+   "s": 38.2,
+   "e": 38.82,
+   "p": 0.99
+  },
+  {
+   "w": "starring",
+   "s": 38.82,
+   "e": 39.42,
+   "p": 0.93
+  },
+  {
+   "w": "Claude.",
+   "s": 39.42,
+   "e": 40.0,
+   "p": 0.99
+  },
+  {
+   "w": "The",
+   "s": 40.34,
+   "e": 40.56,
+   "p": 0.98
+  },
+  {
+   "w": "Claude",
+   "s": 40.56,
+   "e": 40.88,
+   "p": 0.99
+  },
+  {
+   "w": "Code",
+   "s": 40.88,
+   "e": 41.1,
+   "p": 0.61
+  },
+  {
+   "w": "mascot.",
+   "s": 41.1,
+   "e": 41.52,
+   "p": 0.96
+  },
+  {
+   "w": "Five.",
+   "s": 42.02,
+   "e": 42.32,
+   "p": 0.99
+  },
+  {
+   "w": "The",
+   "s": 42.86,
+   "e": 42.94,
+   "p": 0.98
+  },
+  {
+   "w": "wildest.",
+   "s": 42.94,
+   "e": 43.6,
+   "p": 0.97
+  },
+  {
+   "w": "Lemmo",
+   "s": 44.2,
+   "e": 44.68,
+   "p": 0.61
+  },
+  {
+   "w": "Opuskar.",
+   "s": 44.68,
+   "e": 45.32,
+   "p": 0.74
+  },
+  {
+   "w": "Forty",
+   "s": 46.1,
+   "e": 46.78,
+   "p": 0.7
+  },
+  {
+   "w": "-three",
+   "s": 46.78,
+   "e": 47.02,
+   "p": 0.9
+  },
+  {
+   "w": "film",
+   "s": 47.02,
+   "e": 47.34,
+   "p": 0.98
+  },
+  {
+   "w": "styles.",
+   "s": 47.34,
+   "e": 47.7,
+   "p": 0.98
+  },
+  {
+   "w": "Every",
+   "s": 48.28,
+   "e": 48.62,
+   "p": 1.0
+  },
+  {
+   "w": "film",
+   "s": 48.62,
+   "e": 49.0,
+   "p": 1.0
+  },
+  {
+   "w": "made",
+   "s": 49.0,
+   "e": 49.28,
+   "p": 0.98
+  },
+  {
+   "w": "in",
+   "s": 49.28,
+   "e": 49.44,
+   "p": 1.0
+  },
+  {
+   "w": "code.",
+   "s": 49.44,
+   "e": 49.8,
+   "p": 0.99
+  },
+  {
+   "w": "No",
+   "s": 50.44,
+   "e": 50.7,
+   "p": 1.0
+  },
+  {
+   "w": "video",
+   "s": 50.7,
+   "e": 51.0,
+   "p": 0.99
+  },
+  {
+   "w": "model.",
+   "s": 51.0,
+   "e": 51.36,
+   "p": 0.99
+  },
+  {
+   "w": "All",
+   "s": 51.7,
+   "e": 51.86,
+   "p": 1.0
+  },
+  {
+   "w": "five",
+   "s": 51.86,
+   "e": 52.22,
+   "p": 0.99
+  },
+  {
+   "w": "are",
+   "s": 52.22,
+   "e": 52.44,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 52.44,
+   "e": 52.6,
+   "p": 1.0
+  },
+  {
+   "w": "GitHub.",
+   "s": 52.6,
+   "e": 52.86,
+   "p": 0.89
+  },
+  {
+   "w": "Pick",
+   "s": 53.76,
+   "e": 54.18,
+   "p": 0.99
+  },
+  {
+   "w": "one",
+   "s": 54.18,
+   "e": 54.48,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 54.48,
+   "e": 54.88,
+   "p": 0.84
+  },
+  {
+   "w": "make",
+   "s": 54.88,
+   "e": 55.08,
+   "p": 0.99
+  },
+  {
+   "w": "it",
+   "s": 55.08,
+   "e": 55.2,
+   "p": 1.0
+  },
+  {
+   "w": "yours.",
+   "s": 55.2,
+   "e": 55.46,
+   "p": 1.0
+  },
+  {
+   "w": "Follow",
+   "s": 55.7,
+   "e": 56.38,
+   "p": 0.84
+  },
+  {
+   "w": "WebLab.",
+   "s": 56.38,
+   "e": 57.06,
+   "p": 0.61
+  },
+  {
+   "w": "And",
+   "s": 57.46,
+   "e": 58.06,
+   "p": 0.94
+  },
+  {
+   "w": "remember...",
+   "s": 58.06,
+   "e": 58.76,
+   "p": 0.62
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 4.84,
+   "texto": "Everyone's making videos with Claude now, so how do you make yours look different?"
+  },
+  {
+   "s": 5.32,
+   "e": 9.02,
+   "texto": "Five Claude skills. Five completely different styles."
+  },
+  {
+   "s": 9.5,
+   "e": 15.6,
+   "texto": "One Hyperframes by Hagen. HTML in, motion graphics out,"
+  },
+  {
+   "s": 16.22,
+   "e": 18.8,
+   "texto": "and every video on this channel is built with it."
+  },
+  {
+   "s": 19.02,
+   "e": 23.7,
+   "texto": "Two. One take. One continuous camera that never cuts."
+  },
+  {
+   "s": 24.24,
+   "e": 26.18,
+   "texto": "Free for non-commercial use."
+  },
+  {
+   "s": 26.18,
+   "e": 28.74,
+   "texto": "Three. Collage b-roll."
+  },
+  {
+   "s": 29.28,
+   "e": 31.62,
+   "texto": "Half-tone paper cutouts that assemble themselves."
+  },
+  {
+   "s": 32.18,
+   "e": 33.82,
+   "texto": "Animated by Google's Gemini."
+  },
+  {
+   "s": 34.32,
+   "e": 36.7,
+   "texto": "Four. Claude animation base."
+  },
+  {
+   "s": 37.62,
+   "e": 40.0,
+   "texto": "Hand-painted cartoons starring Claude."
+  },
+  {
+   "s": 40.34,
+   "e": 41.52,
+   "texto": "The Claude Code mascot."
+  },
+  {
+   "s": 42.02,
+   "e": 43.6,
+   "texto": "Five. The wildest."
+  },
+  {
+   "s": 44.2,
+   "e": 45.32,
+   "texto": "Lemmo Opuskar."
+  },
+  {
+   "s": 46.1,
+   "e": 47.7,
+   "texto": "Forty-three film styles."
+  },
+  {
+   "s": 48.28,
+   "e": 49.8,
+   "texto": "Every film made in code."
+  },
+  {
+   "s": 50.44,
+   "e": 51.36,
+   "texto": "No video model."
+  },
+  {
+   "s": 51.7,
+   "e": 52.86,
+   "texto": "All five are on GitHub."
+  },
+  {
+   "s": 53.76,
+   "e": 55.46,
+   "texto": "Pick one and make it yours."
+  },
+  {
+   "s": 55.7,
+   "e": 57.06,
+   "texto": "Follow WebLab."
+  },
+  {
+   "s": 57.46,
+   "e": 58.76,
+   "texto": "And remember..."
+  }
+ ]
+}

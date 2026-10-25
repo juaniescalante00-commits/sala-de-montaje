@@ -1,0 +1,1459 @@
+{
+ "nombre": "3",
+ "archivo": "referencias/3.mp4",
+ "firma": "3341351-1792899787",
+ "generado": "2026-10-25T01:09:56",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 58.39,
+  "ancho": 720,
+  "alto": 1280,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 48000,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 1,
+  "media": 58.39,
+  "mediana": 58.39,
+  "min": 58.39,
+  "max": 58.39
+ },
+ "cortes_por_min": 0.0,
+ "ritmo_habla": {
+  "palabras": 178,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 55.26,
+  "pal_s_hablando": 3.39,
+  "pal_s_total": 3.05,
+  "tiempo_hablando": 52.52,
+  "parte_hablada": 0.9,
+  "bloques": 14,
+  "palabras_por_bloque": {
+   "n": 14,
+   "media": 12.71,
+   "mediana": 10.5,
+   "min": 1.0,
+   "max": 24.0
+  },
+  "dur_bloque": {
+   "n": 14,
+   "media": 3.75,
+   "mediana": 3.25,
+   "min": 0.16,
+   "max": 7.72
+  },
+  "pausas": {
+   "n": 6,
+   "media": 0.32,
+   "mediana": 0.3,
+   "min": 0.28,
+   "max": 0.36
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 58.39,
+   "dur": 58.39,
+   "dicho": "Why is the sun cancer rate up? The sunscreen paradox is really, it's real. And we are using sunscreen more than ever, but one in five women get skin cancer and one in seven men get skin cancer. It's the most prevalent form of cancer. For a problem like this, you have to start by measuring it. And we have never had a tool to really measure the exposure that we've had on a long -term basis. I mean, awareness is really the first step. What are the massive blind spots that dermatologists are missing? Dermatology community has been very black or white on this issue. You apply sunscreen and you supplement with vitamin D. Right. I think the blind spot is the lack of data and we're going to be providing that data to people. But this is all about empowerment because our thinking on this has really evolved to understand how sunlight impacts our overall health. To me, this is the best wearable because it's teaching me to be preventative and aware of my sun exposure."
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 2.94,
+   "dur": 2.94,
+   "palabras": 7,
+   "pal_s": 2.4,
+   "texto": "Why is the sun cancer rate up?"
+  },
+  {
+   "id": 2,
+   "s": 3.22,
+   "e": 5.2,
+   "dur": 1.98,
+   "palabras": 7,
+   "pal_s": 3.5,
+   "texto": "The sunscreen paradox is really, it's real."
+  },
+  {
+   "id": 3,
+   "s": 5.5,
+   "e": 12.16,
+   "dur": 6.66,
+   "palabras": 24,
+   "pal_s": 3.6,
+   "texto": "And we are using sunscreen more than ever, but one in five women get skin cancer and one in seven men get skin cancer."
+  },
+  {
+   "id": 4,
+   "s": 12.32,
+   "e": 14.54,
+   "dur": 2.22,
+   "palabras": 7,
+   "pal_s": 3.2,
+   "texto": "It's the most prevalent form of cancer."
+  },
+  {
+   "id": 5,
+   "s": 14.84,
+   "e": 17.8,
+   "dur": 2.96,
+   "palabras": 12,
+   "pal_s": 4.1,
+   "texto": "For a problem like this, you have to start by measuring it."
+  },
+  {
+   "id": 6,
+   "s": 17.88,
+   "e": 22.96,
+   "dur": 5.08,
+   "palabras": 20,
+   "pal_s": 3.9,
+   "texto": "And we have never had a tool to really measure the exposure that we've had on a long -term basis."
+  },
+  {
+   "id": 7,
+   "s": 23.32,
+   "e": 25.28,
+   "dur": 1.96,
+   "palabras": 8,
+   "pal_s": 4.1,
+   "texto": "I mean, awareness is really the first step."
+  },
+  {
+   "id": 8,
+   "s": 25.3,
+   "e": 28.94,
+   "dur": 3.64,
+   "palabras": 10,
+   "pal_s": 2.7,
+   "texto": "What are the massive blind spots that dermatologists are missing?"
+  },
+  {
+   "id": 9,
+   "s": 28.94,
+   "e": 32.48,
+   "dur": 3.54,
+   "palabras": 11,
+   "pal_s": 3.1,
+   "texto": "Dermatology community has been very black or white on this issue."
+  },
+  {
+   "id": 10,
+   "s": 32.72,
+   "e": 35.6,
+   "dur": 2.88,
+   "palabras": 9,
+   "pal_s": 3.1,
+   "texto": "You apply sunscreen and you supplement with vitamin D."
+  },
+  {
+   "id": 11,
+   "s": 35.78,
+   "e": 35.94,
+   "dur": 0.16,
+   "palabras": 1,
+   "pal_s": 6.3,
+   "texto": "Right."
+  },
+  {
+   "id": 12,
+   "s": 36.1,
+   "e": 41.32,
+   "dur": 5.22,
+   "palabras": 20,
+   "pal_s": 3.8,
+   "texto": "I think the blind spot is the lack of data and we're going to be providing that data to people."
+  },
+  {
+   "id": 13,
+   "s": 41.62,
+   "e": 49.34,
+   "dur": 7.72,
+   "palabras": 22,
+   "pal_s": 2.8,
+   "texto": "But this is all about empowerment because our thinking on this has really evolved to understand how sunlight impacts our overall health."
+  },
+  {
+   "id": 14,
+   "s": 49.7,
+   "e": 55.26,
+   "dur": 5.56,
+   "palabras": 20,
+   "pal_s": 3.6,
+   "texto": "To me, this is the best wearable because it's teaching me to be preventative and aware of my sun exposure."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "Why is"
+   },
+   {
+    "t": 8.34,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "but one in five women get"
+   },
+   {
+    "t": 16.68,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "you have to start by measuring"
+   },
+   {
+    "t": 25.02,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "the first step. What are"
+   },
+   {
+    "t": 33.37,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "You apply sunscreen and"
+   },
+   {
+    "t": 41.71,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "people. But this is all"
+   },
+   {
+    "t": 50.05,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "To me, this is the"
+   },
+   {
+    "t": 58.09,
+    "que": "final",
+    "plano": 1,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Why",
+   "s": 0.0,
+   "e": 0.36,
+   "p": 0.63
+  },
+  {
+   "w": "is",
+   "s": 0.36,
+   "e": 1.12,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 1.12,
+   "e": 1.5,
+   "p": 0.99
+  },
+  {
+   "w": "sun",
+   "s": 1.5,
+   "e": 1.76,
+   "p": 0.83
+  },
+  {
+   "w": "cancer",
+   "s": 1.76,
+   "e": 2.24,
+   "p": 0.96
+  },
+  {
+   "w": "rate",
+   "s": 2.24,
+   "e": 2.6,
+   "p": 0.94
+  },
+  {
+   "w": "up?",
+   "s": 2.6,
+   "e": 2.94,
+   "p": 0.97
+  },
+  {
+   "w": "The",
+   "s": 3.22,
+   "e": 3.28,
+   "p": 0.78
+  },
+  {
+   "w": "sunscreen",
+   "s": 3.28,
+   "e": 3.6,
+   "p": 0.94
+  },
+  {
+   "w": "paradox",
+   "s": 3.6,
+   "e": 4.06,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 4.06,
+   "e": 4.4,
+   "p": 0.95
+  },
+  {
+   "w": "really,",
+   "s": 4.4,
+   "e": 4.7,
+   "p": 0.96
+  },
+  {
+   "w": "it's",
+   "s": 4.92,
+   "e": 5.02,
+   "p": 0.99
+  },
+  {
+   "w": "real.",
+   "s": 5.02,
+   "e": 5.2,
+   "p": 1.0
+  },
+  {
+   "w": "And",
+   "s": 5.5,
+   "e": 5.6,
+   "p": 0.88
+  },
+  {
+   "w": "we",
+   "s": 5.6,
+   "e": 5.9,
+   "p": 0.97
+  },
+  {
+   "w": "are",
+   "s": 5.9,
+   "e": 6.1,
+   "p": 0.99
+  },
+  {
+   "w": "using",
+   "s": 6.1,
+   "e": 6.34,
+   "p": 1.0
+  },
+  {
+   "w": "sunscreen",
+   "s": 6.34,
+   "e": 6.68,
+   "p": 0.95
+  },
+  {
+   "w": "more",
+   "s": 6.68,
+   "e": 6.96,
+   "p": 0.99
+  },
+  {
+   "w": "than",
+   "s": 6.96,
+   "e": 7.1,
+   "p": 1.0
+  },
+  {
+   "w": "ever,",
+   "s": 7.1,
+   "e": 7.34,
+   "p": 1.0
+  },
+  {
+   "w": "but",
+   "s": 7.56,
+   "e": 7.86,
+   "p": 0.99
+  },
+  {
+   "w": "one",
+   "s": 7.86,
+   "e": 8.2,
+   "p": 0.87
+  },
+  {
+   "w": "in",
+   "s": 8.2,
+   "e": 8.32,
+   "p": 0.99
+  },
+  {
+   "w": "five",
+   "s": 8.32,
+   "e": 8.5,
+   "p": 0.98
+  },
+  {
+   "w": "women",
+   "s": 8.5,
+   "e": 8.8,
+   "p": 0.99
+  },
+  {
+   "w": "get",
+   "s": 8.8,
+   "e": 9.14,
+   "p": 0.44
+  },
+  {
+   "w": "skin",
+   "s": 9.14,
+   "e": 9.6,
+   "p": 0.99
+  },
+  {
+   "w": "cancer",
+   "s": 9.6,
+   "e": 9.98,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 9.98,
+   "e": 10.48,
+   "p": 0.51
+  },
+  {
+   "w": "one",
+   "s": 10.48,
+   "e": 10.82,
+   "p": 0.99
+  },
+  {
+   "w": "in",
+   "s": 10.82,
+   "e": 10.94,
+   "p": 0.99
+  },
+  {
+   "w": "seven",
+   "s": 10.94,
+   "e": 11.1,
+   "p": 0.99
+  },
+  {
+   "w": "men",
+   "s": 11.1,
+   "e": 11.32,
+   "p": 1.0
+  },
+  {
+   "w": "get",
+   "s": 11.32,
+   "e": 11.54,
+   "p": 0.91
+  },
+  {
+   "w": "skin",
+   "s": 11.54,
+   "e": 11.78,
+   "p": 1.0
+  },
+  {
+   "w": "cancer.",
+   "s": 11.78,
+   "e": 12.16,
+   "p": 1.0
+  },
+  {
+   "w": "It's",
+   "s": 12.32,
+   "e": 12.5,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 12.5,
+   "e": 12.74,
+   "p": 1.0
+  },
+  {
+   "w": "most",
+   "s": 12.74,
+   "e": 13.02,
+   "p": 1.0
+  },
+  {
+   "w": "prevalent",
+   "s": 13.02,
+   "e": 13.42,
+   "p": 1.0
+  },
+  {
+   "w": "form",
+   "s": 13.42,
+   "e": 13.94,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 13.94,
+   "e": 14.18,
+   "p": 1.0
+  },
+  {
+   "w": "cancer.",
+   "s": 14.18,
+   "e": 14.54,
+   "p": 1.0
+  },
+  {
+   "w": "For",
+   "s": 14.84,
+   "e": 14.96,
+   "p": 0.98
+  },
+  {
+   "w": "a",
+   "s": 14.96,
+   "e": 15.06,
+   "p": 0.99
+  },
+  {
+   "w": "problem",
+   "s": 15.06,
+   "e": 15.36,
+   "p": 1.0
+  },
+  {
+   "w": "like",
+   "s": 15.36,
+   "e": 15.58,
+   "p": 1.0
+  },
+  {
+   "w": "this,",
+   "s": 15.58,
+   "e": 15.92,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 16.08,
+   "e": 16.28,
+   "p": 1.0
+  },
+  {
+   "w": "have",
+   "s": 16.28,
+   "e": 16.58,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 16.58,
+   "e": 16.72,
+   "p": 1.0
+  },
+  {
+   "w": "start",
+   "s": 16.72,
+   "e": 16.98,
+   "p": 1.0
+  },
+  {
+   "w": "by",
+   "s": 16.98,
+   "e": 17.2,
+   "p": 0.99
+  },
+  {
+   "w": "measuring",
+   "s": 17.2,
+   "e": 17.56,
+   "p": 1.0
+  },
+  {
+   "w": "it.",
+   "s": 17.56,
+   "e": 17.8,
+   "p": 1.0
+  },
+  {
+   "w": "And",
+   "s": 17.88,
+   "e": 18.04,
+   "p": 0.97
+  },
+  {
+   "w": "we",
+   "s": 18.04,
+   "e": 18.24,
+   "p": 1.0
+  },
+  {
+   "w": "have",
+   "s": 18.24,
+   "e": 18.44,
+   "p": 0.99
+  },
+  {
+   "w": "never",
+   "s": 18.44,
+   "e": 18.72,
+   "p": 1.0
+  },
+  {
+   "w": "had",
+   "s": 18.72,
+   "e": 18.98,
+   "p": 1.0
+  },
+  {
+   "w": "a",
+   "s": 18.98,
+   "e": 19.08,
+   "p": 1.0
+  },
+  {
+   "w": "tool",
+   "s": 19.08,
+   "e": 19.38,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 19.38,
+   "e": 19.68,
+   "p": 1.0
+  },
+  {
+   "w": "really",
+   "s": 19.68,
+   "e": 19.98,
+   "p": 1.0
+  },
+  {
+   "w": "measure",
+   "s": 19.98,
+   "e": 20.4,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 20.4,
+   "e": 20.66,
+   "p": 1.0
+  },
+  {
+   "w": "exposure",
+   "s": 20.66,
+   "e": 21.02,
+   "p": 1.0
+  },
+  {
+   "w": "that",
+   "s": 21.02,
+   "e": 21.3,
+   "p": 0.99
+  },
+  {
+   "w": "we've",
+   "s": 21.3,
+   "e": 21.5,
+   "p": 1.0
+  },
+  {
+   "w": "had",
+   "s": 21.5,
+   "e": 21.8,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 21.8,
+   "e": 22.02,
+   "p": 0.99
+  },
+  {
+   "w": "a",
+   "s": 22.02,
+   "e": 22.12,
+   "p": 1.0
+  },
+  {
+   "w": "long",
+   "s": 22.12,
+   "e": 22.32,
+   "p": 1.0
+  },
+  {
+   "w": "-term",
+   "s": 22.32,
+   "e": 22.5,
+   "p": 0.86
+  },
+  {
+   "w": "basis.",
+   "s": 22.5,
+   "e": 22.96,
+   "p": 1.0
+  },
+  {
+   "w": "I",
+   "s": 23.32,
+   "e": 23.34,
+   "p": 0.96
+  },
+  {
+   "w": "mean,",
+   "s": 23.34,
+   "e": 23.44,
+   "p": 1.0
+  },
+  {
+   "w": "awareness",
+   "s": 23.48,
+   "e": 23.84,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 23.84,
+   "e": 24.16,
+   "p": 1.0
+  },
+  {
+   "w": "really",
+   "s": 24.16,
+   "e": 24.42,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 24.42,
+   "e": 24.64,
+   "p": 0.99
+  },
+  {
+   "w": "first",
+   "s": 24.64,
+   "e": 24.9,
+   "p": 1.0
+  },
+  {
+   "w": "step.",
+   "s": 24.9,
+   "e": 25.28,
+   "p": 1.0
+  },
+  {
+   "w": "What",
+   "s": 25.3,
+   "e": 25.62,
+   "p": 0.89
+  },
+  {
+   "w": "are",
+   "s": 25.62,
+   "e": 25.64,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 25.64,
+   "e": 25.8,
+   "p": 0.99
+  },
+  {
+   "w": "massive",
+   "s": 25.8,
+   "e": 26.38,
+   "p": 1.0
+  },
+  {
+   "w": "blind",
+   "s": 26.38,
+   "e": 26.8,
+   "p": 1.0
+  },
+  {
+   "w": "spots",
+   "s": 26.8,
+   "e": 27.16,
+   "p": 0.95
+  },
+  {
+   "w": "that",
+   "s": 27.16,
+   "e": 27.48,
+   "p": 0.99
+  },
+  {
+   "w": "dermatologists",
+   "s": 27.48,
+   "e": 28.26,
+   "p": 0.99
+  },
+  {
+   "w": "are",
+   "s": 28.26,
+   "e": 28.66,
+   "p": 1.0
+  },
+  {
+   "w": "missing?",
+   "s": 28.66,
+   "e": 28.94,
+   "p": 1.0
+  },
+  {
+   "w": "Dermatology",
+   "s": 28.94,
+   "e": 29.6,
+   "p": 0.83
+  },
+  {
+   "w": "community",
+   "s": 29.6,
+   "e": 30.04,
+   "p": 0.97
+  },
+  {
+   "w": "has",
+   "s": 30.04,
+   "e": 30.74,
+   "p": 0.99
+  },
+  {
+   "w": "been",
+   "s": 30.74,
+   "e": 30.98,
+   "p": 1.0
+  },
+  {
+   "w": "very",
+   "s": 30.98,
+   "e": 31.34,
+   "p": 0.99
+  },
+  {
+   "w": "black",
+   "s": 31.34,
+   "e": 31.6,
+   "p": 0.95
+  },
+  {
+   "w": "or",
+   "s": 31.6,
+   "e": 31.74,
+   "p": 0.83
+  },
+  {
+   "w": "white",
+   "s": 31.74,
+   "e": 31.88,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 31.88,
+   "e": 32.02,
+   "p": 0.99
+  },
+  {
+   "w": "this",
+   "s": 32.02,
+   "e": 32.2,
+   "p": 1.0
+  },
+  {
+   "w": "issue.",
+   "s": 32.2,
+   "e": 32.48,
+   "p": 1.0
+  },
+  {
+   "w": "You",
+   "s": 32.72,
+   "e": 32.78,
+   "p": 0.99
+  },
+  {
+   "w": "apply",
+   "s": 32.78,
+   "e": 33.12,
+   "p": 1.0
+  },
+  {
+   "w": "sunscreen",
+   "s": 33.12,
+   "e": 33.54,
+   "p": 0.99
+  },
+  {
+   "w": "and",
+   "s": 33.54,
+   "e": 34.1,
+   "p": 0.73
+  },
+  {
+   "w": "you",
+   "s": 34.1,
+   "e": 34.2,
+   "p": 0.98
+  },
+  {
+   "w": "supplement",
+   "s": 34.2,
+   "e": 34.58,
+   "p": 1.0
+  },
+  {
+   "w": "with",
+   "s": 34.58,
+   "e": 35.02,
+   "p": 0.99
+  },
+  {
+   "w": "vitamin",
+   "s": 35.02,
+   "e": 35.28,
+   "p": 0.84
+  },
+  {
+   "w": "D.",
+   "s": 35.28,
+   "e": 35.6,
+   "p": 0.97
+  },
+  {
+   "w": "Right.",
+   "s": 35.78,
+   "e": 35.94,
+   "p": 0.75
+  },
+  {
+   "w": "I",
+   "s": 36.1,
+   "e": 36.22,
+   "p": 0.99
+  },
+  {
+   "w": "think",
+   "s": 36.22,
+   "e": 36.48,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 36.48,
+   "e": 36.66,
+   "p": 0.99
+  },
+  {
+   "w": "blind",
+   "s": 36.66,
+   "e": 36.9,
+   "p": 1.0
+  },
+  {
+   "w": "spot",
+   "s": 36.9,
+   "e": 37.22,
+   "p": 0.97
+  },
+  {
+   "w": "is",
+   "s": 37.22,
+   "e": 37.58,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 37.58,
+   "e": 37.82,
+   "p": 0.99
+  },
+  {
+   "w": "lack",
+   "s": 37.82,
+   "e": 38.02,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 38.02,
+   "e": 38.14,
+   "p": 1.0
+  },
+  {
+   "w": "data",
+   "s": 38.14,
+   "e": 38.36,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 38.36,
+   "e": 38.88,
+   "p": 0.48
+  },
+  {
+   "w": "we're",
+   "s": 38.88,
+   "e": 39.2,
+   "p": 0.99
+  },
+  {
+   "w": "going",
+   "s": 39.2,
+   "e": 39.38,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 39.38,
+   "e": 39.54,
+   "p": 1.0
+  },
+  {
+   "w": "be",
+   "s": 39.54,
+   "e": 39.64,
+   "p": 1.0
+  },
+  {
+   "w": "providing",
+   "s": 39.64,
+   "e": 40.0,
+   "p": 1.0
+  },
+  {
+   "w": "that",
+   "s": 40.0,
+   "e": 40.3,
+   "p": 1.0
+  },
+  {
+   "w": "data",
+   "s": 40.3,
+   "e": 40.6,
+   "p": 0.99
+  },
+  {
+   "w": "to",
+   "s": 40.6,
+   "e": 40.94,
+   "p": 1.0
+  },
+  {
+   "w": "people.",
+   "s": 40.94,
+   "e": 41.32,
+   "p": 1.0
+  },
+  {
+   "w": "But",
+   "s": 41.62,
+   "e": 41.84,
+   "p": 0.82
+  },
+  {
+   "w": "this",
+   "s": 41.84,
+   "e": 42.04,
+   "p": 0.98
+  },
+  {
+   "w": "is",
+   "s": 42.04,
+   "e": 42.16,
+   "p": 0.99
+  },
+  {
+   "w": "all",
+   "s": 42.16,
+   "e": 42.36,
+   "p": 1.0
+  },
+  {
+   "w": "about",
+   "s": 42.36,
+   "e": 42.52,
+   "p": 1.0
+  },
+  {
+   "w": "empowerment",
+   "s": 42.52,
+   "e": 43.0,
+   "p": 1.0
+  },
+  {
+   "w": "because",
+   "s": 43.0,
+   "e": 43.48,
+   "p": 0.66
+  },
+  {
+   "w": "our",
+   "s": 43.48,
+   "e": 43.7,
+   "p": 0.99
+  },
+  {
+   "w": "thinking",
+   "s": 43.7,
+   "e": 44.02,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 44.02,
+   "e": 44.38,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 44.38,
+   "e": 44.62,
+   "p": 1.0
+  },
+  {
+   "w": "has",
+   "s": 44.62,
+   "e": 44.78,
+   "p": 0.99
+  },
+  {
+   "w": "really",
+   "s": 44.78,
+   "e": 45.1,
+   "p": 1.0
+  },
+  {
+   "w": "evolved",
+   "s": 45.1,
+   "e": 45.52,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 45.52,
+   "e": 46.0,
+   "p": 0.91
+  },
+  {
+   "w": "understand",
+   "s": 46.0,
+   "e": 46.76,
+   "p": 1.0
+  },
+  {
+   "w": "how",
+   "s": 46.76,
+   "e": 47.3,
+   "p": 1.0
+  },
+  {
+   "w": "sunlight",
+   "s": 47.3,
+   "e": 47.82,
+   "p": 1.0
+  },
+  {
+   "w": "impacts",
+   "s": 47.82,
+   "e": 48.42,
+   "p": 1.0
+  },
+  {
+   "w": "our",
+   "s": 48.42,
+   "e": 48.68,
+   "p": 1.0
+  },
+  {
+   "w": "overall",
+   "s": 48.68,
+   "e": 49.06,
+   "p": 1.0
+  },
+  {
+   "w": "health.",
+   "s": 49.06,
+   "e": 49.34,
+   "p": 1.0
+  },
+  {
+   "w": "To",
+   "s": 49.7,
+   "e": 49.82,
+   "p": 0.98
+  },
+  {
+   "w": "me,",
+   "s": 49.82,
+   "e": 50.04,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 50.2,
+   "e": 50.42,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 50.42,
+   "e": 50.56,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 50.56,
+   "e": 50.7,
+   "p": 1.0
+  },
+  {
+   "w": "best",
+   "s": 50.7,
+   "e": 51.06,
+   "p": 1.0
+  },
+  {
+   "w": "wearable",
+   "s": 51.06,
+   "e": 51.42,
+   "p": 1.0
+  },
+  {
+   "w": "because",
+   "s": 51.42,
+   "e": 51.72,
+   "p": 0.92
+  },
+  {
+   "w": "it's",
+   "s": 51.72,
+   "e": 52.02,
+   "p": 0.99
+  },
+  {
+   "w": "teaching",
+   "s": 52.02,
+   "e": 52.34,
+   "p": 1.0
+  },
+  {
+   "w": "me",
+   "s": 52.34,
+   "e": 52.58,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 52.58,
+   "e": 52.66,
+   "p": 1.0
+  },
+  {
+   "w": "be",
+   "s": 52.66,
+   "e": 52.78,
+   "p": 1.0
+  },
+  {
+   "w": "preventative",
+   "s": 52.78,
+   "e": 53.38,
+   "p": 0.99
+  },
+  {
+   "w": "and",
+   "s": 53.38,
+   "e": 53.64,
+   "p": 1.0
+  },
+  {
+   "w": "aware",
+   "s": 53.64,
+   "e": 53.98,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 53.98,
+   "e": 54.5,
+   "p": 1.0
+  },
+  {
+   "w": "my",
+   "s": 54.5,
+   "e": 54.66,
+   "p": 1.0
+  },
+  {
+   "w": "sun",
+   "s": 54.66,
+   "e": 54.86,
+   "p": 0.98
+  },
+  {
+   "w": "exposure.",
+   "s": 54.86,
+   "e": 55.26,
+   "p": 1.0
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 2.94,
+   "texto": "Why is the sun cancer rate up?"
+  },
+  {
+   "s": 3.22,
+   "e": 5.2,
+   "texto": "The sunscreen paradox is really, it's real."
+  },
+  {
+   "s": 5.5,
+   "e": 7.34,
+   "texto": "And we are using sunscreen more than ever,"
+  },
+  {
+   "s": 7.56,
+   "e": 9.98,
+   "texto": "but one in five women get skin cancer"
+  },
+  {
+   "s": 9.98,
+   "e": 12.16,
+   "texto": "and one in seven men get skin cancer."
+  },
+  {
+   "s": 12.32,
+   "e": 14.54,
+   "texto": "It's the most prevalent form of cancer."
+  },
+  {
+   "s": 14.84,
+   "e": 17.8,
+   "texto": "For a problem like this, you have to start by measuring it."
+  },
+  {
+   "s": 17.88,
+   "e": 19.38,
+   "texto": "And we have never had a tool"
+  },
+  {
+   "s": 19.38,
+   "e": 21.8,
+   "texto": "to really measure the exposure that we've had"
+  },
+  {
+   "s": 21.8,
+   "e": 22.96,
+   "texto": "on a long-term basis."
+  },
+  {
+   "s": 23.32,
+   "e": 25.28,
+   "texto": "I mean, awareness is really the first step."
+  },
+  {
+   "s": 25.3,
+   "e": 27.16,
+   "texto": "What are the massive blind spots"
+  },
+  {
+   "s": 27.16,
+   "e": 28.94,
+   "texto": "that dermatologists are missing?"
+  },
+  {
+   "s": 28.94,
+   "e": 30.98,
+   "texto": "Dermatology community has been"
+  },
+  {
+   "s": 30.98,
+   "e": 32.48,
+   "texto": "very black or white on this issue."
+  },
+  {
+   "s": 32.72,
+   "e": 35.6,
+   "texto": "You apply sunscreen and you supplement with vitamin D."
+  },
+  {
+   "s": 35.78,
+   "e": 35.94,
+   "texto": "Right."
+  },
+  {
+   "s": 36.1,
+   "e": 38.36,
+   "texto": "I think the blind spot is the lack of data"
+  },
+  {
+   "s": 38.36,
+   "e": 41.32,
+   "texto": "and we're going to be providing that data to people."
+  },
+  {
+   "s": 41.62,
+   "e": 43.0,
+   "texto": "But this is all about empowerment"
+  },
+  {
+   "s": 43.0,
+   "e": 45.52,
+   "texto": "because our thinking on this has really evolved"
+  },
+  {
+   "s": 45.52,
+   "e": 49.34,
+   "texto": "to understand how sunlight impacts our overall health."
+  },
+  {
+   "s": 49.7,
+   "e": 51.42,
+   "texto": "To me, this is the best wearable"
+  },
+  {
+   "s": 51.42,
+   "e": 53.38,
+   "texto": "because it's teaching me to be preventative"
+  },
+  {
+   "s": 53.38,
+   "e": 55.26,
+   "texto": "and aware of my sun exposure."
+  }
+ ]
+}

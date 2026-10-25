@@ -1,0 +1,622 @@
+{
+ "nombre": "7",
+ "archivo": "referencias/7.mp4",
+ "firma": "4000859-1792900035",
+ "generado": "2026-10-25T01:10:39",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 26.5,
+  "ancho": 464,
+  "alto": 832,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "29:52",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 7,
+  "media": 3.79,
+  "mediana": 2.37,
+  "min": 0.87,
+  "max": 10.3
+ },
+ "cortes_por_min": 13.6,
+ "ritmo_habla": {
+  "palabras": 60,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 22.0,
+  "pal_s_hablando": 2.93,
+  "pal_s_total": 2.26,
+  "tiempo_hablando": 20.46,
+  "parte_hablada": 0.77,
+  "bloques": 5,
+  "palabras_por_bloque": {
+   "n": 5,
+   "media": 12.0,
+   "mediana": 12.0,
+   "min": 5.0,
+   "max": 17.0
+  },
+  "dur_bloque": {
+   "n": 5,
+   "media": 4.09,
+   "mediana": 4.42,
+   "min": 1.58,
+   "max": 6.98
+  },
+  "pausas": {
+   "n": 3,
+   "media": 0.45,
+   "mediana": 0.46,
+   "min": 0.3,
+   "max": 0.58
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 0.87,
+   "dur": 0.87,
+   "dicho": "It feels like every"
+  },
+  {
+   "id": 2,
+   "s": 0.87,
+   "e": 11.17,
+   "dur": 10.3,
+   "dicho": "new week in 2025 is a new life. Like we're starting from scratch. There is this new AI tool that we're integrating. There is this new strategy"
+  },
+  {
+   "id": 3,
+   "s": 11.17,
+   "e": 13.53,
+   "dur": 2.37,
+   "dicho": "and we're hiring more people to"
+  },
+  {
+   "id": 4,
+   "s": 13.53,
+   "e": 15.67,
+   "dur": 2.13,
+   "dicho": "help us with all of that. So I've been creating"
+  },
+  {
+   "id": 5,
+   "s": 15.67,
+   "e": 20.17,
+   "dur": 4.5,
+   "dicho": "content for 10 years but I've never experienced anything like"
+  },
+  {
+   "id": 6,
+   "s": 20.17,
+   "e": 22.5,
+   "dur": 2.33,
+   "dicho": "this, like 2025."
+  },
+  {
+   "id": 7,
+   "s": 22.5,
+   "e": 26.5,
+   "dur": 4.0,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 5.06,
+   "dur": 5.06,
+   "palabras": 12,
+   "pal_s": 2.4,
+   "texto": "It feels like every new week in 2025 is a new life."
+  },
+  {
+   "id": 2,
+   "s": 5.36,
+   "e": 6.94,
+   "dur": 1.58,
+   "palabras": 5,
+   "pal_s": 3.2,
+   "texto": "Like we're starting from scratch."
+  },
+  {
+   "id": 3,
+   "s": 7.52,
+   "e": 9.94,
+   "dur": 2.42,
+   "palabras": 9,
+   "pal_s": 3.7,
+   "texto": "There is this new AI tool that we're integrating."
+  },
+  {
+   "id": 4,
+   "s": 10.4,
+   "e": 14.82,
+   "dur": 4.42,
+   "palabras": 17,
+   "pal_s": 3.8,
+   "texto": "There is this new strategy and we're hiring more people to help us with all of that."
+  },
+  {
+   "id": 5,
+   "s": 15.02,
+   "e": 22.0,
+   "dur": 6.98,
+   "palabras": 17,
+   "pal_s": 2.4,
+   "texto": "So I've been creating content for 10 years but I've never experienced anything like this, like 2025."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "It feels like every"
+   },
+   {
+    "t": 1.47,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": "every new week"
+   },
+   {
+    "t": 11.77,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": "strategy and we're hiring"
+   },
+   {
+    "t": 14.13,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "to help us with all of that."
+   },
+   {
+    "t": 16.27,
+    "que": "entra el plano",
+    "plano": 5,
+    "dicho": "creating content for 10 years"
+   },
+   {
+    "t": 20.77,
+    "que": "entra el plano",
+    "plano": 6,
+    "dicho": "like this, like 2025."
+   },
+   {
+    "t": 23.1,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": ""
+   },
+   {
+    "t": 26.2,
+    "que": "final",
+    "plano": 7,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "It",
+   "s": 0.0,
+   "e": 0.1,
+   "p": 0.68
+  },
+  {
+   "w": "feels",
+   "s": 0.1,
+   "e": 0.24,
+   "p": 0.99
+  },
+  {
+   "w": "like",
+   "s": 0.24,
+   "e": 0.54,
+   "p": 1.0
+  },
+  {
+   "w": "every",
+   "s": 0.54,
+   "e": 1.06,
+   "p": 0.99
+  },
+  {
+   "w": "new",
+   "s": 1.06,
+   "e": 1.46,
+   "p": 0.99
+  },
+  {
+   "w": "week",
+   "s": 1.46,
+   "e": 2.1,
+   "p": 0.99
+  },
+  {
+   "w": "in",
+   "s": 2.1,
+   "e": 2.52,
+   "p": 0.94
+  },
+  {
+   "w": "2025",
+   "s": 2.52,
+   "e": 3.42,
+   "p": 0.96
+  },
+  {
+   "w": "is",
+   "s": 3.42,
+   "e": 4.36,
+   "p": 0.87
+  },
+  {
+   "w": "a",
+   "s": 4.36,
+   "e": 4.5,
+   "p": 0.91
+  },
+  {
+   "w": "new",
+   "s": 4.5,
+   "e": 4.7,
+   "p": 1.0
+  },
+  {
+   "w": "life.",
+   "s": 4.7,
+   "e": 5.06,
+   "p": 0.97
+  },
+  {
+   "w": "Like",
+   "s": 5.36,
+   "e": 5.62,
+   "p": 0.92
+  },
+  {
+   "w": "we're",
+   "s": 5.62,
+   "e": 5.94,
+   "p": 0.91
+  },
+  {
+   "w": "starting",
+   "s": 5.94,
+   "e": 6.38,
+   "p": 1.0
+  },
+  {
+   "w": "from",
+   "s": 6.38,
+   "e": 6.66,
+   "p": 1.0
+  },
+  {
+   "w": "scratch.",
+   "s": 6.66,
+   "e": 6.94,
+   "p": 1.0
+  },
+  {
+   "w": "There",
+   "s": 7.52,
+   "e": 7.7,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 7.7,
+   "e": 7.9,
+   "p": 0.93
+  },
+  {
+   "w": "this",
+   "s": 7.9,
+   "e": 8.06,
+   "p": 1.0
+  },
+  {
+   "w": "new",
+   "s": 8.06,
+   "e": 8.3,
+   "p": 1.0
+  },
+  {
+   "w": "AI",
+   "s": 8.3,
+   "e": 8.62,
+   "p": 0.94
+  },
+  {
+   "w": "tool",
+   "s": 8.62,
+   "e": 9.02,
+   "p": 0.99
+  },
+  {
+   "w": "that",
+   "s": 9.02,
+   "e": 9.24,
+   "p": 0.99
+  },
+  {
+   "w": "we're",
+   "s": 9.24,
+   "e": 9.44,
+   "p": 0.99
+  },
+  {
+   "w": "integrating.",
+   "s": 9.44,
+   "e": 9.94,
+   "p": 1.0
+  },
+  {
+   "w": "There",
+   "s": 10.4,
+   "e": 10.46,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 10.46,
+   "e": 10.6,
+   "p": 0.59
+  },
+  {
+   "w": "this",
+   "s": 10.6,
+   "e": 10.78,
+   "p": 1.0
+  },
+  {
+   "w": "new",
+   "s": 10.78,
+   "e": 10.94,
+   "p": 1.0
+  },
+  {
+   "w": "strategy",
+   "s": 10.94,
+   "e": 11.38,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 11.38,
+   "e": 12.0,
+   "p": 0.64
+  },
+  {
+   "w": "we're",
+   "s": 12.0,
+   "e": 12.24,
+   "p": 1.0
+  },
+  {
+   "w": "hiring",
+   "s": 12.24,
+   "e": 12.6,
+   "p": 1.0
+  },
+  {
+   "w": "more",
+   "s": 12.6,
+   "e": 12.88,
+   "p": 1.0
+  },
+  {
+   "w": "people",
+   "s": 12.88,
+   "e": 13.22,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 13.22,
+   "e": 13.8,
+   "p": 0.99
+  },
+  {
+   "w": "help",
+   "s": 13.8,
+   "e": 14.0,
+   "p": 1.0
+  },
+  {
+   "w": "us",
+   "s": 14.0,
+   "e": 14.2,
+   "p": 1.0
+  },
+  {
+   "w": "with",
+   "s": 14.2,
+   "e": 14.36,
+   "p": 1.0
+  },
+  {
+   "w": "all",
+   "s": 14.36,
+   "e": 14.54,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 14.54,
+   "e": 14.66,
+   "p": 0.98
+  },
+  {
+   "w": "that.",
+   "s": 14.66,
+   "e": 14.82,
+   "p": 1.0
+  },
+  {
+   "w": "So",
+   "s": 15.02,
+   "e": 15.12,
+   "p": 0.98
+  },
+  {
+   "w": "I've",
+   "s": 15.12,
+   "e": 15.38,
+   "p": 0.97
+  },
+  {
+   "w": "been",
+   "s": 15.38,
+   "e": 15.48,
+   "p": 1.0
+  },
+  {
+   "w": "creating",
+   "s": 15.48,
+   "e": 15.76,
+   "p": 1.0
+  },
+  {
+   "w": "content",
+   "s": 15.76,
+   "e": 16.18,
+   "p": 1.0
+  },
+  {
+   "w": "for",
+   "s": 16.18,
+   "e": 16.44,
+   "p": 1.0
+  },
+  {
+   "w": "10",
+   "s": 16.44,
+   "e": 16.72,
+   "p": 0.94
+  },
+  {
+   "w": "years",
+   "s": 16.72,
+   "e": 17.0,
+   "p": 1.0
+  },
+  {
+   "w": "but",
+   "s": 17.0,
+   "e": 17.38,
+   "p": 0.28
+  },
+  {
+   "w": "I've",
+   "s": 17.38,
+   "e": 17.78,
+   "p": 0.99
+  },
+  {
+   "w": "never",
+   "s": 17.78,
+   "e": 18.12,
+   "p": 1.0
+  },
+  {
+   "w": "experienced",
+   "s": 18.12,
+   "e": 18.82,
+   "p": 1.0
+  },
+  {
+   "w": "anything",
+   "s": 18.82,
+   "e": 19.5,
+   "p": 1.0
+  },
+  {
+   "w": "like",
+   "s": 19.5,
+   "e": 20.24,
+   "p": 1.0
+  },
+  {
+   "w": "this,",
+   "s": 20.24,
+   "e": 20.78,
+   "p": 0.99
+  },
+  {
+   "w": "like",
+   "s": 20.96,
+   "e": 21.18,
+   "p": 1.0
+  },
+  {
+   "w": "2025.",
+   "s": 21.18,
+   "e": 22.0,
+   "p": 0.96
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 5.06,
+   "texto": "It feels like every new week in 2025 is a new life."
+  },
+  {
+   "s": 5.36,
+   "e": 6.94,
+   "texto": "Like we're starting from scratch."
+  },
+  {
+   "s": 7.52,
+   "e": 9.94,
+   "texto": "There is this new AI tool that we're integrating."
+  },
+  {
+   "s": 10.4,
+   "e": 11.38,
+   "texto": "There is this new strategy"
+  },
+  {
+   "s": 11.38,
+   "e": 14.82,
+   "texto": "and we're hiring more people to help us with all of that."
+  },
+  {
+   "s": 15.02,
+   "e": 17.0,
+   "texto": "So I've been creating content for 10 years"
+  },
+  {
+   "s": 17.0,
+   "e": 22.0,
+   "texto": "but I've never experienced anything like this, like 2025."
+  }
+ ]
+}

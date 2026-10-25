@@ -1,0 +1,835 @@
+{
+ "nombre": "5",
+ "archivo": "referencias/5.mp4",
+ "firma": "7834922-1792899813",
+ "generado": "2026-10-25T01:10:16",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 64.87,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 43,
+  "media": 1.51,
+  "mediana": 1.2,
+  "min": 0.47,
+  "max": 7.77
+ },
+ "cortes_por_min": 38.8,
+ "ritmo_habla": {
+  "palabras": 48,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 58.06,
+  "pal_s_hablando": 2.7,
+  "pal_s_total": 0.74,
+  "tiempo_hablando": 17.78,
+  "parte_hablada": 0.27,
+  "bloques": 5,
+  "palabras_por_bloque": {
+   "n": 5,
+   "media": 9.6,
+   "mediana": 10.0,
+   "min": 8.0,
+   "max": 12.0
+  },
+  "dur_bloque": {
+   "n": 5,
+   "media": 3.56,
+   "mediana": 2.8,
+   "min": 2.04,
+   "max": 6.16
+  },
+  "pausas": {
+   "n": 4,
+   "media": 10.07,
+   "mediana": 1.84,
+   "min": 0.28,
+   "max": 36.32
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 7.77,
+   "dur": 7.77,
+   "dicho": "If you love the finishes on this property, then you will love this fully remodeled, single -level Albuquerque space"
+  },
+  {
+   "id": 2,
+   "s": 7.77,
+   "e": 10.53,
+   "dur": 2.77,
+   "dicho": "located"
+  },
+  {
+   "id": 3,
+   "s": 10.53,
+   "e": 11.63,
+   "dur": 1.1,
+   "dicho": ""
+  },
+  {
+   "id": 4,
+   "s": 11.63,
+   "e": 12.83,
+   "dur": 1.2,
+   "dicho": "in"
+  },
+  {
+   "id": 5,
+   "s": 12.83,
+   "e": 14.33,
+   "dur": 1.5,
+   "dicho": "Lincolnton, North Carolina"
+  },
+  {
+   "id": 6,
+   "s": 14.33,
+   "e": 17.03,
+   "dur": 2.7,
+   "dicho": "in a highly desirable, matured neighborhood."
+  },
+  {
+   "id": 7,
+   "s": 17.03,
+   "e": 17.93,
+   "dur": 0.9,
+   "dicho": "Myseller knows the"
+  },
+  {
+   "id": 8,
+   "s": 17.93,
+   "e": 19.1,
+   "dur": 1.17,
+   "dicho": "finishes you love and"
+  },
+  {
+   "id": 9,
+   "s": 19.1,
+   "e": 19.87,
+   "dur": 0.77,
+   "dicho": "they're right here."
+  },
+  {
+   "id": 10,
+   "s": 19.87,
+   "e": 22.5,
+   "dur": 2.63,
+   "dicho": ""
+  },
+  {
+   "id": 11,
+   "s": 22.5,
+   "e": 24.97,
+   "dur": 2.47,
+   "dicho": ""
+  },
+  {
+   "id": 12,
+   "s": 24.97,
+   "e": 26.33,
+   "dur": 1.37,
+   "dicho": ""
+  },
+  {
+   "id": 13,
+   "s": 26.33,
+   "e": 27.53,
+   "dur": 1.2,
+   "dicho": ""
+  },
+  {
+   "id": 14,
+   "s": 27.53,
+   "e": 28.27,
+   "dur": 0.73,
+   "dicho": ""
+  },
+  {
+   "id": 15,
+   "s": 28.27,
+   "e": 28.73,
+   "dur": 0.47,
+   "dicho": ""
+  },
+  {
+   "id": 16,
+   "s": 28.73,
+   "e": 30.13,
+   "dur": 1.4,
+   "dicho": ""
+  },
+  {
+   "id": 17,
+   "s": 30.13,
+   "e": 30.7,
+   "dur": 0.57,
+   "dicho": ""
+  },
+  {
+   "id": 18,
+   "s": 30.7,
+   "e": 32.0,
+   "dur": 1.3,
+   "dicho": ""
+  },
+  {
+   "id": 19,
+   "s": 32.0,
+   "e": 32.63,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 20,
+   "s": 32.63,
+   "e": 33.93,
+   "dur": 1.3,
+   "dicho": ""
+  },
+  {
+   "id": 21,
+   "s": 33.93,
+   "e": 34.57,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 22,
+   "s": 34.57,
+   "e": 35.2,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 23,
+   "s": 35.2,
+   "e": 35.83,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 24,
+   "s": 35.83,
+   "e": 37.7,
+   "dur": 1.87,
+   "dicho": ""
+  },
+  {
+   "id": 25,
+   "s": 37.7,
+   "e": 38.97,
+   "dur": 1.27,
+   "dicho": ""
+  },
+  {
+   "id": 26,
+   "s": 38.97,
+   "e": 40.27,
+   "dur": 1.3,
+   "dicho": ""
+  },
+  {
+   "id": 27,
+   "s": 40.27,
+   "e": 42.27,
+   "dur": 2.0,
+   "dicho": ""
+  },
+  {
+   "id": 28,
+   "s": 42.27,
+   "e": 43.47,
+   "dur": 1.2,
+   "dicho": ""
+  },
+  {
+   "id": 29,
+   "s": 43.47,
+   "e": 44.1,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 30,
+   "s": 44.1,
+   "e": 44.73,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 31,
+   "s": 44.73,
+   "e": 45.27,
+   "dur": 0.53,
+   "dicho": ""
+  },
+  {
+   "id": 32,
+   "s": 45.27,
+   "e": 46.0,
+   "dur": 0.73,
+   "dicho": ""
+  },
+  {
+   "id": 33,
+   "s": 46.0,
+   "e": 46.63,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 34,
+   "s": 46.63,
+   "e": 47.3,
+   "dur": 0.67,
+   "dicho": ""
+  },
+  {
+   "id": 35,
+   "s": 47.3,
+   "e": 47.93,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 36,
+   "s": 47.93,
+   "e": 48.57,
+   "dur": 0.63,
+   "dicho": ""
+  },
+  {
+   "id": 37,
+   "s": 48.57,
+   "e": 50.47,
+   "dur": 1.9,
+   "dicho": ""
+  },
+  {
+   "id": 38,
+   "s": 50.47,
+   "e": 51.73,
+   "dur": 1.27,
+   "dicho": ""
+  },
+  {
+   "id": 39,
+   "s": 51.73,
+   "e": 54.87,
+   "dur": 3.13,
+   "dicho": ""
+  },
+  {
+   "id": 40,
+   "s": 54.87,
+   "e": 56.6,
+   "dur": 1.73,
+   "dicho": "Contacting"
+  },
+  {
+   "id": 41,
+   "s": 56.6,
+   "e": 58.43,
+   "dur": 1.83,
+   "dicho": "today while we're still on the market."
+  },
+  {
+   "id": 42,
+   "s": 58.43,
+   "e": 60.83,
+   "dur": 2.4,
+   "dicho": ""
+  },
+  {
+   "id": 43,
+   "s": 60.83,
+   "e": 64.87,
+   "dur": 4.03,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 2.66,
+   "dur": 2.66,
+   "palabras": 8,
+   "pal_s": 3.0,
+   "texto": "If you love the finishes on this property,"
+  },
+  {
+   "id": 2,
+   "s": 3.08,
+   "e": 9.24,
+   "dur": 6.16,
+   "palabras": 12,
+   "pal_s": 1.9,
+   "texto": "then you will love this fully remodeled, single -level Albuquerque space located"
+  },
+  {
+   "id": 3,
+   "s": 12.5,
+   "e": 16.62,
+   "dur": 4.12,
+   "palabras": 10,
+   "pal_s": 2.4,
+   "texto": "in Lincolnton, North Carolina in a highly desirable, matured neighborhood."
+  },
+  {
+   "id": 4,
+   "s": 16.9,
+   "e": 19.7,
+   "dur": 2.8,
+   "palabras": 10,
+   "pal_s": 3.6,
+   "texto": "Myseller knows the finishes you love and they're right here."
+  },
+  {
+   "id": 5,
+   "s": 56.02,
+   "e": 58.06,
+   "dur": 2.04,
+   "palabras": 8,
+   "pal_s": 3.9,
+   "texto": "Contacting today while we're still on the market."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "If you love the"
+   },
+   {
+    "t": 12.23,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "in"
+   },
+   {
+    "t": 17.48,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": "Myseller knows the finishes"
+   },
+   {
+    "t": 20.47,
+    "que": "entra el plano",
+    "plano": 10,
+    "dicho": ""
+   },
+   {
+    "t": 25.57,
+    "que": "entra el plano",
+    "plano": 12,
+    "dicho": ""
+   },
+   {
+    "t": 28.5,
+    "que": "entra el plano",
+    "plano": 15,
+    "dicho": ""
+   },
+   {
+    "t": 31.3,
+    "que": "entra el plano",
+    "plano": 18,
+    "dicho": ""
+   },
+   {
+    "t": 34.24,
+    "que": "entra el plano",
+    "plano": 21,
+    "dicho": ""
+   },
+   {
+    "t": 36.43,
+    "que": "entra el plano",
+    "plano": 24,
+    "dicho": ""
+   },
+   {
+    "t": 40.87,
+    "que": "entra el plano",
+    "plano": 27,
+    "dicho": ""
+   },
+   {
+    "t": 44.41,
+    "que": "entra el plano",
+    "plano": 30,
+    "dicho": ""
+   },
+   {
+    "t": 46.31,
+    "que": "entra el plano",
+    "plano": 33,
+    "dicho": ""
+   },
+   {
+    "t": 47.61,
+    "que": "entra el plano",
+    "plano": 35,
+    "dicho": ""
+   },
+   {
+    "t": 51.07,
+    "que": "entra el plano",
+    "plano": 38,
+    "dicho": ""
+   },
+   {
+    "t": 57.2,
+    "que": "entra el plano",
+    "plano": 41,
+    "dicho": "Contacting today while we're still on the"
+   },
+   {
+    "t": 64.57,
+    "que": "final",
+    "plano": 43,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "If",
+   "s": 0.0,
+   "e": 0.2,
+   "p": 0.9
+  },
+  {
+   "w": "you",
+   "s": 0.2,
+   "e": 0.38,
+   "p": 1.0
+  },
+  {
+   "w": "love",
+   "s": 0.38,
+   "e": 0.78,
+   "p": 0.95
+  },
+  {
+   "w": "the",
+   "s": 0.78,
+   "e": 1.02,
+   "p": 0.99
+  },
+  {
+   "w": "finishes",
+   "s": 1.02,
+   "e": 1.36,
+   "p": 0.99
+  },
+  {
+   "w": "on",
+   "s": 1.36,
+   "e": 1.76,
+   "p": 0.99
+  },
+  {
+   "w": "this",
+   "s": 1.76,
+   "e": 2.2,
+   "p": 0.98
+  },
+  {
+   "w": "property,",
+   "s": 2.2,
+   "e": 2.66,
+   "p": 0.99
+  },
+  {
+   "w": "then",
+   "s": 3.08,
+   "e": 4.26,
+   "p": 0.97
+  },
+  {
+   "w": "you",
+   "s": 4.26,
+   "e": 4.4,
+   "p": 1.0
+  },
+  {
+   "w": "will",
+   "s": 4.4,
+   "e": 4.52,
+   "p": 0.86
+  },
+  {
+   "w": "love",
+   "s": 4.52,
+   "e": 4.8,
+   "p": 1.0
+  },
+  {
+   "w": "this",
+   "s": 4.8,
+   "e": 5.12,
+   "p": 1.0
+  },
+  {
+   "w": "fully",
+   "s": 5.12,
+   "e": 5.4,
+   "p": 0.81
+  },
+  {
+   "w": "remodeled,",
+   "s": 5.4,
+   "e": 5.96,
+   "p": 0.99
+  },
+  {
+   "w": "single",
+   "s": 5.98,
+   "e": 6.34,
+   "p": 0.99
+  },
+  {
+   "w": "-level",
+   "s": 6.34,
+   "e": 6.64,
+   "p": 0.7
+  },
+  {
+   "w": "Albuquerque",
+   "s": 6.64,
+   "e": 7.28,
+   "p": 0.58
+  },
+  {
+   "w": "space",
+   "s": 7.28,
+   "e": 7.56,
+   "p": 0.96
+  },
+  {
+   "w": "located",
+   "s": 7.56,
+   "e": 9.24,
+   "p": 0.14
+  },
+  {
+   "w": "in",
+   "s": 12.5,
+   "e": 12.94,
+   "p": 1.0
+  },
+  {
+   "w": "Lincolnton,",
+   "s": 12.94,
+   "e": 13.68,
+   "p": 0.63
+  },
+  {
+   "w": "North",
+   "s": 13.74,
+   "e": 13.96,
+   "p": 0.96
+  },
+  {
+   "w": "Carolina",
+   "s": 13.96,
+   "e": 14.34,
+   "p": 1.0
+  },
+  {
+   "w": "in",
+   "s": 14.34,
+   "e": 14.64,
+   "p": 0.62
+  },
+  {
+   "w": "a",
+   "s": 14.64,
+   "e": 14.76,
+   "p": 1.0
+  },
+  {
+   "w": "highly",
+   "s": 14.76,
+   "e": 15.08,
+   "p": 1.0
+  },
+  {
+   "w": "desirable,",
+   "s": 15.08,
+   "e": 15.42,
+   "p": 0.97
+  },
+  {
+   "w": "matured",
+   "s": 15.42,
+   "e": 16.26,
+   "p": 0.77
+  },
+  {
+   "w": "neighborhood.",
+   "s": 16.26,
+   "e": 16.62,
+   "p": 0.99
+  },
+  {
+   "w": "Myseller",
+   "s": 16.9,
+   "e": 17.38,
+   "p": 0.64
+  },
+  {
+   "w": "knows",
+   "s": 17.38,
+   "e": 17.76,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 17.76,
+   "e": 17.96,
+   "p": 1.0
+  },
+  {
+   "w": "finishes",
+   "s": 17.96,
+   "e": 18.2,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 18.2,
+   "e": 18.46,
+   "p": 0.99
+  },
+  {
+   "w": "love",
+   "s": 18.46,
+   "e": 18.72,
+   "p": 0.99
+  },
+  {
+   "w": "and",
+   "s": 18.72,
+   "e": 19.2,
+   "p": 0.46
+  },
+  {
+   "w": "they're",
+   "s": 19.2,
+   "e": 19.36,
+   "p": 0.98
+  },
+  {
+   "w": "right",
+   "s": 19.36,
+   "e": 19.48,
+   "p": 1.0
+  },
+  {
+   "w": "here.",
+   "s": 19.48,
+   "e": 19.7,
+   "p": 1.0
+  },
+  {
+   "w": "Contacting",
+   "s": 56.02,
+   "e": 56.6,
+   "p": 0.93
+  },
+  {
+   "w": "today",
+   "s": 56.6,
+   "e": 56.88,
+   "p": 0.99
+  },
+  {
+   "w": "while",
+   "s": 56.88,
+   "e": 57.3,
+   "p": 0.83
+  },
+  {
+   "w": "we're",
+   "s": 57.3,
+   "e": 57.46,
+   "p": 0.99
+  },
+  {
+   "w": "still",
+   "s": 57.46,
+   "e": 57.62,
+   "p": 1.0
+  },
+  {
+   "w": "on",
+   "s": 57.62,
+   "e": 57.76,
+   "p": 0.71
+  },
+  {
+   "w": "the",
+   "s": 57.76,
+   "e": 57.82,
+   "p": 1.0
+  },
+  {
+   "w": "market.",
+   "s": 57.82,
+   "e": 58.06,
+   "p": 0.99
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 6.64,
+   "texto": "If you love the finishes on this property, then you will love this fully remodeled, single-level"
+  },
+  {
+   "s": 6.64,
+   "e": 16.62,
+   "texto": "Albuquerque space located in Lincolnton, North Carolina in a highly desirable, matured neighborhood."
+  },
+  {
+   "s": 16.9,
+   "e": 19.7,
+   "texto": "Myseller knows the finishes you love and they're right here."
+  },
+  {
+   "s": 56.02,
+   "e": 58.06,
+   "texto": "Contacting today while we're still on the market."
+  }
+ ]
+}

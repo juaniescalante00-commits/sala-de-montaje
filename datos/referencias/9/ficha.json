@@ -1,0 +1,897 @@
+{
+ "nombre": "9",
+ "archivo": "referencias/9.mp4",
+ "firma": "6692496-1792900035",
+ "generado": "2026-10-25T01:10:58",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 57.1,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 24.413,
+  "fps_variable": true,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 2,
+  "media": 28.55,
+  "mediana": 28.55,
+  "min": 4.05,
+  "max": 53.05
+ },
+ "cortes_por_min": 1.1,
+ "ritmo_habla": {
+  "palabras": 109,
+  "primera_palabra": 1.36,
+  "ultima_palabra": 49.34,
+  "pal_s_hablando": 2.39,
+  "pal_s_total": 1.91,
+  "tiempo_hablando": 45.56,
+  "parte_hablada": 0.8,
+  "bloques": 5,
+  "palabras_por_bloque": {
+   "n": 5,
+   "media": 21.8,
+   "mediana": 6.0,
+   "min": 4.0,
+   "max": 78.0
+  },
+  "dur_bloque": {
+   "n": 5,
+   "media": 9.11,
+   "mediana": 2.12,
+   "min": 1.88,
+   "max": 31.3
+  },
+  "pausas": {
+   "n": 4,
+   "media": 0.6,
+   "mediana": 0.54,
+   "min": 0.36,
+   "max": 0.98
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 53.05,
+   "dur": 53.05,
+   "dicho": "Your dashboard is lying to you. It says you made 1284 today. You actually kept 412 So where the rest go fees 8164 ads burned 398 refunds took 96 and shipping 214 and you only find out at midnight with 14 tabs open So we built tally every store every payout every ad account Melted into one number the real one when your ads start bleeding money It taps you on the shoulder one swipe paused every morning before coffee, you know exactly where you stand fewer tabs more sleep tally Oh, and this whole video made with AI every single frame comment prompts and I'll send you out"
+  },
+  {
+   "id": 2,
+   "s": 53.05,
+   "e": 57.1,
+   "dur": 4.05,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 1.36,
+   "e": 3.48,
+   "dur": 2.12,
+   "palabras": 6,
+   "pal_s": 2.8,
+   "texto": "Your dashboard is lying to you."
+  },
+  {
+   "id": 2,
+   "s": 3.88,
+   "e": 5.76,
+   "dur": 1.88,
+   "palabras": 6,
+   "pal_s": 3.2,
+   "texto": "It says you made 1284 today."
+  },
+  {
+   "id": 3,
+   "s": 6.12,
+   "e": 8.06,
+   "dur": 1.94,
+   "palabras": 4,
+   "pal_s": 2.1,
+   "texto": "You actually kept 412"
+  },
+  {
+   "id": 4,
+   "s": 9.04,
+   "e": 17.36,
+   "dur": 8.32,
+   "palabras": 15,
+   "pal_s": 1.8,
+   "texto": "So where the rest go fees 8164 ads burned 398 refunds took 96 and shipping"
+  },
+  {
+   "id": 5,
+   "s": 18.04,
+   "e": 49.34,
+   "dur": 31.3,
+   "palabras": 78,
+   "pal_s": 2.5,
+   "texto": "214 and you only find out at midnight with 14 tabs open So we built tally every store every payout every ad account Melted into one number the real one when your ads start bleeding money It taps you on the shoulder one swipe paused every morning before coffee, you know exactly where you stand fewer tabs more sleep tally Oh, and this whole video made with AI every single frame comment prompts and I'll send you out"
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 8.16,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "412"
+   },
+   {
+    "t": 16.31,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "took 96 and"
+   },
+   {
+    "t": 24.47,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "tally every store"
+   },
+   {
+    "t": 32.63,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "bleeding money It taps"
+   },
+   {
+    "t": 40.79,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "fewer tabs more"
+   },
+   {
+    "t": 48.94,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "and I'll send you out"
+   },
+   {
+    "t": 53.65,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": ""
+   },
+   {
+    "t": 56.8,
+    "que": "final",
+    "plano": 2,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Your",
+   "s": 1.36,
+   "e": 1.86,
+   "p": 0.37
+  },
+  {
+   "w": "dashboard",
+   "s": 1.86,
+   "e": 2.34,
+   "p": 0.94
+  },
+  {
+   "w": "is",
+   "s": 2.34,
+   "e": 2.62,
+   "p": 0.99
+  },
+  {
+   "w": "lying",
+   "s": 2.62,
+   "e": 3.02,
+   "p": 0.92
+  },
+  {
+   "w": "to",
+   "s": 3.02,
+   "e": 3.28,
+   "p": 0.99
+  },
+  {
+   "w": "you.",
+   "s": 3.28,
+   "e": 3.48,
+   "p": 1.0
+  },
+  {
+   "w": "It",
+   "s": 3.88,
+   "e": 4.06,
+   "p": 0.98
+  },
+  {
+   "w": "says",
+   "s": 4.06,
+   "e": 4.22,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 4.22,
+   "e": 4.36,
+   "p": 0.98
+  },
+  {
+   "w": "made",
+   "s": 4.36,
+   "e": 4.5,
+   "p": 0.98
+  },
+  {
+   "w": "1284",
+   "s": 4.5,
+   "e": 5.2,
+   "p": 0.62
+  },
+  {
+   "w": "today.",
+   "s": 5.2,
+   "e": 5.76,
+   "p": 0.99
+  },
+  {
+   "w": "You",
+   "s": 6.12,
+   "e": 6.34,
+   "p": 0.99
+  },
+  {
+   "w": "actually",
+   "s": 6.34,
+   "e": 6.64,
+   "p": 1.0
+  },
+  {
+   "w": "kept",
+   "s": 6.64,
+   "e": 7.02,
+   "p": 0.99
+  },
+  {
+   "w": "412",
+   "s": 7.02,
+   "e": 8.06,
+   "p": 0.86
+  },
+  {
+   "w": "So",
+   "s": 9.04,
+   "e": 9.5,
+   "p": 0.39
+  },
+  {
+   "w": "where",
+   "s": 9.5,
+   "e": 9.94,
+   "p": 0.96
+  },
+  {
+   "w": "the",
+   "s": 9.94,
+   "e": 10.08,
+   "p": 0.42
+  },
+  {
+   "w": "rest",
+   "s": 10.08,
+   "e": 10.36,
+   "p": 0.99
+  },
+  {
+   "w": "go",
+   "s": 10.36,
+   "e": 10.66,
+   "p": 0.98
+  },
+  {
+   "w": "fees",
+   "s": 10.66,
+   "e": 11.42,
+   "p": 0.62
+  },
+  {
+   "w": "8164",
+   "s": 11.42,
+   "e": 12.7,
+   "p": 0.7
+  },
+  {
+   "w": "ads",
+   "s": 12.7,
+   "e": 13.44,
+   "p": 0.56
+  },
+  {
+   "w": "burned",
+   "s": 13.44,
+   "e": 13.66,
+   "p": 0.61
+  },
+  {
+   "w": "398",
+   "s": 13.66,
+   "e": 14.64,
+   "p": 0.91
+  },
+  {
+   "w": "refunds",
+   "s": 14.64,
+   "e": 15.62,
+   "p": 0.98
+  },
+  {
+   "w": "took",
+   "s": 15.62,
+   "e": 15.74,
+   "p": 0.92
+  },
+  {
+   "w": "96",
+   "s": 15.74,
+   "e": 16.24,
+   "p": 0.97
+  },
+  {
+   "w": "and",
+   "s": 16.24,
+   "e": 17.04,
+   "p": 0.98
+  },
+  {
+   "w": "shipping",
+   "s": 17.04,
+   "e": 17.36,
+   "p": 0.97
+  },
+  {
+   "w": "214",
+   "s": 18.04,
+   "e": 18.46,
+   "p": 0.63
+  },
+  {
+   "w": "and",
+   "s": 18.46,
+   "e": 19.14,
+   "p": 0.48
+  },
+  {
+   "w": "you",
+   "s": 19.14,
+   "e": 19.26,
+   "p": 0.99
+  },
+  {
+   "w": "only",
+   "s": 19.26,
+   "e": 19.58,
+   "p": 0.99
+  },
+  {
+   "w": "find",
+   "s": 19.58,
+   "e": 19.84,
+   "p": 0.99
+  },
+  {
+   "w": "out",
+   "s": 19.84,
+   "e": 20.02,
+   "p": 1.0
+  },
+  {
+   "w": "at",
+   "s": 20.02,
+   "e": 20.18,
+   "p": 0.99
+  },
+  {
+   "w": "midnight",
+   "s": 20.18,
+   "e": 20.52,
+   "p": 0.97
+  },
+  {
+   "w": "with",
+   "s": 20.52,
+   "e": 21.24,
+   "p": 0.89
+  },
+  {
+   "w": "14",
+   "s": 21.24,
+   "e": 21.76,
+   "p": 0.95
+  },
+  {
+   "w": "tabs",
+   "s": 21.76,
+   "e": 22.14,
+   "p": 0.97
+  },
+  {
+   "w": "open",
+   "s": 22.14,
+   "e": 22.48,
+   "p": 0.98
+  },
+  {
+   "w": "So",
+   "s": 22.48,
+   "e": 23.1,
+   "p": 0.48
+  },
+  {
+   "w": "we",
+   "s": 23.1,
+   "e": 23.58,
+   "p": 0.98
+  },
+  {
+   "w": "built",
+   "s": 23.58,
+   "e": 23.86,
+   "p": 0.91
+  },
+  {
+   "w": "tally",
+   "s": 23.86,
+   "e": 24.24,
+   "p": 0.88
+  },
+  {
+   "w": "every",
+   "s": 24.24,
+   "e": 24.98,
+   "p": 0.96
+  },
+  {
+   "w": "store",
+   "s": 24.98,
+   "e": 25.34,
+   "p": 0.97
+  },
+  {
+   "w": "every",
+   "s": 25.34,
+   "e": 25.98,
+   "p": 0.96
+  },
+  {
+   "w": "payout",
+   "s": 25.98,
+   "e": 26.54,
+   "p": 0.98
+  },
+  {
+   "w": "every",
+   "s": 26.54,
+   "e": 27.12,
+   "p": 0.92
+  },
+  {
+   "w": "ad",
+   "s": 27.12,
+   "e": 27.44,
+   "p": 0.93
+  },
+  {
+   "w": "account",
+   "s": 27.44,
+   "e": 27.76,
+   "p": 0.99
+  },
+  {
+   "w": "Melted",
+   "s": 27.76,
+   "e": 28.58,
+   "p": 0.42
+  },
+  {
+   "w": "into",
+   "s": 28.58,
+   "e": 28.84,
+   "p": 0.94
+  },
+  {
+   "w": "one",
+   "s": 28.84,
+   "e": 29.2,
+   "p": 0.87
+  },
+  {
+   "w": "number",
+   "s": 29.2,
+   "e": 29.56,
+   "p": 0.99
+  },
+  {
+   "w": "the",
+   "s": 29.56,
+   "e": 30.12,
+   "p": 0.07
+  },
+  {
+   "w": "real",
+   "s": 30.12,
+   "e": 30.46,
+   "p": 0.97
+  },
+  {
+   "w": "one",
+   "s": 30.46,
+   "e": 30.76,
+   "p": 0.99
+  },
+  {
+   "w": "when",
+   "s": 30.76,
+   "e": 31.3,
+   "p": 0.63
+  },
+  {
+   "w": "your",
+   "s": 31.3,
+   "e": 31.44,
+   "p": 0.96
+  },
+  {
+   "w": "ads",
+   "s": 31.44,
+   "e": 31.7,
+   "p": 0.73
+  },
+  {
+   "w": "start",
+   "s": 31.7,
+   "e": 32.0,
+   "p": 0.99
+  },
+  {
+   "w": "bleeding",
+   "s": 32.0,
+   "e": 32.3,
+   "p": 0.99
+  },
+  {
+   "w": "money",
+   "s": 32.3,
+   "e": 32.62,
+   "p": 0.99
+  },
+  {
+   "w": "It",
+   "s": 32.62,
+   "e": 33.14,
+   "p": 0.28
+  },
+  {
+   "w": "taps",
+   "s": 33.14,
+   "e": 33.4,
+   "p": 0.55
+  },
+  {
+   "w": "you",
+   "s": 33.4,
+   "e": 33.54,
+   "p": 0.99
+  },
+  {
+   "w": "on",
+   "s": 33.54,
+   "e": 33.66,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 33.66,
+   "e": 33.76,
+   "p": 1.0
+  },
+  {
+   "w": "shoulder",
+   "s": 33.76,
+   "e": 34.06,
+   "p": 1.0
+  },
+  {
+   "w": "one",
+   "s": 34.06,
+   "e": 34.7,
+   "p": 0.78
+  },
+  {
+   "w": "swipe",
+   "s": 34.7,
+   "e": 35.0,
+   "p": 0.87
+  },
+  {
+   "w": "paused",
+   "s": 35.0,
+   "e": 35.76,
+   "p": 0.75
+  },
+  {
+   "w": "every",
+   "s": 35.76,
+   "e": 36.62,
+   "p": 0.72
+  },
+  {
+   "w": "morning",
+   "s": 36.62,
+   "e": 36.98,
+   "p": 1.0
+  },
+  {
+   "w": "before",
+   "s": 36.98,
+   "e": 37.4,
+   "p": 0.98
+  },
+  {
+   "w": "coffee,",
+   "s": 37.4,
+   "e": 37.88,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 37.94,
+   "e": 38.34,
+   "p": 0.99
+  },
+  {
+   "w": "know",
+   "s": 38.34,
+   "e": 38.54,
+   "p": 1.0
+  },
+  {
+   "w": "exactly",
+   "s": 38.54,
+   "e": 39.0,
+   "p": 0.95
+  },
+  {
+   "w": "where",
+   "s": 39.0,
+   "e": 39.34,
+   "p": 0.97
+  },
+  {
+   "w": "you",
+   "s": 39.34,
+   "e": 39.5,
+   "p": 0.99
+  },
+  {
+   "w": "stand",
+   "s": 39.5,
+   "e": 39.9,
+   "p": 0.98
+  },
+  {
+   "w": "fewer",
+   "s": 39.9,
+   "e": 40.52,
+   "p": 0.87
+  },
+  {
+   "w": "tabs",
+   "s": 40.52,
+   "e": 40.9,
+   "p": 0.56
+  },
+  {
+   "w": "more",
+   "s": 40.9,
+   "e": 41.46,
+   "p": 0.96
+  },
+  {
+   "w": "sleep",
+   "s": 41.46,
+   "e": 41.88,
+   "p": 0.95
+  },
+  {
+   "w": "tally",
+   "s": 41.88,
+   "e": 42.64,
+   "p": 0.83
+  },
+  {
+   "w": "Oh,",
+   "s": 42.64,
+   "e": 43.28,
+   "p": 0.37
+  },
+  {
+   "w": "and",
+   "s": 43.34,
+   "e": 43.66,
+   "p": 0.99
+  },
+  {
+   "w": "this",
+   "s": 43.66,
+   "e": 43.88,
+   "p": 1.0
+  },
+  {
+   "w": "whole",
+   "s": 43.88,
+   "e": 44.0,
+   "p": 1.0
+  },
+  {
+   "w": "video",
+   "s": 44.0,
+   "e": 44.28,
+   "p": 1.0
+  },
+  {
+   "w": "made",
+   "s": 44.28,
+   "e": 44.94,
+   "p": 0.97
+  },
+  {
+   "w": "with",
+   "s": 44.94,
+   "e": 45.18,
+   "p": 1.0
+  },
+  {
+   "w": "AI",
+   "s": 45.18,
+   "e": 45.44,
+   "p": 0.89
+  },
+  {
+   "w": "every",
+   "s": 45.44,
+   "e": 46.3,
+   "p": 0.89
+  },
+  {
+   "w": "single",
+   "s": 46.3,
+   "e": 46.72,
+   "p": 1.0
+  },
+  {
+   "w": "frame",
+   "s": 46.72,
+   "e": 47.1,
+   "p": 0.98
+  },
+  {
+   "w": "comment",
+   "s": 47.1,
+   "e": 47.8,
+   "p": 0.88
+  },
+  {
+   "w": "prompts",
+   "s": 47.8,
+   "e": 48.18,
+   "p": 0.98
+  },
+  {
+   "w": "and",
+   "s": 48.18,
+   "e": 48.66,
+   "p": 0.7
+  },
+  {
+   "w": "I'll",
+   "s": 48.66,
+   "e": 48.82,
+   "p": 0.99
+  },
+  {
+   "w": "send",
+   "s": 48.82,
+   "e": 48.96,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 48.96,
+   "e": 49.14,
+   "p": 1.0
+  },
+  {
+   "w": "out",
+   "s": 49.14,
+   "e": 49.34,
+   "p": 0.22
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 1.36,
+   "e": 8.06,
+   "texto": "Your dashboard is lying to you. It says you made 1284 today. You actually kept 412"
+  },
+  {
+   "s": 9.04,
+   "e": 14.64,
+   "texto": "So where the rest go fees 8164 ads burned 398"
+  },
+  {
+   "s": 14.64,
+   "e": 17.36,
+   "texto": "refunds took 96 and shipping"
+  },
+  {
+   "s": 18.04,
+   "e": 22.48,
+   "texto": "214 and you only find out at midnight with 14 tabs open"
+  },
+  {
+   "s": 22.48,
+   "e": 27.76,
+   "texto": "So we built tally every store every payout every ad account"
+  },
+  {
+   "s": 27.76,
+   "e": 32.62,
+   "texto": "Melted into one number the real one when your ads start bleeding money"
+  },
+  {
+   "s": 32.62,
+   "e": 35.0,
+   "texto": "It taps you on the shoulder one swipe"
+  },
+  {
+   "s": 35.0,
+   "e": 42.64,
+   "texto": "paused every morning before coffee, you know exactly where you stand fewer tabs more sleep tally"
+  },
+  {
+   "s": 42.64,
+   "e": 49.34,
+   "texto": "Oh, and this whole video made with AI every single frame comment prompts and I'll send you out"
+  }
+ ]
+}

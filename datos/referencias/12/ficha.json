@@ -1,0 +1,1304 @@
+{
+ "nombre": "12",
+ "archivo": "referencias/12.mp4",
+ "firma": "7874422-1792900035",
+ "generado": "2026-10-25T01:09:12",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 48.97,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 21,
+  "media": 2.33,
+  "mediana": 2.07,
+  "min": 0.23,
+  "max": 5.97
+ },
+ "cortes_por_min": 24.5,
+ "ritmo_habla": {
+  "palabras": 138,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 43.18,
+  "pal_s_hablando": 3.52,
+  "pal_s_total": 2.82,
+  "tiempo_hablando": 39.26,
+  "parte_hablada": 0.8,
+  "bloques": 12,
+  "palabras_por_bloque": {
+   "n": 12,
+   "media": 11.5,
+   "mediana": 9.0,
+   "min": 5.0,
+   "max": 21.0
+  },
+  "dur_bloque": {
+   "n": 12,
+   "media": 3.27,
+   "mediana": 2.38,
+   "min": 1.14,
+   "max": 8.18
+  },
+  "pausas": {
+   "n": 11,
+   "media": 0.38,
+   "mediana": 0.34,
+   "min": 0.26,
+   "max": 0.58
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 2.23,
+   "dur": 2.23,
+   "dicho": "Within a saturated market of editors,"
+  },
+  {
+   "id": 2,
+   "s": 2.23,
+   "e": 4.3,
+   "dur": 2.07,
+   "dicho": "if you continue to edit like everyone else, it"
+  },
+  {
+   "id": 3,
+   "s": 4.3,
+   "e": 5.23,
+   "dur": 0.93,
+   "dicho": "will be invisible."
+  },
+  {
+   "id": 4,
+   "s": 5.23,
+   "e": 6.53,
+   "dur": 1.3,
+   "dicho": "The 3D"
+  },
+  {
+   "id": 5,
+   "s": 6.53,
+   "e": 9.17,
+   "dur": 2.63,
+   "dicho": "editing style is completely changing the game, transforming"
+  },
+  {
+   "id": 6,
+   "s": 9.17,
+   "e": 10.33,
+   "dur": 1.17,
+   "dicho": "common content into"
+  },
+  {
+   "id": 7,
+   "s": 10.33,
+   "e": 13.9,
+   "dur": 3.57,
+   "dicho": "immersive visual experiences that catch your attention instantly."
+  },
+  {
+   "id": 8,
+   "s": 13.9,
+   "e": 19.87,
+   "dur": 5.97,
+   "dicho": "You will be able to raise your quality and improve retention on platforms like Instagram or TikTok, where you will highlight the key."
+  },
+  {
+   "id": 9,
+   "s": 19.87,
+   "e": 23.3,
+   "dur": 3.43,
+   "dicho": "In addition, you can open doors with brands and creators who are looking for something"
+  },
+  {
+   "id": 10,
+   "s": 23.3,
+   "e": 25.4,
+   "dur": 2.1,
+   "dicho": "unique, but not everything is easy."
+  },
+  {
+   "id": 11,
+   "s": 25.4,
+   "e": 29.13,
+   "dur": 3.73,
+   "dicho": "Dominating it takes time, demanding managing advanced tools, and without a good"
+  },
+  {
+   "id": 12,
+   "s": 29.13,
+   "e": 30.5,
+   "dur": 1.37,
+   "dicho": "team, renderings can"
+  },
+  {
+   "id": 13,
+   "s": 30.5,
+   "e": 33.4,
+   "dur": 2.9,
+   "dicho": "be eternal. It also requires balance creativity and"
+  },
+  {
+   "id": 14,
+   "s": 33.4,
+   "e": 34.97,
+   "dur": 1.57,
+   "dicho": "efficiency, because each project"
+  },
+  {
+   "id": 15,
+   "s": 34.97,
+   "e": 36.73,
+   "dur": 1.77,
+   "dicho": "can take more than expected."
+  },
+  {
+   "id": 16,
+   "s": 36.73,
+   "e": 38.73,
+   "dur": 2.0,
+   "dicho": "Even so, this editing style is not just"
+  },
+  {
+   "id": 17,
+   "s": 38.73,
+   "e": 39.77,
+   "dur": 1.03,
+   "dicho": "a trend, it is"
+  },
+  {
+   "id": 18,
+   "s": 39.77,
+   "e": 43.7,
+   "dur": 3.93,
+   "dicho": "an evolution, and if you try, the rewards can be enormous."
+  },
+  {
+   "id": 19,
+   "s": 43.7,
+   "e": 44.67,
+   "dur": 0.97,
+   "dicho": ""
+  },
+  {
+   "id": 20,
+   "s": 44.67,
+   "e": 44.9,
+   "dur": 0.23,
+   "dicho": ""
+  },
+  {
+   "id": 21,
+   "s": 44.9,
+   "e": 48.97,
+   "dur": 4.07,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 4.76,
+   "dur": 4.76,
+   "palabras": 18,
+   "pal_s": 3.8,
+   "texto": "Within a saturated market of editors, if you continue to edit like everyone else, it will be invisible."
+  },
+  {
+   "id": 2,
+   "s": 5.34,
+   "e": 13.52,
+   "dur": 8.18,
+   "palabras": 21,
+   "pal_s": 2.6,
+   "texto": "The 3D editing style is completely changing the game, transforming common content into immersive visual experiences that catch your attention instantly."
+  },
+  {
+   "id": 3,
+   "s": 14.04,
+   "e": 18.24,
+   "dur": 4.2,
+   "palabras": 17,
+   "pal_s": 4.0,
+   "texto": "You will be able to raise your quality and improve retention on platforms like Instagram or TikTok,"
+  },
+  {
+   "id": 4,
+   "s": 18.66,
+   "e": 19.8,
+   "dur": 1.14,
+   "palabras": 6,
+   "pal_s": 5.3,
+   "texto": "where you will highlight the key."
+  },
+  {
+   "id": 5,
+   "s": 20.06,
+   "e": 23.76,
+   "dur": 3.7,
+   "palabras": 16,
+   "pal_s": 4.3,
+   "texto": "In addition, you can open doors with brands and creators who are looking for something unique,"
+  },
+  {
+   "id": 6,
+   "s": 24.1,
+   "e": 25.24,
+   "dur": 1.14,
+   "palabras": 5,
+   "pal_s": 4.4,
+   "texto": "but not everything is easy."
+  },
+  {
+   "id": 7,
+   "s": 25.24,
+   "e": 31.28,
+   "dur": 6.04,
+   "palabras": 17,
+   "pal_s": 2.8,
+   "texto": "Dominating it takes time, demanding managing advanced tools, and without a good team, renderings can be eternal."
+  },
+  {
+   "id": 8,
+   "s": 31.58,
+   "e": 33.82,
+   "dur": 2.24,
+   "palabras": 7,
+   "pal_s": 3.1,
+   "texto": "It also requires balance creativity and efficiency,"
+  },
+  {
+   "id": 9,
+   "s": 34.16,
+   "e": 36.4,
+   "dur": 2.24,
+   "palabras": 8,
+   "pal_s": 3.6,
+   "texto": "because each project can take more than expected."
+  },
+  {
+   "id": 10,
+   "s": 36.68,
+   "e": 39.2,
+   "dur": 2.52,
+   "palabras": 10,
+   "pal_s": 4.0,
+   "texto": "Even so, this editing style is not just a trend,"
+  },
+  {
+   "id": 11,
+   "s": 39.58,
+   "e": 40.98,
+   "dur": 1.4,
+   "palabras": 8,
+   "pal_s": 5.7,
+   "texto": "it is an evolution, and if you try,"
+  },
+  {
+   "id": 12,
+   "s": 41.48,
+   "e": 43.18,
+   "dur": 1.7,
+   "palabras": 5,
+   "pal_s": 2.9,
+   "texto": "the rewards can be enormous."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "Within a saturated"
+   },
+   {
+    "t": 2.83,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": "if you continue to edit like everyone"
+   },
+   {
+    "t": 5.83,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "The 3D"
+   },
+   {
+    "t": 7.13,
+    "que": "entra el plano",
+    "plano": 5,
+    "dicho": "3D editing style is completely changing"
+   },
+   {
+    "t": 10.93,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": "into immersive visual experiences that"
+   },
+   {
+    "t": 14.5,
+    "que": "entra el plano",
+    "plano": 8,
+    "dicho": "You will be able to raise your quality and"
+   },
+   {
+    "t": 20.47,
+    "que": "entra el plano",
+    "plano": 9,
+    "dicho": "In addition, you can open doors"
+   },
+   {
+    "t": 26.0,
+    "que": "entra el plano",
+    "plano": 11,
+    "dicho": "Dominating it takes time,"
+   },
+   {
+    "t": 29.73,
+    "que": "entra el plano",
+    "plano": 12,
+    "dicho": "team, renderings can"
+   },
+   {
+    "t": 34.0,
+    "que": "entra el plano",
+    "plano": 14,
+    "dicho": "and efficiency, because each project"
+   },
+   {
+    "t": 35.57,
+    "que": "entra el plano",
+    "plano": 15,
+    "dicho": "can take more than expected."
+   },
+   {
+    "t": 37.33,
+    "que": "entra el plano",
+    "plano": 16,
+    "dicho": "Even so, this editing style"
+   },
+   {
+    "t": 40.37,
+    "que": "entra el plano",
+    "plano": 18,
+    "dicho": "is an evolution, and if you try,"
+   },
+   {
+    "t": 44.19,
+    "que": "entra el plano",
+    "plano": 19,
+    "dicho": ""
+   },
+   {
+    "t": 45.5,
+    "que": "entra el plano",
+    "plano": 21,
+    "dicho": ""
+   },
+   {
+    "t": 48.67,
+    "que": "final",
+    "plano": 21,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Within",
+   "s": 0.0,
+   "e": 0.28,
+   "p": 0.03
+  },
+  {
+   "w": "a",
+   "s": 0.28,
+   "e": 0.62,
+   "p": 0.69
+  },
+  {
+   "w": "saturated",
+   "s": 0.62,
+   "e": 1.2,
+   "p": 0.11
+  },
+  {
+   "w": "market",
+   "s": 1.2,
+   "e": 1.2,
+   "p": 0.89
+  },
+  {
+   "w": "of",
+   "s": 1.2,
+   "e": 1.62,
+   "p": 0.88
+  },
+  {
+   "w": "editors,",
+   "s": 1.62,
+   "e": 2.02,
+   "p": 0.96
+  },
+  {
+   "w": "if",
+   "s": 2.2,
+   "e": 2.32,
+   "p": 0.88
+  },
+  {
+   "w": "you",
+   "s": 2.32,
+   "e": 2.52,
+   "p": 0.99
+  },
+  {
+   "w": "continue",
+   "s": 2.52,
+   "e": 2.52,
+   "p": 0.38
+  },
+  {
+   "w": "to",
+   "s": 2.52,
+   "e": 2.66,
+   "p": 0.64
+  },
+  {
+   "w": "edit",
+   "s": 2.66,
+   "e": 2.8,
+   "p": 0.94
+  },
+  {
+   "w": "like",
+   "s": 2.8,
+   "e": 3.28,
+   "p": 0.56
+  },
+  {
+   "w": "everyone",
+   "s": 3.28,
+   "e": 3.52,
+   "p": 0.51
+  },
+  {
+   "w": "else,",
+   "s": 3.52,
+   "e": 4.04,
+   "p": 0.98
+  },
+  {
+   "w": "it",
+   "s": 4.16,
+   "e": 4.34,
+   "p": 0.62
+  },
+  {
+   "w": "will",
+   "s": 4.34,
+   "e": 4.38,
+   "p": 0.93
+  },
+  {
+   "w": "be",
+   "s": 4.38,
+   "e": 4.38,
+   "p": 0.97
+  },
+  {
+   "w": "invisible.",
+   "s": 4.38,
+   "e": 4.76,
+   "p": 0.95
+  },
+  {
+   "w": "The",
+   "s": 5.34,
+   "e": 5.52,
+   "p": 0.68
+  },
+  {
+   "w": "3D",
+   "s": 5.52,
+   "e": 6.76,
+   "p": 0.86
+  },
+  {
+   "w": "editing",
+   "s": 6.76,
+   "e": 6.76,
+   "p": 0.73
+  },
+  {
+   "w": "style",
+   "s": 6.76,
+   "e": 6.76,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 6.76,
+   "e": 7.1,
+   "p": 0.97
+  },
+  {
+   "w": "completely",
+   "s": 7.1,
+   "e": 7.62,
+   "p": 0.5
+  },
+  {
+   "w": "changing",
+   "s": 7.62,
+   "e": 8.32,
+   "p": 0.94
+  },
+  {
+   "w": "the",
+   "s": 8.32,
+   "e": 8.42,
+   "p": 0.91
+  },
+  {
+   "w": "game,",
+   "s": 8.42,
+   "e": 8.64,
+   "p": 0.88
+  },
+  {
+   "w": "transforming",
+   "s": 8.8,
+   "e": 9.24,
+   "p": 0.76
+  },
+  {
+   "w": "common",
+   "s": 9.24,
+   "e": 9.48,
+   "p": 0.71
+  },
+  {
+   "w": "content",
+   "s": 9.48,
+   "e": 9.88,
+   "p": 0.98
+  },
+  {
+   "w": "into",
+   "s": 9.88,
+   "e": 10.34,
+   "p": 0.91
+  },
+  {
+   "w": "immersive",
+   "s": 10.34,
+   "e": 10.64,
+   "p": 0.91
+  },
+  {
+   "w": "visual",
+   "s": 10.64,
+   "e": 11.24,
+   "p": 0.87
+  },
+  {
+   "w": "experiences",
+   "s": 11.24,
+   "e": 11.4,
+   "p": 0.98
+  },
+  {
+   "w": "that",
+   "s": 11.4,
+   "e": 12.42,
+   "p": 0.83
+  },
+  {
+   "w": "catch",
+   "s": 12.42,
+   "e": 12.74,
+   "p": 0.29
+  },
+  {
+   "w": "your",
+   "s": 12.74,
+   "e": 12.92,
+   "p": 0.31
+  },
+  {
+   "w": "attention",
+   "s": 12.92,
+   "e": 13.4,
+   "p": 0.6
+  },
+  {
+   "w": "instantly.",
+   "s": 13.4,
+   "e": 13.52,
+   "p": 0.59
+  },
+  {
+   "w": "You",
+   "s": 14.04,
+   "e": 14.06,
+   "p": 0.98
+  },
+  {
+   "w": "will",
+   "s": 14.06,
+   "e": 14.14,
+   "p": 0.32
+  },
+  {
+   "w": "be",
+   "s": 14.14,
+   "e": 14.22,
+   "p": 0.96
+  },
+  {
+   "w": "able",
+   "s": 14.22,
+   "e": 14.22,
+   "p": 1.0
+  },
+  {
+   "w": "to",
+   "s": 14.22,
+   "e": 14.34,
+   "p": 1.0
+  },
+  {
+   "w": "raise",
+   "s": 14.34,
+   "e": 14.54,
+   "p": 0.42
+  },
+  {
+   "w": "your",
+   "s": 14.54,
+   "e": 14.82,
+   "p": 0.97
+  },
+  {
+   "w": "quality",
+   "s": 14.82,
+   "e": 15.04,
+   "p": 0.97
+  },
+  {
+   "w": "and",
+   "s": 15.04,
+   "e": 15.38,
+   "p": 0.92
+  },
+  {
+   "w": "improve",
+   "s": 15.38,
+   "e": 15.68,
+   "p": 0.97
+  },
+  {
+   "w": "retention",
+   "s": 15.68,
+   "e": 16.24,
+   "p": 0.42
+  },
+  {
+   "w": "on",
+   "s": 16.24,
+   "e": 16.48,
+   "p": 0.88
+  },
+  {
+   "w": "platforms",
+   "s": 16.48,
+   "e": 16.94,
+   "p": 0.96
+  },
+  {
+   "w": "like",
+   "s": 16.94,
+   "e": 17.28,
+   "p": 0.6
+  },
+  {
+   "w": "Instagram",
+   "s": 17.28,
+   "e": 17.72,
+   "p": 0.85
+  },
+  {
+   "w": "or",
+   "s": 17.72,
+   "e": 18.04,
+   "p": 0.94
+  },
+  {
+   "w": "TikTok,",
+   "s": 18.04,
+   "e": 18.24,
+   "p": 0.64
+  },
+  {
+   "w": "where",
+   "s": 18.66,
+   "e": 18.8,
+   "p": 0.91
+  },
+  {
+   "w": "you",
+   "s": 18.8,
+   "e": 19.04,
+   "p": 0.81
+  },
+  {
+   "w": "will",
+   "s": 19.04,
+   "e": 19.04,
+   "p": 0.47
+  },
+  {
+   "w": "highlight",
+   "s": 19.04,
+   "e": 19.26,
+   "p": 0.71
+  },
+  {
+   "w": "the",
+   "s": 19.26,
+   "e": 19.68,
+   "p": 0.2
+  },
+  {
+   "w": "key.",
+   "s": 19.68,
+   "e": 19.8,
+   "p": 0.31
+  },
+  {
+   "w": "In",
+   "s": 20.06,
+   "e": 20.18,
+   "p": 0.41
+  },
+  {
+   "w": "addition,",
+   "s": 20.18,
+   "e": 20.4,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 20.56,
+   "e": 20.66,
+   "p": 0.81
+  },
+  {
+   "w": "can",
+   "s": 20.66,
+   "e": 20.7,
+   "p": 0.88
+  },
+  {
+   "w": "open",
+   "s": 20.7,
+   "e": 20.9,
+   "p": 0.95
+  },
+  {
+   "w": "doors",
+   "s": 20.9,
+   "e": 21.28,
+   "p": 0.96
+  },
+  {
+   "w": "with",
+   "s": 21.28,
+   "e": 21.56,
+   "p": 0.94
+  },
+  {
+   "w": "brands",
+   "s": 21.56,
+   "e": 21.94,
+   "p": 0.9
+  },
+  {
+   "w": "and",
+   "s": 21.94,
+   "e": 22.12,
+   "p": 0.99
+  },
+  {
+   "w": "creators",
+   "s": 22.12,
+   "e": 22.42,
+   "p": 0.98
+  },
+  {
+   "w": "who",
+   "s": 22.42,
+   "e": 22.76,
+   "p": 0.58
+  },
+  {
+   "w": "are",
+   "s": 22.76,
+   "e": 22.92,
+   "p": 0.76
+  },
+  {
+   "w": "looking",
+   "s": 22.92,
+   "e": 22.98,
+   "p": 0.94
+  },
+  {
+   "w": "for",
+   "s": 22.98,
+   "e": 23.14,
+   "p": 1.0
+  },
+  {
+   "w": "something",
+   "s": 23.14,
+   "e": 23.36,
+   "p": 0.98
+  },
+  {
+   "w": "unique,",
+   "s": 23.36,
+   "e": 23.76,
+   "p": 0.97
+  },
+  {
+   "w": "but",
+   "s": 24.1,
+   "e": 24.42,
+   "p": 0.98
+  },
+  {
+   "w": "not",
+   "s": 24.42,
+   "e": 24.62,
+   "p": 0.86
+  },
+  {
+   "w": "everything",
+   "s": 24.62,
+   "e": 24.84,
+   "p": 0.64
+  },
+  {
+   "w": "is",
+   "s": 24.84,
+   "e": 25.04,
+   "p": 0.93
+  },
+  {
+   "w": "easy.",
+   "s": 25.04,
+   "e": 25.24,
+   "p": 0.6
+  },
+  {
+   "w": "Dominating",
+   "s": 25.24,
+   "e": 25.88,
+   "p": 0.24
+  },
+  {
+   "w": "it",
+   "s": 25.88,
+   "e": 25.98,
+   "p": 0.5
+  },
+  {
+   "w": "takes",
+   "s": 25.98,
+   "e": 26.18,
+   "p": 0.36
+  },
+  {
+   "w": "time,",
+   "s": 26.18,
+   "e": 26.5,
+   "p": 0.83
+  },
+  {
+   "w": "demanding",
+   "s": 26.72,
+   "e": 27.04,
+   "p": 0.65
+  },
+  {
+   "w": "managing",
+   "s": 27.04,
+   "e": 27.38,
+   "p": 0.2
+  },
+  {
+   "w": "advanced",
+   "s": 27.38,
+   "e": 27.62,
+   "p": 0.94
+  },
+  {
+   "w": "tools,",
+   "s": 27.62,
+   "e": 28.5,
+   "p": 0.9
+  },
+  {
+   "w": "and",
+   "s": 28.66,
+   "e": 28.7,
+   "p": 0.87
+  },
+  {
+   "w": "without",
+   "s": 28.7,
+   "e": 28.84,
+   "p": 0.73
+  },
+  {
+   "w": "a",
+   "s": 28.84,
+   "e": 28.96,
+   "p": 0.9
+  },
+  {
+   "w": "good",
+   "s": 28.96,
+   "e": 29.1,
+   "p": 0.95
+  },
+  {
+   "w": "team,",
+   "s": 29.1,
+   "e": 29.42,
+   "p": 0.74
+  },
+  {
+   "w": "renderings",
+   "s": 29.6,
+   "e": 30.28,
+   "p": 0.34
+  },
+  {
+   "w": "can",
+   "s": 30.28,
+   "e": 30.62,
+   "p": 0.77
+  },
+  {
+   "w": "be",
+   "s": 30.62,
+   "e": 30.92,
+   "p": 0.9
+  },
+  {
+   "w": "eternal.",
+   "s": 30.92,
+   "e": 31.28,
+   "p": 0.64
+  },
+  {
+   "w": "It",
+   "s": 31.58,
+   "e": 31.6,
+   "p": 0.73
+  },
+  {
+   "w": "also",
+   "s": 31.6,
+   "e": 31.8,
+   "p": 0.98
+  },
+  {
+   "w": "requires",
+   "s": 31.8,
+   "e": 32.18,
+   "p": 0.86
+  },
+  {
+   "w": "balance",
+   "s": 32.18,
+   "e": 32.5,
+   "p": 0.36
+  },
+  {
+   "w": "creativity",
+   "s": 32.5,
+   "e": 33.24,
+   "p": 0.29
+  },
+  {
+   "w": "and",
+   "s": 33.24,
+   "e": 33.54,
+   "p": 0.99
+  },
+  {
+   "w": "efficiency,",
+   "s": 33.54,
+   "e": 33.82,
+   "p": 0.92
+  },
+  {
+   "w": "because",
+   "s": 34.16,
+   "e": 34.32,
+   "p": 0.9
+  },
+  {
+   "w": "each",
+   "s": 34.32,
+   "e": 34.58,
+   "p": 0.76
+  },
+  {
+   "w": "project",
+   "s": 34.58,
+   "e": 34.92,
+   "p": 0.98
+  },
+  {
+   "w": "can",
+   "s": 34.92,
+   "e": 35.24,
+   "p": 0.88
+  },
+  {
+   "w": "take",
+   "s": 35.24,
+   "e": 35.5,
+   "p": 0.92
+  },
+  {
+   "w": "more",
+   "s": 35.5,
+   "e": 35.84,
+   "p": 0.85
+  },
+  {
+   "w": "than",
+   "s": 35.84,
+   "e": 36.04,
+   "p": 0.96
+  },
+  {
+   "w": "expected.",
+   "s": 36.04,
+   "e": 36.4,
+   "p": 0.92
+  },
+  {
+   "w": "Even",
+   "s": 36.68,
+   "e": 36.86,
+   "p": 0.48
+  },
+  {
+   "w": "so,",
+   "s": 36.86,
+   "e": 37.14,
+   "p": 0.94
+  },
+  {
+   "w": "this",
+   "s": 37.34,
+   "e": 37.52,
+   "p": 0.96
+  },
+  {
+   "w": "editing",
+   "s": 37.52,
+   "e": 37.7,
+   "p": 0.34
+  },
+  {
+   "w": "style",
+   "s": 37.7,
+   "e": 38.26,
+   "p": 0.99
+  },
+  {
+   "w": "is",
+   "s": 38.26,
+   "e": 38.42,
+   "p": 0.89
+  },
+  {
+   "w": "not",
+   "s": 38.42,
+   "e": 38.54,
+   "p": 0.99
+  },
+  {
+   "w": "just",
+   "s": 38.54,
+   "e": 38.78,
+   "p": 0.83
+  },
+  {
+   "w": "a",
+   "s": 38.78,
+   "e": 38.98,
+   "p": 0.95
+  },
+  {
+   "w": "trend,",
+   "s": 38.98,
+   "e": 39.2,
+   "p": 0.67
+  },
+  {
+   "w": "it",
+   "s": 39.58,
+   "e": 39.58,
+   "p": 0.94
+  },
+  {
+   "w": "is",
+   "s": 39.58,
+   "e": 39.82,
+   "p": 0.67
+  },
+  {
+   "w": "an",
+   "s": 39.82,
+   "e": 39.96,
+   "p": 0.87
+  },
+  {
+   "w": "evolution,",
+   "s": 39.96,
+   "e": 40.26,
+   "p": 0.87
+  },
+  {
+   "w": "and",
+   "s": 40.52,
+   "e": 40.66,
+   "p": 0.99
+  },
+  {
+   "w": "if",
+   "s": 40.66,
+   "e": 40.74,
+   "p": 0.97
+  },
+  {
+   "w": "you",
+   "s": 40.74,
+   "e": 40.86,
+   "p": 0.99
+  },
+  {
+   "w": "try,",
+   "s": 40.86,
+   "e": 40.98,
+   "p": 0.19
+  },
+  {
+   "w": "the",
+   "s": 41.48,
+   "e": 41.62,
+   "p": 0.68
+  },
+  {
+   "w": "rewards",
+   "s": 41.62,
+   "e": 42.0,
+   "p": 0.82
+  },
+  {
+   "w": "can",
+   "s": 42.0,
+   "e": 42.62,
+   "p": 0.87
+  },
+  {
+   "w": "be",
+   "s": 42.62,
+   "e": 42.88,
+   "p": 0.98
+  },
+  {
+   "w": "enormous.",
+   "s": 42.88,
+   "e": 43.18,
+   "p": 0.54
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 4.76,
+   "texto": "Within a saturated market of editors, if you continue to edit like everyone else, it will be invisible."
+  },
+  {
+   "s": 5.34,
+   "e": 8.64,
+   "texto": "The 3D editing style is completely changing the game,"
+  },
+  {
+   "s": 8.8,
+   "e": 13.52,
+   "texto": "transforming common content into immersive visual experiences that catch your attention instantly."
+  },
+  {
+   "s": 14.04,
+   "e": 19.8,
+   "texto": "You will be able to raise your quality and improve retention on platforms like Instagram or TikTok, where you will highlight the key."
+  },
+  {
+   "s": 20.06,
+   "e": 25.24,
+   "texto": "In addition, you can open doors with brands and creators who are looking for something unique, but not everything is easy."
+  },
+  {
+   "s": 25.24,
+   "e": 31.28,
+   "texto": "Dominating it takes time, demanding managing advanced tools, and without a good team, renderings can be eternal."
+  },
+  {
+   "s": 31.58,
+   "e": 36.4,
+   "texto": "It also requires balance creativity and efficiency, because each project can take more than expected."
+  },
+  {
+   "s": 36.68,
+   "e": 43.18,
+   "texto": "Even so, this editing style is not just a trend, it is an evolution, and if you try, the rewards can be enormous."
+  }
+ ]
+}

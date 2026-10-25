@@ -1,0 +1,313 @@
+{
+ "nombre": "8",
+ "archivo": "referencias/8.mp4",
+ "firma": "5446694-1792900035",
+ "generado": "2026-10-25T01:10:45",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 34.0,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 14,
+  "media": 2.43,
+  "mediana": 2.23,
+  "min": 0.27,
+  "max": 5.27
+ },
+ "cortes_por_min": 22.9,
+ "ritmo_habla": {
+  "palabras": 5,
+  "primera_palabra": 14.96,
+  "ultima_palabra": 16.62,
+  "pal_s_hablando": 3.01,
+  "pal_s_total": 0.15,
+  "tiempo_hablando": 1.66,
+  "parte_hablada": 0.05,
+  "bloques": 1,
+  "palabras_por_bloque": {
+   "n": 1,
+   "media": 5.0,
+   "mediana": 5.0,
+   "min": 5.0,
+   "max": 5.0
+  },
+  "dur_bloque": {
+   "n": 1,
+   "media": 1.66,
+   "mediana": 1.66,
+   "min": 1.66,
+   "max": 1.66
+  },
+  "pausas": {
+   "n": 0
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 4.73,
+   "dur": 4.73,
+   "dicho": ""
+  },
+  {
+   "id": 2,
+   "s": 4.73,
+   "e": 9.13,
+   "dur": 4.4,
+   "dicho": ""
+  },
+  {
+   "id": 3,
+   "s": 9.13,
+   "e": 11.73,
+   "dur": 2.6,
+   "dicho": ""
+  },
+  {
+   "id": 4,
+   "s": 11.73,
+   "e": 12.0,
+   "dur": 0.27,
+   "dicho": ""
+  },
+  {
+   "id": 5,
+   "s": 12.0,
+   "e": 16.9,
+   "dur": 4.9,
+   "dicho": "Just how to take control"
+  },
+  {
+   "id": 6,
+   "s": 16.9,
+   "e": 17.9,
+   "dur": 1.0,
+   "dicho": ""
+  },
+  {
+   "id": 7,
+   "s": 17.9,
+   "e": 18.4,
+   "dur": 0.5,
+   "dicho": ""
+  },
+  {
+   "id": 8,
+   "s": 18.4,
+   "e": 20.33,
+   "dur": 1.93,
+   "dicho": ""
+  },
+  {
+   "id": 9,
+   "s": 20.33,
+   "e": 20.93,
+   "dur": 0.6,
+   "dicho": ""
+  },
+  {
+   "id": 10,
+   "s": 20.93,
+   "e": 21.3,
+   "dur": 0.37,
+   "dicho": ""
+  },
+  {
+   "id": 11,
+   "s": 21.3,
+   "e": 22.2,
+   "dur": 0.9,
+   "dicho": ""
+  },
+  {
+   "id": 12,
+   "s": 22.2,
+   "e": 24.73,
+   "dur": 2.53,
+   "dicho": ""
+  },
+  {
+   "id": 13,
+   "s": 24.73,
+   "e": 30.0,
+   "dur": 5.27,
+   "dicho": ""
+  },
+  {
+   "id": 14,
+   "s": 30.0,
+   "e": 34.0,
+   "dur": 4.0,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 14.96,
+   "e": 16.62,
+   "dur": 1.66,
+   "palabras": 5,
+   "pal_s": 3.0,
+   "texto": "Just how to take control"
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 5.33,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": ""
+   },
+   {
+    "t": 9.73,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": ""
+   },
+   {
+    "t": 11.87,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": ""
+   },
+   {
+    "t": 12.6,
+    "que": "entra el plano",
+    "plano": 5,
+    "dicho": ""
+   },
+   {
+    "t": 17.4,
+    "que": "entra el plano",
+    "plano": 6,
+    "dicho": ""
+   },
+   {
+    "t": 18.15,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": ""
+   },
+   {
+    "t": 19.0,
+    "que": "entra el plano",
+    "plano": 8,
+    "dicho": ""
+   },
+   {
+    "t": 20.63,
+    "que": "entra el plano",
+    "plano": 9,
+    "dicho": ""
+   },
+   {
+    "t": 21.11,
+    "que": "entra el plano",
+    "plano": 10,
+    "dicho": ""
+   },
+   {
+    "t": 21.75,
+    "que": "entra el plano",
+    "plano": 11,
+    "dicho": ""
+   },
+   {
+    "t": 22.8,
+    "que": "entra el plano",
+    "plano": 12,
+    "dicho": ""
+   },
+   {
+    "t": 25.33,
+    "que": "entra el plano",
+    "plano": 13,
+    "dicho": ""
+   },
+   {
+    "t": 30.6,
+    "que": "entra el plano",
+    "plano": 14,
+    "dicho": ""
+   },
+   {
+    "t": 33.7,
+    "que": "final",
+    "plano": 14,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "Just",
+   "s": 14.96,
+   "e": 15.28,
+   "p": 0.41
+  },
+  {
+   "w": "how",
+   "s": 15.28,
+   "e": 15.6,
+   "p": 0.56
+  },
+  {
+   "w": "to",
+   "s": 15.6,
+   "e": 15.72,
+   "p": 0.94
+  },
+  {
+   "w": "take",
+   "s": 15.72,
+   "e": 16.04,
+   "p": 0.98
+  },
+  {
+   "w": "control",
+   "s": 16.04,
+   "e": 16.62,
+   "p": 0.96
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 14.96,
+   "e": 16.62,
+   "texto": "Just how to take control"
+  }
+ ]
+}

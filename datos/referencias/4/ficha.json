@@ -1,0 +1,753 @@
+{
+ "nombre": "4",
+ "archivo": "referencias/4.mp4",
+ "firma": "2858141-1792899798",
+ "generado": "2026-10-25T01:10:06",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 22.78,
+  "ancho": 720,
+  "alto": 1280,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 48000,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 8,
+  "media": 2.83,
+  "mediana": 1.68,
+  "min": 0.67,
+  "max": 7.23
+ },
+ "cortes_por_min": 18.4,
+ "ritmo_habla": {
+  "palabras": 83,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 21.48,
+  "pal_s_hablando": 4.12,
+  "pal_s_total": 3.64,
+  "tiempo_hablando": 20.16,
+  "parte_hablada": 0.88,
+  "bloques": 5,
+  "palabras_por_bloque": {
+   "n": 5,
+   "media": 16.6,
+   "mediana": 11.0,
+   "min": 6.0,
+   "max": 28.0
+  },
+  "dur_bloque": {
+   "n": 5,
+   "media": 4.03,
+   "mediana": 3.12,
+   "min": 0.94,
+   "max": 6.72
+  },
+  "pausas": {
+   "n": 4,
+   "media": 0.37,
+   "mediana": 0.36,
+   "min": 0.28,
+   "max": 0.46
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 7.23,
+   "dur": 7.23,
+   "dicho": "If your definition of success is win or lose, giving everything you've got and growing or learning along the way, then you're setting yourself up for success."
+  },
+  {
+   "id": 2,
+   "s": 7.23,
+   "e": 14.07,
+   "dur": 6.83,
+   "dicho": "I really think the biggest cheat code in life is just going after it and not being concerned of whether or not you fail at one specific task."
+  },
+  {
+   "id": 3,
+   "s": 14.07,
+   "e": 14.97,
+   "dur": 0.9,
+   "dicho": "Instead understanding"
+  },
+  {
+   "id": 4,
+   "s": 14.97,
+   "e": 15.9,
+   "dur": 0.93,
+   "dicho": "the big picture,"
+  },
+  {
+   "id": 5,
+   "s": 15.9,
+   "e": 18.33,
+   "dur": 2.43,
+   "dicho": "what your long -term goal is, and knowing if you"
+  },
+  {
+   "id": 6,
+   "s": 18.33,
+   "e": 19.0,
+   "dur": 0.67,
+   "dicho": "keep driving forward"
+  },
+  {
+   "id": 7,
+   "s": 19.0,
+   "e": 19.8,
+   "dur": 0.8,
+   "dicho": "and never"
+  },
+  {
+   "id": 8,
+   "s": 19.8,
+   "e": 22.67,
+   "dur": 2.87,
+   "dicho": "fucking quit, in the end you will succeed."
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 6.72,
+   "dur": 6.72,
+   "palabras": 27,
+   "pal_s": 4.0,
+   "texto": "If your definition of success is win or lose, giving everything you've got and growing or learning along the way, then you're setting yourself up for success."
+  },
+  {
+   "id": 2,
+   "s": 7.18,
+   "e": 13.76,
+   "dur": 6.58,
+   "palabras": 28,
+   "pal_s": 4.3,
+   "texto": "I really think the biggest cheat code in life is just going after it and not being concerned of whether or not you fail at one specific task."
+  },
+  {
+   "id": 3,
+   "s": 13.9,
+   "e": 17.02,
+   "dur": 3.12,
+   "palabras": 11,
+   "pal_s": 3.5,
+   "texto": "Instead understanding the big picture, what your long -term goal is,"
+  },
+  {
+   "id": 4,
+   "s": 17.44,
+   "e": 20.24,
+   "dur": 2.8,
+   "palabras": 11,
+   "pal_s": 3.9,
+   "texto": "and knowing if you keep driving forward and never fucking quit,"
+  },
+  {
+   "id": 5,
+   "s": 20.54,
+   "e": 21.48,
+   "dur": 0.94,
+   "palabras": 6,
+   "pal_s": 6.4,
+   "texto": "in the end you will succeed."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "If your definition of success"
+   },
+   {
+    "t": 7.83,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": "I really think the biggest cheat"
+   },
+   {
+    "t": 14.52,
+    "que": "entra el plano",
+    "plano": 3,
+    "dicho": "Instead understanding the"
+   },
+   {
+    "t": 15.44,
+    "que": "entra el plano",
+    "plano": 4,
+    "dicho": "understanding the big picture, what your"
+   },
+   {
+    "t": 16.5,
+    "que": "entra el plano",
+    "plano": 5,
+    "dicho": "what your long -term goal is,"
+   },
+   {
+    "t": 18.66,
+    "que": "entra el plano",
+    "plano": 6,
+    "dicho": "if you keep driving forward and"
+   },
+   {
+    "t": 19.4,
+    "que": "entra el plano",
+    "plano": 7,
+    "dicho": "forward and never fucking quit,"
+   },
+   {
+    "t": 20.4,
+    "que": "entra el plano",
+    "plano": 8,
+    "dicho": "fucking quit, in the end you"
+   },
+   {
+    "t": 22.48,
+    "que": "final",
+    "plano": 8,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "If",
+   "s": 0.0,
+   "e": 0.18,
+   "p": 0.9
+  },
+  {
+   "w": "your",
+   "s": 0.18,
+   "e": 0.28,
+   "p": 0.97
+  },
+  {
+   "w": "definition",
+   "s": 0.28,
+   "e": 0.62,
+   "p": 0.99
+  },
+  {
+   "w": "of",
+   "s": 0.62,
+   "e": 0.88,
+   "p": 1.0
+  },
+  {
+   "w": "success",
+   "s": 0.88,
+   "e": 1.22,
+   "p": 0.98
+  },
+  {
+   "w": "is",
+   "s": 1.22,
+   "e": 1.66,
+   "p": 0.99
+  },
+  {
+   "w": "win",
+   "s": 1.66,
+   "e": 1.86,
+   "p": 0.81
+  },
+  {
+   "w": "or",
+   "s": 1.86,
+   "e": 1.98,
+   "p": 0.99
+  },
+  {
+   "w": "lose,",
+   "s": 1.98,
+   "e": 2.3,
+   "p": 0.99
+  },
+  {
+   "w": "giving",
+   "s": 2.58,
+   "e": 2.76,
+   "p": 0.99
+  },
+  {
+   "w": "everything",
+   "s": 2.76,
+   "e": 3.1,
+   "p": 1.0
+  },
+  {
+   "w": "you've",
+   "s": 3.1,
+   "e": 3.38,
+   "p": 0.97
+  },
+  {
+   "w": "got",
+   "s": 3.38,
+   "e": 3.6,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 3.6,
+   "e": 3.9,
+   "p": 0.6
+  },
+  {
+   "w": "growing",
+   "s": 3.9,
+   "e": 4.2,
+   "p": 1.0
+  },
+  {
+   "w": "or",
+   "s": 4.2,
+   "e": 4.38,
+   "p": 0.62
+  },
+  {
+   "w": "learning",
+   "s": 4.38,
+   "e": 4.58,
+   "p": 1.0
+  },
+  {
+   "w": "along",
+   "s": 4.58,
+   "e": 4.78,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 4.78,
+   "e": 4.98,
+   "p": 1.0
+  },
+  {
+   "w": "way,",
+   "s": 4.98,
+   "e": 5.18,
+   "p": 1.0
+  },
+  {
+   "w": "then",
+   "s": 5.32,
+   "e": 5.44,
+   "p": 0.99
+  },
+  {
+   "w": "you're",
+   "s": 5.44,
+   "e": 5.58,
+   "p": 0.98
+  },
+  {
+   "w": "setting",
+   "s": 5.58,
+   "e": 5.78,
+   "p": 1.0
+  },
+  {
+   "w": "yourself",
+   "s": 5.78,
+   "e": 6.04,
+   "p": 0.99
+  },
+  {
+   "w": "up",
+   "s": 6.04,
+   "e": 6.24,
+   "p": 1.0
+  },
+  {
+   "w": "for",
+   "s": 6.24,
+   "e": 6.4,
+   "p": 1.0
+  },
+  {
+   "w": "success.",
+   "s": 6.4,
+   "e": 6.72,
+   "p": 1.0
+  },
+  {
+   "w": "I",
+   "s": 7.18,
+   "e": 7.3,
+   "p": 1.0
+  },
+  {
+   "w": "really",
+   "s": 7.3,
+   "e": 7.54,
+   "p": 1.0
+  },
+  {
+   "w": "think",
+   "s": 7.54,
+   "e": 7.84,
+   "p": 1.0
+  },
+  {
+   "w": "the",
+   "s": 7.84,
+   "e": 8.06,
+   "p": 0.98
+  },
+  {
+   "w": "biggest",
+   "s": 8.06,
+   "e": 8.22,
+   "p": 1.0
+  },
+  {
+   "w": "cheat",
+   "s": 8.22,
+   "e": 8.46,
+   "p": 0.99
+  },
+  {
+   "w": "code",
+   "s": 8.46,
+   "e": 8.66,
+   "p": 0.99
+  },
+  {
+   "w": "in",
+   "s": 8.66,
+   "e": 8.78,
+   "p": 0.99
+  },
+  {
+   "w": "life",
+   "s": 8.78,
+   "e": 9.02,
+   "p": 1.0
+  },
+  {
+   "w": "is",
+   "s": 9.02,
+   "e": 9.36,
+   "p": 0.98
+  },
+  {
+   "w": "just",
+   "s": 9.36,
+   "e": 9.5,
+   "p": 0.99
+  },
+  {
+   "w": "going",
+   "s": 9.5,
+   "e": 9.72,
+   "p": 1.0
+  },
+  {
+   "w": "after",
+   "s": 9.72,
+   "e": 10.04,
+   "p": 1.0
+  },
+  {
+   "w": "it",
+   "s": 10.04,
+   "e": 10.26,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 10.26,
+   "e": 10.64,
+   "p": 0.87
+  },
+  {
+   "w": "not",
+   "s": 10.64,
+   "e": 10.82,
+   "p": 1.0
+  },
+  {
+   "w": "being",
+   "s": 10.82,
+   "e": 11.0,
+   "p": 0.99
+  },
+  {
+   "w": "concerned",
+   "s": 11.0,
+   "e": 11.46,
+   "p": 1.0
+  },
+  {
+   "w": "of",
+   "s": 11.46,
+   "e": 11.86,
+   "p": 0.79
+  },
+  {
+   "w": "whether",
+   "s": 11.86,
+   "e": 12.04,
+   "p": 1.0
+  },
+  {
+   "w": "or",
+   "s": 12.04,
+   "e": 12.16,
+   "p": 0.99
+  },
+  {
+   "w": "not",
+   "s": 12.16,
+   "e": 12.26,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 12.26,
+   "e": 12.4,
+   "p": 1.0
+  },
+  {
+   "w": "fail",
+   "s": 12.4,
+   "e": 12.68,
+   "p": 0.98
+  },
+  {
+   "w": "at",
+   "s": 12.68,
+   "e": 12.82,
+   "p": 0.99
+  },
+  {
+   "w": "one",
+   "s": 12.82,
+   "e": 12.92,
+   "p": 1.0
+  },
+  {
+   "w": "specific",
+   "s": 12.92,
+   "e": 13.24,
+   "p": 1.0
+  },
+  {
+   "w": "task.",
+   "s": 13.24,
+   "e": 13.76,
+   "p": 1.0
+  },
+  {
+   "w": "Instead",
+   "s": 13.9,
+   "e": 14.32,
+   "p": 0.99
+  },
+  {
+   "w": "understanding",
+   "s": 14.32,
+   "e": 14.94,
+   "p": 0.64
+  },
+  {
+   "w": "the",
+   "s": 14.94,
+   "e": 15.16,
+   "p": 1.0
+  },
+  {
+   "w": "big",
+   "s": 15.16,
+   "e": 15.3,
+   "p": 0.99
+  },
+  {
+   "w": "picture,",
+   "s": 15.3,
+   "e": 15.64,
+   "p": 1.0
+  },
+  {
+   "w": "what",
+   "s": 15.88,
+   "e": 15.98,
+   "p": 1.0
+  },
+  {
+   "w": "your",
+   "s": 15.98,
+   "e": 16.1,
+   "p": 0.99
+  },
+  {
+   "w": "long",
+   "s": 16.1,
+   "e": 16.3,
+   "p": 1.0
+  },
+  {
+   "w": "-term",
+   "s": 16.3,
+   "e": 16.48,
+   "p": 0.83
+  },
+  {
+   "w": "goal",
+   "s": 16.48,
+   "e": 16.72,
+   "p": 1.0
+  },
+  {
+   "w": "is,",
+   "s": 16.72,
+   "e": 17.02,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 17.44,
+   "e": 17.52,
+   "p": 1.0
+  },
+  {
+   "w": "knowing",
+   "s": 17.52,
+   "e": 17.78,
+   "p": 1.0
+  },
+  {
+   "w": "if",
+   "s": 17.78,
+   "e": 18.16,
+   "p": 0.98
+  },
+  {
+   "w": "you",
+   "s": 18.16,
+   "e": 18.26,
+   "p": 1.0
+  },
+  {
+   "w": "keep",
+   "s": 18.26,
+   "e": 18.44,
+   "p": 1.0
+  },
+  {
+   "w": "driving",
+   "s": 18.44,
+   "e": 18.72,
+   "p": 1.0
+  },
+  {
+   "w": "forward",
+   "s": 18.72,
+   "e": 19.12,
+   "p": 1.0
+  },
+  {
+   "w": "and",
+   "s": 19.12,
+   "e": 19.54,
+   "p": 0.89
+  },
+  {
+   "w": "never",
+   "s": 19.54,
+   "e": 19.7,
+   "p": 1.0
+  },
+  {
+   "w": "fucking",
+   "s": 19.7,
+   "e": 19.96,
+   "p": 0.96
+  },
+  {
+   "w": "quit,",
+   "s": 19.96,
+   "e": 20.24,
+   "p": 1.0
+  },
+  {
+   "w": "in",
+   "s": 20.54,
+   "e": 20.62,
+   "p": 0.94
+  },
+  {
+   "w": "the",
+   "s": 20.62,
+   "e": 20.72,
+   "p": 1.0
+  },
+  {
+   "w": "end",
+   "s": 20.72,
+   "e": 20.9,
+   "p": 1.0
+  },
+  {
+   "w": "you",
+   "s": 20.9,
+   "e": 21.02,
+   "p": 0.79
+  },
+  {
+   "w": "will",
+   "s": 21.02,
+   "e": 21.14,
+   "p": 0.99
+  },
+  {
+   "w": "succeed.",
+   "s": 21.14,
+   "e": 21.48,
+   "p": 1.0
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 6.72,
+   "texto": "If your definition of success is win or lose, giving everything you've got and growing or learning along the way, then you're setting yourself up for success."
+  },
+  {
+   "s": 7.18,
+   "e": 13.76,
+   "texto": "I really think the biggest cheat code in life is just going after it and not being concerned of whether or not you fail at one specific task."
+  },
+  {
+   "s": 13.9,
+   "e": 21.48,
+   "texto": "Instead understanding the big picture, what your long-term goal is, and knowing if you keep driving forward and never fucking quit, in the end you will succeed."
+  }
+ ]
+}

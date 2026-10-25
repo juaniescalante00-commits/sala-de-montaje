@@ -1,0 +1,455 @@
+{
+ "nombre": "10",
+ "archivo": "referencias/10.mp4",
+ "firma": "4135416-1792900035",
+ "generado": "2026-10-25T01:08:50",
+ "parametros": {
+  "umbral": 27.0,
+  "frames": 16,
+  "version": 1
+ },
+ "formato": {
+  "dur": 26.7,
+  "ancho": 576,
+  "alto": 1024,
+  "rotacion": 0,
+  "fps": 30.0,
+  "fps_variable": false,
+  "orientacion": "vertical",
+  "aspecto": "9:16",
+  "video_codec": "h264",
+  "audio": {
+   "canales": 2,
+   "hz": 44100,
+   "codec": "aac"
+  }
+ },
+ "transcripcion": {
+  "modelo": "small",
+  "idioma": "en",
+  "motor": "faster-whisper",
+  "tiempo_por_palabra": true
+ },
+ "ritmo_planos": {
+  "n": 2,
+  "media": 13.35,
+  "mediana": 13.35,
+  "min": 4.0,
+  "max": 22.7
+ },
+ "cortes_por_min": 2.2,
+ "ritmo_habla": {
+  "palabras": 28,
+  "primera_palabra": 0.0,
+  "ultima_palabra": 17.42,
+  "pal_s_hablando": 3.31,
+  "pal_s_total": 1.05,
+  "tiempo_hablando": 8.46,
+  "parte_hablada": 0.32,
+  "bloques": 11,
+  "palabras_por_bloque": {
+   "n": 11,
+   "media": 2.55,
+   "mediana": 2.0,
+   "min": 1.0,
+   "max": 6.0
+  },
+  "dur_bloque": {
+   "n": 11,
+   "media": 0.77,
+   "mediana": 0.6,
+   "min": 0.34,
+   "max": 2.06
+  },
+  "pausas": {
+   "n": 10,
+   "media": 0.9,
+   "mediana": 0.64,
+   "min": 0.32,
+   "max": 2.6
+  }
+ },
+ "planos": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 22.7,
+   "dur": 22.7,
+   "dicho": "It starts with something you made. Tap once, you're open. T -shirts, shoes, jackets. Somewhere, someone found you. Sell what you make. And hear your first sale. Shopify."
+  },
+  {
+   "id": 2,
+   "s": 22.7,
+   "e": 26.7,
+   "dur": 4.0,
+   "dicho": ""
+  }
+ ],
+ "bloques": [
+  {
+   "id": 1,
+   "s": 0.0,
+   "e": 2.06,
+   "dur": 2.06,
+   "palabras": 6,
+   "pal_s": 2.9,
+   "texto": "It starts with something you made."
+  },
+  {
+   "id": 2,
+   "s": 2.68,
+   "e": 3.56,
+   "dur": 0.88,
+   "palabras": 2,
+   "pal_s": 2.3,
+   "texto": "Tap once,"
+  },
+  {
+   "id": 3,
+   "s": 3.88,
+   "e": 4.42,
+   "dur": 0.54,
+   "palabras": 2,
+   "pal_s": 3.7,
+   "texto": "you're open."
+  },
+  {
+   "id": 4,
+   "s": 4.94,
+   "e": 5.42,
+   "dur": 0.48,
+   "palabras": 2,
+   "pal_s": 4.2,
+   "texto": "T -shirts,"
+  },
+  {
+   "id": 5,
+   "s": 6.02,
+   "e": 6.42,
+   "dur": 0.4,
+   "palabras": 1,
+   "pal_s": 2.5,
+   "texto": "shoes,"
+  },
+  {
+   "id": 6,
+   "s": 7.08,
+   "e": 7.42,
+   "dur": 0.34,
+   "palabras": 1,
+   "pal_s": 2.9,
+   "texto": "jackets."
+  },
+  {
+   "id": 7,
+   "s": 9.0,
+   "e": 9.6,
+   "dur": 0.6,
+   "palabras": 1,
+   "pal_s": 1.7,
+   "texto": "Somewhere,"
+  },
+  {
+   "id": 8,
+   "s": 10.02,
+   "e": 10.76,
+   "dur": 0.74,
+   "palabras": 3,
+   "pal_s": 4.1,
+   "texto": "someone found you."
+  },
+  {
+   "id": 9,
+   "s": 11.58,
+   "e": 12.36,
+   "dur": 0.78,
+   "palabras": 4,
+   "pal_s": 5.1,
+   "texto": "Sell what you make."
+  },
+  {
+   "id": 10,
+   "s": 13.18,
+   "e": 14.44,
+   "dur": 1.26,
+   "palabras": 5,
+   "pal_s": 4.0,
+   "texto": "And hear your first sale."
+  },
+  {
+   "id": 11,
+   "s": 17.04,
+   "e": 17.42,
+   "dur": 0.38,
+   "palabras": 1,
+   "pal_s": 2.6,
+   "texto": "Shopify."
+  }
+ ],
+ "tira": {
+  "archivo": "tira.jpg",
+  "momentos": [
+   {
+    "t": 0.3,
+    "que": "arranque",
+    "plano": 1,
+    "dicho": "It starts"
+   },
+   {
+    "t": 3.81,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "Tap once, you're open."
+   },
+   {
+    "t": 7.63,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "jackets."
+   },
+   {
+    "t": 11.44,
+    "que": "medio",
+    "plano": 1,
+    "dicho": "Sell what you"
+   },
+   {
+    "t": 15.26,
+    "que": "medio",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 19.07,
+    "que": "medio",
+    "plano": 1,
+    "dicho": ""
+   },
+   {
+    "t": 22.89,
+    "que": "medio",
+    "plano": 2,
+    "dicho": ""
+   },
+   {
+    "t": 23.3,
+    "que": "entra el plano",
+    "plano": 2,
+    "dicho": ""
+   },
+   {
+    "t": 26.4,
+    "que": "final",
+    "plano": 2,
+    "dicho": ""
+   }
+  ]
+ },
+ "palabras": [
+  {
+   "w": "It",
+   "s": 0.0,
+   "e": 0.84,
+   "p": 0.71
+  },
+  {
+   "w": "starts",
+   "s": 0.84,
+   "e": 1.1,
+   "p": 0.99
+  },
+  {
+   "w": "with",
+   "s": 1.1,
+   "e": 1.36,
+   "p": 1.0
+  },
+  {
+   "w": "something",
+   "s": 1.36,
+   "e": 1.58,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 1.58,
+   "e": 1.76,
+   "p": 0.99
+  },
+  {
+   "w": "made.",
+   "s": 1.76,
+   "e": 2.06,
+   "p": 0.98
+  },
+  {
+   "w": "Tap",
+   "s": 2.68,
+   "e": 3.28,
+   "p": 0.43
+  },
+  {
+   "w": "once,",
+   "s": 3.28,
+   "e": 3.56,
+   "p": 0.85
+  },
+  {
+   "w": "you're",
+   "s": 3.88,
+   "e": 4.08,
+   "p": 0.95
+  },
+  {
+   "w": "open.",
+   "s": 4.08,
+   "e": 4.42,
+   "p": 0.99
+  },
+  {
+   "w": "T",
+   "s": 4.94,
+   "e": 5.18,
+   "p": 0.98
+  },
+  {
+   "w": "-shirts,",
+   "s": 5.18,
+   "e": 5.42,
+   "p": 0.95
+  },
+  {
+   "w": "shoes,",
+   "s": 6.02,
+   "e": 6.42,
+   "p": 0.99
+  },
+  {
+   "w": "jackets.",
+   "s": 7.08,
+   "e": 7.42,
+   "p": 0.98
+  },
+  {
+   "w": "Somewhere,",
+   "s": 9.0,
+   "e": 9.6,
+   "p": 0.98
+  },
+  {
+   "w": "someone",
+   "s": 10.02,
+   "e": 10.18,
+   "p": 0.99
+  },
+  {
+   "w": "found",
+   "s": 10.18,
+   "e": 10.48,
+   "p": 0.99
+  },
+  {
+   "w": "you.",
+   "s": 10.48,
+   "e": 10.76,
+   "p": 1.0
+  },
+  {
+   "w": "Sell",
+   "s": 11.58,
+   "e": 11.8,
+   "p": 0.99
+  },
+  {
+   "w": "what",
+   "s": 11.8,
+   "e": 11.96,
+   "p": 0.99
+  },
+  {
+   "w": "you",
+   "s": 11.96,
+   "e": 12.06,
+   "p": 1.0
+  },
+  {
+   "w": "make.",
+   "s": 12.06,
+   "e": 12.36,
+   "p": 0.99
+  },
+  {
+   "w": "And",
+   "s": 13.18,
+   "e": 13.4,
+   "p": 0.98
+  },
+  {
+   "w": "hear",
+   "s": 13.4,
+   "e": 13.58,
+   "p": 0.52
+  },
+  {
+   "w": "your",
+   "s": 13.58,
+   "e": 13.76,
+   "p": 0.99
+  },
+  {
+   "w": "first",
+   "s": 13.76,
+   "e": 14.04,
+   "p": 0.99
+  },
+  {
+   "w": "sale.",
+   "s": 14.04,
+   "e": 14.44,
+   "p": 0.95
+  },
+  {
+   "w": "Shopify.",
+   "s": 17.04,
+   "e": 17.42,
+   "p": 0.99
+  }
+ ],
+ "segmentos": [
+  {
+   "s": 0.0,
+   "e": 2.06,
+   "texto": "It starts with something you made."
+  },
+  {
+   "s": 2.68,
+   "e": 4.42,
+   "texto": "Tap once, you're open."
+  },
+  {
+   "s": 4.94,
+   "e": 7.42,
+   "texto": "T-shirts, shoes, jackets."
+  },
+  {
+   "s": 9.0,
+   "e": 10.76,
+   "texto": "Somewhere, someone found you."
+  },
+  {
+   "s": 11.58,
+   "e": 12.36,
+   "texto": "Sell what you make."
+  },
+  {
+   "s": 13.18,
+   "e": 14.44,
+   "texto": "And hear your first sale."
+  },
+  {
+   "s": 17.04,
+   "e": 17.42,
+   "texto": "Shopify."
+  }
+ ]
+}
