@@ -45,8 +45,8 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 
 ## Qué NO va en este archivo
 Movimientos de cámara (zooms, seguimiento de cara, reencuadres), estilo de subtítulos (tamaño, palabras por bloque,
-posición, mayúsculas, cuándo se ocultan), pantallas completas, densidad de gráficos y música se eligen en cada edición,
-en el plan que aprueba Juani. Sus reglas fijas están en `CLAUDE.md`; el oficio y los valores por defecto, en `docs/EDITOR.md`.
+posición, mayúsculas, cuándo se ocultan), pantallas completas, densidad de gráficos y música se eligen en cada edición
+(la edición decide y lo dice en su mensaje; no hay paso de aprobación). Sus reglas fijas están en `CLAUDE.md`; el oficio y los valores por defecto, en `docs/EDITOR.md`.
 
 ---
 Origen: reglas 2, 6, 8–16, 19–21 y 24 adaptadas de [browser-use/video-use](https://github.com/browser-use/video-use) y

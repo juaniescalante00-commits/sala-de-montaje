@@ -18,7 +18,7 @@ function applyAgentOps(ops) {
         if (o.op === 'crear' && o.pieza && PRESETS[o.pieza.type]) {
           const m = sanitizeMotion(Object.assign({}, o.pieza, { id: null, status: 'pendiente', comment: '' }));
           m.start = clamp(m.start, 0, Math.max(0, p.duration - .8)); m.dur = Math.min(m.dur, p.duration - m.start);
-          if (!m.beats.some(b => b != null) && !['libre', 'codigo', '3d', 'plantilla'].includes(m.type)) syncBeats(m, false);
+          if (!m.beats.some(b => b != null) && !['libre', 'codigo', '3d', 'plantilla', 'inserto'].includes(m.type)) syncBeats(m, false);
           if (!m.quote) m.quote = quoteFor(p, m);
           p.motions.push(m); log.push(`+ ${PRESETS[m.type].name} en ${mmss(m.start)}`);
         } else if (o.op === 'editar') {
@@ -94,7 +94,7 @@ function agentHTML() {
     <div class="row" style="flex-wrap:wrap">
       <button class="btn pri" id="agSend" type="button" ${(!S.sample && !deepAvailable()) || S.busy.agent || deepBusy(P) ? 'disabled' : ''}>${S.busy.agent || deepBusy(P) ? 'Trabajando…' : 'Enviar'}</button>
       ${S.busy.agent ? '<button class="btn ghost" id="agStop" type="button">Detener</button>' : ''}
-      ${deepAvailable() ? `<label class="chk" style="font-size:12px" title="Claude Code en la nube: mira la referencia completa, renderiza cuadros reales, los compara y corrige. Tarda 5 a 10 minutos."><input type="checkbox" id="agDeep" ${deepDefault(P) ? 'checked' : ''}> A fondo con Claude Code</label>` : ''}
+      ${deepAvailable() ? `<label class="chk" style="font-size:12px" title="Claude Code en la nube: lee el manual, las reglas, las skills, la música por datos y las fichas de referencia; mira la referencia, renderiza cuadros reales, los compara y corrige. Tarda 5 a 15 minutos. Destildalo para la edición rápida."><input type="checkbox" id="agDeep" ${deepDefault(P) ? 'checked' : ''}> A fondo con Claude Code</label>` : ''}
       <label class="chk" style="font-size:12px"><input type="checkbox" id="agImg" ${S.agentImg ? 'checked' : ''}> Mostrarle el cuadro actual</label>
     </div>
     <p class="hint">Ctrl + Enter envía. Todo se puede deshacer con Ctrl + Z.${P.words?.length ? '' : ' Sin transcripción, Claude no sabe en qué segundo se dice cada cosa.'}</p>
@@ -106,7 +106,7 @@ function wireAgent(body) {
   ta.addEventListener('input', () => { S.agentDraft = ta.value; });
   ta.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); send(); } });
   const send = () => { const v = ta.value; if (!v.trim()) return; S.agentDraft = ''; const deep = body.querySelector('#agDeep')?.checked; if (deep && deepAvailable()) runDeep(v).then(ok => { if (!ok) runAgent(v); }); else runAgent(v); };
-  body.querySelector('#agDeep')?.addEventListener('change', e => { try { localStorage.setItem('sala.deep', e.target.checked ? '1' : '0'); } catch (er) { } });
+  body.querySelector('#agDeep')?.addEventListener('change', e => { try { localStorage.setItem('sala.deep.v2', e.target.checked ? '1' : '0'); } catch (er) { } });
   wireDeepBanner(body);
   body.querySelector('#agSend')?.addEventListener('click', send);
   body.querySelector('#agStop')?.addEventListener('click', () => S.agentCtl?.abort());

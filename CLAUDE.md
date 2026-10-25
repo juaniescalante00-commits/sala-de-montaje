@@ -25,8 +25,8 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 - Nunca doble texto (título grande y abajo el subtítulo diciendo lo mismo).
 - Nunca agregar música si el crudo ya trae (`audio.rawMusic`).
 - Todo texto dentro de la zona segura de la plataforma.
-- Los movimientos de cámara y el estilo de subtítulos NO son reglas fijas: se eligen en cada edición, en el plan que
-  aprueba Juani (por defecto: cámara estable sin mini zooms repetidos, subtítulos limpios de a un bloque).
+- Los movimientos de cámara y el estilo de subtítulos NO son reglas fijas: se eligen en cada edición (la edición
+  decide y lo dice en su mensaje; no hay paso de aprobación: video + pedido y edita). Por defecto: cámara estable sin mini zooms repetidos, subtítulos limpios de a un bloque.
 - Datos solo si se dicen o los da Juani. Recordar sus correcciones anteriores y aplicarlas.
 
 ## Arquitectura de la página
@@ -47,6 +47,7 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 | `03d-code.js` | Piezas `codigo` (canvas 2D), `3d` (three.js) y `plantilla` (Lottie); `prepareMotions` |
 | `03e-matte.js` | Recorte de persona: decodifica `video.matte` por tramos (`matteAt`, `matteWarm`) |
 | `03f-palabra.js` | Pieza `palabra` (palabra gigante, detrás de la cabeza con `behind`) |
+| `03g-inserto.js` | Pieza `inserto`: animación hecha afuera (Remotion, GSAP, three, Lottie, HTML) en MP4 lado a lado (color \| alfa); vista previa a 432 px, exportación a resolución completa |
 | `04-audio.js` | Audio, forma de onda, ducking, `detectRawMusic`, mezcla |
 | `05-store.js` | Persistencia en la base, `migrate`, `sanitizeMotion`, `adoptRemote`, carga de video y copia liviana |
 | `05b-library.js` | Biblioteca de música y sonidos |
@@ -69,9 +70,23 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 ## Tareas en la nube (Claude Code Remote)
 - `trig_013ERanf5oCJYw1uMqif5veU` · "Sala de Montaje · transcribir, caras y recorte": Whisper (modelo por npm), BlazeFace
   (`tools/faces.py`), Robust Video Matting (`tools/matte.py`).
-- `trig_01FSh19WcrPjb3sAq7BRPFZp` · "Sala de Montaje · editar a fondo": recibe `{proyecto, pedido}`, sigue
-  `docs/EDITOR.md`, usa `tools/edit.js`, escribe el resultado y `deep.estado`.
-Si cambiás una herramienta o el manual, publicalos en el artifact (ver abajo): las tareas los bajan de ahí en cada corrida.
+- `trig_01FSh19WcrPjb3sAq7BRPFZp` · "Sala de Montaje · editar a fondo": recibe `{proyecto, pedido}`, **clona este repo**
+  (add_repo + git clone; si no puede, baja `tools/repo.tgz.b64.txt` del artifact), lee la lista obligatoria de
+  `docs/EDITOR.md` (sección 0: CLAUDE.md, HARD-RULES, manual, skills, fichas, índice de audio), edita con `tools/edit.js`,
+  hace insertos con `tools/html_inserto.js` / Remotion, elige audio con `tools/elegir_audio.py`, escribe el resultado y
+  `deep.estado`, y cierra su mensaje con "Leí: …". Es el modo por defecto de la página (la edición rápida es opcional).
+Las tareas usan el editor **publicado** (dist del artifact) y las herramientas del repo: después de cambiar algo,
+push a main + publicar (ver abajo) para que la copia de respaldo quede igual.
+
+## Herramientas (`tools/`)
+- `edit.js`: renderiza el proyecto con el editor real (hojas de cuadros, exportación, manual generado).
+- `html_inserto.js`: HTML con `window.seek(t)` → MP4 lado a lado para la pieza `inserto`. Plantillas en `tools/insertos/`
+  (`gsap-titulo`, `gsap-dato`, `three-objeto`, `lottie`). `a_inserto.sh`: cualquier video con alfa (Remotion ProRes 4444,
+  WebM, PNG) → mismo formato. Composición de ejemplo con alfa: `remotion/InsertoTexto.tsx`.
+- `elegir_audio.py`: cruza `datos/audio/indice.json` con la biblioteca y el kit de la base; devuelve solo lo usable.
+  Ojo: de los 1105 sonidos del índice, la mayoría no está subida a la Sala (solo los de la biblioteca sirven).
+- `empaquetar.sh`: copia de respaldo del repo para la tarea en la nube (`dist/repo.tgz.b64.txt`).
+- `transcribe.py`, `faces.py`, `matte.py`: los usa la tarea de transcripción. `render.js`: render final a Editados.
 
 ## Datos de la compu de Juani (`datos/`, generados por `local/`)
 - Material en `C:\Users\usr\Videos\Sala de Montaje` (`Música`, `Sonidos`, `referencias`, …). Los scripts de `local/`
@@ -104,7 +119,7 @@ Librerías de motion de la sala de montaje. Antes de animar, elegí según esta 
 Estética obligatoria: minimalista y editorial. Nada de pips ni mini zooms. Movimientos cortos y suaves, tipografía limpia, mucho aire. Ante la duda, menos animación.
 Después de cada render, sacá frames en los momentos animados y miralos antes de mostrármelo. Revisá que el texto no se corte, que nada tape caras y que el posicionamiento sea el pedido.
 
-Nota: la línea de "Estética obligatoria" es el default cuando el plan no dice otra cosa, porque cámara y estilo de subtítulos se eligen en cada edición, en el plan que aprueba Juani (regla de Juani del 25/10/2026).
+Nota: la línea de "Estética obligatoria" es el default cuando el plan no dice otra cosa, porque cámara y estilo de subtítulos se eligen en cada edición (regla de Juani del 25/10/2026; sin paso de aprobación).
 
 ## Construir, probar y publicar
 1. `npm run build` (o `sh build.sh`).
@@ -113,8 +128,9 @@ Nota: la línea de "Estética obligatoria" es el default cuando el plan no dice 
    el recorte es `2257ed9570b02ce4923422c04e71082d`. Después `npm test`, o una prueba sola con `node test/rules.js`.
    Ver siempre las imágenes que dejan en `test/out/`.
 3. Probar una edición de punta a punta: `node tools/edit.js --dist dist --blobs .media --project <proyecto.json> --ops <ops.json> --sheet "1,5,10" --out test/out/x` y mirar `sheet.jpg`.
-4. Publicar: herramienta Artifact, `publish` con `url` del editor, `file_path` = `dist/sala.html` y `files` para lo que
-   cambió (`tools/edit.js`, `tools/EDITOR.md` desde `docs/EDITOR.md`; los `.py` con `contentType: "text/plain"`).
+4. Publicar: commit y push a main, `sh tools/empaquetar.sh`, y herramienta Artifact `publish` con `url` del editor,
+   `file_path` = `dist/sala.html` y `files` para lo que cambió (`tools/edit.js`, `tools/EDITOR.md` desde `docs/EDITOR.md`,
+   `tools/HARD-RULES.md`, `tools/repo.tgz.b64.txt` y `tools/repo.commit.txt` desde `dist/`; los `.py` con `contentType: "text/plain"`).
    Si el artifact cambió desde otra sesión, leé primero lo publicado y fusioná.
 5. Nunca publiques sin haber construido, probado y mirado cuadros renderizados.
 

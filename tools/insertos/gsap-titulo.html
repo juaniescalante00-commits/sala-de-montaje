@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- Plantilla de inserto: título por palabras que suben desde una máscara y salen al final.
+     Parámetros (--q): texto, color (hex, por defecto blanco), acento (hex), y (0..1, centro vertical; por defecto .30),
+     tam (px del texto, por defecto 96), dur (segundos totales; tiene que coincidir con --dur).
+     Ejemplo: node tools/html_inserto.js tools/insertos/gsap-titulo.html out.mp4 --dur 3 --q "texto=Tres%20errores%20que%20te%20cuestan%20plata" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: Inter; src: url(/fonts/InterVariable.woff2) format('woff2'); font-weight: 100 900; }
+  html, body { margin: 0; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+  #t { position: absolute; left: 108px; right: 108px; font: 800 96px/1.02 Inter, sans-serif; letter-spacing: -0.035em; text-align: center; text-wrap: balance; }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.08em 0.12em; margin: 0 -0.04em; }
+  .w > span { display: inline-block; will-change: transform; text-shadow: 0 4px 30px rgba(0,0,0,.35); }
+  #bar { position: absolute; height: 10px; border-radius: 5px; left: 50%; transform-origin: 50% 50%; }
+</style>
+<script src="/lib/gsap.min.js"></script>
+</head><body>
+<div id="t"></div><div id="bar"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const texto = q.get('texto') || 'Título del inserto', color = q.get('color') || '#ffffff', acento = q.get('acento') || '#ffd400';
+  const Y = +(q.get('y') || .30), TAM = +(q.get('tam') || 96), DUR = +(q.get('dur') || 3);
+  const t = document.getElementById('t'), bar = document.getElementById('bar');
+  t.style.fontSize = TAM + 'px'; t.style.color = color; bar.style.background = acento;
+  t.innerHTML = texto.split(/\s+/).map(w => `<span class="w"><span>${w.replace(/[<>&]/g, '')}</span></span>`).join(' ');
+  window.ready = document.fonts.ready.then(() => {
+    const h = t.getBoundingClientRect().height; t.style.top = (Y * 1920 - h / 2) + 'px';
+    bar.style.top = (Y * 1920 + h / 2 + 28) + 'px'; bar.style.width = '160px'; bar.style.marginLeft = '-80px';
+    const words = [...t.querySelectorAll('.w > span')];
+    const tl = gsap.timeline({ paused: true });
+    // entrada: cada palabra sube 110% con desaceleración firme, 60 ms entre palabras
+    tl.fromTo(words, { yPercent: 110 }, { yPercent: 0, duration: .55, ease: 'expo.out', stagger: .06, immediateRender: false }, 0);
+    tl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power3.out', immediateRender: false }, .25);
+    // salida: todo junto, acelerando, termina justo en el último cuadro
+    const out = Math.max(.9, DUR - .35);
+    tl.fromTo(words, { yPercent: 0 }, { yPercent: -110, duration: .3, ease: 'power3.in', stagger: .02, immediateRender: false }, out - .1);
+    tl.fromTo(bar, { scaleX: 1 }, { scaleX: 0, duration: .25, ease: 'power3.in', immediateRender: false }, out - .1);
+    gsap.set(words, { yPercent: 110 }); gsap.set(bar, { scaleX: 0 });
+    window.seek = s => { tl.seek(Math.min(s, DUR), false); };
+  });
+</script>
+</body></html>

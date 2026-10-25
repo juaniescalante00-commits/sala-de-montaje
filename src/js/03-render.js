@@ -646,7 +646,8 @@ function drawMotion(ctx, m, t, env) {
   if (tr === 'subir') ctx.translate(0, (1 - L.a) * 50 - L.o * 20);
   else if (tr === 'escala') { const s = .95 + .05 * L.a; ctx.translate(W / 2, H / 2); ctx.scale(s, s); ctx.translate(-W / 2, -H / 2); }
   else if (tr === 'mascara') al = 1;
-  ctx.globalAlpha *= al * (1 - L.o);
+  if (tr === 'corte') al = 1; // la animación ya viene hecha (inserto): sin fundidos del editor
+  ctx.globalAlpha *= tr === 'corte' ? 1 : al * (1 - L.o);
   const prevFull = env.inFull; env.inFull = m.layout === 'full';
   ctx.textBaseline = 'alphabetic';
   try { pr.draw(ctx, m, L, env); } catch (e) { console.warn('motion', m.type, e); }

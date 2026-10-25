@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- Plantilla de inserto: dato grande que cuenta hasta su valor, con etiqueta debajo. Solo con datos que se dicen en el
+     video o que dio Juani (HARD-RULES / CLAUDE.md).
+     Parámetros (--q): valor (número, ej. 38), antes (ej. "+"), despues (ej. "%"), etiqueta, color, acento, y (0..1), dur.
+     Ejemplo: --q "valor=38&antes=%2B&despues=%25&etiqueta=m%C3%A1s%20ventas%20en%20un%20mes" -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: Inter; src: url(/fonts/InterVariable.woff2) format('woff2'); font-weight: 100 900; }
+  html, body { margin: 0; width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+  #box { position: absolute; left: 108px; right: 108px; text-align: center; font-family: Inter, sans-serif; }
+  #n { font-weight: 800; font-size: 260px; line-height: .9; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; text-shadow: 0 6px 40px rgba(0,0,0,.35); }
+  #l { margin-top: 18px; font-weight: 600; font-size: 54px; letter-spacing: -0.02em; text-shadow: 0 3px 24px rgba(0,0,0,.45); }
+  #l span { display: inline-block; }
+</style>
+<script src="/lib/gsap.min.js"></script>
+</head><body>
+<div id="box"><div id="n"></div><div id="l"><span></span></div></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const valor = +(q.get('valor') || 0), antes = q.get('antes') || '', despues = q.get('despues') || '', dec = (String(q.get('valor') || '').split('.')[1] || '').length;
+  const etiqueta = q.get('etiqueta') || '', color = q.get('color') || '#ffffff', acento = q.get('acento') || '#ffd400';
+  const Y = +(q.get('y') || .30), DUR = +(q.get('dur') || 3);
+  const box = document.getElementById('box'), n = document.getElementById('n'), l = document.querySelector('#l span');
+  n.style.color = acento; l.style.color = color; l.textContent = etiqueta;
+  const fmt = v => antes + v.toLocaleString('es-AR', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + despues;
+  window.ready = document.fonts.ready.then(() => {
+    n.textContent = fmt(valor); const h = box.getBoundingClientRect().height; box.style.top = (Y * 1920 - h / 2) + 'px';
+    const st = { v: 0 }, tl = gsap.timeline({ paused: true });
+    tl.fromTo(box, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .35, ease: 'power3.out', immediateRender: false }, 0);
+    tl.fromTo(st, { v: 0 }, { v: valor, duration: Math.min(1.2, DUR * .45), ease: 'expo.out', immediateRender: false, onUpdate: () => { n.textContent = fmt(+st.v.toFixed(dec)); } }, .05);
+    tl.fromTo(l, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out', immediateRender: false }, .35);
+    tl.fromTo(box, { opacity: 1 }, { opacity: 0, duration: .25, ease: 'power2.in', immediateRender: false }, Math.max(1, DUR - .25));
+    window.seek = s => { tl.seek(Math.min(s, DUR), false); n.textContent = fmt(+st.v.toFixed(dec)); };
+    gsap.set(box, { opacity: 0 });
+  });
+</script>
+</body></html>

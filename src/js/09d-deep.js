@@ -13,7 +13,8 @@ function deepState(P) {
   return d;
 }
 function deepBusy(P) { const d = deepState(P); return !!d && (d.estado === 'pendiente' || d.estado === 'en_curso'); }
-function deepDefault(P) { let v = null; try { v = localStorage.getItem('sala.deep'); } catch (e) { } if (v === '0' || v === '1') return v === '1'; return !(P?.motions || []).length; }
+/* por defecto siempre a fondo: es la edición que lee el repo (manual, reglas, skills, índice de audio y fichas). La edición rápida queda para quien la elija. */
+function deepDefault(P) { let v = null; try { v = localStorage.getItem('sala.deep.v2'); } catch (e) { } if (v === '0' || v === '1') return v === '1'; return true; }
 async function runDeep(text) {
   const P = S.p; text = String(text || '').trim(); if (!P || !text) return false;
   if (!deepAvailable()) { toast('La edición a fondo funciona dentro de claude.ai. Uso la edición rápida.', 5000); return false; }

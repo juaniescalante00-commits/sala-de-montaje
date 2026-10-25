@@ -213,4 +213,5 @@ async function prepareMotions(P) {
   if (ms.some(m => m.type === '3d')) await ensureThree().catch(() => { });
   if (ms.some(m => m.type === 'plantilla')) { await ensureLottie().catch(() => { }); for (const m of ms) if (m.type === 'plantilla' && m.params.tpl) await loadTplData(m.params.tpl).catch(() => { }); }
   if (ms.some(m => m.behind)) await matteWarm(P).catch(() => { });
+  if (ms.some(m => m.type === 'inserto')) await insWarm(P).catch(() => { });
 }

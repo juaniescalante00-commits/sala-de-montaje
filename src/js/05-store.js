@@ -104,7 +104,7 @@ function sanitizeMotion(m) {
   const o = {
     id: m.id || 'm' + uid(), type: pr.key, start: Math.max(0, num(m.start)), dur: clamp(num(m.dur, 4), 0.8, 30),
     layout: m.layout === 'full' ? 'full' : 'overlay', pos: ['auto', 'arriba', 'centro', 'abajo'].includes(m.pos) ? m.pos : 'auto',
-    bg: m.bg === 'solido' ? 'solido' : 'video', tr: ['subir', 'fundido', 'escala', 'mascara'].includes(m.tr) ? m.tr : (pr.key === 'palabra' ? 'fundido' : 'subir'),
+    bg: m.bg === 'solido' ? 'solido' : 'video', tr: ['subir', 'fundido', 'escala', 'mascara', 'corte'].includes(m.tr) ? m.tr : (pr.key === 'palabra' ? 'fundido' : pr.key === 'inserto' ? 'corte' : 'subir'),
     sfx: (SFX[m.sfx] || /^lib:/.test(m.sfx || '')) ? m.sfx : 'ninguno', stagger: clamp(num(m.stagger, .35), .1, 2),
     params: Object.assign(clone(pr.defaults), m.params || {}),
     beats: Array.isArray(m.beats) ? m.beats.map(b => (b == null || !Number.isFinite(+b)) ? null : +(+b).toFixed(3)) : [],

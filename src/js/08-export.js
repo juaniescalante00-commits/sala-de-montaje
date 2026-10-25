@@ -62,6 +62,7 @@ async function exportMP4() {
     }
     const show = { motions: o.motions ? undefined : [], captions: o.captions };
     const savedGrade = P.grade; if (!o.grade) P.grade = Object.assign(clone(P.grade), { preset: 'neutro', exposure: 0, contrast: 0, saturation: 0, temperature: 0, tint: 0, fade: 0, vignette: 0, grain: 0 });
+    const hasIns = (P.motions || []).some(m => m.type === 'inserto');
     const N = Math.max(1, Math.round(P.duration * fps)); const prev = $('#exPrev'); const pctx = prev?.getContext('2d');
     try {
       for (let i = 0; i < N; i++) {
@@ -76,6 +77,7 @@ async function exportMP4() {
             smp.draw(sctx, 0, 0, dw, dh);
           }
         }
+        if (show.motions === undefined && hasIns) await insPrepareExport(P, t);
         if (show.motions === undefined && matteInfo(P) && behindList(P, activeMotions(P, t)).length && !matteAt(P, t)) await matteLoad(P, t, t + 3);
         composeFrame(ctx, t, { source: srcCan && srcCan.width > 1 ? srcCan : null, sw: srcCan?.width, sh: srcCan?.height, frameNo: i, motions: show.motions, captions: show.captions, strictMatte: true });
         await vs.add(t, 1 / fps);
@@ -96,6 +98,7 @@ async function exportMP4() {
     console.error(e); EX.info = ''; if (String(e.message) !== 'cancelado') toast('La exportación falló: ' + (e.message || e)); else toast('Exportación cancelada.');
   } finally {
     try { cur?.close(); nxt?.close(); await it?.return?.(); } catch (e) { }
+    try { await insEndExport(); } catch (e) { }
     EX.running = false; renderExport();
   }
 }

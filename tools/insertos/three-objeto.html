@@ -1,0 +1,38 @@
+<!doctype html>
+<!-- Plantilla de inserto 3D (three.js r160): una pieza de vidrio/metal que entra girando y se asienta, con luz de estudio.
+     Sirve de base para logos o productos simples; cambiá la geometría en build(). Todo depende de t (sin reloj propio).
+     Parámetros (--q): forma (toro | cubo | esfera | anillo), color (hex), y (0..1), tam (0.2..1, ancho relativo), dur. -->
+<html><head><meta charset="utf-8">
+<style>html, body { margin: 0; width: 1080px; height: 1920px; background: transparent; overflow: hidden; } canvas { display: block; }</style>
+</head><body>
+<script type="module">
+  import * as THREE from '/lib/three.module.min.js';
+  const q = new URLSearchParams(location.search);
+  const forma = q.get('forma') || 'toro', color = q.get('color') || '#e8e8ea', Y = +(q.get('y') || .32), TAM = +(q.get('tam') || .5), DUR = +(q.get('dur') || 3);
+  const r = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+  r.setPixelRatio(1); r.setSize(1080, 1920); r.setClearColor(0x000000, 0); r.outputColorSpace = THREE.SRGBColorSpace;
+  r.toneMapping = THREE.ACESFilmicToneMapping; document.body.appendChild(r.domElement);
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(30, 1080 / 1920, .1, 100); cam.position.set(0, 0, 12);
+  // luz de estudio: key cálida, rim fría, relleno suave
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222233, .6));
+  const key = new THREE.DirectionalLight(0xfff1e0, 2.4); key.position.set(4, 5, 6); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xbcd4ff, 2.0); rim.position.set(-6, 2, -4); scene.add(rim);
+  const geo = { toro: () => new THREE.TorusGeometry(1, .38, 64, 160), cubo: () => new THREE.BoxGeometry(1.6, 1.6, 1.6, 4, 4, 4),
+    esfera: () => new THREE.SphereGeometry(1.2, 96, 64), anillo: () => new THREE.TorusKnotGeometry(.9, .28, 220, 32) }[forma] || (() => new THREE.TorusGeometry(1, .38, 64, 160));
+  const mat = new THREE.MeshPhysicalMaterial({ color, metalness: .35, roughness: .28, clearcoat: 1, clearcoatRoughness: .1 });
+  const mesh = new THREE.Mesh(geo(), mat); scene.add(mesh);
+  // posición vertical en pantalla → mundo
+  const halfH = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2)) * cam.position.z, halfW = halfH * cam.aspect;
+  const baseY = (0.5 - Y) * 2 * halfH, baseS = (TAM * 2 * halfW) / 2.8;
+  const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3.4), easeIn = x => Math.pow(Math.min(1, Math.max(0, x)), 2.6);
+  window.seek = t => {
+    const a = ease(t / .9), out = easeIn((t - (DUR - .4)) / .4);
+    const s = baseS * (0.6 + 0.4 * a) * (1 - out);
+    mesh.scale.setScalar(Math.max(1e-4, s));
+    mesh.position.set(0, baseY - (1 - a) * 1.2, 0);
+    mesh.rotation.set(.35 + (1 - a) * 1.4 + t * .15, -2.4 * (1 - a) + t * .5, .1);
+    r.render(scene, cam);
+  };
+  window.seek(0);
+</script>
+</body></html>

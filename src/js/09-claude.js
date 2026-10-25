@@ -6,7 +6,7 @@ const BEAT_NAMES = {
   linea: ['titular', 'paso 1', 'paso 2', 'paso n'], cta: ['titular', 'botón', 'nota'], monograma: ['iniciales', 'nombre', 'bajada'], etiqueta: ['texto'], libre: ['elemento 1', 'elemento 2', 'elemento n (o usá "at" en cada elemento)'], codigo: ['texto'], '3d': ['texto'], plantilla: ['textos'],
 };
 function catalogText() {
-  return Object.values(PRESETS).map(pr => ['codigo', '3d', 'plantilla'].includes(pr.key) ? `- "${pr.key}" (${pr.name}): ${pr.desc} (ver abajo)` : `- "${pr.key}" (${pr.name}): ${pr.desc} params por defecto: ${JSON.stringify(pr.defaults)}. Orden de beats: ${(BEAT_NAMES[pr.key] || ['elemento 1', 'elemento n']).join(', ')}.`).join('\n');
+  return Object.values(PRESETS).map(pr => ['codigo', '3d', 'plantilla', 'inserto'].includes(pr.key) ? `- "${pr.key}" (${pr.name}): ${pr.desc} (ver abajo)` : `- "${pr.key}" (${pr.name}): ${pr.desc} params por defecto: ${JSON.stringify(pr.defaults)}. Orden de beats: ${(BEAT_NAMES[pr.key] || ['elemento 1', 'elemento n']).join(', ')}.`).join('\n');
 }
 function wordsText(ws) { return ws.map(w => `${w.w}@${w.s.toFixed(2)}`).join(' '); }
 function sampleErr(e) {

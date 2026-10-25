@@ -78,8 +78,8 @@ function faceShare(P, t0, t1) {
 /* constantes de las reglas duras */
 const CAPS_HIDE_MAX = 3.5;          // s máximos que una pieza puede apagar los subtítulos
 const FULL_OVER_FACE_MAX = 2.5;     // s máximos de una pantalla completa sobre alguien que habla
-const BIG_TEXT = new Set(['titulo', 'cita', 'palabra', 'codigo', '3d', 'plantilla', 'libre', 'contador']);
-const MAX_DUR = { etiqueta: 4, lowerthird: 5, lista: 6, titulo: 4, cita: 5, palabra: 2.6, cta: 5, contador: 4.5, progreso: 4.5, barras: 6, comparacion: 6, bento: 6, grilla: 6, linea: 6, monograma: 3, codigo: 5, '3d': 5, plantilla: 6, libre: 6 };
+const BIG_TEXT = new Set(['titulo', 'cita', 'palabra', 'codigo', '3d', 'plantilla', 'libre', 'contador', 'inserto']);
+const MAX_DUR = { etiqueta: 4, lowerthird: 5, lista: 6, titulo: 4, cita: 5, palabra: 2.6, cta: 5, contador: 4.5, progreso: 4.5, barras: 6, comparacion: 6, bento: 6, grilla: 6, linea: 6, monograma: 3, codigo: 5, '3d': 5, plantilla: 6, libre: 6, inserto: 10 };
 
 /* ============ medir lo que dibuja una pieza ============ */
 const MEAS = document.createElement('canvas'); MEAS.width = 270; MEAS.height = 480;
@@ -119,6 +119,7 @@ function tokens(s) { return String(s || '').split(/[\s/·,.;:!?¡¿()"“”'\-�
 function motionText(m) {
   if (m.type === 'codigo' || m.type === '3d') return String(m.params?.texto || '');
   if (m.type === 'plantilla') return Object.values(m.params?.textos || {}).join(' ');
+  if (m.type === 'inserto') return String(m.params?.texto || '');
   const pr = PRESETS[m.type]; const labs = (pr?.labels?.(m.params) || []).filter(x => typeof x === 'string');
   const p = m.params || {}; return labs.concat([p.eyebrow, p.sub, p.caption, p.note].filter(Boolean)).join(' ');
 }
