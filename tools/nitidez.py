@@ -95,7 +95,7 @@ def plan(video, P, base):
     for a, b in tomas(video, info['dur']):
         ts = [a + (b - a) * q for q in (0.3, 0.7)]
         orig = [cuadro(video, t, W, H) for t in ts]
-        def con(m, c=0.0):
+        def con(m, c=0.0, ts=ts, orig=orig):   # ts y orig atados a ESTA toma (sin esto, todas medían la última)
             vf = unsharp(m, c); ys = [cuadro(video, t, W, H, vf) for t in ts] if vf else orig
             return float(np.mean([detalle(y) for y in ys])), float(np.mean([halos(o, y) for o, y in zip(orig, ys)]))
         nt, hl = con(base)
