@@ -73,6 +73,14 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
   `docs/EDITOR.md`, usa `tools/edit.js`, escribe el resultado y `deep.estado`.
 Si cambiás una herramienta o el manual, publicalos en el artifact (ver abajo): las tareas los bajan de ahí en cada corrida.
 
+## Datos de la compu de Juani (`datos/`, generados por `local/`)
+- Material en `C:\Users\usr\Videos\Sala de Montaje` (`Música`, `Sonidos`, `referencias`, …). Los scripts de `local/`
+  (Python, corren en su compu, ver `local/README.md`) escriben acá solo datos livianos; audios y videos nunca suben.
+- `datos/audio/indice.json` (y `.csv`): música y SFX con BPM, energía, golpes, tonalidad y clima; `doc_id` = `library/<doc_id>`.
+  Elegí música por datos desde acá.
+- `datos/referencias/<nombre>/ficha.md` (+ `ficha.json`, `tira.jpg`): planos, palabras por segundo y bloques de habla de
+  cada referencia; `datos/referencias/indice.md` las resume. Es el molde para "editalo como esta referencia".
+
 ## Construir, probar y publicar
 1. `npm run build` (o `sh build.sh`).
 2. Pruebas: necesitan Playwright (en la nube ya está) y el video de prueba en `.media/`. Bajalo con Artifact `read`
