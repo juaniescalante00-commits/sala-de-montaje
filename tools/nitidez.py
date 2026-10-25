@@ -139,8 +139,10 @@ def main():
     P = json.load(open(a.proyecto))
     if a.medir:
         res, _ = medir_tomas(a.video, P)
+        # en el FINAL los títulos y subtítulos suman bordes y suben la medida (una toma con titular da 34 y la misma sin
+        # él 26): la referencia es la toma A-roll más limpia (la de menos detalle), no la mediana
         ar = [r['nitidez'] for r in res if r['aroll']] or [r['nitidez'] for r in res]
-        ref = float(np.median(ar)); peor = min(res, key=lambda r: r['nitidez'])
+        ref = float(min(ar)); peor = min(res, key=lambda r: r['nitidez'])
         inf = {'tomas': res, 'ref_aroll': round(ref, 4), 'peor': peor, 'relacion_peor': round(peor['nitidez'] / ref, 3) if ref else 0, 'ok': peor['nitidez'] >= ref * 0.8}
     else:
         info0 = probe(a.video); base = a.base if a.base is not None else (0.5 if info0['h'] < 1920 else 0.0)
