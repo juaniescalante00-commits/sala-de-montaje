@@ -1,0 +1,7 @@
+# Scripts locales de la Sala de Montaje (Windows, Python 3.10 a 3.13; recomendado 3.12). Todo gratis y local.
+# Además hace falta ffmpeg en el PATH: winget install Gyan.FFmpeg
+numpy>=1.24
+librosa>=0.10.2        # tempo, beats, energía, golpes, tonalidad
+faster-whisper>=1.1    # transcripción local con tiempo por palabra (baja el modelo la primera vez, sin cuenta)
+scenedetect>=0.6.4     # detección de cortes (PySceneDetect)
+opencv-python>=4.8     # lo usa PySceneDetect y arma la tira de cuadros

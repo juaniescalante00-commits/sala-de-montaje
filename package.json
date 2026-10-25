@@ -4,12 +4,20 @@
   "description": "Fábrica de edición de video de Juani: editor por código (artifact de claude.ai) + herramientas para Claude Code en la nube.",
   "scripts": {
     "build": "sh build.sh",
-    "test": "node test/run-all.js"
+    "test": "node test/run-all.js",
+    "remotion:studio": "remotion studio remotion/index.ts",
+    "remotion:prueba": "remotion render remotion/index.ts Prueba test/out/remotion-prueba.mp4"
   },
   "devDependencies": {
-    "mediabunny": "1.61.2",
     "@mediabunny/aac-encoder": "1.61.2",
-    "three": "0.160.0",
-    "lottie-web": "5.12.2"
+    "@remotion/bundler": "4.0.538",
+    "@remotion/cli": "4.0.538",
+    "@remotion/renderer": "4.0.538",
+    "lottie-web": "5.12.2",
+    "mediabunny": "1.61.2",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.538",
+    "three": "0.160.0"
   }
 }

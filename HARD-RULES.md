@@ -7,7 +7,7 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 ## A. Leer el material (Claude lee el video, no lo mira)
 1. **Probe antes de tocar nada.** `ffprobe` (o `ffmpeg-skill/scripts/probe.py`): fps real (avisar si es VFR), dimensiones de *display* (no de stream: el celular guarda la rotación aparte), duración y canales de audio. Un video vertical leído como horizontal se letterboxea entero sin avisar.
 2. **Transcript con tiempos por palabra, idioma fijado.** faster-whisper o WhisperX con `word_timestamps`, idioma explícito (`es`); nunca autodetectar (puede traducir en silencio) ni usar SRT por frase. Se cachea por archivo y se rehace solo si cambia el archivo.
-3. **El ritmo sale del audio.** Cortes de habla: silencios (`silencedetect`, VAD) y fin de oración. Cortes musicales: beats y energía (librosa). La visión no encuentra un golpe de 200 ms.
+3. **El ritmo sale del audio.** Cortes de habla: silencios (`silencedetect`, VAD) y fin de oración. Cortes musicales: beats y energía (librosa; ya medidos en `datos/audio/indice.json`). La visión no encuentra un golpe de 200 ms.
 4. **Ojos a demanda.** Hoja de cuadros o tira con onda y palabras solo en puntos de decisión (pausas dudosas, tomas, cada corte). Nunca volcar todos los cuadros.
 
 ## B. Decidir (Claude decide, el código ejecuta)
@@ -41,6 +41,7 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 24. **Nunca escribir dentro de la carpeta de una skill**: todo lo que se genera va a la carpeta del proyecto.
 25. **Nada pago ni cuentas nuevas sin OK de Juani.** `motionmaxxing` trae `voice.py` (ElevenLabs) e `imagegen.py` (Codex): no se configuran claves para usarlos.
 26. **Skills de terceros: solo copias auditadas** (sin red escondida, sin claves, sin comandos peligrosos). Se actualizan volviendo a auditar, nunca con el instalador de la skill.
+27. **Al repo nunca suben audios ni videos** (pesan y no son nuestros): solo tablas, fichas y tiras JPG livianas. El `.gitignore` los frena; si uno aparece en un commit, se saca antes de pushear.
 
 ## Qué NO va en este archivo
 Movimientos de cámara (zooms, seguimiento de cara, reencuadres), estilo de subtítulos (tamaño, palabras por bloque,

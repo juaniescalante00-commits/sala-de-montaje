@@ -7,4 +7,31 @@ test/out/
 *.webm
 *.wav
 *.onnx
+# Audio y video nunca van al repo (pesan y no son nuestros): solo tablas, fichas y tiras livianas.
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.opus
+*.wma
+*.aif
+*.aiff
+*.mkv
+*.m4v
+*.avi
+*.mts
+*.mxf
+*.prores
+# Windows ignora mayúsculas, Linux no: los más comunes del celular y de los packs, en mayúscula.
+*.MP4
+*.MOV
+*.WAV
+*.MP3
+*.M4A
+*.AIF
+# Scripts locales de Python
+.venv/
+__pycache__/
+*.tmp
 !test/fixtures/*.webm

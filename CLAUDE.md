@@ -17,7 +17,7 @@ Castellano rioplatense con voseo, directo, sin tecnicismos ni nombres de archivo
 Estética minimalista y editorial en todo.
 
 Reglas técnicas que nunca se rompen: `HARD-RULES.md` (leelo antes de cortar o renderizar).
-Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` (cortes, silencios, subtítulos, loudness, verificación) y `motionmaxxing` (motion graphics con oficio). Para skills nuevas: auditar con `tools/scan_skill.py` antes de copiar.
+Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` (cortes, silencios, subtítulos, loudness, verificación), `motionmaxxing` (motion graphics con oficio) y las oficiales de Remotion (`remotion-markup`, `-captions`, `-render`, `-studio`, `-multimedia`, `-interactivity`, `-docs`). Para skills nuevas: auditar con `tools/scan_skill.py` antes de copiar.
 
 ## Reglas de edición que nunca se rompen
 - Nunca sonidos que no tienen que ver con lo que pasa en pantalla. Nada de pips, pops, ticks.
@@ -72,6 +72,19 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 - `trig_01FSh19WcrPjb3sAq7BRPFZp` · "Sala de Montaje · editar a fondo": recibe `{proyecto, pedido}`, sigue
   `docs/EDITOR.md`, usa `tools/edit.js`, escribe el resultado y `deep.estado`.
 Si cambiás una herramienta o el manual, publicalos en el artifact (ver abajo): las tareas los bajan de ahí en cada corrida.
+
+## Datos de la compu de Juani (`datos/`, generados por `local/`)
+- Material en `C:\Users\usr\Videos\Sala de Montaje` (`Música`, `Sonidos`, `referencias`, …). Los scripts de `local/`
+  (Python, corren en su compu, ver `local/README.md`) escriben acá solo datos livianos; audios y videos nunca suben.
+- `datos/audio/indice.json` (y `.csv`): música y SFX con BPM, energía, golpes, tonalidad y clima; `doc_id` = `library/<doc_id>`.
+  Elegí música por datos desde acá.
+- `datos/referencias/<nombre>/ficha.md` (+ `ficha.json`, `tira.jpg`): planos, palabras por segundo y bloques de habla de
+  cada referencia; `datos/referencias/indice.md` las resume. Es el molde para "editalo como esta referencia".
+
+## Remotion (`remotion/`)
+- Remotion 4.0.538 se usa bajo la **licencia gratis para individuos** (https://remotion.dev/license): Juani lo usa como persona individual. Si pasara a usarlo una empresa de más de 3 personas, hace falta la licencia de empresa.
+- Composiciones en `remotion/Root.tsx` (1080×1920, 30 fps). Prueba: `npm run remotion:prueba` → `test/out/remotion-prueba.mp4`; vista previa: `npm run remotion:studio`. En la nube: `REMOTION_CHROME=/opt/pw-browsers/chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell`.
+- Nunca pasar `licenseKey` (manda un aviso de uso a remotion.pro). Nunca `npx remotion upgrade` ni `npx skills`: pisan las skills auditadas. Para actualizar: todas las `remotion`/`@remotion/*` a la misma versión exacta con npm, y volver a auditar las skills.
 
 ## Construir, probar y publicar
 1. `npm run build` (o `sh build.sh`).
