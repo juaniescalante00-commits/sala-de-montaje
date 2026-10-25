@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.media/
+test/out/
+*.mp4
+*.mov
+*.webm
+*.wav
+*.onnx
+!test/fixtures/*.webm

@@ -1,0 +1,10 @@
+[
+ {"op":"proyecto","subtitulos":{"on":true,"style":"limpio","pos":"auto","y":0.43,"maxWords":2,"size":1,"upper":false,"hideOnFull":true},
+  "marca":{"display":"Inter","body":"Inter","dw":700,"upper":false,"fg":"#ffffff","bg":"#121214","accent":"#e9e4dc","panel":"glass","radius":40,"track":-2},
+  "color":{"preset":"calido","mix":0.6,"contrast":0.08,"saturation":0.06,"temperature":0.06,"vignette":0.12,"fade":0.02,"grain":0.03},"movimiento":"expo"},
+ {"op":"camara","seguirCara":false,"zooms":[]},
+ {"op":"crear","pieza":{"type":"palabra","start":0.0,"dur":1.75,"behind":true,"tr":"fundido","params":{"pre":"esto era el","word":"Tiro Federal","size":"XL"},"quote":"Esto era el Tiro Federal","desc":"Gancho: la palabra gigante detrás de la cabeza"}},
+ {"op":"crear","pieza":{"type":"palabra","start":11.85,"dur":2.1,"behind":true,"tr":"fundido","params":{"pre":"libre y","word":"gratuito","size":"XL"},"quote":"libre, gratuito","desc":"La promesa central"}},
+ {"op":"crear","pieza":{"type":"palabra","start":27.05,"dur":1.8,"tr":"fundido","params":{"pre":"la","word":"innovación","size":"XL","y":0.36},"quote":"la innovación","desc":"Sobre la toma aérea, centrada"}},
+ {"op":"crear","pieza":{"type":"palabra","start":36.3,"dur":1.67,"behind":true,"tr":"fundido","params":{"pre":"acá está el","word":"futuro","size":"XL"},"quote":"Acá está el futuro","desc":"Cierre"}}
+]

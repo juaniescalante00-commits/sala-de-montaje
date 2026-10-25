@@ -1,0 +1,158 @@
+<div id="app">
+  <header class="top">
+    <button class="btn icon ghost" id="btnHome" type="button" title="Inicio: subir otro video" aria-label="Inicio">⌂</button>
+    <div class="logo">Sala de <i>Montaje</i></div>
+    <div class="proj">
+      <label class="vh" for="projSel" hidden>Proyecto</label>
+      <select id="projSel" aria-label="Proyecto"></select>
+      <button class="btn sm" id="btnNewProj" type="button">Nuevo</button>
+    </div>
+    <nav class="modes" role="tablist" aria-label="Modo">
+      <button type="button" role="tab" data-mode="editor" aria-selected="true">Editor</button>
+      <button type="button" role="tab" data-mode="review" aria-selected="false">Revisión</button>
+      <button type="button" role="tab" data-mode="export" aria-selected="false">Exportar</button>
+    </nav>
+    <div class="spacer"></div>
+    <div class="status">
+      <span class="pill" id="saveState"><span class="dot"></span><span>Cargando</span></span>
+      <span class="pill" id="claudeState" title="Funciones con Claude dentro de la página"><span class="dot"></span><span>Claude</span></span>
+      <button class="btn icon ghost" id="btnUndo" type="button" title="Deshacer (Ctrl+Z)" aria-label="Deshacer">↶</button>
+      <button class="btn icon ghost" id="btnRedo" type="button" title="Rehacer (Ctrl+Shift+Z)" aria-label="Rehacer">↷</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="view editor" id="view-editor">
+      <aside class="panel left">
+        <div class="tabs" role="tablist" id="leftTabs">
+          <button type="button" data-tab="claude" aria-selected="true">Claude</button>
+          <button type="button" data-tab="estilo" aria-selected="false">Estilo y reglas</button>
+          <button type="button" data-tab="lib" aria-selected="false">Piezas</button>
+          <button type="button" data-tab="text" aria-selected="false">Texto</button>
+          <button type="button" data-tab="brand" aria-selected="false">Marca</button>
+          <button type="button" data-tab="color" aria-selected="false">Color</button>
+          <button type="button" data-tab="audio" aria-selected="false">Audio</button>
+        </div>
+        <div class="scroll" id="leftBody"></div>
+      </aside>
+
+      <div class="center">
+        <div class="stagewrap" id="stageWrap">
+          <canvas id="stage" width="540" height="960" aria-label="Vista previa 9:16"></canvas>
+          <div class="drop" id="dropHint" hidden>Soltá el video para cargarlo</div>
+        </div>
+        <div class="transport">
+          <button class="btn icon" id="btnPlay" type="button" title="Reproducir (Espacio)" aria-label="Reproducir">▶</button>
+          <button class="btn icon ghost" id="btnBack" type="button" title="Cuadro anterior (←)" aria-label="Cuadro anterior">‹</button>
+          <button class="btn icon ghost" id="btnFwd" type="button" title="Cuadro siguiente (→)" aria-label="Cuadro siguiente">›</button>
+          <div class="tc" id="tcNow">00:00:00 <span>/ 00:00</span></div>
+          <div class="spacer" style="flex:1"></div>
+          <button class="btn sm toggle" id="tgSafe" type="button" aria-pressed="false" title="Zonas seguras Meta / TikTok">Zonas seguras</button>
+          <button class="btn sm toggle" id="tgFaces" type="button" aria-pressed="false" title="Mostrar caras detectadas">Caras</button>
+          <button class="btn sm toggle" id="tgLoop" type="button" aria-pressed="false" title="Repetir la pieza seleccionada">Loop pieza</button>
+          <button class="btn sm" id="btnLoadVideo" type="button">Cargar video</button>
+        </div>
+      </div>
+
+      <aside class="panel right">
+        <div class="scroll" id="inspector"></div>
+      </aside>
+
+      <div class="timeline" id="timeline">
+        <div class="tl-bar">
+          <span class="eyebrow">Línea de tiempo</span>
+          <span class="hint" id="tlHint">Arrastrá las piezas para moverlas, los bordes para recortarlas.</span>
+          <div style="flex:1"></div>
+          <label class="chk" style="font-size:12px"><input type="checkbox" id="tlSnap" checked> Imán a palabras</label>
+          <button class="btn sm ghost" id="tlOut" type="button" aria-label="Alejar">−</button>
+          <button class="btn sm ghost" id="tlFit" type="button">Ajustar</button>
+          <button class="btn sm ghost" id="tlIn" type="button" aria-label="Acercar">+</button>
+        </div>
+        <div class="tl-body">
+          <div class="tl-labels"><div></div><div>Motions</div><div>Subtítulos</div><div>Voz</div><div>Música</div></div>
+          <div class="tl-scroll" id="tlScroll">
+            <div class="tl-inner" id="tlInner">
+              <div class="ruler" id="tlRuler"></div>
+              <div class="lane" id="laneMotions"></div>
+              <div class="lane" id="laneCaps"></div>
+              <div class="lane" id="laneVoice"><canvas class="wave" id="waveCan"></canvas></div>
+              <div class="lane" id="laneMusic"></div>
+              <div class="playhead" id="playhead"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view review" id="view-review" hidden>
+      <div class="rv-head">
+        <div class="grow">
+          <div class="eyebrow" id="rvCrumb">Proyecto · Motion graphics</div>
+          <h1 id="rvTitle">Motion graphics · Revisión v1</h1>
+        </div>
+        <span class="pill" id="rvCount"><span class="dot"></span><span>0 aprobados · 0 con cambios · 0 piezas</span></span>
+        <button class="btn" id="rvPlayAll" type="button">Ver todo seguido</button>
+        <button class="btn claude" id="rvApplyAll" type="button">Aplicar cambios con Claude</button>
+        <button class="btn" id="rvQC" type="button" title="Claude mira un cuadro de cada pieza y marca problemas">Control de calidad</button>
+        <button class="btn ghost" id="rvNewRound" type="button">Nueva ronda</button>
+      </div>
+      <div class="rv-main">
+        <div class="rv-stage" id="rvStage"></div>
+        <div class="rv-ctrl">
+          <button class="btn icon" id="rvPrev" type="button" aria-label="Pieza anterior">◀</button>
+          <button class="btn" id="rvReplay" type="button">⟳ Repetir animación</button>
+          <button class="btn icon" id="rvNext" type="button" aria-label="Pieza siguiente">▶</button>
+          <span class="tc" id="rvTc">Motion 00 / 00 · TC 00:00</span>
+        </div>
+        <div class="rv-mini" id="rvMini"></div>
+      </div>
+      <aside class="rv-side">
+        <div class="rv-card" id="rvCard"></div>
+        <div class="rv-list" id="rvList"></div>
+      </aside>
+    </section>
+
+    <section class="view export" id="view-export" hidden>
+      <div class="ex-wrap" id="exWrap"></div>
+    </section>
+  </main>
+</div>
+
+<div class="home" id="home" hidden>
+  <div class="hm-top">
+    <div class="logo">Sala de <i>Montaje</i></div>
+    <button class="btn sm ghost" id="hmBack" type="button" hidden>Volver al editor →</button>
+  </div>
+  <div class="hm-col">
+    <h1 class="hm-title" id="hmTitle">¿Qué editamos <i>hoy</i>?</h1>
+    <div class="hm-card" id="hmCard">
+      <div id="hmMedia"></div>
+      <div id="hmThread"></div>
+      <label class="vh" for="hmIn">Qué querés que haga con el video</label>
+      <textarea id="hmIn" rows="3" placeholder="Contame qué necesitás, como se lo dirías a un editor: subtítulos, títulos, música, color, un cierre…"></textarea>
+      <div class="hm-foot">
+        <div class="hm-style"><label class="vh" for="hmStyle">Estilo</label><select id="hmStyle" aria-label="Estilo de referencia"></select><button class="btn sm ghost" id="hmRef" type="button">+ Referencia</button></div>
+        <span class="hint" id="hmHint">Win + H para dictar · Ctrl + Enter envía</span>
+        <button class="btn pri" id="hmSend" type="button">Editar <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+    <div class="chips hm-ideas" id="hmIdeas"></div>
+    <div class="hm-recent" id="hmRecent"></div>
+  </div>
+</div>
+
+<dialog id="styleDlg" class="dlg" aria-labelledby="sdTitle">
+  <h2 id="sdTitle">Nuevo estilo desde una referencia</h2>
+  <p class="hint">Subí el video que querés copiar (o capturas). Lo miro cuadro por cuadro: ritmo de cortes, tipografía, colores, cómo entran los textos y los gráficos. Queda guardado para usarlo en todos tus videos.</p>
+  <label class="f">Nombre<input type="text" id="sdName" placeholder="Ej.: Real estate USA, Podcast limpio, Producto 3D"></label>
+  <div class="row"><button class="btn" type="button" id="sdPick">Elegir video o imágenes</button><span class="hint" id="sdFiles">Ningún archivo</span></div>
+  <label class="f">Qué copiar y qué no (opcional)<textarea id="sdInstr" rows="3" placeholder="Ej.: quiero el mismo tipo de títulos y transiciones, pero sin la música épica y con mis colores."></textarea></label>
+  <div class="bar" id="sdBar" hidden><i></i></div>
+  <p class="hint" id="sdMsg" role="status"></p>
+  <div class="row" style="justify-content:flex-end"><button class="btn ghost" type="button" id="sdCancel">Cancelar</button><button class="btn pri" type="button" id="sdGo">Analizar y guardar</button></div>
+</dialog>
+<div id="toast" hidden role="status" aria-live="polite"></div>
+<input type="file" id="fileVideo" accept="video/*" hidden>
+<input type="file" id="fileAny" hidden>
+<video id="vid" class="vhide" playsinline preload="auto"></video>
+<audio id="mus" preload="auto"></audio>

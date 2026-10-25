@@ -1,0 +1,15 @@
+{
+  "name": "sala-de-montaje",
+  "private": true,
+  "description": "Fábrica de edición de video de Juani: editor por código (artifact de claude.ai) + herramientas para Claude Code en la nube.",
+  "scripts": {
+    "build": "sh build.sh",
+    "test": "node test/run-all.js"
+  },
+  "devDependencies": {
+    "mediabunny": "1.61.2",
+    "@mediabunny/aac-encoder": "1.61.2",
+    "three": "0.160.0",
+    "lottie-web": "5.12.2"
+  }
+}
