@@ -82,6 +82,10 @@ Si el renderizador te informa una corrección, **entendé por qué** y corregí 
     ritmo de cortes, color/look, música y sonidos, cierre;
   - las `instructions` del estilo son de Juani: mandan.
 
+**Cortes** (sección 11): si el pedido habla de cortes, silencios, muletillas, tomas, ritmo o "como la referencia N" (y la
+ficha tiene planos más cortos que los del crudo), cortá **antes** de editar: los gráficos, subtítulos y sonido se
+ubican sobre el tiempo ya cortado (HARD-RULES 5). Si el pedido no lo pide, el crudo se usa tal cual.
+
 ### 2.3 Planear
 Escribí un plan corto (es para vos, no se frena a esperar aprobación): qué momentos merecen un gráfico y por qué (Murch: emoción > historia > ritmo), qué no lleva nada,
 y cómo vas a traducir cada rasgo de la ficha de estilo al vocabulario del editor (sección 4). Menos piezas y mejor hechas.
@@ -191,7 +195,8 @@ Subilo con Artifact (`publish`, `url` del editor, `file_path` = matte.mp4, `asse
 Las piezas `behind` solo valen mientras hay alguien en cuadro (el editor las convierte en texto normal si no).
 
 ## 6. Lo que este editor todavía no hace (decilo si la referencia lo usa)
-- Cortar, reordenar o acelerar el video crudo; transiciones entre tomas (whip pan, barridos). El crudo se usa tal cual.
+- Reordenar o acelerar el video crudo; transiciones entre tomas (whip pan, barridos). **Cortar sí**: silencios,
+  muletillas, tomas repetidas y jump cuts con punch-in (sección 11); el corte queda en un proyecto nuevo "… · cortado".
 - Insertar otros videos o B-roll externo (sí se pueden montar animaciones propias: pieza `inserto`).
 - Formato horizontal.
 - Generar imágenes, voces o música.
@@ -294,3 +299,47 @@ Pieza:
   se ocultan mientras está; si no tiene texto, dejalo vacío).
 - El editor lo mide por sus píxeles reales: si tapa la cara, lo baja o achica (lo vas a ver en `rules.json`). Mejor
   diseñalo desde el principio fuera de la cara (mirá `faces` en el manual generado).
+
+## 11. Cortes del crudo (silencios, muletillas, tomas repetidas, ritmo de la referencia)
+`tools/cortar.py` corta el crudo por palabras: vos decidís QUÉ sale (por IDs de palabra o de frase, nunca por tiempo:
+HARD-RULES 6) y el script decide DÓNDE cae cada corte (en un silencio sostenido entre palabras, medido en el audio) y
+lo ejecuta con ffmpeg. Usa la skill `ffmpeg-skill` para el probe y para los planos de origen (`scenes.py`).
+
+Qué hace solo (cada cosa se apaga con `--sin-silencios`, `--sin-muletillas`, `--sin-tomas`, `--sin-ritmo`):
+- **Silencios**: pausas de más de 0,35 s (`--silencio`) quedan con 0,2 s de aire total (`--aire`); no corta si salen
+  menos de 0,15 s (`--min-corte`: sería un salto sin ganancia).
+- **Muletillas**: solo sonidos de duda (eh, em, mm, ah…) y "este" cuando está aislado entre pausas. Nunca "esto",
+  "o sea", "bueno": son palabras reales casi siempre (si una sobra en este video, sacala por ID).
+- **Tomas repetidas y falsos arranques**: si una frase arranca igual que la siguiente, queda la **última**; tartamudeos
+  ("el el", "lo que lo que") pierden la primera copia. "muy muy" (énfasis) se deja.
+- **Ritmo de la referencia** (`--ficha datos/referencias/N/ficha.json`): los planos de talking head más largos que 1,6 veces
+  la duración de plano de la ficha se parten en fin de frase o coma, y cada jump cut alterna el encuadre 1,0 ↔ punch-in
+  (`--punch 1.1`, centrado en la cara). En cada plano nuevo del crudo y en las tomas sin persona vuelve a 1,0.
+- Si una palabra pedida no tiene un silencio de verdad alrededor, **no la saca** y lo avisa (transcript y audio
+  siempre iguales).
+
+Pasos:
+```
+python3 tools/cortar.py --proyecto proyecto.json --blobs blobs --vista             # transcript con IDs (#n, F#) y pausas
+python3 tools/cortar.py --proyecto proyecto.json --blobs blobs --out corte --ficha datos/referencias/1/ficha.json \
+        [--quitar-frases 3,7] [--quitar-palabras 12-15] [--mantener-palabras 40] [--modelo <carpeta whisper>]
+```
+1. Leé `corte/informe.txt` (qué salió y por qué, tramos, zoom de cada uno) y **mirá `corte/uniones.jpg`** (cuadro
+   antes | después de cada unión). Controles automáticos: duración video = audio = suma de tramos, salto de audio en
+   cada unión, y con `--modelo` (el Whisper local de la tarea de transcripción) retranscribe ±1,2 s de cada unión y
+   compara (HARD-RULES 21). Si una unión sale mal, corregí con IDs y volvé a correr.
+2. Subí `corte/cortado.mp4` y `corte/recorte.mp4` (si hay) con Artifact `publish` (`url` del editor, `asset: true`) y copialos
+   a `blobs/<assetId>.mp4`.
+3. `python3 tools/cortar.py --armar corte --proyecto proyecto.json --asset-video <id> [--asset-recorte <id>]` →
+   `corte/proyecto_cortado.json`: un proyecto **nuevo** ("<nombre> · cortado") con el video cortado, las palabras y caras
+   en el tiempo nuevo, el mismo estilo y marca, y `cortes` (origen y resumen). ArtifactData `set` en
+   `projects/<id nuevo>` (es un documento nuevo: sin if_version). El original no se toca: la página reproduce el video
+   del navegador de Juani si lo tiene guardado, así que el corte no puede ir en el mismo proyecto.
+4. Editá ese proyecto nuevo como siempre (edit.js con `--project corte/proyecto_cortado.json`).
+5. En el mensaje final decí el resumen del corte (segundos que salieron, cuántos silencios, muletillas y tomas, jump
+   cuts y punch-in) y en qué proyecto quedó.
+
+Si el proyecto ya es una versión cortada (`cortes` existe) y Juani pide cortar distinto, cortá desde el crudo de origen
+(`cortes.origen.video.assetId`) con el `proyecto.json` del original, no sobre lo ya cortado.
+Límite: el corte sale de la copia del proyecto (720p si el crudo pesaba más de 19 MB): en ese caso el proyecto cortado
+exporta a 1080 desde 720p. Decilo si el pedido es para un anuncio en alta.

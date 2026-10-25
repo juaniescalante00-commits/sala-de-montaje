@@ -72,7 +72,7 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
   (`tools/faces.py`), Robust Video Matting (`tools/matte.py`).
 - `trig_01FSh19WcrPjb3sAq7BRPFZp` · "Sala de Montaje · editar a fondo": recibe `{proyecto, pedido}`, **clona este repo**
   (add_repo + git clone; si no puede, baja `tools/repo.tgz.b64.txt` del artifact), lee la lista obligatoria de
-  `docs/EDITOR.md` (sección 0: CLAUDE.md, HARD-RULES, manual, skills, fichas, índice de audio), edita con `tools/edit.js`,
+  `docs/EDITOR.md` (sección 0: CLAUDE.md, HARD-RULES, manual, skills, fichas, índice de audio), corta el crudo con `tools/cortar.py` si el pedido lo pide (proyecto nuevo "… · cortado"), edita con `tools/edit.js`,
   hace insertos con `tools/html_inserto.js` / Remotion, elige audio con `tools/elegir_audio.py`, escribe el resultado y
   `deep.estado`, y cierra su mensaje con "Leí: …". Es el modo por defecto de la página (la edición rápida es opcional).
 Las tareas usan el editor **publicado** (dist del artifact) y las herramientas del repo: después de cambiar algo,
@@ -83,6 +83,9 @@ push a main + publicar (ver abajo) para que la copia de respaldo quede igual.
 - `html_inserto.js`: HTML con `window.seek(t)` → MP4 lado a lado para la pieza `inserto`. Plantillas en `tools/insertos/`
   (`gsap-titulo`, `gsap-dato`, `three-objeto`, `lottie`). `a_inserto.sh`: cualquier video con alfa (Remotion ProRes 4444,
   WebM, PNG) → mismo formato. Composición de ejemplo con alfa: `remotion/InsertoTexto.tsx`.
+- `cortar.py`: cortes del crudo por palabras (silencios, muletillas, tomas repetidas, jump cuts con punch-in al ritmo de la
+  ficha de una referencia), con ffmpeg y la skill `ffmpeg-skill` (probe y planos). Deja el corte en un proyecto nuevo
+  "… · cortado" (`--armar`). Manual: sección 11 de `docs/EDITOR.md`. Prueba: `python3 test/cortar.py`.
 - `fuentes_locales.js`: las 17 tipografías de la Sala desde npm (`@fontsource/*`, OFL) para `edit.js` y `html_inserto.js`:
   en la nube Google Fonts está bloqueado y sin esto los cuadros de control salen con letra de reemplazo. En Remotion,
   lo mismo con `remotion/fuentes.ts`. Si se suma una familia a `FONTS` (01-core.js), sumá su `@fontsource/<familia>`.
