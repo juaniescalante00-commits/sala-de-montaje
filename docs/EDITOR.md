@@ -10,22 +10,29 @@ comparado lado a lado con la referencia.
 
 ---
 
+Antes de cortar o renderizar, leé también `HARD-RULES.md` (en el artifact: `tools/HARD-RULES.md`): las reglas técnicas de correctitud.
+
 ## 1. Lo que nunca se rompe (reglas de Juani)
 
 1. Nunca sonidos que no tienen nada que ver con lo que pasa en pantalla. Nada de pips, pops, ticks ni dings sobre textos.
 2. Nunca tapar la cara de quien habla. Ni un texto, ni una caja, ni una pantalla completa larga.
 3. Nunca doble texto: un título grande y abajo el subtítulo diciendo lo mismo. Mientras un texto grande repite lo que se dice, los subtítulos se ocultan (solo ese rato).
 4. Nunca dos músicas. Si el crudo ya trae música (`audio.rawMusic`), no se agrega otra.
-5. Nada de mini zooms repetidos para "dar ritmo". Cámara estable; zooms lentos y motivados, pocos.
-6. Subtítulos y títulos con al menos 10% de margen, dentro de la zona segura, de a uno por vez.
-7. Estética minimalista y editorial por defecto: una o dos familias tipográficas, paleta corta, aire en el cuadro.
-8. Datos solo si se dicen o los da Juani. Nunca inventar números, nombres, teléfonos ni @usuarios.
-9. Si algo de la referencia no se puede hacer con este editor (ver sección 6), se dice claro en la respuesta. No se disimula con plantillas genéricas.
+5. Todo texto dentro de la zona segura de la plataforma (la interfaz de Reels y TikTok tapa lo que quede afuera).
+6. Estética minimalista y editorial por defecto: una o dos familias tipográficas, paleta corta, aire en el cuadro.
+7. Datos solo si se dicen o los da Juani. Nunca inventar números, nombres, teléfonos ni @usuarios.
+8. Si algo de la referencia no se puede hacer con este editor (ver sección 6), se dice claro en la respuesta. No se disimula con plantillas genéricas.
+
+**Se eligen en cada edición, en el plan que aprueba Juani (no son reglas fijas):** movimientos de cámara (zooms,
+punch-ins, seguimiento de cara, reencuadres) y estilo de subtítulos (tamaño, palabras por bloque, posición, mayúsculas,
+color, cuándo se ocultan). Salen de la referencia y del pedido, y el plan los dice explícitamente. Si el plan no dice
+nada, por defecto: cámara estable sin mini zooms repetidos, y subtítulos chicos y limpios de a un bloque por vez.
 
 El editor además controla por código: caras, doble texto, sonidos del kit, zonas seguras, tiempo de lectura,
-pantallas completas (máximo 2,5 s sobre quien habla, nunca dos seguidas), duración máxima de cada pieza, mini zooms
-y música duplicada. Si el renderizador te informa una corrección de reglas, **entendé por qué** y corregí la causa en
-tu plan, no la dejes en manos del corrector.
+pantallas completas, duración máxima de cada pieza, mini zooms y música duplicada. Las reglas de cámara, pantallas
+completas y duración son valores por defecto: si el plan aprobado pide otra cosa, se apagan solo para ese proyecto
+con la op `{"op":"proyecto","reglasOff":["minizoom","completa"]}` (queda en `rulesOff` del proyecto) y se dice en el mensaje. Las de cara, doble texto, sonido y música no se apagan.
+Si el renderizador te informa una corrección, **entendé por qué** y corregí la causa en tu plan.
 
 ---
 
@@ -58,6 +65,7 @@ tu plan, no la dejes en manos del corrector.
 ### 2.3 Planear
 Escribí un plan corto: qué momentos merecen un gráfico y por qué (Murch: emoción > historia > ritmo), qué no lleva nada,
 y cómo vas a traducir cada rasgo de la ficha de estilo al vocabulario del editor (sección 4). Menos piezas y mejor hechas.
+El plan siempre dice qué cámara y qué estilo de subtítulos vas a usar y por qué (son decisiones de cada edición, no reglas).
 
 ### 2.4 Editar y renderizar
 Las ediciones son operaciones JSON (mismo formato que el agente de la página, ver el manual generado en 2.5). Guardalas en `ops.json` y corré:

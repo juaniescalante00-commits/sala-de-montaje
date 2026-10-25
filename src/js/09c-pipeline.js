@@ -48,6 +48,7 @@ ${templatesForAgent()}
 
 UBICACIÓN: en piezas plantilla usá pos "auto" (el editor esquiva la cara). En "libre", "codigo" y "3d" ubicá todo vos dentro de la zona segura y fuera de la cara. Igual el editor mide cada pieza y la corre si tapa la cara o se sale de la zona segura.
 DETRÁS DE LA PERSONA: ${matteInfo(P) ? 'hay recorte de persona para este video. Una pieza con "behind":true se dibuja detrás de quien habla (la persona queda encima): es la forma de poner una palabra gigante detrás de la cabeza sin taparle la cara. Usalo con "palabra" en momentos clave (gancho, promesa, cierre), como mucho una cada 6 a 8 s.' : 'todavía no hay recorte de persona para este video: no uses "behind".'}
+CÁMARA Y SUBTÍTULOS: no son reglas fijas, se eligen para cada video según la referencia y el pedido. Si el pedido o la referencia piden algo que una regla automática no fija corrige (por ejemplo punch-ins rápidos), apagala solo para este proyecto con "reglasOff" en la op proyecto (ids: ${RULES.filter(r => r.auto && !r.fija).map(r => r.id).join(', ')}).
 CÁMARA: {"op":"camara","seguirCara":true,"zoomBase":1.15,"altoCara":0.36,"zooms":[{"s":3.2,"e":5.0,"z":1.12}]} sigue la cara del presentador con un reencuadre suave; los zooms son acercamientos puntuales (pocos, solo en frases fuertes).
 ESTILOS DE SUBTÍTULOS: ${Object.entries(CAPS).map(([k, v]) => `${k} (${v.name})`).join(', ')}. Posiciones: auto, abajo, centro, arriba. Campos: on, style, pos, y (0.45–0.64), maxWords (1–6), size (0.7–1.4), upper, hideOnFull, duringText ("auto" oculta los subtítulos si una pieza repite lo dicho, "ocultar" los oculta con cualquier texto en pantalla).
 LOOKS DE COLOR: ${Object.entries(GRADES).map(([k, v]) => `${k} (${v.name})`).join(', ')}. Campos: preset, mix (0–1), exposure, contrast, saturation, temperature, tint (−1 a 1; 0,08 = +8%, nunca 8), fade, vignette, grain (0–1). Ajustes sutiles, casi siempre entre −0,2 y 0,2.
@@ -70,7 +71,7 @@ Respondé solo con JSON:
  {"op":"crear","pieza":{"type":"...","start":0,"dur":4,"layout":"overlay","pos":"auto","bg":"video","tr":"subir","sfx":"ninguno","params":{},"beats":[],"quote":"","desc":""}},
  {"op":"editar","id":"<id de pieza>","cambios":{"...":"solo lo que cambia; params se combina"}},
  {"op":"borrar","id":"<id>"},
- {"op":"proyecto","subtitulos":{},"color":{},"audio":{},"marca":{},"movimiento":"expo"},
+ {"op":"proyecto","subtitulos":{},"color":{},"audio":{},"marca":{},"movimiento":"expo","reglasOff":["minizoom"]},
  {"op":"camara","seguirCara":false,"zooms":[]},
  {"op":"musica","id":"<id de la biblioteca o null para quitar>","volumen":0.18,"ducking":true},
  {"op":"palabras","cambios":[{"i":3,"w":"Atlas"}]}

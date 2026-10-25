@@ -1,7 +1,7 @@
 # HARD-RULES · Sala de Montaje
 
 Correctitud técnica, no gusto. Cada regla evita una **falla silenciosa**: un render que termina sin error y está mal.
-No se negocian. El gusto vive en `docs/EDITOR.md` y en las recetas; las reglas fijas de Juani, en `CLAUDE.md`.
+Solo correctitud técnica: no se negocian. El gusto vive en `docs/EDITOR.md` y en las recetas; las reglas fijas de Juani, en `CLAUDE.md`.
 Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla con el fallo que previene.
 
 ## A. Leer el material (Claude lee el video, no lo mira)
@@ -26,28 +26,29 @@ Cada vez que Juani rechaza un render por algo técnico, se agrega acá una regla
 15. **Gráficos al mismo tamaño y fps que el corte**, con movimiento manejado por cuadro (nada de transiciones CSS, timers ni `requestAnimationFrame`: se renderizan quietos). El audio de un gráfico nunca va dentro del gráfico: todo sonido va a la mezcla.
 16. **B-roll y paneles se componen dentro de la composición**, nunca pegados sobre el render terminado (se pierden los subtítulos de encima).
 
-## D. Sala de Montaje (aprendido en renders rechazados)
+## D. Sala de Montaje (fallas técnicas ya vistas)
 17. **Color en escala −1 a 1** (0,08 = +8%). Un 8 escrito como porcentaje pintó un video entero de rojo. `normGrade` lo corrige, pero se escribe bien.
-18. **Un texto grande que repite lo dicho apaga los subtítulos como máximo 3,5 s.** Una etiqueta o un zócalo chico nunca los apaga (un video quedó 23 s sin subtítulos).
-19. **Ninguna pantalla completa tapa a quien habla más de 2,5 s, ni dos seguidas, ni en la frase de cierre.** Si un texto no entra sin tapar la cara, se saca; nunca se convierte en pantalla completa larga.
-20. **Texto detrás de la persona solo con recorte y con alguien en cuadro.** Sin recorte, el texto se ubica arriba de la cabeza.
-21. **Si el crudo trae música, no se agrega otra** (`audio.rawMusic`; se mide el fondo en los silencios contra la voz).
-22. **Texto claro sobre fondo oscuro y viceversa.** Nunca blanco sobre caja crema. Nada de texto por debajo del tamaño legible en un celular (subtítulos 64 px o más sobre 1080 de ancho).
+18. **Texto detrás de la persona solo con recorte y con alguien en cuadro.** Sin recorte de persona, una pieza "detrás" se dibuja encima de la cara; en tomas sin persona, el recorte puede marcar edificios u objetos como si fueran gente.
 
 ## E. Verificar antes de mostrar (máximo 3 vueltas)
-23. **Mirar el archivo renderizado, no el plan.** Cuadros en cada corte, al principio y al final, hoja de cuadros de todo el video; mirarlos de verdad.
-24. **Medir audio.** Integrado a −14 LUFS y pico −1 dBTP. Un efecto de sonido se verifica por diferencia contra la mezcla sin efectos, no midiendo el master.
-25. **Retranscribir 2 s alrededor de cada unión** y comparar con el plan: un corte a mitad de frase puede invertir el sentido.
-26. **Comparar contra la referencia lado a lado** cuando hay estilo de referencia.
-27. **Corregir y re-renderizar, máximo 3 vueltas.** Si después de 3 sigue mal, se entrega con el problema dicho claro.
+19. **Mirar el archivo renderizado, no el plan.** Cuadros en cada corte, al principio y al final, hoja de cuadros de todo el video; mirarlos de verdad.
+20. **Medir audio.** Integrado a −14 LUFS y pico −1 dBTP. Un efecto de sonido se verifica por diferencia contra la mezcla sin efectos, no midiendo el master.
+21. **Retranscribir 2 s alrededor de cada unión** y comparar con el plan: un corte a mitad de frase puede invertir el sentido.
+22. **Comparar contra la referencia lado a lado** cuando hay estilo de referencia.
+23. **Corregir y re-renderizar, máximo 3 vueltas.** Si después de 3 sigue mal, se entrega con el problema dicho claro.
 
 ## F. Herramientas y seguridad
-28. **Nunca escribir dentro de la carpeta de una skill**: todo lo que se genera va a la carpeta del proyecto.
-29. **Nada pago ni cuentas nuevas sin OK de Juani.** `motionmaxxing` trae `voice.py` (ElevenLabs) e `imagegen.py` (Codex): no se configuran claves para usarlos.
-30. **Skills de terceros: solo copias auditadas** (sin red escondida, sin claves, sin comandos peligrosos). Se actualizan volviendo a auditar, nunca con el instalador de la skill.
+24. **Nunca escribir dentro de la carpeta de una skill**: todo lo que se genera va a la carpeta del proyecto.
+25. **Nada pago ni cuentas nuevas sin OK de Juani.** `motionmaxxing` trae `voice.py` (ElevenLabs) e `imagegen.py` (Codex): no se configuran claves para usarlos.
+26. **Skills de terceros: solo copias auditadas** (sin red escondida, sin claves, sin comandos peligrosos). Se actualizan volviendo a auditar, nunca con el instalador de la skill.
+
+## Qué NO va en este archivo
+Movimientos de cámara (zooms, seguimiento de cara, reencuadres), estilo de subtítulos (tamaño, palabras por bloque,
+posición, mayúsculas, cuándo se ocultan), pantallas completas, densidad de gráficos y música se eligen en cada edición,
+en el plan que aprueba Juani. Sus reglas fijas están en `CLAUDE.md`; el oficio y los valores por defecto, en `docs/EDITOR.md`.
 
 ---
-Origen: reglas 2, 6, 8–16, 23–25 y 28 adaptadas de [browser-use/video-use](https://github.com/browser-use/video-use) y
+Origen: reglas 2, 6, 8–16, 19–21 y 24 adaptadas de [browser-use/video-use](https://github.com/browser-use/video-use) y
 [ranahaani/i-hate-editing](https://github.com/ranahaani/i-hate-editing) (MIT, usadas como referencia, no instaladas) y del
-informe "Cómo hacer que Claude edite bien". Reglas 1, 11 y 24 se ejecutan con `.claude/skills/ffmpeg-skill`
-([kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill), MIT). Reglas 17–22 salen de renders de la Sala rechazados por Juani.
+informe "Cómo hacer que Claude edite bien". Reglas 1, 11 y 20 se ejecutan con `.claude/skills/ffmpeg-skill`
+([kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill), MIT). Reglas 17 y 18 salen de fallas de la Sala.

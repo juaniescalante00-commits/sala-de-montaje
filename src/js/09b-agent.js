@@ -38,6 +38,7 @@ function applyAgentOps(ops) {
           if (pick(o.audio, p.audio, ['voice', 'sfx', 'normalize'])) log.push('~ audio');
           if (o.marca) { const kit = o.marca.kit && BRANDS.find(b => b.key === o.marca.kit); if (kit) p.brand = clone(kit); if (pick(o.marca, p.brand, ['display', 'body', 'dw', 'upper', 'bg', 'fg', 'accent', 'accent2', 'panel', 'radius', 'track', 'name'])) log.push('~ marca'); }
           if (o.movimiento && EASES[o.movimiento]) { p.ease = o.movimiento; log.push('~ movimiento'); }
+          if (Array.isArray(o.reglasOff)) { p.rulesOff = o.reglasOff.filter(id => RULES.some(r => r.id === id && !r.fija)); log.push('~ reglas de este proyecto: ' + (p.rulesOff.join(', ') || 'todas prendidas')); }
           normGrade(p.grade); if (!GRADES[p.grade.preset] && p.grade.preset !== 'custom') p.grade.preset = 'neutro';
           if (!CAPS[p.captions.style]) p.captions.style = 'editorial';
         } else if (o.op === 'musica') {

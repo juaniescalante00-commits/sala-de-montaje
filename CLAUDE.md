@@ -24,7 +24,9 @@ Skills del proyecto (auditadas, ver `docs/auditoria-skills.md`): `ffmpeg-skill` 
 - Nunca tapar la cara de quien habla.
 - Nunca doble texto (título grande y abajo el subtítulo diciendo lo mismo).
 - Nunca agregar música si el crudo ya trae (`audio.rawMusic`).
-- Nada de mini zooms repetidos. Subtítulos y títulos con 10% de margen, de a uno.
+- Todo texto dentro de la zona segura de la plataforma.
+- Los movimientos de cámara y el estilo de subtítulos NO son reglas fijas: se eligen en cada edición, en el plan que
+  aprueba Juani (por defecto: cámara estable sin mini zooms repetidos, subtítulos limpios de a un bloque).
 - Datos solo si se dicen o los da Juani. Recordar sus correcciones anteriores y aplicarlas.
 
 ## Arquitectura de la página

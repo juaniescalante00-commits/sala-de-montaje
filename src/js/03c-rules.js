@@ -168,7 +168,8 @@ const RULES = [
 ];
 S.rules = { custom: [], off: [] };
 S.sfxKit = null; // {id: uso}
-function ruleOn(id) { return !(S.rules.off || []).includes(id) || RULES.find(r => r.id === id)?.fija; }
+/* una regla se apaga para todos (settings/reglas.off) o solo para este proyecto (P.rulesOff, lo decide el plan aprobado); las fijas nunca */
+function ruleOn(id) { const off = (S.rules.off || []).concat(S.p?.rulesOff || []); return !off.includes(id) || !!RULES.find(r => r.id === id)?.fija; }
 function rulesText() {
   const on = RULES.filter(r => ruleOn(r.id));
   return `REGLAS QUE NUNCA SE ROMPEN (el editor además las controla por código y corrige lo que las viole):\n${on.map(r => `- ${r.t}: ${r.d}`).join('\n')}${(S.rules.custom || []).length ? `\nREGLAS PROPIAS DE QUIEN EDITA (obligatorias):\n${S.rules.custom.map(r => '- ' + r).join('\n')}` : ''}`;
