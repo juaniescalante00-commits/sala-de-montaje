@@ -39,8 +39,8 @@ repo que leíste en esta edición (rutas cortas, separadas por coma). Si no leí
 7. Datos solo si se dicen o los da Juani. Nunca inventar números, nombres, teléfonos ni @usuarios.
 8. Si algo de la referencia no se puede hacer con este editor (ver sección 6), se dice claro en la respuesta. No se disimula con plantillas genéricas.
 
-**Se eligen en cada edición (no son reglas fijas):** movimientos de cámara (zooms, punch-ins, seguimiento de cara,
-reencuadres) y estilo de subtítulos (tamaño, palabras por bloque, posición, mayúsculas, color, cuándo se ocultan). Salen
+**Se eligen en cada edición (no son reglas fijas):** movimientos de cámara (zooms, seguimiento de cara, reencuadres;
+punch-in solo si la referencia lo pide y nunca chico, HARD-RULES 45) y estilo de subtítulos (tamaño, palabras por bloque, posición, mayúsculas, color, cuándo se ocultan). Salen
 de la referencia y del pedido; vos decidís y lo decís en el mensaje final. No hay paso de aprobación: Juani manda video +
 pedido y la edición sale entera. Si el plan no dice
 nada, por defecto: cámara estable sin mini zooms repetidos, y subtítulos chicos y limpios de a un bloque por vez.
@@ -196,16 +196,23 @@ Las piezas `behind` solo valen mientras hay alguien en cuadro (el editor las con
 
 ## 6. Lo que este editor todavía no hace (decilo si la referencia lo usa)
 - Reordenar o acelerar el video crudo; transiciones entre tomas (whip pan, barridos). **Cortar sí**: silencios,
-  muletillas, tomas repetidas y jump cuts con punch-in (sección 11); el corte queda en un proyecto nuevo "… · cortado".
+  muletillas, tomas repetidas y jump cuts (sin punch-in salvo que la referencia lo pida, sección 11); el corte queda en
+  un proyecto nuevo "… · cortado".
 - Insertar otros videos o B-roll externo (sí se pueden montar animaciones propias: pieza `inserto`).
 - Formato horizontal.
 - Generar imágenes, voces o música.
 
-## 6b. Nitidez de la exportación (HARD-RULES 43)
-Si el video del proyecto es la copia liviana (720p), `edit.js --export` lo escala a 1080×1920 con lanczos y un enfoque
-leve antes de exportar (`--sin-nitidez` para no). Medido en Larreta: el detalle de una toma aérea pasa de 4,5 a 10,4
-(varianza del laplaciano) sin halos en cara ni texto. No inventa detalle: para la máxima calidad, exportar desde la
-página de Juani con el original.
+## 6b. Nitidez y audio de la exportación (HARD-RULES 43, 47, 48 y 49)
+`edit.js --export` prepara el video del proyecto antes de exportar y revisa el final después (todo solo, sin tocar la página):
+- **Nitidez por toma** (`tools/nitidez.py`): la copia liviana (720p) pasa a 1080×1920 con lanczos y enfoque leve, y cada
+  toma B-roll más blanda que el A-roll (microcontraste absoluto por debajo del 90 %) recibe más enfoque y claridad hasta
+  acercarse, sin halos. En Larreta: solo las aéreas de las cúpulas (17,5 → 27,8 contra 22,4 del A-roll). `--sin-nitidez`.
+- **Música del crudo bajo la voz** (`tools/separar.py`): si `audio.rawMusic`, separa voz y música y baja la música solo
+  donde queda a menos de 20 dB de la voz mientras se habla. `--sin-ducking`.
+- **Revisión del final** (`tools/revisar_audio.py` y `nitidez.py --medir`): corrige el desfase del audio que deja el
+  codificador de la página (27 ms en la v2), mide −14 LUFS / −1 dBTP, voz sobre música (18 dB o más) y la toma más
+  blanda contra el A-roll. Todo queda en `revision_audio.json` y `nitidez_final.json`; los "OJO" se arreglan antes de entregar.
+No inventa detalle: para la máxima calidad, exportar desde la página de Juani con el original.
 
 ## 7. Render final a la carpeta Editados
 `tools/render.js` (otro archivo) renderiza el proyecto con el video original en máxima calidad para guardarlo en la
@@ -305,8 +312,10 @@ Pieza:
   se ocultan mientras está; si no tiene texto, dejalo vacío).
 - El editor lo mide por sus píxeles reales: si tapa la cara, lo baja o achica (lo vas a ver en `rules.json`). Mejor
   diseñalo desde el principio fuera de la cara (mirá `faces` en el manual generado).
-- **Contraste** (HARD-RULES 42): `edit.js` mide el texto del inserto contra el fondo real y, si no se lee, lo mueve o
-  avisa que necesita velo (`rules.json` → `contraste`). Diseñalo sobre la zona oscura o pareja de la toma, mirando
+- **Contraste** (HARD-RULES 42 y 46): `edit.js` mide el texto del inserto contra el fondo real y, si no se lee, lo mueve o
+  avisa que necesita velo (`rules.json` → `contraste`). Los demás textos (titulares `libre`, palabras, plantillas) se
+  miden letra por letra, en todos los cuadros, contra el peor caso: si no se leen los mueve y, si no hay lugar, les pone
+  velo suave (`rules.json` → `contraste_texto`). Diseñalo sobre la zona oscura o pareja de la toma, mirando
   cómo se mueve la cámara mientras está; si el fondo es claro o cargado, velo suave detrás (`velo=1` en las plantillas,
   o un `radial-gradient` oscuro sin bordes en tu HTML) y sombra. Nada de texto blanco sobre superficies blancas.
 
@@ -323,21 +332,25 @@ HARD-RULES 6) y el script decide DÓNDE cae cada corte (en un silencio sostenido
 lo ejecuta con ffmpeg. Usa la skill `ffmpeg-skill` para el probe y para los planos de origen (`scenes.py`).
 
 Qué hace solo (cada cosa se apaga con `--sin-silencios`, `--sin-muletillas`, `--sin-tomas`, `--sin-ritmo`):
-- **Silencios**: pausas de más de 0,35 s (`--silencio`) quedan con 0,2 s de aire total (`--aire`); no corta si salen
-  menos de 0,15 s (`--min-corte`: sería un salto sin ganancia).
+- **Silencios** (HARD-RULES 44): pausas de más de 0,4 s (`--silencio`) quedan con una pausa natural de 0,2 s ya contado
+  el fundido (`--pausa`, 0,15-0,25); no corta si salen menos de 0,15 s (`--min-corte`: sería un salto sin ganancia). No
+  ahogues el ritmo: aunque la referencia sea rápida, entre frases tiene que quedar aire.
 - **Muletillas**: solo sonidos de duda (eh, em, mm, ah…) y "este" cuando está aislado entre pausas. Nunca "esto",
   "o sea", "bueno": son palabras reales casi siempre (si una sobra en este video, sacala por ID).
 - **Tomas repetidas y falsos arranques**: si una frase arranca igual que la siguiente, queda la **última**; tartamudeos
   ("el el", "lo que lo que") pierden la primera copia. "muy muy" (énfasis) se deja.
-- **Ritmo de la referencia** (`--ficha datos/referencias/N/ficha.json`): los planos de talking head más largos que 1,6 veces
-  la duración de plano de la ficha se parten en fin de frase o coma, y cada jump cut alterna el encuadre 1,0 ↔ punch-in
-  (`--punch 1.1`, centrado en la cara). En cada plano nuevo del crudo y en las tomas sin persona vuelve a 1,0.
+- **Punch-in** (HARD-RULES 45): por defecto NO hay (un 1,1 que entra y sale se ve como mini zoom o falla de encuadre).
+  Solo si la referencia lo pide de verdad (lo ves en su tira y su ficha): `--punch 1.25` o más; la herramienta pone pocos
+  (uno cada 10 s como mucho, separados 6 s, centrados en la cara) y con eso también parte los planos largos al ritmo de
+  la ficha (`--ficha`). Sin punch-in no se parten planos: un corte dentro de un plano continuo no cambia nada.
 - Si una palabra pedida no tiene un silencio de verdad alrededor, **no la saca** y lo avisa (transcript y audio
   siempre iguales).
-- **Audio de cada unión** (HARD-RULES 41): fundido cruzado de 40 ms, el borde de entrada al menos 80 ms antes del ataque
-  real (medido en el audio, no en el transcript) y el de salida 60 ms después de la caída; donde no se saca audio (ritmo,
-  plano) el sonido no se toca. Chasquidos y respiraciones en las pausas se bajan solos (`--sin-suavizar` para no).
-  `informe.txt` dice en cada unión si hubo ataque o cola comidos, hueco o pop: con cualquiera de esos, no se entrega.
+- **Audio de cada unión** (HARD-RULES 41 y 44): fundido cruzado de 40 ms; el borde de entrada 150 ms antes del ataque
+  real si la palabra arranca suave (s, f, l, m, n, y, vocal…) y 80 ms si arranca con oclusiva (medido en el audio, no
+  en el transcript); donde no se saca audio (cambio de plano) el sonido no se toca. Chasquidos cortos en las pausas se
+  bajan solos, nunca cerca de la voz (`--sin-suavizar` para no). `informe.txt` dice en cada unión si hubo ataque o cola
+  comidos, hueco, pop o **primera palabra incompleta**, y cuántas palabras arrancan completas (todas tienen que dar
+  bien): con cualquier falla, no se entrega.
 
 Pasos:
 ```
@@ -358,7 +371,7 @@ python3 tools/cortar.py --proyecto proyecto.json --blobs blobs --out corte --fic
    del navegador de Juani si lo tiene guardado, así que el corte no puede ir en el mismo proyecto.
 4. Editá ese proyecto nuevo como siempre (edit.js con `--project corte/proyecto_cortado.json`).
 5. En el mensaje final decí el resumen del corte (segundos que salieron, cuántos silencios, muletillas y tomas, jump
-   cuts y punch-in) y en qué proyecto quedó.
+   cuts, punch-in si hubo y "arranques completos N/N") y en qué proyecto quedó.
 
 Si el proyecto ya es una versión cortada (`cortes` existe) y Juani pide cortar distinto, cortá desde el crudo de origen
 (`cortes.origen.video.assetId`) con el `proyecto.json` del original, no sobre lo ya cortado.

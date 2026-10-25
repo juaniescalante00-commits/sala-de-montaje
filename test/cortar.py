@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Prueba de tools/cortar.py con un crudo sintético: cada palabra es un tono con un cierre mudo en el medio (como la
 "p" de "startups"). Verifica muletillas, falso arranque, toma repetida (queda la última), tartamudeo, "esto"/"este"
-como palabras reales, que ningún corte caiga dentro de una palabra, 80 ms antes del ataque real aunque el
-reconocedor marque tarde, chasquidos suavizados en las pausas, la duración y uniones sin huecos ni pops."""
+como palabras reales, que ningún corte caiga dentro de una palabra, 150 ms antes del ataque real de una palabra que
+arranca suave aunque el reconocedor marque tarde, pausa natural (150-300 ms) en cada corte, sin punch-in por defecto
+(y error con uno chico), chasquidos suavizados en las pausas, la duración, uniones sin huecos ni pops, todos los
+arranques completos y que el control FALLE con un corte hecho a propósito dentro de un ataque (HARD-RULES 44 y 45)."""
 import json, os, subprocess, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tools'))
 AQUI = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(AQUI, 'out', 'cortar'); os.makedirs(OUT, exist_ok=True)
 frase = [
     ('Esto', 0.0), ('era', 0.4), ('el', 0.7), ('parque.', 0.9),                       # "Esto" es palabra real: se queda
@@ -57,13 +60,41 @@ for i, w in enumerate(words):
     chk(adentro == (i in fuera), f"#{i} {w['w']}: {'salió del transcript pero sigue en el audio' if i in fuera else 'quedó en el transcript pero se cortó del audio'}")
 # ataque real: el tramo que trae "Este" arranca al menos 80 ms antes de que suene (aunque el transcript lo marque tarde)
 seg_este = next((g for g in plan['segmentos'] if g['s'] <= reales[19]['s'] <= g['e']), None)
-chk(seg_este and reales[19]['s'] - seg_este['s'] >= 0.075, f"\"Este\" entra con menos de 80 ms antes de su ataque: {seg_este and round(reales[19]['s'] - seg_este['s'], 3)}")
+chk(seg_este and reales[19]['s'] - seg_este['s'] >= 0.14, f"\"Este\" (arranque suave) entra con menos de 150 ms antes de su ataque: {seg_este and round(reales[19]['s'] - seg_este['s'], 3)}")
+# pausa natural: en cada corte de silencio queda 150-300 ms entre el fin real de una palabra y el ataque real de la otra
+# (ya descontado el fundido cruzado de 40 ms)
+segs = plan['segmentos']
+for k in range(1, len(segs)):
+    g, pv = segs[k], segs[k - 1]
+    if abs(g['s'] - pv['e']) < 1e-4: continue
+    fin_a = max((w['e'] for w in reales if w['e'] <= pv['e'] + 1e-3), default=None)
+    ini_b = min((w['s'] for w in reales if w['s'] >= g['s'] - 1e-3), default=None)
+    if fin_a is None or ini_b is None: continue
+    pausa = (pv['e'] - fin_a) + (ini_b - g['s']) - 0.04
+    chk(0.14 <= pausa <= 0.31, f"pausa de {pausa:.3f} s en el corte de {g['out_s']:.2f}s (tiene que quedar natural: 150-300 ms)")
+chk(all(g['zoom'] == 1.0 for g in segs), 'por defecto no hay punch-in (HARD-RULES 45): %s' % [g['zoom'] for g in segs])
 c = plan['controles']
 chk(any(abs(x['s'] - (CHASQUIDO[0] - (plan['segmentos'][0]['e'] - plan['segmentos'][0]['s']) * 0)) < 9 for x in c.get('suavizados', [])) and len(c.get('suavizados', [])) >= 1,
     'el chasquido en la pausa entre "parque" y "de" tenía que suavizarse')
 chk(all(u.get('saca_audio') is not None for u in c['uniones']), 'cada unión tiene que decir si saca audio')
 chk(c['duracion']['ok'], 'la duración no cierra: %s' % c['duracion'])
 chk(all(u['ok'] for u in c['uniones']), 'uniones con ataque o cola comidos, hueco o pop: %s' % [u for u in c['uniones'] if not u['ok']])
+chk('arranques' in c and c['arranques']['palabras'] >= 15 and not c['arranques']['mal'], 'arranques incompletos: %s' % c.get('arranques'))
+chk(all(u.get('primera_palabra', {}).get('ok') for u in c['uniones'] if u['saca_audio']), 'cada unión de audio tiene que verificar su primera palabra')
+# un punch-in chico se rechaza
+r2 = subprocess.run([sys.executable, os.path.join(AQUI, '..', 'tools', 'cortar.py'), '--proyecto', os.path.join(OUT, 'p.json'),
+                     '--video', os.path.join(OUT, 'vid.mp4'), '--out', os.path.join(OUT, 'p11'), '--punch', '1.1', '--solo-plan'], capture_output=True, text=True)
+chk(r2.returncode != 0 and 'mini zoom' in r2.stderr, 'un --punch 1.1 tenía que rechazarse')
+# el control falla de verdad: un tramo que entra 50 ms DESPUÉS del ataque de "Este" (corte dentro de la palabra)
+import cortar as C
+info = C.probe(os.path.join(OUT, 'vid.mp4')); rms, hz = C.energia(os.path.join(OUT, 'vid.mp4'))
+malo = [{'s': 0.0, 'e': 9.6, 'dur': 9.6, 'out_s': 0.0, 'zoom': 1.0, 'cx': .5, 'cy': .5, 'entra_por': 'inicio'},
+        {'s': 9.95, 'e': 11.5, 'dur': 1.55, 'out_s': 9.6, 'zoom': 1.0, 'cx': .5, 'cy': .5, 'entra_por': 'jump'}]
+C.renderizar(os.path.join(OUT, 'vid.mp4'), malo, info, os.path.join(OUT, 'malo.mp4'))
+cm = C.controles(os.path.join(OUT, 'malo.mp4'), malo, OUT, info, rms, hz, [w for i, w in enumerate(reales) if i in (16, 17, 18, 19, 20, 21, 22)], os.path.join(OUT, 'vid.mp4'))
+u = cm['uniones'][0]
+chk(not u['ok'] and u.get('primera_palabra', {}).get('w') == 'Este' and not u['primera_palabra']['ok'],
+    'un corte dentro del ataque de "Este" tenía que hacer FALLAR el control: %s' % u)
 print('palabras que quedan:', ' '.join(pal))
 print('MAL:\n- ' + '\n- '.join(mal) if mal else 'ok: cortes por palabra, muletillas, tomas y uniones')
 sys.exit(1 if mal else 0)

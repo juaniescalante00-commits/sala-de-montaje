@@ -3,14 +3,15 @@
 
 Claude decide QUÉ sale (por IDs de palabra o de frase, nunca por timecodes); este script decide DÓNDE cae cada corte
 (en el silencio entre palabras, por energía del audio) y lo ejecuta con ffmpeg: corte por segmento cuantizado a
-cuadros, fades de 30 ms en cada unión (sin clicks), punch-in opcional en los jump cuts del talking head, y el mismo
+cuadros, fundido cruzado de 40 ms en cada unión, pausa natural entre frases, sin punch-in salvo que la referencia
+lo pida (claro y pocos), y el mismo
 corte para el recorte de persona. Remapea palabras y caras al tiempo nuevo y deja controles para mirar.
 
 Uso típico (en la carpeta de trabajo de la edición a fondo):
   python3 tools/cortar.py --proyecto proyecto.json --blobs blobs --vista            # transcript con IDs y pausas
   python3 tools/cortar.py --proyecto proyecto.json --blobs blobs --out corte \\
       [--ficha datos/referencias/1/ficha.json] [--quitar-frases 3,7] [--quitar-palabras 12-15,40] \\
-      [--sin-silencios] [--sin-muletillas] [--sin-tomas] [--sin-ritmo] [--punch 1.1] [--aire 0.2] [--silencio 0.35]
+      [--sin-silencios] [--sin-muletillas] [--sin-tomas] [--sin-ritmo] [--pausa 0.2] [--silencio 0.4] [--punch 1.25]
   python3 tools/cortar.py --armar corte --proyecto proyecto.json --asset-video <id> [--asset-recorte <id>]
       → corte/proyecto_cortado.json: proyecto NUEVO (no pisa el original) listo para ArtifactData set.
 
@@ -25,14 +26,23 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 SKILL = os.path.join(AQUI, '..', '.claude', 'skills', 'ffmpeg-skill', 'scripts')
 FADE = 0.03            # fundido al principio y al final del video
 XF = 0.04              # HARD-RULES 10 y 41: fundido CRUZADO de 40 ms en cada unión (sin hueco en la música de fondo)
-PRE_ATAQUE = 0.08      # HARD-RULES 41: al menos 80 ms antes del ataque real de la palabra que entra
-POST_CAIDA = 0.06      # y 60 ms después de que se apaga la que sale
+PRE_ATAQUE = 0.08      # HARD-RULES 41: al menos 80 ms antes del ataque real si la palabra arranca con oclusiva (p, t, k, b, d, g)
+PRE_SUAVE = 0.15       # HARD-RULES 44: 150 ms si arranca suave (s, f, j, l, m, n, y, vocal, h…): el ataque real empieza antes
+POST_CAIDA = 0.06      # y al menos 60 ms después de que se apaga la que sale
+PAUSA = 0.20           # HARD-RULES 44: pausa natural que QUEDA entre frases después de un corte (150-250 ms, ya con el fundido)
 MARGEN_MIN, MARGEN_MAX = 0.03, 0.20   # HARD-RULES 9: 30 a 200 ms de aire en cada borde
 
 # Muletillas: solo sonidos de duda. "este", "o sea", "bueno", "esto" son palabras reales casi siempre: "este" sale
 # únicamente si está aislado entre pausas (ver es_muletilla). Nunca "esto" (ffmpeg-skill lo trae en su lista: acá no).
 MULETILLAS = {'eh', 'ehh', 'eeh', 'ehm', 'em', 'emm', 'mm', 'mmm', 'hmm', 'ah', 'ahh', 'aah', 'uh', 'um', 'mmh'}
 MULETILLAS_AISLADAS = {'este', 'eeste', 'esteee'}
+
+
+def pre_ataque(palabra):
+    """Margen antes del ataque según cómo arranca la palabra. Las oclusivas tienen un cierre mudo (el corte puede ir
+    cerca); las fricativas, líquidas, nasales y vocales arrancan suave y bajo: el oído las oye antes que la energía."""
+    t = norm(palabra)
+    return PRE_ATAQUE if re.match(r'(p|t|k|b|v|d|qu|gu|c[aoulr]|g[aoulr])', t) else PRE_SUAVE
 
 
 def norm(s):
@@ -228,7 +238,7 @@ def planear(P, info, rms, hz, cortes_origen, a):
     # tramos de palabras contiguas que se quedan; entre dos tramos (o en una pausa larga) va un corte
     segs, quitado, no_cortado, lim_corte = [], [], [], []
     inicio_w = kept[0]
-    s0 = max(0.0, W[inicio_w]['s'] - (0.12 if W[inicio_w]['s'] > a.silencio else W[inicio_w]['s']))
+    s0 = max(0.0, W[inicio_w]['s'] - (pre_ataque(W[inicio_w]['w']) + 0.03 if W[inicio_w]['s'] > a.silencio else W[inicio_w]['s']))
     if s0 > 0.05: quitado.append({'s': 0.0, 'e': round(s0, 3), 'motivo': 'silencio inicial', 'texto': ''})
     cur_s, prev = s0, kept[0]
     for i in kept[1:]:
@@ -237,7 +247,6 @@ def planear(P, info, rms, hz, cortes_origen, a):
         gap = B['s'] - A['e']
         if medio or (gap > a.silencio and not a.sin_silencios):
             lim_a = W[medio[0]]['s'] if medio else B['s']; lim_b = W[medio[-1]]['e'] if medio else A['e']
-            aire = a.aire / 2
             # fin real de la voz de A y comienzo real de la de B (por energía), y recién ahí el margen (HARD-RULES 8 y 9)
             # para sacar palabras alcanza un silencio más corto (la palabra que sale se lleva su propia cola)
             mini = 0.05 if medio else 0.12
@@ -270,14 +279,19 @@ def planear(P, info, rms, hz, cortes_origen, a):
                 ult_voz = max(caida_real(rms, hz, (j + 1) / hz, ini_r, voz, piso), W[medio[-1]]['e'])
             else:
                 prox_voz, ult_voz = ini_r, fin_r
-            lim = {'out_lo': fin_r + MARGEN_MIN, 'out_pref': fin_r + POST_CAIDA, 'out_hi': prox_voz - XF - 0.01,
-                   'in_lo': ult_voz + MARGEN_MIN, 'in_hi': ini_r - PRE_ATAQUE}
-            if lim['out_hi'] < lim['out_lo'] or lim['in_hi'] < lim['in_lo']:
+            # HARD-RULES 44: margen antes del ataque según la primera letra (150 ms si arranca suave) y una pausa natural
+            # (a.pausa, ya descontado el fundido cruzado) repartida: lo que falta después del margen va al final de A
+            pre = min(pre_ataque(B['w']), ini_r - ult_voz - MARGEN_MIN)
+            post = max(POST_CAIDA, a.pausa + XF - pre)
+            lim = {'out_lo': fin_r + MARGEN_MIN, 'out_pref': fin_r + post, 'out_hi': prox_voz - XF - 0.01,
+                   'in_lo': ult_voz + MARGEN_MIN, 'in_hi': ini_r - pre, 'pre': round(pre, 3)}
+            if pre < PRE_ATAQUE or lim['out_hi'] < lim['out_lo'] or lim['in_hi'] < lim['in_lo']:
                 for j in medio:
                     no_cortado.append({'id': j, 'w': W[j]['w'], 'motivo': fuera.pop(j)})
                 prev = i; continue
-            out_e = lo_mas_callado(rms, hz, max(lim['out_lo'], min(lim['out_pref'], lim['out_hi'])), min(lim['out_hi'], lim['out_pref'] + max(0, aire - POST_CAIDA)), lim['out_pref'])
-            in_s = lo_mas_callado(rms, hz, max(lim['in_lo'], lim['in_hi'] - max(aire - PRE_ATAQUE, 0.02), out_e), lim['in_hi'], lim['in_hi'])
+            op = min(lim['out_pref'], lim['out_hi'])
+            out_e = lo_mas_callado(rms, hz, max(lim['out_lo'], op - 0.02), min(lim['out_hi'], op + 0.02), op)
+            in_s = lo_mas_callado(rms, hz, max(lim['in_lo'], lim['in_hi'] - 0.02, out_e), lim['in_hi'], lim['in_hi'])
             if in_s - out_e >= (0.02 if medio else a.min_corte):   # un corte que saca casi nada es un salto sin ganancia
                 segs.append([cur_s, out_e]); lim_corte.append(lim)
                 txt = ' '.join(W[j]['w'] for j in medio)
@@ -305,7 +319,7 @@ def planear(P, info, rms, hz, cortes_origen, a):
 
     # ritmo: partir planos largos del talking head en jump cuts con punch-in, al ritmo de la ficha
     objetivo = None
-    if a.ficha and not a.sin_ritmo:
+    if a.ficha and not a.sin_ritmo and a.punch >= 1.25:   # sin punch-in, partir un plano continuo no cambia nada en pantalla
         fi = json.load(open(a.ficha)); rp = fi.get('ritmo_planos') or {}
         objetivo = rp.get('mediana') or rp.get('media')
     caras = sorted(P.get('faces') or [], key=lambda c: c['t'])
@@ -343,20 +357,23 @@ def planear(P, info, rms, hz, cortes_origen, a):
             nuevas.append([cur, e, mot if cur == s else 'ritmo'])
         piezas = nuevas
 
-    # punch-in: alterna 1.0 / punch en cada jump cut o corte de ritmo del mismo plano con cara; vuelve a 1.0 en cada plano nuevo
-    out, zoom_prev, t_out = [], 1.0, 0.0
+    # HARD-RULES 45: por defecto SIN punch-in (un 1,1 que entra y sale se ve como mini zoom o falla de encuadre). Si la
+    # referencia lo pide: claro (1,25 o más) y pocos, uno cada 10 s como mucho y separados al menos 6 s; el tramo
+    # siguiente vuelve a 1,0. Nunca en un plano nuevo ni sin cara.
+    out, t_out, ultimo_punch = [], 0.0, -99.0
+    dur_total = sum(e - s for s, e, _ in piezas); max_punch = max(1, int(dur_total / 10)) if a.punch >= 1.25 else 0; hechos = 0
     for s, e, mot in piezas:
         cara, parte = cara_en(caras, s, e)
-        if mot in ('inicio', 'plano') or not cara or parte < 0.6 or a.punch <= 1.0:
-            z = 1.0
-        else:
-            z = a.punch if zoom_prev == 1.0 else 1.0
+        z = 1.0
+        if (a.punch >= 1.25 and mot in ('jump', 'ritmo') and cara and parte >= 0.6 and hechos < max_punch
+                and t_out - ultimo_punch >= 6 and (not out or out[-1]['zoom'] == 1.0)):
+            z = a.punch; hechos += 1; ultimo_punch = t_out
         cx, cy = (cara[0], cara[1] + 0.04) if cara else (0.5, 0.5)
         hw = 0.5 / z
         cx, cy = min(1 - hw, max(hw, cx)), min(1 - hw, max(hw, cy))
         out.append({'s': round(s, 6), 'e': round(e, 6), 'dur': round(e - s, 6), 'out_s': round(t_out, 6), 'zoom': z,
                     'cx': round(cx, 4), 'cy': round(cy, 4), 'entra_por': mot, 'cara': bool(cara and parte >= 0.6)})
-        t_out += e - s; zoom_prev = z
+        t_out += e - s
     return W, F, fuera, out, quitado, objetivo, no_cortado
 
 
@@ -370,7 +387,8 @@ def remapear(W, fuera, segs, caras):
         if i in fuera: continue
         g, ns = mapear(w['s'])
         if g is None: continue
-        ne = min(w['e'], g['e']) - g['s'] + g['out_s']
+        g2, ne2 = mapear(w['e'])   # la palabra puede seguir en el tramo siguiente (cambio de plano sin corte de audio)
+        ne = ne2 if g2 is not None and ne2 >= ns else min(w['e'], g['e']) - g['s'] + g['out_s']
         palabras.append({'w': w['w'], 's': round(ns, 3), 'e': round(max(ns + 0.05, ne), 3)})
     nuevas = []
     for g in segs:
@@ -429,51 +447,105 @@ def renderizar(fuente, segs, info, salida, con_audio=True, crf=19, ancho=None, a
 
 
 def suavizar_chasquidos(salida, palabras, gan=0.4):
-    """Chasquidos de boca, respiraciones y golpes cortos DENTRO de las pausas entre palabras (no en la voz): les baja
-    unos 8 dB con rampas de 15 ms. Pasa en el crudo aunque no haya corte (Larreta, 0:29, entre "Además," y "te").
+    """Chasquidos de boca y golpes CORTOS (hasta 50 ms) dentro de las pausas: les baja unos 8 dB con rampas de 15 ms.
+    HARD-RULES 44: nunca toca la voz ni lo que la rodea. Zona protegida = toda energía sostenida (50 ms o más por encima
+    de un umbral bajo, así entra la caída de la palabra y el aire de una s o una vocal suave) más 100 ms antes y después.
+    Una respiración (larga y pareja) no es un chasquido: anuncia la palabra que viene y se deja.
     Devuelve la lista de lo que suavizó (tiempos del archivo cortado)."""
-    raw = run(['ffmpeg', '-v', 'error', '-i', salida, '-vn', '-ac', '2', '-ar', '48000', '-f', 's16le', '-'], text=False).stdout
-    a = array.array('h'); a.frombytes(raw[:len(raw) // 4 * 4]); sr, n = 48000, 480
-    mono = [(abs(a[2 * i]) + abs(a[2 * i + 1])) for i in range(len(a) // 2)]
-    rms = [math.sqrt(sum(x * x for x in mono[i:i + n]) / n) / 2 for i in range(0, len(mono) - n, n)]
+    # los mismos canales que el archivo (pasar un mono a estéreo lo baja 3 dB entero)
+    nch = int(json.loads(run(['ffprobe', '-v', 'error', '-select_streams', 'a:0', '-show_entries', 'stream=channels', '-of', 'json', salida]).stdout)['streams'][0]['channels'])
+    raw = run(['ffmpeg', '-v', 'error', '-i', salida, '-vn', '-ac', str(nch), '-ar', '48000', '-f', 's16le', '-'], text=False).stdout
+    a = array.array('h'); a.frombytes(raw[:len(raw) // (2 * nch) * 2 * nch]); sr, n = 48000, 480
+    mono = [sum(abs(a[nch * i + c]) for c in range(nch)) for i in range(len(a) // nch)]
+    rms = [math.sqrt(sum(x * x for x in mono[i:i + n]) / n) / nch for i in range(0, len(mono) - n, n)]
     hz = sr / n; voz = sorted(rms)[int(len(rms) * 0.9)] if rms else 0
+    piso_g = sorted(rms)[len(rms) // 10] if rms else 0
+    bajo = max(piso_g * 1.6, voz * 0.03)
+    protegido = [False] * len(rms); j = 0
+    while j < len(rms):   # energía sostenida (≥ 50 ms) = voz o su aire: protegida con 100 ms a cada lado
+        if rms[j] > bajo:
+            k = j
+            while k < len(rms) and rms[k] > bajo: k += 1
+            if (k - j) / hz >= 0.05:
+                for q in range(max(0, j - int(0.10 * hz)), min(len(rms), k + int(0.10 * hz))): protegido[q] = True
+            j = k
+        j += 1
     hechos = []
-    ws = sorted(palabras, key=lambda w: w['s'])
-    for w0, w1 in zip(ws, ws[1:]):
-        a0, b0 = w0['e'] + 0.05, w1['s'] - 0.06
-        if b0 - a0 < 0.06: continue
-        i0, i1 = int(a0 * hz), int(b0 * hz)
-        zona = rms[i0:i1]
-        if not zona: continue
-        piso = sorted(zona)[len(zona) // 2]
-        umbral = max(piso * 2.5, voz * 0.04)
-        j = i0
-        while j < i1:
-            if rms[j] > umbral and rms[j] < voz * 0.35:
-                k = j
-                while k < i1 and rms[k] > umbral: k += 1
-                if (k - j) / hz <= 0.15:
-                    hechos.append((j / hz, k / hz))
-                j = k
-            j += 1
+    j = 0
+    while j < len(rms):
+        if not protegido[j] and rms[j] > bajo and rms[j] < voz * 0.35:
+            k = j
+            while k < len(rms) and rms[k] > bajo: k += 1
+            alrededor = sorted(rms[max(0, j - 10):j] + rms[k:k + 10]) or [0]
+            if (k - j) / hz <= 0.05 and not any(protegido[j:k]) and max(rms[j:k]) > 3 * alrededor[len(alrededor) // 2]:
+                hechos.append((j / hz, k / hz))
+            j = k
+        j += 1
     if not hechos: return []
     rampa = int(0.015 * sr)
     for t0, t1 in hechos:
         s0, s1 = int((t0 - 0.01) * sr), int((t1 + 0.01) * sr)
-        for i in range(max(0, s0 - rampa), min(len(a) // 2, s1 + rampa)):
+        for i in range(max(0, s0 - rampa), min(len(a) // nch, s1 + rampa)):
             if i < s0: g = 1 - (1 - gan) * (0.5 - 0.5 * math.cos(math.pi * (i - (s0 - rampa)) / rampa))
             elif i > s1: g = 1 - (1 - gan) * (0.5 + 0.5 * math.cos(math.pi * (i - s1) / rampa))
             else: g = gan
-            a[2 * i] = int(a[2 * i] * g); a[2 * i + 1] = int(a[2 * i + 1] * g)
+            for c in range(nch): a[nch * i + c] = int(a[nch * i + c] * g)
     tmp = salida + '.tmp.mp4'
-    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', salida, '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', '-', '-map', '0:v',
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', salida, '-f', 's16le', '-ar', '48000', '-ac', str(nch), '-i', '-', '-map', '0:v',
                     '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', tmp],
                    input=a.tobytes(), check=True, capture_output=True)
     os.replace(tmp, salida)
     return [{'s': round(t0, 3), 'e': round(t1, 3)} for t0, t1 in hechos]
 
 
-def controles(salida, segs, out_dir, info, rms_src=None, hz_src=100):
+def _pcm16(path):
+    raw = run(['ffmpeg', '-v', 'error', '-i', path, '-vn', '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], text=False).stdout
+    a = array.array('h'); a.frombytes(raw[:len(raw) // 2 * 2]); return a
+
+
+def arranques(salida, segs, palabras_src, rms_src, hz, fuente=None):
+    """HARD-RULES 44: cada palabra que queda tiene que arrancar COMPLETA. Busca el ataque real en el crudo (hacia
+    adelante y hacia atrás del tiempo del transcript, que puede estar corrido) y compara la energía del archivo cortado
+    con la del crudo en esa ventana (30 ms antes a 120 ms después), con ventanas alineadas a la muestra en los dos
+    archivos. Falla si el ataque empezaba antes del corte (quedó afuera) o si suena más bajo que en el crudo."""
+    voz = sorted(rms_src)[int(len(rms_src) * 0.9)] if rms_src else 0
+    piso = sorted(rms_src)[len(rms_src) // 10] if rms_src else 0
+    bajo = max(piso * 1.6, voz * 0.03); fuerte = max(bajo, voz * 0.08)
+    A = _pcm16(fuente) if fuente else None; B = _pcm16(salida); sr = 16000
+    def e(arr, t0, t1):
+        v = arr[max(0, int(round(t0 * sr))):max(0, int(round(t1 * sr)))]
+        return sum(x * x for x in v) / len(v) if len(v) else 0.0
+    res = []
+    for k, w in enumerate(palabras_src):
+        g = next((g for g in segs if g['s'] - 1e-6 <= w['s'] <= g['e'] + 1e-6), None) or \
+            next((g for g in segs if w['s'] < g['s'] < w['e'] - 0.01), None)
+        if not g or A is None: continue
+        gi = segs.index(g); corte = gi > 0 and abs(g['s'] - segs[gi - 1]['e']) > 1e-4   # este tramo entra por una unión de audio
+        # ataque real: primera voz sostenida (30 ms) desde 250 ms antes del transcript, y de ahí hacia atrás por el umbral bajo
+        prev_e = palabras_src[k - 1]['e'] if k else 0
+        desde = max(prev_e, w['s'] - 0.25); atras = desde
+        if corte and g['s'] > desde:   # antes del corte está lo que se sacó a propósito: se busca desde el corte y se mira
+            desde, atras = g['s'], g['s'] - 0.12   # hacia atrás si la voz venía de antes (ataque comido)
+        i = int(round(desde * hz)); fin = int(min(w['e'], w['s'] + 0.3) * hz)
+        while i < fin and not all(x > fuerte for x in rms_src[i:i + 5]): i += 1   # voz = 50 ms sostenidos (un chasquido no)
+        ini = ataque_real(rms_src, hz, i / hz, atras, voz, piso) if i < fin else w['s']
+        fr = [ini - 0.03 + j * 0.01 for j in range(15)]
+        afuera = [e(A, t, t + 0.01) ** 0.5 for t in fr if t < g['s']] if corte else []
+        dentro = [(e(A, t, t + 0.01), e(B, g['out_s'] + t - g['s'], g['out_s'] + t - g['s'] + 0.01)) for t in fr if t >= g['s']]
+        e_src = sum(a for a, _ in dentro) or 1; e_out = sum(b for _, b in dentro)
+        ini6 = dentro[:9]
+        r6 = (sum(b for _, b in ini6) / (sum(a for a, _ in ini6) or 1)) if ini6 and max(a for a, _ in ini6) ** 0.5 > bajo else 1.0
+        umbral = max(bajo * 2, voz * 0.05)
+        primera = corte and (k == 0 or palabras_src[k - 1]['s'] < g['s'] - 1e-6)
+        cruza = primera and e(A, g['s'] - 0.015, g['s']) ** 0.5 > umbral   # el corte cae con sonido: la voz venía de antes
+        comido = cruza or (bool(afuera) and max(afuera) > umbral)
+        ok = not comido and e_out / e_src >= 0.8 and r6 >= 0.6
+        res.append({'w': w['w'], 't': round(g['out_s'] + max(ini, g['s']) - g['s'], 3), 'ataque_real': round(ini, 3),
+                    'ataque_antes_del_corte': comido, 'energia': round(e_out / e_src, 2), 'inicio': round(r6, 2), 'ok': ok})
+    return res
+
+
+def controles(salida, segs, out_dir, info, rms_src=None, hz_src=100, palabras_src=None, fuente=None):
     """Uniones: cuadro antes | después de cada corte (miralo con Read) y, en cada unión: ataque o cola comidos (en el
     crudo: ¿el tramo que entra arranca con voz? ¿el que sale corta con voz?), hueco (la música de fondo cae a casi
     nada) y pop (salto de muestra mucho mayor que lo normal alrededor). Más la duración."""
@@ -516,6 +588,15 @@ def controles(salida, segs, out_dir, info, rms_src=None, hz_src=100):
         u['salto_audio'] = round(pico / 32768, 4)
         u['ok'] = not (u.get('ataque_comido') or u.get('cola_comida') or u['hueco'] or u['pop'])
         rep['uniones'].append(u)
+    # HARD-RULES 44: arranques completos (todas las palabras; la primera de cada unión cuenta para la unión)
+    if rms_src and palabras_src and fuente:
+        ar = arranques(salida, segs, palabras_src, rms_src, hz_src, fuente); rep['arranques'] = {'palabras': len(ar), 'mal': [x for x in ar if not x['ok']]}
+        for u in rep['uniones']:
+            if not u.get('saca_audio'): continue
+            pr = next((x for x in ar if x['t'] >= u['t'] - 0.01), None)
+            if pr:
+                u['primera_palabra'] = {k: pr[k] for k in ('w', 'energia', 'inicio', 'ataque_antes_del_corte', 'ok')}
+                if not pr['ok']: u['ok'] = False
     # hoja de uniones: hasta 12, cada una cuadro antes | después
     sel = segs[1:13]
     if sel:
@@ -545,7 +626,8 @@ def retranscribir(salida, palabras, segs, modelo, out_dir):
         return {'hecho': False, 'motivo': 'falta faster-whisper (pip install --break-system-packages faster-whisper)'}
     m = WhisperModel(modelo, device='cpu', compute_type='int8')
     res = []
-    for g in segs[1:]:
+    for k_, g in enumerate(segs[1:], 1):
+        if abs(g['s'] - segs[k_ - 1]['e']) < 1e-4: continue   # corte de imagen solo: el audio sigue entero
         t = g['out_s']; a, b = max(0, t - 1.2), t + 1.2
         # el audio va decodificado por ffmpeg como arreglo: el PyAV instalado puede no ser compatible con faster-whisper
         raw = run(['ffmpeg', '-v', 'error', '-ss', f'{a:.3f}', '-t', f'{b - a:.3f}', '-i', salida, '-vn', '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], text=False).stdout
@@ -556,12 +638,13 @@ def retranscribir(salida, palabras, segs, modelo, out_dir):
         despues = [w for w in palabras if t - 0.02 <= w['s'] and w['e'] <= b - 0.05][:2]
         esperado = [norm(w['w']) for w in antes + despues]
         toks = [norm(x) for x in oido.split()]
-        j, ok = 0, 0
-        for e in esperado:   # en orden; una palabra que no aparece no consume el resto
+        j, ok, primera = 0, 0, None
+        for n_, e in enumerate(esperado):   # en orden; una palabra que no aparece no consume el resto
             k = next((x for x in range(j, len(toks)) if toks[x] == e or (len(e) > 3 and e in toks[x])), None)
+            if n_ == len(antes) and despues: primera = k is not None and toks[k] == e   # la primera después del corte: ENTERA
             if k is not None: ok += 1; j = k + 1
         res.append({'t': round(t, 3), 'esperado': ' '.join(w['w'] for w in antes) + ' | ' + ' '.join(w['w'] for w in despues),
-                    'oido': oido, 'ok': ok >= len(esperado) - 1})
+                    'oido': oido, 'primera_entera': primera, 'ok': ok >= len(esperado) - 1 and primera is not False})
     return {'hecho': True, 'uniones': res, 'mal': [r for r in res if not r['ok']]}
 
 
@@ -608,16 +691,22 @@ def main():
     ap.add_argument('--quitar-frases', default=''); ap.add_argument('--quitar-palabras', default=''); ap.add_argument('--mantener-palabras', default='')
     ap.add_argument('--sin-silencios', action='store_true'); ap.add_argument('--sin-muletillas', action='store_true')
     ap.add_argument('--sin-tomas', action='store_true'); ap.add_argument('--sin-ritmo', action='store_true')
-    ap.add_argument('--silencio', type=float, default=0.35, help='pausa entre palabras a partir de la cual se corta (s)')
+    ap.add_argument('--silencio', type=float, default=0.40, help='pausa entre palabras a partir de la cual se corta (s)')
     ap.add_argument('--min-corte', type=float, default=0.15, help='un silencio se corta solo si salen al menos estos segundos')
-    ap.add_argument('--aire', type=float, default=0.2, help='aire total que queda entre las dos palabras de un corte (s)')
-    ap.add_argument('--punch', type=float, default=1.1, help='zoom del punch-in en los jump cuts del talking head (1 = sin punch-in)')
+    ap.add_argument('--pausa', type=float, default=PAUSA, help='pausa natural que queda entre frases en cada corte, ya con el fundido (0,15-0,25 s)')
+    ap.add_argument('--aire', type=float, help='(viejo) igual que --pausa')
+    ap.add_argument('--punch', type=float, default=1.0, help='punch-in en jump cuts: 1 = sin punch-in (por defecto). Solo si la referencia lo pide: 1,25 o más')
     ap.add_argument('--modelo', help='carpeta del modelo Whisper local: retranscribe ±1,2 s en cada unión y compara (HARD-RULES 21)')
     ap.add_argument('--sin-suavizar', action='store_true', help='no bajar chasquidos ni respiraciones de las pausas')
     ap.add_argument('--solo-plan', action='store_true', help='no renderiza: solo plan.json e informe')
     ap.add_argument('--armar', help='carpeta de un corte ya hecho: arma el proyecto nuevo con los assetId subidos')
     ap.add_argument('--asset-video'); ap.add_argument('--asset-recorte'); ap.add_argument('--id')
     a = ap.parse_args()
+    if a.aire is not None: a.pausa = a.aire
+    if not 0.12 <= a.pausa <= 0.4: raise SystemExit('--pausa fuera de rango: entre 0,15 y 0,25 s suena natural (HARD-RULES 44)')
+    if 1.0 < a.punch < 1.25:
+        raise SystemExit(f'--punch {a.punch}: un punch-in chico se ve como mini zoom o falla de encuadre (HARD-RULES 45). '
+                         'Sin punch-in (1) o, si la referencia lo pide, 1,25 o más.')
     if a.armar:
         if not a.asset_video: raise SystemExit('--armar necesita --asset-video (el id que devolvió la subida de cortado.mp4)')
         return armar(a)
@@ -670,14 +759,17 @@ def main():
         mi = probe(matte); mi['audio'] = False
         renderizar(matte, segs, mi, os.path.join(a.out, 'recorte.mp4'), con_audio=False, crf=20)
     suaves = [] if a.sin_suavizar else suavizar_chasquidos(salida, palabras)
-    rep = controles(salida, segs, a.out, info, rms, hz)
+    rep = controles(salida, segs, a.out, info, rms, hz, [w for i, w in enumerate(W) if i not in fuera], fuente)
     rep['suavizados'] = suaves
     malas = [u for u in rep['uniones'] if not u['ok']]
-    motivos = lambda u: '+'.join(k for k in ('ataque_comido', 'cola_comida', 'hueco', 'pop') if u.get(k))
+    motivos = lambda u: '+'.join([k for k in ('ataque_comido', 'cola_comida', 'hueco', 'pop') if u.get(k)] +
+                                 (['primera palabra incompleta («%s»)' % u['primera_palabra']['w']] if u.get('primera_palabra') and not u['primera_palabra']['ok'] else []))
     lineas += ['', f"Controles: duración {'ok' if rep['duracion']['ok'] else 'MAL'} ({rep['duracion']}), " +
                f"{sum(1 for u in rep['uniones'] if u.get('saca_audio'))} uniones de audio con fundido cruzado de {int(XF * 1000)} ms, {len(malas)} con problemas" +
                (': ' + ', '.join(f"{u['t']:.2f}s {motivos(u)}" for u in malas) if malas else ' (ataques, colas, huecos y pops)') +
                (f". Chasquidos o respiraciones suavizados en las pausas: {len(suaves)} ({', '.join(str(x['s']) for x in suaves)})" if suaves else '') +
+               (f". Arranques completos: {rep['arranques']['palabras'] - len(rep['arranques']['mal'])}/{rep['arranques']['palabras']}" +
+                (' — MAL: ' + ', '.join(f"«{x['w']}» {x['t']:.2f}s" for x in rep['arranques']['mal']) if rep['arranques']['mal'] else '') if 'arranques' in rep else '') +
                f". Mirá uniones.jpg. Render en {time.time() - t0:.0f} s."]
     if a.modelo:
         rt = retranscribir(salida, palabras, segs, a.modelo, a.out); rep['retranscripcion'] = rt

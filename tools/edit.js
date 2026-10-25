@@ -5,7 +5,7 @@
    node edit.js --dist <carpeta con sala.html y librerías> --blobs <carpeta con recursos, cada archivo nombrado por su assetId>
                   --project <proyecto.json> [--ops <ops.json>] [--clear] [--settings <settings.json>]
                   [--sheet "1.2,5,11.5"] [--cols 4] [--width 360] [--export <salida.mp4>] [--doc <manual.txt> --pedido "texto"] --out <carpeta>
-                  [--sin-contraste] [--sin-nitidez]
+                  [--sin-contraste] [--sin-nitidez] [--sin-ducking] [--sin-revision]
 
    Escribe en --out: project.json (proyecto final), rules.json ({log, fixes, warns}) y sheet.jpg.
    Necesita: npm i playwright (o el Playwright preinstalado). Si chromium no tiene el códec, exporta en VP9 y
@@ -51,19 +51,41 @@ const MOCK = ([proj, settings]) => {
   window.claude = { use: async n => ({ db, assets: { upload: async () => ({ id: 'x' }), delete: async () => ({}) }, user: { can: async () => true } })[n] || null };
 };
 (async () => {
-  // Nitidez al exportar (HARD-RULES 43): si el video del proyecto es la copia liviana (720p), se escala a 1080×1920 con
-  // lanczos y un enfoque leve (unsharp 5×5 0,5, solo luminancia) y el editor exporta desde esa versión. Sin tocar la
-  // página: es el mismo video, mismos cuadros y tiempos. --sin-nitidez lo apaga.
-  if (A.export && !A['sin-nitidez'] && PROJ.video?.assetId) {
+  // Antes de exportar, el video del proyecto se prepara (sin tocar la página: mismos cuadros y tiempos):
+  // - Nitidez (HARD-RULES 43 y 47): copia liviana → 1080×1920 con lanczos y enfoque leve, y además nitidez POR TOMA:
+  //   las tomas B-roll más blandas que el A-roll reciben más enfoque y claridad hasta acercarse, sin halos (nitidez.py).
+  // - Música (HARD-RULES 48): si el crudo ya trae música, se separa (Spleeter) y se baja solo donde queda a menos de
+  //   20 dB por debajo de la voz mientras se habla (separar.py). Lo demás queda idéntico.
+  // --sin-nitidez y --sin-ducking los apagan.
+  const PY = (script, args) => execFileSync('python3', ['-B', path.join(__dirname, script), ...args], { encoding: 'utf8', maxBuffer: 64 << 20, timeout: 1800000 });
+  let REF_AUDIO = null;
+  if (A.export && PROJ.video?.assetId) {
     const id = PROJ.video.assetId, f = fs.readdirSync(BLOBS).find(n => n === id || n.startsWith(id + '.'));
     if (f) {
-      const pr = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'json', path.join(BLOBS, f)], { encoding: 'utf8' })).streams[0];
-      if (pr && pr.height < 1920) {
-        const dir = path.join(OUT, '_hq'); fs.mkdirSync(dir, { recursive: true }); const dst = path.join(dir, id + '.mp4'); const t0 = Date.now();
-        execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', path.join(BLOBS, f), '-vf', 'scale=1080:1920:flags=lanczos,unsharp=5:5:0.5:5:5:0',
-          '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '14', '-pix_fmt', 'yuv420p', '-c:a', 'copy', '-movflags', '+faststart', dst]);
-        HQ[id] = dst; console.log(`nitidez: ${pr.width}×${pr.height} → 1080×1920 (lanczos + enfoque leve) en ${((Date.now() - t0) / 1000).toFixed(0)} s`);
+      const dir = path.join(OUT, '_hq'); fs.mkdirSync(dir, { recursive: true }); let src = path.join(BLOBS, f);
+      if (!A['sin-nitidez']) {
+        const dst = path.join(dir, id + '.mp4'), t0 = Date.now();
+        try {
+          const inf = JSON.parse(PY('nitidez.py', ['--video', src, '--proyecto', path.resolve(A.project), '--salida', dst, '--informe', path.join(OUT, 'nitidez.json')]));
+          const comp = inf.tomas.filter(r => r.monto > r.base || r.claridad > 0);
+          console.log(`nitidez: 1080×1920, enfoque base ${inf.tomas[0]?.base ?? 0}; ` + (comp.length ? comp.map(r => `toma ${r.s.toFixed(1)}-${r.e.toFixed(1)} s más blanda (${r.nitidez} vs ${inf.ref_aroll} del A-roll) → enfoque ${r.monto} + claridad ${r.claridad} (${r.despues})`).join('; ') : 'ninguna toma B-roll más blanda que el A-roll') + ` (${((Date.now() - t0) / 1000).toFixed(0)} s)`);
+          src = dst;
+        } catch (e) { console.log('OJO: nitidez por toma falló (' + String(e.message).slice(0, 200) + '); sigo con el video tal cual'); }
       }
+      if (!A['sin-ducking'] && PROJ.audio?.rawMusic && (PROJ.words || []).length) {
+        try {
+          const wav = path.join(dir, 'duck.wav');
+          const inf = JSON.parse(PY('separar.py', ['--entrada', src, '--palabras', path.resolve(A.project), '--duck', wav, '--bajo-voz', '20', '--json', path.join(OUT, 'ducking.json')]));
+          console.log(`música del crudo: voz ${inf.antes.mediana_db} dB sobre la música (peor 10 %: ${inf.antes.peor10_db} dB) → ` + (inf.baja_max_db < -0.5 ? `la bajé hasta ${inf.baja_max_db} dB mientras se habla; queda peor 10 % ${inf.despues.peor10_db} dB` : 'ya está 20 dB o más abajo: no hace falta bajarla'));
+          if (inf.baja_max_db < -0.5) {
+            const dst2 = path.join(dir, id + '.duck.mp4');
+            execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-i', wav, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '256k', '-shortest', '-movflags', '+faststart', dst2]);
+            src = dst2;
+          }
+        } catch (e) { console.log('OJO: separación de la música falló (' + String(e.message).slice(0, 200) + '); sigo sin ducking'); }
+      }
+      if (src !== path.join(BLOBS, f)) HQ[id] = src;
+      REF_AUDIO = src;
     }
   }
   await new Promise(r => srv.listen(0, r)); const port = srv.address().port;
@@ -185,6 +207,142 @@ const MOCK = ([proj, settings]) => {
       if (r.velo) res.warns.push(`Inserto de ${mm}: el texto no llega a 3:1 contra el video ni a 4,5:1 con su sombra en ningún lugar posible (${txt(r.despues || r)}). Rehacelo con velo (plantillas: --q "velo=1") o cambiá el color del texto.`);
     }
     res.contraste = ct;
+    // Contraste del TEXTO de las demás piezas (títulos libres, palabras, plantillas…), HARD-RULES 46. No un promedio de
+    // la caja: el PEOR caso de los píxeles bajo CADA letra (componentes conexos del texto), en TODOS los cuadros en que
+    // la pieza está entera en pantalla (cada 0,1 s). Una letra pasa con 3:1 contra el video o 4,5:1 contra lo que la
+    // rodea ya compuesto (su sombra o velo). Si alguna no pasa: la mueve (arriba o abajo, zona segura, sin caras) y, si
+    // ningún lugar sirve, le pone un velo suave (capas negras muy tenues detrás del texto: la página ya las dibuja).
+    const textoContraste = soloMedir => page.evaluate(async (soloMedir) => {
+      const lum = (r, g, b) => { const f = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+      const cr = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      const K = 0.4, w = Math.round(W * K), h = Math.round(H * K), R = 5, rep = [];
+      const cv = () => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+      const piezas = (S.p.motions || []).filter(m => m.type !== 'inserto' && m.layout !== 'full' && !m.behind && String(motionText(m) || '').trim());
+      const captar = async (m, paso) => {
+        const fr = [];
+        // con la pieza ENTERA en pantalla y quieta: después de su entrada (0,55 s expo: 98 % a los 0,3 s) y de la entrada
+        // de cada elemento (máscara, subir…: una letra que todavía se mueve no es la que se lee), antes de su salida (0,38 s)
+        const els = Array.isArray(m.params?.elements) ? m.params.elements : [];
+        const finEls = els.reduce((x, e) => Math.max(x, (Number.isFinite(+e.at) ? +e.at : 0) + (e.anim === 'ninguna' ? 0 : Math.max(0.05, num(e.dur, 0.55)) * 0.8)), 0);
+        const ta = m.start + Math.min(Math.max(0.3, finEls), m.dur / 2), tb = Math.max(ta, m.start + m.dur - 0.38);
+        for (let t = ta; t <= tb + 1e-6; t += paso) {
+          seek(t); await waitSeek();
+          const cb = cv(); composeFrame(cb.getContext('2d'), t, { source: S.videoReady ? VID : null, sw: VID.videoWidth, sh: VID.videoHeight, captions: false, motions: (S.p.motions || []).filter(x => x !== m) });
+          const env = { k: K, t, P: S.p, B: S.p.brand, base: cb, capTop: SAFE.bottom, inFull: false };
+          const ci = cv(), x = ci.getContext('2d'); x.setTransform(K, 0, 0, K, 0, 0); drawMotion(x, m, t, env);
+          // las letras salen de la pieza dibujada SIN sombra y SIN velo (si no, sombra + velo pasan por letra)
+          const cl = cv(), xl = cl.getContext('2d'); xl.setTransform(K, 0, 0, K, 0, 0);
+          for (const pr of ['shadowColor', 'shadowBlur', 'shadowOffsetX', 'shadowOffsetY']) Object.defineProperty(xl, pr, { get: () => pr === 'shadowColor' ? 'transparent' : 0, set: () => { } });
+          const els = m.params && m.params.elements; if (Array.isArray(els)) m.params.elements = els.filter(e => !e._velo);
+          try { drawMotion(xl, m, t, env); } finally { if (Array.isArray(els)) m.params.elements = els; }
+          const bg = cb.getContext('2d').getImageData(0, 0, w, h).data, pc = x.getImageData(0, 0, w, h).data, pl = xl.getImageData(0, 0, w, h).data;
+          // letras = componentes conexos de lo opaco (alfa ≥ 0,8) del dibujo sin sombra ni velo
+          const lab = new Int32Array(w * h).fill(-1), comps = []; let y0 = 1e9, y1 = -1, x0 = 1e9, x1 = -1;
+          for (let i = 0; i < w * h; i++) {
+            if (pc[i * 4 + 3] > 24) { const r = Math.floor(i / w), c = i % w; if (r < y0) y0 = r; if (r > y1) y1 = r; if (c < x0) x0 = c; if (c > x1) x1 = c; }
+            if (pl[i * 4 + 3] < 204 || lab[i] >= 0) continue;
+            const px = [], st = [i]; lab[i] = comps.length;
+            while (st.length) { const j = st.pop(); px.push(j); const r = Math.floor(j / w), c = j % w;
+              for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) { const rr = r + dr, cc = c + dc; if (rr < 0 || rr >= h || cc < 0 || cc >= w) continue; const k = rr * w + cc; if (lab[k] < 0 && pl[k * 4 + 3] >= 204) { lab[k] = comps.length; st.push(k); } } }
+            if (px.length >= 4) comps.push(px);
+          }
+          fr.push({ t, bg, pc, pl, lab, comps, box: x1 >= 0 ? { y0, y1, x0, x1 } : null });
+        }
+        return fr;
+      };
+      const medir = (fr, dyp) => {
+        let peor = null;
+        for (const f of fr) for (const px of f.comps) {
+          const cs = [], vs = [];
+          for (const i of px) {
+            const r = Math.floor(i / w), c = i % w, rb = r + dyp; if (rb < 0 || rb >= h) return null;
+            const lt = lum(f.pl[i * 4], f.pl[i * 4 + 1], f.pl[i * 4 + 2]), jb = (rb * w + c) * 4;
+            cs.push(cr(lt, lum(f.bg[jb], f.bg[jb + 1], f.bg[jb + 2])));
+            let pv = null;
+            for (const [dr, dc] of [[-R, 0], [R, 0], [0, -R], [0, R]]) {
+              const rr = r + dr, cc = c + dc; if (rr < 0 || rr >= h || cc < 0 || cc >= w) continue;
+              const k = rr * w + cc, a = f.pc[k * 4 + 3] / 255;
+              // lo que rodea a la letra: todo lo que no es letra ni su borde suavizado (velo y sombra sí cuentan)
+              let pegado = false; for (let d1 = -1; d1 <= 1 && !pegado; d1++) for (let d2 = -1; d2 <= 1; d2++) { const r3 = rr + d1, c3 = cc + d2; if (r3 >= 0 && r3 < h && c3 >= 0 && c3 < w && f.lab[r3 * w + c3] >= 0) { pegado = true; break; } }
+              if (pegado || f.pl[k * 4 + 3] > 24) continue;   // borde suavizado de otra letra: no es entorno
+              const rbb = rr + dyp; if (rbb < 0 || rbb >= h) continue; const kb = (rbb * w + cc) * 4;
+              const mix = q => f.pc[k * 4 + q] * a + f.bg[kb + q] * (1 - a);
+              const v = cr(lt, lum(mix(0), mix(1), mix(2))); if (pv === null || v < pv) pv = v;
+            }
+            if (pv !== null) vs.push(pv);
+          }
+          cs.sort((a, b) => a - b); vs.sort((a, b) => a - b);
+          const c5 = cs[Math.floor(cs.length * 0.05)], v5 = vs.length ? vs[Math.floor(vs.length * 0.05)] : 0;
+          const nota = Math.max(c5 / 3, v5 / 4.5);
+          if (!peor || nota < peor.nota) { const i = px[0]; peor = { nota, c: c5, v: v5, t: f.t, x: Math.round((i % w) / K), y: Math.round((Math.floor(i / w) + dyp) / K) }; }
+        }
+        return peor;
+      };
+      const caja = (fr, dyp) => { let b = null; for (const f of fr) if (f.box) b = b ? { y0: Math.min(b.y0, f.box.y0), y1: Math.max(b.y1, f.box.y1), x0: Math.min(b.x0, f.box.x0), x1: Math.max(b.x1, f.box.x1) } : Object.assign({}, f.box); return b && { x: b.x0 / K, x1: (b.x1 + 1) / K, y: (b.y0 + dyp) / K, y1: (b.y1 + 1 + dyp) / K }; };
+      const mover = (m, dy) => {   // en px reales, después del ajuste (fit) de la pieza
+        const s = (m.fit && m.fit.s) || 1;
+        if (m.type === 'libre' && Array.isArray(m.params?.elements)) for (const e of m.params.elements) { for (const k of ['y', 'y2', 'cy']) if (e[k] != null && Number.isFinite(+e[k])) e[k] = +e[k] + dy / s; }
+        else m.fit = Object.assign({ ox: W / 2, oy: H / 2, s: 1 }, m.fit || {}, { dy: ((m.fit && m.fit.dy) || 0) + dy });
+      };
+      for (const m of piezas) {
+        let fr = await captar(m, 0.1); if (!fr.some(f => f.comps.length)) continue;
+        const cara = protectedBox(S.p, m.start, m.start + m.dur);
+        const ahora = medir(fr, 0); if (!ahora) continue;
+        const r = { id: m.id, start: m.start, texto: String(motionText(m)).slice(0, 40), nota: +ahora.nota.toFixed(2), letra: ahora, movido_px: 0, velo: 0 };
+        if (ahora.nota < 1 && !soloMedir) {
+          const ralo = fr.filter((_, i) => i % 2 === 0);   // la búsqueda con la mitad de los cuadros; después se verifica con todos
+          let mejor = null, primero = null;
+          for (let k = 2; k <= 175; k += 2) {
+            if (primero !== null && k > primero + 20) break;
+            for (const dyp of [-k, k]) {
+              const b = caja(ralo, dyp); if (!b || b.y < SAFE.top + 8 || b.y1 > SAFE.bottom || boxHitsFace(b, cara)) continue;
+              const v = medir(ralo, dyp); if (!v) continue;
+              if (primero === null && v.nota >= 1) primero = k;
+              if (!mejor || v.nota > mejor.nota + 1e-6) mejor = Object.assign({ dyp }, v);
+            }
+          }
+          if (mejor && mejor.nota > ahora.nota + 0.1) { mover(m, mejor.dyp / K); r.movido_px = Math.round(mejor.dyp / K); }
+          fr = await captar(m, 0.1); let fin = medir(fr, 0);
+          // velo suave si sigue sin llegar (solo pieza libre: capas negras de 9 % que se suman hacia el centro, 8 px de borde por capa)
+          if (fin && fin.nota < 1 && m.type === 'libre' && Array.isArray(m.params?.elements)) {
+            const base = m.params.elements.filter(e => !e._velo);
+            for (let capas = 6; capas <= 12 && fin && fin.nota < 1; capas += 2) {
+              // el velo entero tiene que entrar en la zona segura (si no, la regla de la página corre toda la pieza):
+              // si no entra, primero se corre la pieza lo justo
+              m.params.elements = base; fr = await captar(m, 0.2);
+              const pad = 2 + (capas - 1) * 3, b0 = caja(fr, 0);   // vertical: pegado al texto (no invade la cara ni sale de la zona)
+              const corr = Math.max(0, SAFE.top + 4 - (b0.y - pad)) - Math.max(0, (b0.y1 + pad) - (SAFE.bottom - 4));
+              if (corr) { mover(m, corr); r.movido_px += Math.round(corr); fr = await captar(m, 0.2); }
+              const b = caja(fr, 0), s = (m.fit && m.fit.s) || 1, ox = m.fit ? m.fit.ox : 0, oy = m.fit ? m.fit.oy : 0, dyf = (m.fit && m.fit.dy) || 0;
+              const inv = (X, Y) => m.fit ? [ox + (X - ox) / s, oy + (Y - oy - dyf) / s] : [X, Y];
+              const [ax, ay] = inv(b.x, b.y), [bx, by] = inv(b.x1, b.y1);
+              const velo = [];   // radio moderado: con media altura las puntas son semicírculos y la última letra queda sin velo
+              for (let i = capas - 1; i >= 0; i--) { const px = 10 + i * 6, py = 2 + i * 3; velo.push({ _velo: 1, kind: 'caja', x: Math.round(ax - px), y: Math.round(ay - py), w: Math.round(bx - ax + 2 * px), h: Math.round(by - ay + 2 * py), radius: Math.round(Math.min(36, (by - ay) / 3) + py), fill: '#000000', opacity: 0.09, at: 0, anim: 'ninguna' }); }
+              m.params.elements = velo.concat(m.params.elements.filter(e => !e._velo)); r.velo = capas;
+              fr = await captar(m, 0.1); fin = medir(fr, 0);
+            }
+          }
+          r.despues = fin ? { nota: +fin.nota.toFixed(2), letra: fin } : null;
+        }
+        rep.push(r);
+      }
+      return rep;
+    }, soloMedir);
+    const tx = await textoContraste(false);
+    if (tx.some(r => r.movido_px || r.velo)) {
+      const rr3 = await page.evaluate(async () => { const rr = runRules(true); await prepareMotions(S.p); return rr; });
+      res.fixes.push(...rr3.fixes);
+      // las reglas pueden haber reubicado algo: se vuelve a medir tal como queda
+      for (const v of await textoContraste(true)) { const r = tx.find(x => x.id === v.id); if (r && (r.movido_px || r.velo)) r.despues = { nota: v.nota, letra: v.letra }; }
+    }
+    for (const r of tx) {
+      const mm = String(Math.floor(r.start / 60)).padStart(2, '0') + ':' + String(Math.floor(r.start % 60)).padStart(2, '0');
+      const L = x => `peor letra ${x.letra.c.toFixed(1)}:1 contra el video y ${x.letra.v.toFixed(1)}:1 con su sombra (a ${x.letra.t.toFixed(1)} s, x ${x.letra.x}, y ${x.letra.y})`;
+      if (r.movido_px || r.velo) res.fixes.push(`Texto «${r.texto}» (${mm}): ${L(r)}; ` + (r.movido_px ? `lo ${r.movido_px < 0 ? 'subí' : 'bajé'} ${Math.abs(r.movido_px)} px` : '') + (r.movido_px && r.velo ? ' y ' : '') + (r.velo ? `le puse velo suave (${r.velo} capas)` : '') + (r.despues ? `; quedó ${L(r.despues)}.` : '.'));
+      const finalNota = r.despues ? r.despues.nota : r.nota;
+      if (finalNota < 1) res.warns.push(`Texto «${r.texto}» (${mm}): no llega a 3:1 ni a 4,5:1 con sombra en ninguna posición (${L(r.despues || r)}). Cambiá el color, el lugar o poné un velo más fuerte.`);
+    }
+    res.contraste_texto = tx;
   }
   fs.writeFileSync(path.join(OUT, 'rules.json'), JSON.stringify(res, null, 1));
   console.log(res.log.join('\n')); if (res.fixes.length) console.log('REGLAS:\n- ' + res.fixes.join('\n- ')); if (res.warns.length) console.log('OJO:\n- ' + res.warns.join('\n- '));
@@ -215,6 +373,20 @@ const MOCK = ([proj, settings]) => {
       if (r.vcodec === 'avc' && r.acodec === 'aac') fs.renameSync(raw, A.export);
       else execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', raw, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '17', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', A.export]);
       console.log(`video: ${A.export} (${r.vcodec}/${r.acodec}, ${((Date.now() - t0) / 1000).toFixed(0)} s)`);
+      // revisión del audio final (HARD-RULES 48 y 49): sincronía (corrige el relleno del AAC), sonoridad y voz/música;
+      // y nitidez por toma del final (HARD-RULES 47)
+      if (REF_AUDIO && !A['sin-revision']) {
+        try {
+          const ra = JSON.parse(PY('revisar_audio.py', ['--ref', REF_AUDIO, '--final', A.export, '--proyecto', path.resolve(A.project), '--corregir', '--json', path.join(OUT, 'revision_audio.json')]));
+          const sc = ra.sincro, so = ra.sonoridad, vm = ra.voz_musica || {};
+          console.log(`audio: sincronía ${sc.corregido ? `corregida (${sc.atraso_ms} ms → ${sc.despues_ms} ms)` : `${sc.atraso_ms} ms`}, ${so.lufs} LUFS, pico ${so.pico_dbtp} dBTP` + (vm.ventanas ? `, voz sobre música ${vm.mediana_db} dB (peor 10 %: ${vm.peor10_db} dB)` : ''));
+          if (!sc.ok) console.log('OJO: el audio quedó desfasado: ' + JSON.stringify(sc));
+          if (!so.ok) console.log('OJO: sonoridad fuera de −14 LUFS ±1 o pico arriba de −1 dBTP');
+          if (vm.ventanas && !vm.ok) console.log(`OJO: la música compite con la voz (peor 10 %: ${vm.peor10_db} dB; tiene que ser 18 o más): ${JSON.stringify(vm.peores)}`);
+          const nf = JSON.parse(PY('nitidez.py', ['--video', A.export, '--proyecto', path.resolve(A.project), '--medir', '--informe', path.join(OUT, 'nitidez_final.json')]));
+          console.log(`nitidez del final: toma más blanda ${nf.peor.s.toFixed(1)}-${nf.peor.e.toFixed(1)} s a ${Math.round(nf.relacion_peor * 100)} % del A-roll` + (nf.ok ? '' : ' — OJO: más blanda que el 80 % del A-roll'));
+        } catch (e) { console.log('OJO: revisión del final falló: ' + String(e.message).slice(0, 300)); }
+      }
     }
   }
   await browser.close(); srv.close();
