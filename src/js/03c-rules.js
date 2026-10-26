@@ -130,6 +130,10 @@ function redundancy(m, P) {
   const hit = mt.filter(w => sp.has(w) || [...sp].some(s => s.length >= 5 && w.length >= 5 && s.slice(0, 5) === w.slice(0, 5))).length;
   return hit / mt.length;
 }
+/* transición de corte (flash, barrido de luz): pantalla completa un instante, sin texto. No es un texto que tape la cara:
+   no la sacan las reglas de cara, zona segura, lectura ni "una cosa por vez", y va encima de la persona (nunca detrás). */
+const TRANS_MAX = 1.2;
+function isTransition(m) { return !!m.transicion && m.type === 'codigo' && m.layout !== 'full' && m.dur <= TRANS_MAX + 0.05 && !tokens(motionText(m)).length; }
 function hasText(m) { return tokens(motionText(m)).length > 0 || ['titulo', 'cita', 'lista', 'cta', 'lowerthird', 'etiqueta', 'contador', 'progreso'].includes(m.type); }
 /* ¿se ocultan los subtítulos en t? (evita el doble texto) */
 function captionsHiddenAt(P, t, list) {
@@ -208,8 +212,10 @@ function fitBox(b, fit) { if (!fit || !b) return b; const s = fit.s || 1, ox = f
 /* corre todas las reglas automáticas sobre el proyecto (dentro de mutate). Devuelve {fixes, warns} */
 function enforceRules(P) {
   const fixes = [], warns = [];
-  const ms = P.motions.slice().sort((a, b) => a.start - b.start);
   const name = m => `${PRESETS[m.type]?.name || m.type} de ${mmss(m.start)}`;
+  for (const m of P.motions) if (m.transicion) { if (m.dur > TRANS_MAX + 0.05) { m.dur = TRANS_MAX; fixes.push(`Dejé la transición de ${mmss(m.start)} en ${String(TRANS_MAX).replace('.', ',')} s: una transición de corte es un instante.`); } delete m.behind; delete m.fit; }
+  const trans = P.motions.filter(isTransition);
+  const ms = P.motions.filter(m => !trans.includes(m)).sort((a, b) => a.start - b.start); // las transiciones no entran en las reglas de piezas
   // 0) dentro del video
   for (const m of ms) { if (m.start + m.dur > P.duration + 0.01) { m.dur = Math.max(0.8, +(P.duration - m.start).toFixed(2)); } }
   // 7) una cosa por vez (solo piezas sobre el video; las completas pueden convivir con un zócalo)
@@ -297,7 +303,7 @@ function enforceRules(P) {
   // 3) sonidos
   if (ruleOn('sonido')) {
     let last = -99, count = 0; const maxN = Math.max(1, Math.ceil(P.duration / 7));
-    for (const m of ms) {
+    for (const m of ms.concat(trans).sort((a, b) => a.start - b.start)) { // el whoosh de una transición cuenta como cualquier sonido
       if (!m.sfx || m.sfx === 'ninguno') continue;
       if (!sfxAllowed(m.sfx)) { m.sfx = 'ninguno'; fixes.push(`Saqué un sonido de ${name(m)} que no es del kit profesional.`); continue; }
       if (m.tr === 'fundido' && m.layout !== 'full' && /whoosh|aire/.test(m.sfx + (S.sfxKit?.[m.sfx.slice(4)] || ''))) { m.sfx = 'ninguno'; fixes.push(`Saqué el whoosh de ${name(m)}: entra con fundido, no hay movimiento que lo justifique.`); continue; }

@@ -70,5 +70,21 @@ const MOCK = ([proj, lib, kit]) => {
   fs.writeFileSync(OUT + '/r2-follow.jpg', Buffer.from(blob2.split(',')[1], 'base64'));
   await page.evaluate(() => { S.tab = 'estilo'; renderLeft(); });
   await page.screenshot({ path: OUT + '/r3-estilo.png' });
+  // transiciones de corte: un flash a pantalla completa marcado "transicion" sobrevive a las reglas de piezas y va encima
+  // de la persona (nunca detrás); si dura de más, queda en 1,2 s
+  const tr = await page.evaluate(() => {
+    const flash = "const a=Math.max(0,1-Math.abs(p.t-0.2)/0.25); ctx.fillStyle='rgba(255,252,246,'+(0.55*a).toFixed(3)+')'; ctx.fillRect(0,0,p.W,p.H);";
+    S.p.motions = [];
+    applyAgentOps([
+      { op: 'crear', pieza: { type: 'codigo', start: 6, dur: 0.8, layout: 'overlay', tr: 'corte', sfx: 'ninguno', transicion: true, behind: true, params: { texto: '', code: flash } } },
+      { op: 'crear', pieza: { type: 'codigo', start: 26, dur: 3, layout: 'overlay', tr: 'corte', sfx: 'ninguno', transicion: true, params: { texto: '', code: flash } } },
+    ]);
+    const rr = runRules(true);
+    return { ms: sortedMotions().map(m => ({ s: m.start, d: m.dur, tr: !!m.transicion, behind: !!m.behind })), fixes: rr.fixes };
+  });
+  console.log('TRANSICIONES', JSON.stringify(tr));
+  const t6 = tr.ms.find(m => m.s === 6), t26 = tr.ms.find(m => m.s === 26);
+  if (!t6 || !t6.tr || t6.behind) throw new Error('la transición marcada no sobrevivió o quedó detrás de la persona');
+  if (!t26 || t26.d > 1.25) throw new Error('una transición larga tendría que quedar en 1,2 s');
   await browser.close(); srv.close();
 })();

@@ -58,12 +58,23 @@ const MOCK = ([proj, lib, kit]) => {
   await page.waitForTimeout(1200);
   console.log('tapa curso', JSON.stringify(await page.evaluate(() => document.querySelector('.deepstage')?.innerText || null)));
   await page.screenshot({ path: OUT + '/d1c-curso.png' });
-  // simular que la nube terminó
+  // simular que la nube terminó: como en un corte, el resultado queda en un proyecto nuevo "… · cortado"
+  await page.evaluate(async () => { const c = JSON.parse(JSON.stringify(S.p)); delete c.deep; c.id = S.p.id + 'c1'; c.name = S.p.name + ' · cortado'; c.chat = []; c.stage = 'editor'; c.cortes = { at: Date.now(), origen: { proyecto: S.p.id }, resumen: 'Corte de prueba' }; await S.db.doc('projects/' + c.id).set(c); });
+  await page.waitForTimeout(400);
   await page.evaluate(() => { const r = JSON.parse(JSON.stringify(S.p)); r.deep.estado = 'listo'; r.deep.resumen = 'Tres palabras gigantes detrás de la cabeza y subtítulos limpios.'; r.chat.push({ role: 'claude', text: 'Hecho.', at: Date.now(), deep: true }); adoptRemote(r); });
   await page.waitForTimeout(300);
   await page.waitForTimeout(1200);
   console.log('tapa al terminar', await page.evaluate(() => !!document.querySelector('.deepstage')));
+  await page.waitForTimeout(1500);
+  console.log('abrió el cortado', await page.evaluate(id => S.p.id === id + 'c1', PROJ.id), JSON.stringify(await page.evaluate(() => S.p.name)));
   await page.screenshot({ path: OUT + '/d2-done.png' });
+  // volver al original: avisa dónde está lo editado y lleva con un botón
+  await page.evaluate(id => openProject(S.projects.find(x => x.id === id)), PROJ.id);
+  await page.waitForTimeout(800); await page.evaluate(() => { S.tab = 'claude'; renderLeft(); });
+  console.log('original visto', await page.evaluate(() => S.p.deep?.visto), 'aviso', JSON.stringify(await page.evaluate(() => document.querySelector('.deepban.ok')?.innerText || null)));
+  await page.screenshot({ path: OUT + '/d3-original.png' });
+  await page.click('[data-deepopen]'); await page.waitForTimeout(800);
+  console.log('botón abre el cortado', await page.evaluate(id => S.p.id === id + 'c1', PROJ.id));
   console.log('toast', await page.evaluate(() => document.querySelector('.toast')?.textContent || ''));
   await browser.close(); srv.close();
 })();

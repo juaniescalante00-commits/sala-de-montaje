@@ -79,7 +79,7 @@ function applyPrompt(P, ms) {
 
 - Cambiá solo lo que pide cada comentario y dejá todo lo demás igual.
 - Si algo no se puede con los parámetros disponibles, hacé lo más parecido y explicalo en "cambios".
-- Campos que podés cambiar: type, start, dur, layout ("overlay"|"full"), pos ("auto"|"arriba"|"centro"|"abajo"), bg ("video"|"solido"), tr ("subir"|"fundido"|"escala"|"mascara"), sfx ("ninguno"|"whoosh"|"aire"|"sub"|"riser"), stagger (segundos entre elementos cuando no hay beats), params, beats (segundos ABSOLUTOS en que entra cada elemento, en el orden de beats del tipo; null = automático), desc.
+- Campos que podés cambiar: type, start, dur, layout ("overlay"|"full"), pos ("auto"|"arriba"|"centro"|"abajo"), bg ("video"|"solido"), tr ("subir"|"fundido"|"escala"|"mascara"), sfx ("ninguno"|"whoosh"|"aire"|"sub"|"riser"), "transicion": true (solo para un flash o barrido de corte con pieza codigo, ver PIEZA "codigo"), stagger (segundos entre elementos cuando no hay beats), params, beats (segundos ABSOLUTOS en que entra cada elemento, en el orden de beats del tipo; null = automático), desc.
 - "Más lento" o "que respire" = más separación entre beats o más stagger. "Que entre cuando dice X" = el beat va en el segundo de esa palabra en transcript_del_tramo.
 - Si cambiás tipo o params, mantené el formato de params de ese tipo.
 ${STYLE_RULES}

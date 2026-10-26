@@ -7,7 +7,8 @@ p.at(t0, dur=0.6, easing="expo") → progreso 0→1 que arranca en t0, p.ease.{e
 p.font(size, {family:"display"|"body", weight, italic}) → string para ctx.font, p.wrap(texto, anchoMax) → líneas, p.rr(x,y,w,h,r) arma un rectángulo redondeado (después ctx.fill()),
 p.panel(x,y,w,h) panel con el estilo de la marca, p.typeIn(texto, t0, letrasPorSegundo) → texto escrito hasta ahora, p.rand(semilla) → 0-1 determinista, p.noise(x,y),
 p.words [{w, t}] palabras dichas durante la pieza (t relativo), p.face {x,y,w,h} zona de la cara en px o null (no dibujes encima).
-Usalo para tipografía cinética, máscaras, contadores, gráficos que se dibujan, partículas, transiciones, glitch sobrio, lo que haga falta. Mantené el estilo de la marca.`;
+Usalo para tipografía cinética, máscaras, contadores, gráficos que se dibujan, partículas, transiciones, glitch sobrio, lo que haga falta. Mantené el estilo de la marca.
+TRANSICIÓN DE CORTE (flash o barrido de luz en un corte): pieza codigo con "transicion": true, "tr": "corte", layout "overlay", texto vacío, dur de 0,5 a 1,2 s, con el pico justo en el corte. Puede cubrir todo el cuadro (cara incluida) por un instante: las reglas de cara no la sacan y va encima de la persona, nunca "behind" (detrás solo se ilumina el fondo y no se nota). Sutil: alfa máximo 0,5-0,6.`;
 const THREE_DOC = `PIEZA "3d" (three.js r160). params: {"texto": "texto principal (para revisión)", "code": "<cuerpo de función>", "fondo": "transparente"|"marca"}.
 El código es el CUERPO de function(THREE, scene, camera, p) que arma la escena UNA vez y DEVUELVE una función update(t) que pone todo según t (segundos desde que entra; determinista).
 La cámara es PerspectiveCamera(35°, 9/16) en (0,0,10) mirando al origen; el cuadro visible a z=0 mide ~3.55 de ancho × 6.31 de alto. Ya hay luz ambiente y una direccional.

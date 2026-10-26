@@ -135,7 +135,7 @@ function renderLeft() {
     color: () => JSON.stringify(P.grade) + JSON.stringify(P.frame),
     audio: () => JSON.stringify(P.audio) + JSON.stringify(P.music) + !!S.voiceBuf + (S.library || []).length + '|' + (S.libQ || '') + '|' + (S.libF || '') + !!S.libMore,
     estilo: () => (S.styles || []).length + '|' + (P.styleId || '') + JSON.stringify(S.rules) + (S.templates || []).length + '|' + (S.lastRules?.at || 0),
-    claude: () => (P.chat || []).length + '|' + !!S.busy.agent + (S.sample ? 1 : 0) + (P.words?.length || 0) + JSON.stringify(P.transcribe || null) + !!P.video?.assetId + JSON.stringify(deepState(P) || null) };
+    claude: () => (P.chat || []).length + '|' + !!S.busy.agent + (S.sample ? 1 : 0) + (P.words?.length || 0) + JSON.stringify(P.transcribe || null) + !!P.video?.assetId + JSON.stringify(deepState(P) || null) + (deepResultProject(P)?.id || '') };
   const key = S.tab + '|' + P.id + '|' + (parts[S.tab] ? parts[S.tab]() : '');
   if (body.dataset.key === key) return;
   body.dataset.key = key;

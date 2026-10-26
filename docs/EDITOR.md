@@ -169,6 +169,7 @@ el transcript con tiempos. Leelo una vez al empezar.
 | La referencia hace | En la Sala de Montaje |
 | --- | --- |
 | Palabra enorme detrás de la cabeza, palabras chicas encima | `palabra` con `"behind":true` (pre = palabras chicas, word = la enorme) |
+| Flash o barrido de luz en cada corte | `codigo` con `"transicion":true`, `"tr":"corte"`, sin texto, 0,5 a 1,2 s con el pico en el corte, alfa máx. 0,5-0,6. Va encima de la persona (nunca `behind`: detrás solo se aclara el fondo y no se ve). Las reglas de cara no la sacan. |
 | Subtítulos sin caja, 1-2 palabras, a la altura del pecho | subtítulos `style:"limpio"`, `maxWords:2`, `pos:"auto"` |
 | Subtítulos bold con la palabra activa en color | `editorial` o `impacto` |
 | Subtítulos dentro de una caja | `caja` |
@@ -195,7 +196,8 @@ Subilo con Artifact (`publish`, `url` del editor, `file_path` = matte.mp4, `asse
 Las piezas `behind` solo valen mientras hay alguien en cuadro (el editor las convierte en texto normal si no).
 
 ## 6. Lo que este editor todavía no hace (decilo si la referencia lo usa)
-- Reordenar o acelerar el video crudo; transiciones entre tomas (whip pan, barridos). **Cortar sí**: silencios,
+- Reordenar o acelerar el video crudo; transiciones que mueven la imagen entre tomas (whip pan). Un flash o un barrido de
+  luz encima del corte sí se puede (tabla de la sección 4). **Cortar sí**: silencios,
   muletillas, tomas repetidas y jump cuts (sin punch-in salvo que la referencia lo pida, sección 11); el corte queda en
   un proyecto nuevo "… · cortado".
 - Insertar otros videos o B-roll externo (sí se pueden montar animaciones propias: pieza `inserto`).

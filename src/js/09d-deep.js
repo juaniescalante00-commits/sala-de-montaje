@@ -33,18 +33,35 @@ async function runDeep(text) {
     return false;
   }
 }
+/* cuando Claude Code corta el crudo, el resultado queda en un proyecto nuevo ("… · cortado") y el original no se toca.
+   Este es ese proyecto: el que dice deep.proyecto o, si no, el más nuevo cuyo cortes.origen apunta a este. */
+function deepResultProject(P) {
+  if (!P || !S.projects) return null;
+  const id = P.deep?.proyecto; if (id && id !== P.id) { const q = S.projects.find(x => x.id === id); if (q) return q; }
+  const hijos = S.projects.filter(x => x.id !== P.id && x.cortes?.origen?.proyecto === P.id);
+  return hijos.sort((a, b) => (b.cortes?.at || 0) - (a.cortes?.at || 0))[0] || null;
+}
+async function deepOpenResult() {
+  const q = deepResultProject(S.p); if (!q) return;
+  /* se guarda el original (visto) antes de cambiar: el guardado escribe siempre el proyecto abierto */
+  mutate(p => { if (p.deep) p.deep.visto = true; }); await store.flush();
+  openProject(q); toast(`Abrí «${q.name}». El crudo original quedó intacto.`, 6000);
+}
 function deepRetry() { const d = S.p?.deep; if (!d?.texto) return; mutate(p => { delete p.deep; }); runDeep(d.texto); }
 function deepBannerHTML() {
   const d = deepState(S.p); if (!d) return '';
   const mins = Math.max(0, Math.round((Date.now() - (d.at || Date.now())) / 60000));
   if (d.estado === 'pendiente' || d.estado === 'en_curso') return `<div class="deepban run"><span class="busy"></span><div><b>Claude Code está editando a fondo</b><span>${esc(d.paso || '')}${mins ? ` · ${mins} min` : ''}</span></div></div>`;
   if (d.estado === 'trabado' || d.estado === 'error') return `<div class="deepban err"><div><b>${d.estado === 'error' ? 'La edición a fondo falló' : 'La edición a fondo se trabó'}</b><span>${esc(d.paso || '')}</span></div><button class="btn sm" type="button" data-deepretry>Reintentar</button><button class="btn sm ghost" type="button" data-deepclear>Cerrar</button></div>`;
+  const q = d.estado === 'listo' ? deepResultProject(S.p) : null;
+  if (q) return `<div class="deepban ok"><div><b>${d.visto ? 'Este es el crudo original' : 'Edición a fondo lista'}</b><span>${d.visto ? `Lo editado está en «${esc(q.name)}».` : esc(d.resumen || 'Mirá el resultado.')}</span></div><button class="btn sm" type="button" data-deepopen>Ver el editado</button></div>`;
   if (d.estado === 'listo' && !d.visto) return `<div class="deepban ok"><div><b>Edición a fondo lista</b><span>${esc(d.resumen || 'Mirá el resultado.')}</span></div><button class="btn sm ghost" type="button" data-deepseen>Ok</button></div>`;
   return '';
 }
 function wireDeepBanner(root) {
   root.querySelectorAll('[data-deepretry]').forEach(b => b.addEventListener('click', deepRetry));
   root.querySelectorAll('[data-deepclear]').forEach(b => b.addEventListener('click', () => mutate(p => { delete p.deep; })));
+  root.querySelectorAll('[data-deepopen]').forEach(b => b.addEventListener('click', deepOpenResult));
   root.querySelectorAll('[data-deepseen]').forEach(b => b.addEventListener('click', () => mutate(p => { if (p.deep) p.deep.visto = true; })));
 }
 /* aviso cuando llega el resultado de la nube */
@@ -52,7 +69,12 @@ let deepLast = '';
 function deepOnRemote(prev, now) {
   const a = prev?.deep, b = now?.deep; if (!b) return false;
   const key = b.id + ':' + b.estado; if (key === deepLast) return true; deepLast = key;
-  if (b.estado === 'listo' && a?.estado !== 'listo') { toast('Claude Code terminó la edición. ' + (b.resumen || ''), 8000); if (S.home) { S.p.stage = 'editor'; showHome(false); } seek(0); }
+  if (b.estado === 'listo' && a?.estado !== 'listo') {
+    toast('Claude Code terminó la edición. ' + (b.resumen || ''), 8000); if (S.home) { S.p.stage = 'editor'; showHome(false); } seek(0);
+    /* si el resultado quedó en un proyecto cortado, se abre ese: si no, parece que la edición no hizo nada */
+    const id = now.id, abrir = (n) => { if (S.p?.id !== id) return; const q = deepResultProject(S.p); if (q) deepOpenResult(); else if (n) setTimeout(() => abrir(n - 1), 1500); };
+    setTimeout(() => abrir(4), 300);
+  }
   else if (b.estado === 'error' && a?.estado !== 'error') toast('La edición a fondo falló: ' + (b.paso || ''), 8000);
   return true;
 }

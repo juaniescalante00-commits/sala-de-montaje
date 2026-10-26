@@ -116,6 +116,7 @@ function sanitizeMotion(m) {
   if (m.fit && typeof m.fit === 'object') o.fit = { s: clamp(num(m.fit.s, 1), 0.4, 1.2), dy: num(m.fit.dy), ox: num(m.fit.ox, 540), oy: num(m.fit.oy, 960) };
   if (m.noCaps) o.noCaps = true; if (m.noCapsManual) o.noCapsManual = true;
   if (m.behind && o.layout !== 'full') o.behind = true; // se dibuja detrás de la persona (necesita el recorte)
+  if (m.transicion) o.transicion = true; // flash o barrido de corte: dura menos de 1,2 s, sin texto, encima de todo
   for (const [k, t] of pr.schema) { if (t === 'number' || t === 'range') o.params[k] = num(o.params[k], pr.defaults[k]); if (t === 'lines' && !Array.isArray(o.params[k])) o.params[k] = String(o.params[k] || '').split('\n').filter(Boolean); if (t === 'pairs' && !Array.isArray(o.params[k])) o.params[k] = clone(pr.defaults[k]); if (t === 'bool') o.params[k] = !!o.params[k]; if (t === 'json' && (o.params[k] == null || typeof o.params[k] !== 'object' || Array.isArray(o.params[k]) !== Array.isArray(pr.defaults[k]))) o.params[k] = clone(pr.defaults[k]); if (t === 'code' && typeof o.params[k] !== 'string') o.params[k] = String(pr.defaults[k]); }
   return o;
 }
