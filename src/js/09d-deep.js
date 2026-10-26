@@ -57,3 +57,16 @@ function deepOnRemote(prev, now) {
   return true;
 }
 setInterval(() => { if (S.p?.deep && deepBusy(S.p) && S.mode === 'editor' && S.tab === 'claude' && !S.home) { const el = document.querySelector('.deepban.run span:last-child'); if (el) { const d = deepState(S.p); const mins = Math.max(0, Math.round((Date.now() - (d.at || Date.now())) / 60000)); el.textContent = (d.paso || '') + (mins ? ` · ${mins} min` : ''); } } }, 20000);
+/* mientras Claude Code trabaja, el video se tapa con un cartel de estado: si no, parece que no pasa nada */
+function deepStageSync() {
+  const w = document.getElementById('stageWrap'); if (!w) return;
+  let el = w.querySelector('.deepstage');
+  if (!S.p || !deepBusy(S.p)) { if (el) el.remove(); return; }
+  if (S.playing) pause();
+  const d = deepState(S.p), cola = d.estado === 'pendiente';
+  const mins = Math.max(0, Math.round((Date.now() - (d.at || Date.now())) / 60000));
+  const html = `<span class="busy"></span><b>${cola ? 'En cola' : 'Claude está editando'}</b><span>${esc(cola ? 'Esperando que arranque Claude Code en la nube.' : (d.paso || 'Trabajando en tu pedido.'))}</span><small>${mins ? `Hace ${mins} min · ` : ''}El video aparece acá cuando termine.</small>`;
+  if (!el) { el = document.createElement('div'); el.className = 'deepstage'; el.setAttribute('role', 'status'); w.appendChild(el); }
+  if (el.dataset.h !== html) { el.dataset.h = html; el.innerHTML = html; }
+}
+setInterval(deepStageSync, 1000);

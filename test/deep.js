@@ -48,9 +48,21 @@ const MOCK = ([proj, lib, kit]) => {
   console.log('deep', JSON.stringify(await page.evaluate(() => S.p.deep)), 'home', await page.evaluate(() => S.home), 'stage', await page.evaluate(() => S.p.stage));
   await page.evaluate(() => { S.tab = 'claude'; renderLeft(); });
   await page.screenshot({ path: OUT + '/d1-run.png' });
+  // mientras trabaja, el video queda tapado: primero "En cola", después el paso en curso, y no se puede reproducir
+  await page.evaluate(() => { S.p.stage = 'editor'; showHome(false); });
+  await page.waitForTimeout(1200);
+  console.log('tapa cola', JSON.stringify(await page.evaluate(() => document.querySelector('.deepstage b')?.textContent || null)));
+  await page.evaluate(() => togglePlay()); console.log('play bloqueado', await page.evaluate(() => !S.playing));
+  await page.screenshot({ path: OUT + '/d1b-cola.png' });
+  await page.evaluate(() => { const r = JSON.parse(JSON.stringify(S.p)); r.deep.estado = 'en_curso'; r.deep.paso = 'Cortando silencios y armando subtítulos'; r.deep.upd = Date.now(); adoptRemote(r); });
+  await page.waitForTimeout(1200);
+  console.log('tapa curso', JSON.stringify(await page.evaluate(() => document.querySelector('.deepstage')?.innerText || null)));
+  await page.screenshot({ path: OUT + '/d1c-curso.png' });
   // simular que la nube terminó
   await page.evaluate(() => { const r = JSON.parse(JSON.stringify(S.p)); r.deep.estado = 'listo'; r.deep.resumen = 'Tres palabras gigantes detrás de la cabeza y subtítulos limpios.'; r.chat.push({ role: 'claude', text: 'Hecho.', at: Date.now(), deep: true }); adoptRemote(r); });
   await page.waitForTimeout(300);
+  await page.waitForTimeout(1200);
+  console.log('tapa al terminar', await page.evaluate(() => !!document.querySelector('.deepstage')));
   await page.screenshot({ path: OUT + '/d2-done.png' });
   console.log('toast', await page.evaluate(() => document.querySelector('.toast')?.textContent || ''));
   await browser.close(); srv.close();

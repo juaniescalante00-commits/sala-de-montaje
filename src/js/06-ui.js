@@ -85,7 +85,7 @@ function draw() {
 
 /* ============ reproducción ============ */
 function play() {
-  if (!S.p) return; if (S.t >= S.p.duration - 0.05) seek(0);
+  if (!S.p || deepBusy(S.p)) return; if (S.t >= S.p.duration - 0.05) seek(0);
   S.playing = true; liveCtx();
   if (S.videoReady) { try { VID.currentTime = S.t; } catch (e) { } VID.play().catch(() => { S.playing = false; updatePlayBtn(); }); }
   else S.clock0 = performance.now() - S.t * 1000;
